@@ -12,9 +12,7 @@ public abstract class Button extends Widget {
     protected Button(Widget child, Consumer<ActionEvent> onPressed) {
         component = new JButton();
         component.add(child.getRef());
-        component.addActionListener(e -> {
-            onPressed.accept(e);
-        });
+        component.addActionListener(onPressed::accept);
     }
 
     @Override

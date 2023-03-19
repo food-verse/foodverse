@@ -42,8 +42,10 @@ public final class TextStyle {
     }
 
     public Map<TextAttribute, Object> getAttributes() {
-        return Map.of(TextAttribute.FAMILY, fontFamily, TextAttribute.WEIGHT,
-                fontWeight.getWeight(), TextAttribute.SIZE, fontSize);
+        return Map.of(
+                TextAttribute.FAMILY, fontFamily,
+                TextAttribute.WEIGHT, fontWeight.getWeight(),
+                TextAttribute.SIZE, fontSize);
     }
 
     public enum FontWeight {

@@ -6,10 +6,10 @@ import javax.swing.JLabel;
 
 public abstract class Text extends Widget {
 
-    private final JLabel component;
+    private final JLabel component = new JLabel();
 
     protected Text(String data, TextStyle textStyle) {
-        component = new JLabel(data);
+        component.setText(data);
         component.setFont(new Font(textStyle.getAttributes()));
     }
 

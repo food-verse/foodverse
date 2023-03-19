@@ -7,10 +7,9 @@ import javax.swing.JButton;
 
 public abstract class Button extends Widget {
 
-    private final JButton component;
+    private final JButton component = new JButton();
 
-    protected Button(Widget child, Consumer<ActionEvent> onPressed) {
-        component = new JButton();
+    protected Button(Widget child, Consumer<ActionEvent> onPressed, ButtonStyle buttonStyle) {
         component.add(child.getRef());
         component.addActionListener(onPressed::accept);
     }

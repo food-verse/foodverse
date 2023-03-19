@@ -8,7 +8,7 @@ public abstract class Text extends Widget {
 
     private final JLabel component;
 
-    public Text(String data, TextStyle textStyle) {
+    protected Text(String data, TextStyle textStyle) {
         component = new JLabel(data);
         component.setFont(new Font(textStyle.getAttributes()));
     }

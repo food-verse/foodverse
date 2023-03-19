@@ -9,7 +9,7 @@ public abstract class Button extends Widget {
 
     private final JButton component;
 
-    public Button(Widget child, Consumer<ActionEvent> onPressed) {
+    protected Button(Widget child, Consumer<ActionEvent> onPressed) {
         component = new JButton();
         component.add(child.getRef());
         component.addActionListener(e -> {

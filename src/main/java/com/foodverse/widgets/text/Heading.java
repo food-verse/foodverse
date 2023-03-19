@@ -1,29 +1,29 @@
-package com.foodverse.widgets;
+package com.foodverse.widgets.text;
 
 import com.foodverse.utility.Text;
 import com.foodverse.utility.TextStyle;
 import com.foodverse.utility.TextStyle.FontWeight;
 
-public final class Paragraph extends Text {
+public final class Heading extends Text {
 
-    public Paragraph(String data, ParagraphSize fontSize) {
+    public Heading(String data, HeadingSize fontSize) {
         this(data, fontSize, false);
     }
 
-    public Paragraph(String data, ParagraphSize fontSize, boolean isMono) {
+    public Heading(String data, HeadingSize fontSize, boolean isMono) {
         super(data, new TextStyle.Builder()
                 .family(isMono ? "IBM Plex Mono" : null)
-                .weight(FontWeight.REGULAR)
+                .weight(FontWeight.MEDIUM)
                 .size(fontSize.getSize())
                 .build());
     }
 
-    public enum ParagraphSize {
-        XS(12), S(14), M(16), L(18);
+    public enum HeadingSize {
+        XS(20), S(24), M(28), L(32), XL(36), XXL(40);
 
         private final int size;
 
-        ParagraphSize(int size) {
+        HeadingSize(int size) {
             this.size = size;
         }
 

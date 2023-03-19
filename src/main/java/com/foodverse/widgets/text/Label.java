@@ -1,4 +1,4 @@
-package com.foodverse.widgets;
+package com.foodverse.widgets.text;
 
 import com.foodverse.utility.Text;
 import com.foodverse.utility.TextStyle;

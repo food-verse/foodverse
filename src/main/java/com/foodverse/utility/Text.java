@@ -2,6 +2,7 @@ package com.foodverse.utility;
 
 import java.awt.Component;
 import java.awt.Font;
+
 import javax.swing.JLabel;
 
 public abstract class Text extends Widget {

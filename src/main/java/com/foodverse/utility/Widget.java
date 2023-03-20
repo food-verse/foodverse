@@ -13,4 +13,3 @@ public abstract class Widget {
     public abstract Component getRef();
 
 }
-

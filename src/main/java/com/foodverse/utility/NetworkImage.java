@@ -11,7 +11,7 @@ public final class NetworkImage extends Widget {
     public NetworkImage(String src, ImageStyle imageStyle) {
         component.setPreferredSize(imageStyle.getDimension());
         AssetManager
-                .getImage(src, imageStyle.getImageWidth(), imageStyle.getImageHeight())
+                .getImage(src, imageStyle.getWidth(), imageStyle.getHeight())
                 .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
     }
 

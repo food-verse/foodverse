@@ -26,7 +26,7 @@ public final class AssetManager {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         File[] fontFiles = new File(dir).listFiles();
         if (fontFiles == null) {
-            logger.log(Level.INFO, "There is no such directory {0}", dir);
+            logger.log(Level.INFO, "There is no such directory: {0}", dir);
             return;
         }
         Stream.of(fontFiles).map(File::getName).forEach(fontName -> {
@@ -59,7 +59,7 @@ public final class AssetManager {
             bufferedImage = ImageIO.read(address);
             scaledImage = bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         } catch (IOException e) {
-            logger.log(Level.INFO, "Could not load image from \"{0}\".", source);
+            logger.log(Level.INFO, "Could not load image from: {0}", source);
         }
         return Optional.ofNullable(scaledImage);
     }

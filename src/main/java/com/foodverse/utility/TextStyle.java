@@ -16,7 +16,7 @@ public final class TextStyle {
         private int fontSize = 12;
 
         public Builder family(String fontFamily) {
-            this.fontFamily = fontFamily.isEmpty() ? "Inter" : fontFamily;
+            this.fontFamily = fontFamily;
             return this;
         }
 

@@ -12,7 +12,7 @@ public final class Heading extends Text {
 
     public Heading(String data, HeadingSize fontSize, boolean isMono) {
         super(data, new TextStyle.Builder()
-                .family(isMono ? "IBM Plex Mono" : null)
+                .family(isMono ? "IBM Plex Mono" : "Inter")
                 .weight(FontWeight.MEDIUM)
                 .size(fontSize.getSize())
                 .build());

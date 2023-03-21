@@ -12,7 +12,7 @@ public final class Paragraph extends Text {
 
     public Paragraph(String data, ParagraphSize fontSize, boolean isMono) {
         super(data, new TextStyle.Builder()
-                .family(isMono ? "IBM Plex Mono" : null)
+                .family(isMono ? "IBM Plex Mono" : "Inter")
                 .weight(FontWeight.REGULAR)
                 .size(fontSize.getSize())
                 .build());

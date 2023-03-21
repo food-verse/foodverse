@@ -12,7 +12,7 @@ public final class Label extends Text {
 
     public Label(String data, LabelSize fontSize, boolean isMono) {
         super(data, new TextStyle.Builder()
-                .family(isMono ? "IBM Plex Mono" : null)
+                .family(isMono ? "IBM Plex Mono" : "Inter")
                 .weight(FontWeight.MEDIUM)
                 .size(fontSize.getSize())
                 .build());

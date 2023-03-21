@@ -14,6 +14,10 @@ public abstract class Text extends Widget {
         component.setFont(new Font(textStyle.getAttributes()));
     }
 
+    public void setText(String data) {
+        component.setText(data);
+    }
+
     @Override
     public Component getRef() {
         return component;

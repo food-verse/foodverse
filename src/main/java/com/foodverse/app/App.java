@@ -12,7 +12,7 @@ public final class App {
     private App() {}
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        // System.out.println("Hello World!");
         // Loading font families.
         AssetManager.loadFont("Inter");
         AssetManager.loadFont("IBM Plex Mono");

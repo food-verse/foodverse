@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.Font;
 
 import javax.swing.JLabel;
-import com.foodverse.utility.TextStyle;
 import com.foodverse.utility.Widget;
 
 public abstract class Text extends Widget {

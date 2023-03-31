@@ -1,8 +1,8 @@
 package com.foodverse.widgets.text;
 
-import com.foodverse.utility.Text;
-import com.foodverse.utility.TextStyle;
-import com.foodverse.utility.TextStyle.FontWeight;
+import com.foodverse.utility.core.Text;
+import com.foodverse.utility.core.TextStyle;
+import com.foodverse.utility.core.TextStyle.FontWeight;
 
 public final class Label extends Text {
 

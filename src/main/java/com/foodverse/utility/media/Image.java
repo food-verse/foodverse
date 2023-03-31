@@ -1,8 +1,10 @@
-package com.foodverse.utility;
+package com.foodverse.utility.media;
 
 import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import com.foodverse.utility.AssetManager;
+import com.foodverse.utility.Widget;
 
 public final class Image extends Widget {
 

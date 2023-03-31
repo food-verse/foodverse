@@ -1,37 +1,27 @@
 package com.foodverse.app;
 
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
-import com.foodverse.samples.Counter;
-import com.foodverse.samples.CounterSwing;
-import com.foodverse.utility.AssetManager;
-import com.foodverse.utility.Window;
+import com.foodverse.pages.HomePage;
+import com.foodverse.utility.Pages;
+import com.foodverse.utility.Router;
+import com.foodverse.utility.Shell;
+import com.foodverse.utility.ShellOptions;
 
 public final class App {
 
     private App() {}
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        // Loading font families.
-        AssetManager.loadFont("Inter");
-        AssetManager.loadFont("IBM Plex Mono");
+        // Initialize the application
+        ShellOptions options = new ShellOptions.Builder()
+                .width(1440)
+                .height(1024)
+                .build();
+        Shell.init(options);
 
-        // Declarative UI
-        Counter counter = new Counter();
-        Window window = new Window();
-        window.inflate(counter);
-        window.setPreferences("Food.verse");
-        window.open();
+        // Add and push HomePage to the router
+        Router.addPage(new HomePage());
+        Router.pushPage(Pages.HOME);
 
-        // Imperative UI
-        CounterSwing counterSwing = new CounterSwing();
-        JFrame frame = new JFrame();
-        frame.add(counterSwing);
-        frame.pack();
-        frame.setTitle("Food.verse");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 
 }

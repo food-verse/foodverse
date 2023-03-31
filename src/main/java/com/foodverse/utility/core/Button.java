@@ -1,10 +1,11 @@
-package com.foodverse.utility;
+package com.foodverse.utility.core;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.function.Consumer;
 
 import javax.swing.JButton;
+import com.foodverse.utility.Widget;
 
 public final class Button extends Widget {
 

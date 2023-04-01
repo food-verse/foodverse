@@ -1,7 +1,7 @@
 package com.foodverse.utility;
 
 public enum Pages {
-    HOME("HomePage");
+    HOME("HomePage"), BUTTONS("ButtonPage");
 
     private final String id;
 

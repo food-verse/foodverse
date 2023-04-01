@@ -7,8 +7,13 @@ import com.foodverse.utility.core.ButtonStyle;
 
 public final class PillButton extends Button {
 
-    public PillButton(String data, Consumer<ActionEvent> onPressed) {
-        super(data, onPressed, new ButtonStyle.Builder().build());
+    public PillButton(String data, PillButtonSize size, PillButtonType type,
+            Consumer<ActionEvent> onPressed) {
+        super(data, onPressed, getButtonStyle(size, type));
+    }
+
+    public static ButtonStyle getButtonStyle(PillButtonSize size, PillButtonType type) {
+        return new ButtonStyle.Builder().build();
     }
 
     public enum PillButtonSize {

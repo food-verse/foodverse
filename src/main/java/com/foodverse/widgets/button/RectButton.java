@@ -7,15 +7,20 @@ import com.foodverse.utility.core.ButtonStyle;
 
 public final class RectButton extends Button {
 
-    public RectButton(String data, Consumer<ActionEvent> onPressed) {
-        super(data, onPressed, new ButtonStyle.Builder().build());
+    public RectButton(String data, RectButtonSize size, RectButtonType type,
+            Consumer<ActionEvent> onPressed) {
+        super(data, onPressed, getButtonStyle(size, type));
     }
 
-    public enum PillButtonSize {
+    public static ButtonStyle getButtonStyle(RectButtonSize size, RectButtonType type) {
+        return new ButtonStyle.Builder().build();
+    }
+
+    public enum RectButtonSize {
         XS, S, M, L;
     }
 
-    public enum PillButtonType {
+    public enum RectButtonType {
         PRIMARY, SECONDARY, TERTIARY;
     }
 

@@ -7,8 +7,13 @@ import com.foodverse.utility.core.ButtonStyle;
 
 public final class CircleButton extends Button {
 
-    public CircleButton(String data, Consumer<ActionEvent> onPressed) {
-        super(data, onPressed, new ButtonStyle.Builder().build());
+    public CircleButton(String data, CircleButtonSize size, CircleButtonType type,
+            Consumer<ActionEvent> onPressed) {
+        super(data, onPressed, getButtonStyle(size, type));
+    }
+
+    public static ButtonStyle getButtonStyle(CircleButtonSize size, CircleButtonType type) {
+        return new ButtonStyle.Builder().build();
     }
 
     public enum CircleButtonSize {

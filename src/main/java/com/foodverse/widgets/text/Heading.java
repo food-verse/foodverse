@@ -11,11 +11,15 @@ public final class Heading extends Text {
     }
 
     public Heading(String data, HeadingSize fontSize, boolean isMono) {
-        super(data, new TextStyle.Builder()
+        super(data, getTextStyle(fontSize, isMono));
+    }
+
+    public static TextStyle getTextStyle(HeadingSize fontSize, boolean isMono) {
+        return new TextStyle.Builder()
                 .family(isMono ? "IBM Plex Mono" : "Inter")
                 .weight(FontWeight.MEDIUM)
                 .size(fontSize.getSize())
-                .build());
+                .build();
     }
 
     public enum HeadingSize {

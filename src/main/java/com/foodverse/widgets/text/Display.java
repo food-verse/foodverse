@@ -11,11 +11,15 @@ public final class Display extends Text {
     }
 
     public Display(String data, DisplaySize fontSize, boolean isMono) {
-        super(data, new TextStyle.Builder()
+        super(data, getTextStyle(fontSize, isMono));
+    }
+
+    public static TextStyle getTextStyle(DisplaySize fontSize, boolean isMono) {
+        return new TextStyle.Builder()
                 .family(isMono ? "IBM Plex Mono" : "Inter")
                 .weight(FontWeight.MEDIUM)
                 .size(fontSize.getSize())
-                .build());
+                .build();
     }
 
     public enum DisplaySize {

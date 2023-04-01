@@ -11,11 +11,15 @@ public final class Paragraph extends Text {
     }
 
     public Paragraph(String data, ParagraphSize fontSize, boolean isMono) {
-        super(data, new TextStyle.Builder()
+        super(data, getTextStyle(fontSize, isMono));
+    }
+
+    public static TextStyle getTextStyle(ParagraphSize fontSize, boolean isMono) {
+        return new TextStyle.Builder()
                 .family(isMono ? "IBM Plex Mono" : "Inter")
                 .weight(FontWeight.REGULAR)
                 .size(fontSize.getSize())
-                .build());
+                .build();
     }
 
     public enum ParagraphSize {

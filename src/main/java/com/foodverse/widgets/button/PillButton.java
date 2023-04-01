@@ -40,13 +40,13 @@ public final class PillButton extends Button {
                 textStyle = Label.getTextStyle(LabelSize.S);
                 padding = new EdgeInsets.Builder().symmetric(10, 12).build();
                 minimumWidth = 60;
-                borderRadius = 36;
+                borderRadius = 38;
                 break;
             case M:
                 textStyle = Label.getTextStyle(LabelSize.M);
                 padding = new EdgeInsets.Builder().symmetric(14, 16).build();
                 minimumWidth = 72;
-                borderRadius = 999;
+                borderRadius = 48;
                 break;
         }
         return new ButtonStyle.Builder()

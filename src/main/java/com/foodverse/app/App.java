@@ -1,5 +1,6 @@
 package com.foodverse.app;
 
+import com.foodverse.pages.ButtonPage;
 import com.foodverse.pages.HomePage;
 import com.foodverse.utility.Pages;
 import com.foodverse.utility.Router;
@@ -20,6 +21,7 @@ public final class App {
 
         // Add and push HomePage to the router
         Router.addPage(new HomePage());
+        Router.addPage(new ButtonPage());
         Router.pushPage(Pages.HOME);
 
     }

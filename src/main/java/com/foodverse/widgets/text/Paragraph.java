@@ -22,6 +22,10 @@ public final class Paragraph extends Text {
                 .build();
     }
 
+    public static TextStyle getTextStyle(ParagraphSize fontSize) {
+        return getTextStyle(fontSize, false);
+    }
+
     public enum ParagraphSize {
         XS(12), S(14), M(16), L(18);
 

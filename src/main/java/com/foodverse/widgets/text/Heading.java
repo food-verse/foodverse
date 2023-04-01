@@ -22,6 +22,10 @@ public final class Heading extends Text {
                 .build();
     }
 
+    public static TextStyle getTextStyle(HeadingSize fontSize) {
+        return getTextStyle(fontSize, false);
+    }
+
     public enum HeadingSize {
         XS(20), S(24), M(28), L(32), XL(36), XXL(40);
 

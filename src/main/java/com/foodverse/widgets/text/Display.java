@@ -22,6 +22,10 @@ public final class Display extends Text {
                 .build();
     }
 
+    public static TextStyle getTextStyle(DisplaySize fontSize) {
+        return getTextStyle(fontSize, false);
+    }
+
     public enum DisplaySize {
         XS(36), S(44), M(52), L(96);
 

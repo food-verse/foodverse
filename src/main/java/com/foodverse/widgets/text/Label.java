@@ -22,6 +22,10 @@ public final class Label extends Text {
                 .build();
     }
 
+    public static TextStyle getTextStyle(LabelSize fontSize) {
+        return getTextStyle(fontSize, false);
+    }
+
     public enum LabelSize {
         XS(12), S(14), M(16), L(18);
 

@@ -20,12 +20,13 @@ final class BaseButton extends JButton {
     }
 
     public void init() {
+        setFont(new Font(buttonStyle.getTextStyle().getAttributes()));
         setPreferredSize(getButtonSize());
         setMinimumSize(getButtonSize());
         setMaximumSize(getButtonSize());
-        setFont(new Font(buttonStyle.getTextStyle().getAttributes()));
-        setOpaque(false);
         setBorder(BorderFactory.createEmptyBorder());
+        setFocusPainted(false);
+        setContentAreaFilled(false);
         addMouseListener(new BaseButtonListener());
         applyStyle();
     }

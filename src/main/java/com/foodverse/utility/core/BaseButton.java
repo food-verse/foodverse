@@ -109,7 +109,7 @@ final class BaseButton extends JButton {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            mouseEntered(e);
+            mouseExited(e);
         }
 
     }

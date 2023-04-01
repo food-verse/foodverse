@@ -2,7 +2,6 @@ package com.foodverse.utility.core;
 
 import java.awt.Component;
 import java.awt.Font;
-
 import javax.swing.JLabel;
 import com.foodverse.utility.Widget;
 

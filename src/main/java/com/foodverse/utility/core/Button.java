@@ -7,12 +7,17 @@ import java.util.function.Consumer;
 import javax.swing.JButton;
 import com.foodverse.utility.Widget;
 
-public final class Button extends Widget {
+public abstract class Button extends Widget {
 
     private final JButton component = new JButton();
 
-    public Button(Widget child, Consumer<ActionEvent> onPressed /* ButtonStyle buttonStyle */ ) {
+    protected Button(Widget child, Consumer<ActionEvent> onPressed, ButtonStyle buttonStyle) {
         component.add(child.getRef());
+        component.addActionListener(onPressed::accept);
+    }
+
+    protected Button(String data, Consumer<ActionEvent> onPressed, ButtonStyle buttonStyle) {
+        component.setText(data);
         component.addActionListener(onPressed::accept);
     }
 

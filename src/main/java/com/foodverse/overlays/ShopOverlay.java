@@ -4,6 +4,7 @@ import java.awt.Component;
 import javax.swing.JPanel;
 import com.foodverse.utility.Overlay;
 import com.foodverse.utility.Router;
+import com.foodverse.utility.core.Colors;
 import com.foodverse.utility.core.Button.ButtonSize;
 import com.foodverse.utility.core.Button.ButtonType;
 import com.foodverse.widgets.button.PillButton;
@@ -22,6 +23,7 @@ public class ShopOverlay extends Overlay {
                 });
         panel.add(text.getRef());
         panel.add(button.getRef());
+        panel.setBackground(Colors.white);
         return panel;
     }
 

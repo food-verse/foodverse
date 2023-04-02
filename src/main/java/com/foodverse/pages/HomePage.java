@@ -27,6 +27,13 @@ public final class HomePage extends Page {
                 e -> {
                     Router.openOverlay(new ShopOverlay());
                 });
+        var openTextPage = new RectButton(
+                "Open TextPage ->",
+                ButtonSize.S,
+                ButtonType.SECONDARY,
+                e -> {
+                    Router.pushPage(Pages.TEXTS);
+                });
         var openButtonPage = new RectButton(
                 "Open ButtonPage ->",
                 ButtonSize.S,
@@ -36,6 +43,7 @@ public final class HomePage extends Page {
                 });
         panel.add(text.getRef());
         panel.add(openOverlay.getRef());
+        panel.add(openTextPage.getRef());
         panel.add(openButtonPage.getRef());
         panel.setBackground(Colors.white);
         return panel;

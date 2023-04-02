@@ -9,10 +9,8 @@ import com.foodverse.utility.Widget;
 public abstract class Button extends Widget {
 
     private final BaseButton component = new BaseButton();
-    private final Consumer<ActionEvent> onPressed;
 
     protected Button(String data, Consumer<ActionEvent> onPressed, ButtonStyle buttonStyle) {
-        this.onPressed = onPressed;
         component.setText(data);
         component.addActionListener(onPressed::accept);
         component.setStyle(buttonStyle);

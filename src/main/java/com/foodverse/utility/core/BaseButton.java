@@ -28,6 +28,7 @@ final class BaseButton extends JButton {
         setFocusPainted(false);
         setContentAreaFilled(false);
         addMouseListener(new BaseButtonListener());
+        setEnabled(isEnabled);
         applyStyle();
     }
 
@@ -43,6 +44,7 @@ final class BaseButton extends JButton {
 
     public void toggle() {
         isEnabled = !isEnabled;
+        setEnabled(isEnabled);
     }
 
     private Dimension getButtonSize() {

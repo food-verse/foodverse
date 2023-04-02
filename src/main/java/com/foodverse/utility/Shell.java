@@ -19,6 +19,9 @@ public final class Shell {
         frame.setSize(options.getDimension());
         frame.getContentPane().setBackground(options.getBackgroundColor());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public static void render() {
         frame.setVisible(true);
     }
 

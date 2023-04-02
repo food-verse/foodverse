@@ -1,6 +1,7 @@
 package com.foodverse.app;
 
 import com.foodverse.pages.ButtonPage;
+import com.foodverse.pages.DemoPage;
 import com.foodverse.pages.HomePage;
 import com.foodverse.pages.TextPage;
 import com.foodverse.utility.Pages;
@@ -17,6 +18,7 @@ public final class App {
         ShellOptions options = new ShellOptions.Builder()
                 .width(1440)
                 .height(1024)
+                .title("Foodiverse")
                 .build();
         Shell.init(options);
 
@@ -25,6 +27,9 @@ public final class App {
         Router.addPage(new TextPage());
         Router.addPage(new ButtonPage());
         Router.pushPage(Pages.HOME);
+
+        // Render the application
+        Shell.render();
 
     }
 

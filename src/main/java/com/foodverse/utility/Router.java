@@ -47,6 +47,7 @@ public final class Router {
         if (p == null) {
             logger.log(Level.WARNING, "There is no such page: {0}", nextPage);
         } else {
+            frame.setTitle(String.format("%s | %s", Shell.getOptions().getTitle(), p.getId()));
             frame.getContentPane().removeAll();
             frame.getContentPane().add(p.getRef());
             frame.revalidate();

@@ -25,6 +25,7 @@ public abstract class Overlay extends Widget implements Identifiable {
         inflate(this);
         dimension = new Dimension(width, height);
         frame.getContentPane().setBackground(Shell.getOptions().getBackgroundColor());
+        frame.setTitle(getId());
     }
 
     /**

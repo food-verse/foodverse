@@ -24,7 +24,7 @@ public final class Router {
     private static final Deque<Overlay> overlays = new ArrayDeque<>();
 
     // A reference to the main frame of the application
-    private static final JFrame mainFrame = Shell.getInstance().getMainFrame();
+    private static final JFrame frame = Shell.getFrame();
 
     private Router() {}
 
@@ -47,10 +47,10 @@ public final class Router {
         if (p == null) {
             logger.log(Level.WARNING, "There is no such page: {0}", nextPage);
         } else {
-            mainFrame.getContentPane().removeAll();
-            mainFrame.getContentPane().add(p.getRef());
-            mainFrame.revalidate();
-            mainFrame.repaint();
+            frame.getContentPane().removeAll();
+            frame.getContentPane().add(p.getRef());
+            frame.revalidate();
+            frame.repaint();
         }
     }
 

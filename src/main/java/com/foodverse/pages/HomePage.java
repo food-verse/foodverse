@@ -39,18 +39,10 @@ public final class HomePage extends Page {
                 e -> {
                     Router.pushPage(Pages.BUTTONS);
                 });
-        var openDemoPage = new RectButton(
-                "Open DemoPage ->",
-                ButtonSize.S,
-                ButtonType.SECONDARY,
-                e -> {
-                    Router.pushPage(Pages.DEMO);
-                });
         panel.add(text.getRef());
         panel.add(openOverlay.getRef());
         panel.add(openTextPage.getRef());
         panel.add(openButtonPage.getRef());
-        panel.add(openDemoPage.getRef());
         panel.setOpaque(false);
         return panel;
     }

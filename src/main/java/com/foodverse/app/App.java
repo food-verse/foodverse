@@ -1,7 +1,6 @@
 package com.foodverse.app;
 
 import com.foodverse.pages.ButtonPage;
-import com.foodverse.pages.DemoPage;
 import com.foodverse.pages.HomePage;
 import com.foodverse.pages.TextPage;
 import com.foodverse.utility.Pages;

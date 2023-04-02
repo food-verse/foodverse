@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import com.foodverse.utility.Page;
 import com.foodverse.utility.Pages;
 import com.foodverse.utility.Router;
-import com.foodverse.utility.core.Colors;
 import com.foodverse.utility.core.Button.ButtonSize;
 import com.foodverse.utility.core.Button.ButtonType;
 import com.foodverse.widgets.button.CircleButton;
@@ -86,7 +85,7 @@ public final class ButtonPage extends Page {
                 panel.add(button.getRef());
             }
         }
-        panel.setBackground(Colors.white);
+        panel.setOpaque(false);
         return panel;
     }
 

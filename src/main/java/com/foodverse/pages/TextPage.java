@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import com.foodverse.utility.Page;
 import com.foodverse.utility.Pages;
 import com.foodverse.utility.Router;
-import com.foodverse.utility.core.Colors;
 import com.foodverse.utility.core.Button.ButtonSize;
 import com.foodverse.utility.core.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;
@@ -65,7 +64,7 @@ public class TextPage extends Page {
             var textWidget = new Paragraph("Paragraph", size, true);
             panel.add(textWidget.getRef());
         }
-        panel.setBackground(Colors.white);
+        panel.setOpaque(false);
         return panel;
     }
 

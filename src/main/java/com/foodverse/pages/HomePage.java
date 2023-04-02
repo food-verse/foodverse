@@ -21,11 +21,17 @@ public final class HomePage extends Page {
         var panel = new JPanel();
         var text = new Heading("HomePage", HeadingSize.L);
         var openOverlay = new RectButton(
-                "Open ShopOverlay ->", ButtonSize.S, ButtonType.PRIMARY, e -> {
+                "Open ShopOverlay ->",
+                ButtonSize.S,
+                ButtonType.PRIMARY,
+                e -> {
                     Router.openOverlay(new ShopOverlay());
                 });
         var openButtonPage = new RectButton(
-                "Open ButtonPage ->", ButtonSize.S, ButtonType.SECONDARY, e -> {
+                "Open ButtonPage ->",
+                ButtonSize.S,
+                ButtonType.SECONDARY,
+                e -> {
                     Router.pushPage(Pages.BUTTONS);
                 });
         panel.add(text.getRef());

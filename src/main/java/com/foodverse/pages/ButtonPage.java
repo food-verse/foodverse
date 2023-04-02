@@ -22,7 +22,10 @@ public final class ButtonPage extends Page {
         var panel = new JPanel();
         var text = new Heading("ButtonPage", HeadingSize.L);
         var openHomePage = new RectButton(
-                "Open HomePage ->", ButtonSize.S, ButtonType.SECONDARY, e -> {
+                "Open HomePage ->",
+                ButtonSize.S,
+                ButtonType.SECONDARY,
+                e -> {
                     Router.pushPage(Pages.HOME);
                 });
         panel.add(text.getRef());

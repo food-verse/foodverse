@@ -1,5 +1,6 @@
 package com.foodverse.utility;
 
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -23,6 +24,7 @@ public final class Shell {
         AssetManager.loadFont("Inter");
         AssetManager.loadFont("IBMPlexMono");
         mainFrame.setSize(options.getDimension());
+        mainFrame.getContentPane().setBackground(Color.white);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
     }

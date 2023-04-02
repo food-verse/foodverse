@@ -20,7 +20,7 @@ public final class App {
                 .build();
         Shell.init(options);
 
-        // Add and push HomePage to the router
+        // Add and push HomePage, TextPage, ButtonPage to the router
         Router.addPage(new HomePage());
         Router.addPage(new TextPage());
         Router.addPage(new ButtonPage());

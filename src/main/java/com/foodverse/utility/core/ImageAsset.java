@@ -1,9 +1,9 @@
-package com.foodverse.utility.media;
+package com.foodverse.utility.core;
 
 import java.io.File;
 
 public enum ImageAsset {
-    BRAND("brand.png"), BURGER("burger.png");
+    BRAND("brand.png"), BURGER("burger.png"), STAR("rating_star.png"), AVATAR("avatar.png");
 
     private final String fileName;
 

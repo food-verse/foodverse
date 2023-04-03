@@ -1,4 +1,4 @@
-package com.foodverse.utility.media;
+package com.foodverse.utility.core;
 
 import java.awt.Dimension;
 

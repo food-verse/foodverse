@@ -61,7 +61,7 @@ public final class Router {
      * @param newOverlay The overlay to be shown
      */
     public static void openOverlay(Overlay newOverlay) {
-        overlays.add(newOverlay);
+        overlays.push(newOverlay);
         newOverlay.open();
     }
 

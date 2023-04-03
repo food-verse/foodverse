@@ -17,7 +17,7 @@ import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.widgets.text.Label.LabelSize;
 import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
-public class TextPage extends Page {
+public final class TextPage extends Page {
 
     @Override
     public Component getRef() {

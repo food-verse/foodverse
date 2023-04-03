@@ -2,6 +2,7 @@ package com.foodverse.app;
 
 import com.foodverse.pages.ButtonPage;
 import com.foodverse.pages.HomePage;
+import com.foodverse.pages.OnboardingPage;
 import com.foodverse.pages.TextPage;
 import com.foodverse.utility.Pages;
 import com.foodverse.utility.Router;
@@ -21,7 +22,8 @@ public final class App {
                 .build();
         Shell.init(options);
 
-        // Add and push HomePage, TextPage, ButtonPage to the router
+        // Add and push OnboardingPage, HomePage, TextPage, ButtonPage to the router
+        Router.addPage(new OnboardingPage());
         Router.addPage(new HomePage());
         Router.addPage(new TextPage());
         Router.addPage(new ButtonPage());

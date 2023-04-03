@@ -2,6 +2,7 @@ package com.foodverse.pages;
 
 import java.awt.Component;
 import javax.swing.JPanel;
+import com.foodverse.overlays.ProfileOverlay;
 import com.foodverse.overlays.ShopOverlay;
 import com.foodverse.utility.Page;
 import com.foodverse.utility.Pages;
@@ -18,12 +19,26 @@ public final class HomePage extends Page {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("HomePage", HeadingSize.L);
-        var openOverlay = new RectButton(
+        var openOnboardingPage = new RectButton(
+                "Open OnboardingPage ->",
+                ButtonSize.S,
+                ButtonType.PRIMARY,
+                e -> {
+                    Router.pushPage(Pages.ONBOARDING);
+                });
+        var openShopOverlay = new RectButton(
                 "Open ShopOverlay ->",
                 ButtonSize.S,
                 ButtonType.PRIMARY,
                 e -> {
                     Router.openOverlay(new ShopOverlay());
+                });
+        var openProfileOverlay = new RectButton(
+                "Open ProfileOverlay ->",
+                ButtonSize.S,
+                ButtonType.PRIMARY,
+                e -> {
+                    Router.openOverlay(new ProfileOverlay());
                 });
         var openTextPage = new RectButton(
                 "Open TextPage ->",
@@ -40,7 +55,9 @@ public final class HomePage extends Page {
                     Router.pushPage(Pages.BUTTONS);
                 });
         panel.add(text.getRef());
-        panel.add(openOverlay.getRef());
+        panel.add(openOnboardingPage.getRef());
+        panel.add(openShopOverlay.getRef());
+        panel.add(openProfileOverlay.getRef());
         panel.add(openTextPage.getRef());
         panel.add(openButtonPage.getRef());
         panel.setOpaque(false);

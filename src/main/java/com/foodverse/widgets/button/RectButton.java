@@ -12,34 +12,45 @@ import com.foodverse.widgets.text.Label.LabelSize;
 
 public final class RectButton extends Button {
 
-    public RectButton(String data, ButtonSize size, ButtonType type,
-            Consumer<ActionEvent> onPressed) {
-        this(data, true, size, type, onPressed);
+    public RectButton(String data, ButtonSize buttonSize, ButtonType buttonType,
+            Consumer<ActionEvent> onPressed, boolean isMono) {
+        this(data, true, buttonSize, buttonType, onPressed, isMono);
     }
 
-    public RectButton(String data, boolean isEnabled, ButtonSize size, ButtonType type,
+    public RectButton(String data, ButtonSize buttonSize, ButtonType buttonType,
             Consumer<ActionEvent> onPressed) {
-        super(data, onPressed, getButtonStyle(isEnabled, size, getButtonTheme(type)));
+        this(data, true, buttonSize, buttonType, onPressed, false);
+    }
+
+    public RectButton(String data, boolean isEnabled, ButtonSize buttonSize,
+            ButtonType buttonType, Consumer<ActionEvent> onPressed) {
+        this(data, isEnabled, buttonSize, buttonType, onPressed, false);
+    }
+
+    public RectButton(String data, boolean isEnabled, ButtonSize buttonSize,
+            ButtonType buttonType, Consumer<ActionEvent> onPressed, boolean isMono) {
+        super(data, onPressed,
+                getButtonStyle(isEnabled, buttonSize, getButtonTheme(buttonType), isMono));
     }
 
     public static ButtonStyle getButtonStyle(boolean isEnabled, ButtonSize buttonSize,
-            ButtonTheme buttonTheme) {
+            ButtonTheme buttonTheme, boolean isMono) {
         final TextStyle textStyle;
         final EdgeInsets padding = new EdgeInsets.Builder().symmetric(6, 10).build();
         final int borderRadius = 8;
         switch (buttonSize) {
             default:
             case XS:
-                textStyle = Label.getTextStyle(LabelSize.XS);
+                textStyle = Label.getTextStyle(LabelSize.XS, isMono);
                 break;
             case S:
-                textStyle = Label.getTextStyle(LabelSize.S);
+                textStyle = Label.getTextStyle(LabelSize.S, isMono);
                 break;
             case M:
-                textStyle = Label.getTextStyle(LabelSize.M);
+                textStyle = Label.getTextStyle(LabelSize.M, isMono);
                 break;
             case L:
-                textStyle = Label.getTextStyle(LabelSize.L);
+                textStyle = Label.getTextStyle(LabelSize.L, isMono);
                 break;
         }
         return new ButtonStyle.Builder()

@@ -50,7 +50,7 @@ public final class TextStyle {
     }
 
     public enum FontWeight {
-        LIGHT(0.75f), REGULAR(1.0f), MEDIUM(1.25f), SEMIBOLD(1.5f), BOLD(2.0f);
+        LIGHT(0.75f), REGULAR(1.0f), MEDIUM(1.5f), SEMIBOLD(1.75f), BOLD(2.0f);
 
         private final Float weight;
 

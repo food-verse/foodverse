@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,123 +26,132 @@ import com.foodverse.widgets.text.Label.LabelSize;
 
 public final class OrderOverlay extends Overlay {
 
-    @Override
-    public Component getRef() {
-        // Heading
-        var panel = new JPanel();
-        var orderLabel = new Heading("Order", HeadingSize.XL);
-        var button = new PillButton(
-                "Close ProfileOverlay ->",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                    Router.closeOverlay();
-                });
-        panel.add(button.getRef());
-        panel.add(orderLabel.getRef());
+        @Override
+        public Component getRef() {
+                // Heading
+                var panel = new JPanel();
+                var orderLabel = new Heading("Order", HeadingSize.XL);
+                var button = new PillButton(
+                                "Close ProfileOverlay ->",
+                                ButtonSize.XS,
+                                ButtonType.SECONDARY,
+                                e -> {
+                                        Router.closeOverlay();
+                                });
+                panel.add(button.getRef());
+                panel.add(orderLabel.getRef());
 
-        // Border
-        Border boarder = BorderFactory.createLineBorder(Colors.black);
+                // Border
+                Border boarder = BorderFactory.createLineBorder(Colors.black);
 
-        // Address
-        AddressView view = new AddressView();
-        panel.add(view.getRef());
+                // Address
+                AddressView view = new AddressView();
+                panel.add(view.getRef());
 
-        // Payment
-        var payment = new JPanel();
-        payment.setBorder(boarder);
-        payment.setPreferredSize(new Dimension(600, 100));
-        payment.setBackground(Colors.white);
+                // Payment
+                var payment = new JPanel();
+                payment.setBorder(boarder);
+                payment.setPreferredSize(new Dimension(600, 100));
+                payment.setBackground(Colors.white);
 
-        var CardDetails = new JLabel("Card Details ");
-        payment.add(CardDetails);
-        var cardNumber = new JTextArea("Card Number ");
-        cardNumber.setBorder(boarder);
-        var Name = new JTextArea("Name ");
-        Name.setBorder(boarder);
-        var secCode = new JTextArea("Secret Code ");
-        secCode.setBorder(boarder);
-        var Date = new JTextArea("Day/Year ");
-        Date.setBorder(boarder);
-        payment.add(cardNumber);
-        payment.add(Name);
-        payment.add(secCode);
-        payment.add(Date);
+                var CardDetails = new JLabel("Card ");
+                payment.add(CardDetails);
+                var checkbox = new JCheckBox();
+                payment.add(checkbox);
 
-        var Cash = new JLabel("Cash ");
-        payment.add(Cash);
+                // Card Details
 
-        var Take = new JLabel("Take away ");
-        payment.add(Take);
+                var cardNumber = new JTextArea("Card Number ");
+                cardNumber.setBorder(boarder);
+                var Name = new JTextArea("Name ");
+                Name.setBorder(boarder);
+                var secCode = new JTextArea("Secret Code ");
+                secCode.setBorder(boarder);
+                var Date = new JTextArea("Day/Year ");
+                Date.setBorder(boarder);
+                payment.add(cardNumber);
+                payment.add(Name);
+                payment.add(secCode);
+                payment.add(Date);
 
-        panel.add(payment);
+                var Cash = new JLabel("Cash ");
+                payment.add(Cash);
+                var checkbox2 = new JCheckBox();
+                payment.add(checkbox2);
 
-        // Amount
-        var amount = new JPanel();
-        amount = new JPanel();
-        amount.setBorder(boarder);
-        amount.setPreferredSize(new Dimension(600, 100));
-        var amountLabel = new Label("Total:", LabelSize.L);
-        amount.add(amountLabel.getRef());
-        amount.setBackground(Colors.white);
-        panel.add(amount);
+                var Take = new JLabel("Take away ");
+                var checkbox3 = new JCheckBox();
+                payment.add(Take);
+                payment.add(checkbox3);
 
-        // Products
-        var products = new JPanel();
-        products.setBorder(boarder);
-        products.setPreferredSize(new Dimension(1000, 200));
-        products.setBackground(Colors.white);
-        panel.add(products);
+                panel.add(payment);
 
-        // Tips
-        var tips = new JPanel();
-        tips.setBorder(boarder);
-        tips.setPreferredSize(new Dimension(1200, 80));
-        tips.setBackground(Colors.white);
-        var tipLabel = new Label("Tips:", LabelSize.L);
-        tips.add(tipLabel.getRef());
+                // Amount
+                var amount = new JPanel();
+                amount = new JPanel();
+                amount.setBorder(boarder);
+                amount.setPreferredSize(new Dimension(600, 100));
+                var amountLabel = new Label("Total:", LabelSize.L);
+                amount.add(amountLabel.getRef());
+                amount.setBackground(Colors.white);
+                panel.add(amount);
 
-        var tip1 = new PillButton("0.5$",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                });
-        var tip2 = new PillButton("1$",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                });
-        var tip3 = new PillButton("2$",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                });
-        var tip4 = new PillButton("5$",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                });
+                // Products
+                var products = new JPanel();
+                products.setBorder(boarder);
+                products.setPreferredSize(new Dimension(1000, 200));
+                products.setBackground(Colors.white);
+                panel.add(products);
 
-        tips.add(tip1.getRef());
-        tips.add(tip2.getRef());
-        tips.add(tip3.getRef());
-        tips.add(tip4.getRef());
-        panel.add(tips);
+                // Tips
+                var tips = new JPanel();
+                tips.setBorder(boarder);
+                tips.setPreferredSize(new Dimension(1200, 80));
+                tips.setBackground(Colors.white);
+                var tipLabel = new Label("Tips:", LabelSize.L);
+                tips.add(tipLabel.getRef());
 
-        var checkoutButton = new RectButton("Checkout ->",
-                ButtonSize.S,
-                ButtonType.PRIMARY,
-                e -> {
-                    showSuccessfulOrderMessage(e);
-                });
+                var tip1 = new PillButton("0.5$",
+                                ButtonSize.XS,
+                                ButtonType.SECONDARY,
+                                e -> {
+                                });
+                var tip2 = new PillButton("1$",
+                                ButtonSize.XS,
+                                ButtonType.SECONDARY,
+                                e -> {
+                                });
+                var tip3 = new PillButton("2$",
+                                ButtonSize.XS,
+                                ButtonType.SECONDARY,
+                                e -> {
+                                });
+                var tip4 = new PillButton("5$",
+                                ButtonSize.XS,
+                                ButtonType.SECONDARY,
+                                e -> {
+                                });
 
-        panel.add(checkoutButton.getRef());
-        panel.setOpaque(false);
-        return panel;
-    }
+                tips.add(tip1.getRef());
+                tips.add(tip2.getRef());
+                tips.add(tip3.getRef());
+                tips.add(tip4.getRef());
+                panel.add(tips);
 
-    private void showSuccessfulOrderMessage(ActionEvent e) {
-        JOptionPane.showMessageDialog(getFrame(), "Your order has been successfully registered!");
-    }
+                var checkoutButton = new RectButton("Checkout ->",
+                                ButtonSize.S,
+                                ButtonType.PRIMARY,
+                                e -> {
+                                        showSuccessfulOrderMessage(e);
+                                });
+
+                panel.add(checkoutButton.getRef());
+                panel.setOpaque(false);
+                return panel;
+        }
+
+        private void showSuccessfulOrderMessage(ActionEvent e) {
+                JOptionPane.showMessageDialog(getFrame(), "Your order has been successfully registered!");
+        }
 
 }

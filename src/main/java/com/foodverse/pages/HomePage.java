@@ -2,6 +2,7 @@ package com.foodverse.pages;
 
 import java.awt.Component;
 import javax.swing.JPanel;
+import com.foodverse.overlays.OrderOverlay;
 import com.foodverse.overlays.ProfileOverlay;
 import com.foodverse.overlays.ShopOverlay;
 import com.foodverse.utility.Page;
@@ -33,6 +34,13 @@ public final class HomePage extends Page {
                 e -> {
                     Router.openOverlay(new ShopOverlay());
                 });
+        var openOrderOverlay = new RectButton(
+                "Open OrderOverlay ->",
+                ButtonSize.S,
+                ButtonType.PRIMARY,
+                e -> {
+                    Router.openOverlay(new OrderOverlay());
+                });
         var openProfileOverlay = new RectButton(
                 "Open ProfileOverlay ->",
                 ButtonSize.S,
@@ -57,6 +65,7 @@ public final class HomePage extends Page {
         panel.add(text.getRef());
         panel.add(openOnboardingPage.getRef());
         panel.add(openShopOverlay.getRef());
+        panel.add(openOrderOverlay.getRef());
         panel.add(openProfileOverlay.getRef());
         panel.add(openTextPage.getRef());
         panel.add(openButtonPage.getRef());

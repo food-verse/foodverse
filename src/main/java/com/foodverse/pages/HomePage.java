@@ -27,6 +27,20 @@ public final class HomePage extends Page {
                 e -> {
                     Router.pushPage(Pages.ONBOARDING);
                 });
+        var openSignInPage = new RectButton(
+                "Open SignInPage ->",
+                ButtonSize.S,
+                ButtonType.PRIMARY,
+                e -> {
+                    Router.pushPage(Pages.LOGIN);
+                });
+        var openSignUpPage = new RectButton(
+                "Open SignUpPage ->",
+                ButtonSize.S,
+                ButtonType.PRIMARY,
+                e -> {
+                    Router.pushPage(Pages.REGISTER);
+                });
         var openShopOverlay = new RectButton(
                 "Open ShopOverlay ->",
                 ButtonSize.S,
@@ -64,6 +78,8 @@ public final class HomePage extends Page {
                 });
         panel.add(text.getRef());
         panel.add(openOnboardingPage.getRef());
+        panel.add(openSignInPage.getRef());
+        panel.add(openSignUpPage.getRef());
         panel.add(openShopOverlay.getRef());
         panel.add(openOrderOverlay.getRef());
         panel.add(openProfileOverlay.getRef());

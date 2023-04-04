@@ -19,19 +19,19 @@ public final class OnboardingPage extends Page {
         var text = new Heading("OnboardingPage", HeadingSize.L);
         var homePageButton = new RectButton(
                 "HomePage ->",
-                ButtonSize.XS,
+                ButtonSize.S,
                 ButtonType.PRIMARY,
                 e -> Router.pushPage(Pages.HOME));
         var signInPageButton = new RectButton(
                 "SignInPage ->",
-                ButtonSize.XS,
-                ButtonType.PRIMARY,
-                e -> Router.pushPage(Pages.HOME));
+                ButtonSize.S,
+                ButtonType.SECONDARY,
+                e -> Router.pushPage(Pages.LOGIN));
         var signUpPageButton = new RectButton(
                 "SignUpPage ->",
-                ButtonSize.XS,
-                ButtonType.PRIMARY,
-                e -> Router.pushPage(Pages.HOME));
+                ButtonSize.S,
+                ButtonType.SECONDARY,
+                e -> Router.pushPage(Pages.REGISTER));
         panel.add(text.getRef());
         panel.add(homePageButton.getRef());
         panel.add(signInPageButton.getRef());

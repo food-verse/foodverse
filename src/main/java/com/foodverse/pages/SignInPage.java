@@ -17,6 +17,13 @@ public final class SignInPage extends Page {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("SignInPage", HeadingSize.L);
+        var openOnboardingPage = new RectButton(
+                "Open OnboardingPage ->",
+                ButtonSize.S,
+                ButtonType.PRIMARY,
+                e -> {
+                    Router.pushPage(Pages.ONBOARDING);
+                });
         var openHomePage = new RectButton(
                 "Open HomePage ->",
                 ButtonSize.S,
@@ -25,7 +32,9 @@ public final class SignInPage extends Page {
                     Router.pushPage(Pages.HOME);
                 });
         panel.add(text.getRef());
+        panel.add(openOnboardingPage.getRef());
         panel.add(openHomePage.getRef());
+        panel.setOpaque(false);
         return panel;
     }
 

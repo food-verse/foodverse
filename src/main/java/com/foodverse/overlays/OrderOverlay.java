@@ -36,7 +36,6 @@ public final class OrderOverlay extends Overlay {
                 });
         panel.add(button.getRef());
         panel.add(orderLabel.getRef());
-        panel.setBackground(Colors.gray100);
 
         // Border
         Border boarder = BorderFactory.createLineBorder(Colors.black);

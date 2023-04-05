@@ -13,6 +13,7 @@ import java.awt.Color;
 
 import java.awt.Dimension;
 import java.awt.Font;
+// import java.awt.Frame;
 // import java.awt.Graphics;
 import javax.swing.*;
 
@@ -37,20 +38,22 @@ public class ShopOverlay extends Overlay {
 
         var offers = new JLabel("Offers");
         var menu = new JLabel("Menu");
-        var offerProducts = new JTextArea("12345");
+        // var menuItem = new JLabel("Item");
+        // var offerProducts = new JTextArea("12345");
 
         offers.setFont(new Font("Courier New", Font.BOLD, 25));
         menu.setFont(new Font("Courier New", Font.BOLD, 25));
         offers.setForeground(Color.white);
         menu.setForeground(Color.white);
 
-        panel1.setPreferredSize(new Dimension(1000, 190));
+        panel1.setPreferredSize(new Dimension(600, 190));
         panel1.setBackground(Color.gray);
         panel1.add(offers);
+        // panel1.add(menuItem);
         // panel1.add(offerProducts);
         // panel1.add (new LinePanel());
 
-        panel2.setPreferredSize(new Dimension(1000, 190));
+        panel2.setPreferredSize(new Dimension(600, 190));
         panel2.setBackground(Color.gray);
 
         panel2.add(menu);
@@ -66,10 +69,28 @@ public class ShopOverlay extends Overlay {
         panel0.add(panel1);
         panel0.add(panel2);
 
+
+
+        JScrollPane scroll1 = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        panel0.add(scroll1);
+
+        JScrollPane scroll2 = new JScrollPane(panel2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        panel0.add(scroll2);
+
         panel.add(panel0);
 
 
         return panel;
     }
+
+    // public void paint(Graphics g)
+    // {
+    // super.paint(g);
+    // g.setColor(Color.white);
+    // // g.drawLine(2000, 222, 0, 222);
+    // g.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
+    // }
 
 }

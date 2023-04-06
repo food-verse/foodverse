@@ -13,6 +13,8 @@ import java.awt.Color;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 // import java.awt.Graphics;
 import javax.swing.*;
 
@@ -36,6 +38,11 @@ public class ShopOverlay extends Overlay {
         var panel2 = new JPanel();
         var panel3 = new JPanel();
 
+
+        double rate = 5.5;
+        var rateNumberLabel = new JLabel(Double.toString(rate) + " ");
+        rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
+        // rateNumberLabel.append(rate);
 
 
         var rateLabel = new JLabel("Rate ");
@@ -61,7 +68,6 @@ public class ShopOverlay extends Overlay {
         var menu = new JLabel("Menu");
 
 
-
         offers.setFont(new Font("Courier New", Font.BOLD, 25));
         menu.setFont(new Font("Courier New", Font.BOLD, 25));
         offers.setForeground(Color.white);
@@ -78,6 +84,7 @@ public class ShopOverlay extends Overlay {
         panel2.add(menu);
 
 
+        panel3.add(rateNumberLabel);
         panel3.add(rateLabel);
         panel3.add(rate1);
         panel3.add(rate2);
@@ -96,9 +103,7 @@ public class ShopOverlay extends Overlay {
             panel4.add(menuItem);
             panel4.add(productAddButton.getRef());
             panel1.add(panel4);
-
         }
-
 
 
         JScrollPane scroll1 = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -112,6 +117,13 @@ public class ShopOverlay extends Overlay {
 
         panel.add(panel3);
 
+        RadioButtonListener listener = new RadioButtonListener(rate1, rate2, rate3, rate4, rate5);
+        rate1.addActionListener(listener);
+        rate2.addActionListener(listener);
+        rate3.addActionListener(listener);
+        rate4.addActionListener(listener);
+        rate5.addActionListener(listener);
+
 
         return panel;
     }
@@ -120,12 +132,57 @@ public class ShopOverlay extends Overlay {
 
     }
 
-    // public void paint(Graphics g)
-    // {
-    // super.paint(g);
-    // g.setColor(Color.white);
-    // // g.drawLine(2000, 222, 0, 222);
-    // g.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
-    // }
 
+    class RadioButtonListener implements ActionListener {
+
+        private JRadioButton rate1; // declare rate1 as a class variable
+        private JRadioButton rate2;
+        private JRadioButton rate3;
+        private JRadioButton rate4;
+        private JRadioButton rate5;
+
+        public RadioButtonListener(JRadioButton rate1, JRadioButton rate2, JRadioButton rate3,
+                JRadioButton rate4, JRadioButton rate5) {
+            this.rate1 = rate1;
+            this.rate2 = rate2;
+            this.rate3 = rate3;
+            this.rate4 = rate4;
+            this.rate5 = rate5;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (e.getSource() == rate1) {
+                System.out.println(rate1.getText());
+                // this.calculateNewRate(1);
+            } else if (e.getSource() == rate2) {
+                System.out.println(rate2.getText());
+            } else if (e.getSource() == rate3) {
+                System.out.println(rate3.getText());
+            } else if (e.getSource() == rate4) {
+                System.out.println(rate4.getText());
+            } else if (e.getSource() == rate5) {
+                System.out.println(rate5.getText());
+            }
+
+
+
+            // private void calculateNewRate(Integer rateValue) {
+
+
+            // }
+
+
+            // public void paint(Graphics g)
+            // {
+            // super.paint(g);
+            // g.setColor(Color.white);
+            // // g.drawLine(2000, 222, 0, 222);
+            // g.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
+            // }
+
+        }
+
+    }
 }

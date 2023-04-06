@@ -65,7 +65,7 @@ public class ShopOverlay extends Overlay {
 
 
         var offers = new JLabel("Offers");
-        var menu = new JLabel("Menu");
+        var menu = new JLabel("Menu  ");
 
 
         offers.setFont(new Font("Courier New", Font.BOLD, 25));
@@ -93,17 +93,8 @@ public class ShopOverlay extends Overlay {
         panel3.add(rate5);
 
 
-        for (var i = 0; i < 3; i++) {
-            var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            });
-            var panel4 = new JPanel();
-            var menuItem = new JLabel("Item");
-
-            panel4.setPreferredSize(new Dimension(1200, 60));
-            panel4.add(menuItem);
-            panel4.add(productAddButton.getRef());
-            panel1.add(panel4);
-        }
+        this.showItems(panel1);
+        this.showItems(panel2);
 
 
         JScrollPane scroll1 = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -128,9 +119,32 @@ public class ShopOverlay extends Overlay {
         return panel;
     }
 
-    public void showItems() {
+
+    public void showItems(JPanel panel1) {
+
+        for (var i = 0; i < 3; i++) {
+            var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+            });
+            var panel4 = new JPanel();
+            var menuItem = new JLabel("Item");
+
+            panel4.setPreferredSize(new Dimension(1200, 60));
+            panel4.add(menuItem);
+            panel4.add(productAddButton.getRef());
+            panel1.add(panel4);
+        }
 
     }
+
+
+    // public void paint(Graphics g)
+    // {
+    // super.paint(g);
+    // g.setColor(Color.white);
+    // g.drawLine(2000, 222, 0, 222);
+    // g.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
+    // }
+
 
 
     class RadioButtonListener implements ActionListener {
@@ -171,15 +185,6 @@ public class ShopOverlay extends Overlay {
             // private void calculateNewRate(Integer rateValue) {
 
 
-            // }
-
-
-            // public void paint(Graphics g)
-            // {
-            // super.paint(g);
-            // g.setColor(Color.white);
-            // // g.drawLine(2000, 222, 0, 222);
-            // g.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
             // }
 
         }

@@ -7,6 +7,7 @@ import com.foodverse.utility.Router;
 import com.foodverse.utility.core.Button.ButtonSize;
 import com.foodverse.utility.core.Button.ButtonType;
 import com.foodverse.widgets.button.PillButton;
+import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 import java.awt.Color;
@@ -34,27 +35,29 @@ public class ShopOverlay extends Overlay {
         panel.setOpaque(false);
 
 
+        // panel creation
         var panel1 = new JPanel();
         var panel2 = new JPanel();
         var panel3 = new JPanel();
 
 
-        double rate = 5.5;
-        var rateNumberLabel = new JLabel(Double.toString(rate) + " ");
+        // store's rate
+        double rateNumber = 5.5;
+        var rateNumberLabel = new JLabel(Double.toString(rateNumber) + " ");
         rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
-        // rateNumberLabel.append(rate);
 
 
-        var rateLabel = new JLabel("Rate ");
-        rateLabel.setFont(new Font("Courier New", Font.BOLD, 25));
+        // label with the word Rate
+        var wordRate = new JLabel("Rate ");
+        wordRate.setFont(new Font("Courier New", Font.BOLD, 25));
 
 
+        // radioButtons with the ratings 1-5
         var rate1 = new JRadioButton("1 ");
         var rate2 = new JRadioButton("2 ");
         var rate3 = new JRadioButton("3 ");
         var rate4 = new JRadioButton("4 ");
         var rate5 = new JRadioButton("5 ");
-
 
         var group = new ButtonGroup();
         group.add(rate1);
@@ -64,6 +67,7 @@ public class ShopOverlay extends Overlay {
         group.add(rate5);
 
 
+        // creation, size, colour of offers and menu
         var offers = new JLabel("Offers");
         var menu = new JLabel("Menu  ");
 
@@ -74,6 +78,7 @@ public class ShopOverlay extends Overlay {
         menu.setForeground(Color.white);
 
 
+        // adding elements to the panels
         panel1.setPreferredSize(new Dimension(1300, 300));
         panel1.setBackground(Color.lightGray);
         panel1.add(offers);
@@ -85,7 +90,7 @@ public class ShopOverlay extends Overlay {
 
 
         panel3.add(rateNumberLabel);
-        panel3.add(rateLabel);
+        panel3.add(wordRate);
         panel3.add(rate1);
         panel3.add(rate2);
         panel3.add(rate3);
@@ -97,6 +102,7 @@ public class ShopOverlay extends Overlay {
         this.showItems(panel2);
 
 
+        // adding scrolling bars at panel1 and panel2
         JScrollPane scroll1 = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         panel.add(scroll1);
@@ -106,7 +112,19 @@ public class ShopOverlay extends Overlay {
         panel.add(scroll2);
 
 
+        // RectButton "Bug" to appear the OrderOverlay
+        var bugButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
+            showSuccessfulOrderMessage(e);
+        });
+
+        panel.add(bugButton.getRef());
+
+
+        // panel.setOpaque(false);
+
+
         panel.add(panel3);
+
 
         RadioButtonListener listener = new RadioButtonListener(rate1, rate2, rate3, rate4, rate5);
         rate1.addActionListener(listener);
@@ -137,6 +155,11 @@ public class ShopOverlay extends Overlay {
     }
 
 
+    private void showSuccessfulOrderMessage(ActionEvent e) {
+        JOptionPane.showMessageDialog(getFrame(), "We will deal with this later");
+    }
+
+
     // public void paint(Graphics g)
     // {
     // super.paint(g);
@@ -146,10 +169,9 @@ public class ShopOverlay extends Overlay {
     // }
 
 
-
     class RadioButtonListener implements ActionListener {
 
-        private JRadioButton rate1; // declare rate1 as a class variable
+        private JRadioButton rate1;
         private JRadioButton rate2;
         private JRadioButton rate3;
         private JRadioButton rate4;
@@ -181,9 +203,7 @@ public class ShopOverlay extends Overlay {
             }
 
 
-
             // private void calculateNewRate(Integer rateValue) {
-
 
             // }
 

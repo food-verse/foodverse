@@ -19,38 +19,32 @@ import java.awt.event.ActionListener;
 // import java.awt.Graphics;
 import javax.swing.*;
 
-
 public class ShopOverlay extends Overlay {
 
     @Override
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button =
-                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                    Router.closeOverlay();
-                });
+        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+            Router.closeOverlay();
+        });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
-
 
         // panel creation
         var panel1 = new JPanel();
         var panel2 = new JPanel();
         var panel3 = new JPanel();
 
-
         // store's rate
         double rateNumber = 5.5;
         var rateNumberLabel = new JLabel(Double.toString(rateNumber) + " ");
         rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
 
-
         // label with the word Rate
         var wordRate = new JLabel("Rate ");
         wordRate.setFont(new Font("Courier New", Font.BOLD, 25));
-
 
         // radioButtons with the ratings 1-5
         var rate1 = new JRadioButton("1 ");
@@ -66,28 +60,23 @@ public class ShopOverlay extends Overlay {
         group.add(rate4);
         group.add(rate5);
 
-
         // creation, size, colour of offers and menu
         var offers = new JLabel("Offers");
         var menu = new JLabel("Menu  ");
-
 
         offers.setFont(new Font("Courier New", Font.BOLD, 25));
         menu.setFont(new Font("Courier New", Font.BOLD, 25));
         offers.setForeground(Color.white);
         menu.setForeground(Color.white);
 
-
         // adding elements to the panels
         panel1.setPreferredSize(new Dimension(1300, 300));
         panel1.setBackground(Color.lightGray);
         panel1.add(offers);
 
-
         panel2.setPreferredSize(new Dimension(1300, 300));
         panel2.setBackground(Color.lightGray);
         panel2.add(menu);
-
 
         panel3.add(rateNumberLabel);
         panel3.add(wordRate);
@@ -97,10 +86,8 @@ public class ShopOverlay extends Overlay {
         panel3.add(rate4);
         panel3.add(rate5);
 
-
         this.showItems(panel1);
         this.showItems(panel2);
-
 
         // adding scrolling bars at panel1 and panel2
         JScrollPane scroll1 = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -111,7 +98,6 @@ public class ShopOverlay extends Overlay {
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         panel.add(scroll2);
 
-
         // RectButton "Bug" to appear the OrderOverlay
         var bugButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
             showSuccessfulOrderMessage(e);
@@ -119,12 +105,9 @@ public class ShopOverlay extends Overlay {
 
         panel.add(bugButton.getRef());
 
-
         // panel.setOpaque(false);
 
-
         panel.add(panel3);
-
 
         RadioButtonListener listener = new RadioButtonListener(rate1, rate2, rate3, rate4, rate5);
         rate1.addActionListener(listener);
@@ -133,10 +116,8 @@ public class ShopOverlay extends Overlay {
         rate4.addActionListener(listener);
         rate5.addActionListener(listener);
 
-
         return panel;
     }
-
 
     public void showItems(JPanel panel1) {
 
@@ -154,11 +135,9 @@ public class ShopOverlay extends Overlay {
 
     }
 
-
     private void showSuccessfulOrderMessage(ActionEvent e) {
         JOptionPane.showMessageDialog(getFrame(), "We will deal with this later");
     }
-
 
     // public void paint(Graphics g)
     // {
@@ -167,7 +146,6 @@ public class ShopOverlay extends Overlay {
     // g.drawLine(2000, 222, 0, 222);
     // g.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
     // }
-
 
     class RadioButtonListener implements ActionListener {
 
@@ -188,10 +166,13 @@ public class ShopOverlay extends Overlay {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            double newrate = 0, oldrate = 0;
+            Integer numberofrates = 0;
 
             if (e.getSource() == rate1) {
+                numberofrates++;
                 System.out.println(rate1.getText());
-                // this.calculateNewRate(1);
+                calculateNewRate(1, newrate, oldrate, numberofrates);
             } else if (e.getSource() == rate2) {
                 System.out.println(rate2.getText());
             } else if (e.getSource() == rate3) {
@@ -202,10 +183,13 @@ public class ShopOverlay extends Overlay {
                 System.out.println(rate5.getText());
             }
 
+        }
 
-            // private void calculateNewRate(Integer rateValue) {
+        private double calculateNewRate(Integer rateValue, double newrate, double oldrate, Integer numberofrates) {
 
-            // }
+            newrate = oldrate + (newrate / numberofrates);
+
+            return newrate;
 
         }
 

@@ -5,12 +5,13 @@ import javax.swing.JPanel;
 import com.foodverse.overlays.OrderOverlay;
 import com.foodverse.overlays.ProfileOverlay;
 import com.foodverse.overlays.ShopOverlay;
-import com.foodverse.utility.Form;
+import com.foodverse.utility.InputForm;
 import com.foodverse.utility.Page;
 import com.foodverse.utility.Pages;
 import com.foodverse.utility.Router;
 import com.foodverse.utility.core.Button.ButtonSize;
 import com.foodverse.utility.core.Button.ButtonType;
+import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
@@ -84,7 +85,13 @@ public final class OverviewPage extends Page {
                 e -> {
                     Router.pushPage(Pages.BUTTONS);
                 });
-        var textForm = new Form();
+        var inputForm = new InputForm("Label", "Hint");
+        var toggleButton = new PillButton("Toggle Field",
+                ButtonSize.S,
+                ButtonType.TERTIARY,
+                e -> {
+                    inputForm.toggle();
+                });
         panel.add(text.getRef());
         panel.add(openOnboardingPage.getRef());
         panel.add(openSignInPage.getRef());
@@ -95,7 +102,8 @@ public final class OverviewPage extends Page {
         panel.add(openProfileOverlay.getRef());
         panel.add(openTextPage.getRef());
         panel.add(openButtonPage.getRef());
-        panel.add(textForm.getRef());
+        panel.add(inputForm.getRef());
+        panel.add(toggleButton.getRef());
         panel.setOpaque(false);
         return panel;
     }

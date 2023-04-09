@@ -1,6 +1,7 @@
 package com.foodverse.utility;
 
 public enum Pages {
+    OVERVIEW("OverviewPage"),
     ONBOARDING("OnboardingPage"),
     LOGIN("SignInPage"),
     REGISTER("SignUpPage"),

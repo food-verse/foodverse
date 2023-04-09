@@ -1,4 +1,4 @@
-package com.foodverse.utility;
+package com.foodverse.utility.navigation;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

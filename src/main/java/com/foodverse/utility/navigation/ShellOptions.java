@@ -1,8 +1,8 @@
-package com.foodverse.utility;
+package com.foodverse.utility.navigation;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import com.foodverse.utility.core.Colors;
+import com.foodverse.utility.core.ui.Colors;
 
 public final class ShellOptions {
 

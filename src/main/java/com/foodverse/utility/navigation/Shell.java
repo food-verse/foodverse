@@ -1,7 +1,8 @@
-package com.foodverse.utility;
+package com.foodverse.utility.navigation;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import com.foodverse.utility.system.AssetManager;
 
 public final class Shell {
 

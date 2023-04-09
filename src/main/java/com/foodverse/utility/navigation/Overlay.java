@@ -1,7 +1,8 @@
-package com.foodverse.utility;
+package com.foodverse.utility.navigation;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import com.foodverse.utility.Widget;
 
 /**
  * The parent class of every overlay. Overlays extending this class get their own id and an

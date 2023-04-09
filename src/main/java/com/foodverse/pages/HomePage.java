@@ -1,7 +1,8 @@
 package com.foodverse.pages;
 
 import java.awt.Component;
-import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,21 +15,18 @@ import com.foodverse.utility.Page;
 import com.foodverse.utility.Pages;
 import com.foodverse.utility.Router;
 import com.foodverse.utility.core.Align;
-import com.foodverse.utility.core.Column;
 import com.foodverse.utility.core.ImageAsset;
 import com.foodverse.utility.core.ImageStyle;
-import com.foodverse.utility.core.Row;
-import com.foodverse.utility.core.ShopType;
 import com.foodverse.utility.core.Button.ButtonSize;
 import com.foodverse.utility.core.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.card.ShopProps;
+import com.foodverse.widgets.layout.Carousel;
+import com.foodverse.widgets.layout.Column;
+import com.foodverse.widgets.layout.Row;
 import com.foodverse.widgets.media.Image;
-import com.foodverse.widgets.card.OfferCard;
 import com.foodverse.widgets.card.OfferProps;
-import com.foodverse.widgets.card.OrderCard;
 import com.foodverse.widgets.card.OrderProps;
-import com.foodverse.widgets.card.ShopCard;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 
@@ -89,36 +87,21 @@ public final class HomePage extends Page {
                 Align.CENTER);
         // Add the heading for the carousel to the main panel
         panel.add(paddedNearby.getRef());
-        // Remove the default padding of the nearby shops carousel with a temporary panel
-        var shopsWithoutPad = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        shopsWithoutPad.setOpaque(false);
-        // Creating carousel of nearby shops...
-        var shopCarousel = new Row();
+        // TODO: Remove list of ShopCard props
+        List<ShopProps> shopProps = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            // Add samples of the ShopCard to the carousel
-            // TODO: Remove mock data
-            shopCarousel.addWidget((new ShopCard(new ShopProps.Builder()
+            shopProps.add(new ShopProps.Builder()
                     .thumbnail(ImageAsset.BURGER)
                     .shopName("Burgerlicious")
-                    .rating(5.0f)
-                    .type(ShopType.BURGER)
-                    .minimumOrder(7.0f)
+                    .rating(5f)
+                    .minimumOrder(7f)
                     .time(30)
-                    .build())),
-                    new EdgeInsets.Builder()
-                            .right(8)
-                            .build(),
-                    Align.FIRST_LINE_END);
+                    .build());
         }
-        shopsWithoutPad.add(shopCarousel.getRef());
-        // Add padding to shops' carousel
-        var paddedCarousel = new Row();
-        paddedCarousel.addComponent(shopsWithoutPad, new EdgeInsets.Builder()
-                .symmetric(16, 48)
-                .bottom(24)
-                .build(),
-                Align.FIRST_LINE_START);
-        panel.add(paddedCarousel.getRef());
+        // Create a carousel for the nearby shops
+        var shopCarousel = new Carousel(shopProps);
+        // Add the carousel for the nearby shops to the main panel
+        panel.add(shopCarousel.getRef());
         // Heading for the carousel of offers
         var paddedOffers = new Row();
         var offersText = new Heading("Offers", HeadingSize.L);
@@ -132,34 +115,20 @@ public final class HomePage extends Page {
                 new Item("Pizza Margarita + 2 Coca Cola -> 5.20€"), 1,
                 new Item("Pizza Picolla + 1 Coca Cola -> 3.40€"), 1,
                 new Item("Pizza Al Forno + 2 Fanta -> 8.60€"), 1);
-        // Remove the default padding of the offers carousel with a temporary panel
-        var offersWithoutPad = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        offersWithoutPad.setOpaque(false);
-        // Creating carousel of offers...
-        var offersCarousel = new Row();
+        // TODO: Remove list of OfferCard props
+        List<OfferProps> offerProps = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
-            // Add samples of the ShopCard to the carousel
-            // TODO: Remove mock data
-            offersCarousel.addWidget((new OfferCard(new OfferProps.Builder()
+            offerProps.add(new OfferProps.Builder()
                     .thumbnail(ImageAsset.SMALL_BURGER)
                     .shopName("Burgerlicious")
                     .rating(5.0f)
                     .items(offerItems)
-                    .build())),
-                    new EdgeInsets.Builder()
-                            .right(16)
-                            .build(),
-                    Align.FIRST_LINE_END);
+                    .build());
         }
-        offersWithoutPad.add(offersCarousel.getRef());
-        // Add padding to offers' carousel
-        var paddedOffersCarousel = new Row();
-        paddedOffersCarousel.addComponent(offersWithoutPad, new EdgeInsets.Builder()
-                .symmetric(16, 48)
-                .bottom(24)
-                .build(),
-                Align.FIRST_LINE_START);
-        panel.add(paddedOffersCarousel.getRef());
+        // Create a carousel for the available offers
+        var offerCarousel = new Carousel(offerProps);
+        // Add the carousel for the available offers to the main panel
+        panel.add(offerCarousel.getRef());
         // Heading for the carousel of recent orders
         var paddedRecent = new Row();
         var recentText = new Heading("Recent", HeadingSize.L);
@@ -173,35 +142,21 @@ public final class HomePage extends Page {
                 new Item("BBQ Burger XL with fries"), 1,
                 new Item("Pepsi Cola"), 1,
                 new Item("Onion Rings"), 1);
-        // Remove the default padding of the recent orders carousel with a temporary panel
-        var ordersWithoutPad = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        ordersWithoutPad.setOpaque(false);
-        // Creating carousel of orders...
-        var ordersCarousel = new Row();
-        for (int i = 0; i < 4; i++) {
-            // Add samples of the OrderCard to the carousel
-            // TODO: Remove mock data
-            ordersCarousel.addWidget((new OrderCard(new OrderProps.Builder()
+        // TODO: Remove list of OfferCard props
+        List<OrderProps> orderProps = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            orderProps.add(new OrderProps.Builder()
                     .thumbnail(ImageAsset.BURGER)
                     .shopName("Burgerlicious")
-                    .rating(5.0f)
+                    .rating(5f)
                     .items(orderItems)
                     .price(24.78f)
-                    .build())),
-                    new EdgeInsets.Builder()
-                            .right(8)
-                            .build(),
-                    Align.FIRST_LINE_END);
+                    .build());
         }
-        ordersWithoutPad.add(ordersCarousel.getRef());
-        // Add padding to recent orders' carousel
-        var paddedOrdersCarousel = new Row();
-        paddedOrdersCarousel.addComponent(ordersWithoutPad, new EdgeInsets.Builder()
-                .symmetric(16, 48)
-                .bottom(24)
-                .build(),
-                Align.FIRST_LINE_START);
-        panel.add(paddedOrdersCarousel.getRef());
+        // Create a carousel for the available offers
+        var orderCarousel = new Carousel(orderProps);
+        // Add the carousel for the available offers to the main panel
+        panel.add(orderCarousel.getRef());
         // Add scrolling to the main panel
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);

@@ -67,7 +67,7 @@ public final class Router {
             oldOverlay = overlays.pop();
             overlays.push(oldOverlay);
         } catch (NoSuchElementException e) {
-            logger.log(Level.WARNING, "Failed to open the overlay because the stack is empty.");
+            // Intentionally left empty
         }
         overlays.push(newOverlay);
         if (oldOverlay != null) {

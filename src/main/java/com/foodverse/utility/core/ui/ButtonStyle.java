@@ -1,7 +1,7 @@
-package com.foodverse.utility.core;
+package com.foodverse.utility.core.ui;
 
 import java.awt.Color;
-import com.foodverse.utility.EdgeInsets;
+import com.foodverse.utility.core.layout.EdgeInsets;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
 

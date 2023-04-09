@@ -1,4 +1,4 @@
-package com.foodverse.utility.core;
+package com.foodverse.utility.core.ui;
 
 import java.awt.Color;
 import java.awt.font.TextAttribute;

@@ -1,4 +1,4 @@
-package com.foodverse.utility.core;
+package com.foodverse.utility.core.ui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.RenderingHints;
 import javax.swing.JPanel;
 import com.foodverse.utility.Widget;
+import com.foodverse.utility.core.ui.ColoredBoxStyle.Builder;
 
 public final class ColoredBox extends JPanel {
 

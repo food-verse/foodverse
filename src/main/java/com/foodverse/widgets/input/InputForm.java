@@ -1,6 +1,9 @@
-package com.foodverse.utility;
+package com.foodverse.widgets.input;
 
 import java.awt.Component;
+import com.foodverse.utility.EdgeInsets;
+import com.foodverse.utility.TextField;
+import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.Align;
 import com.foodverse.utility.core.Colors;
 import com.foodverse.widgets.layout.Column;

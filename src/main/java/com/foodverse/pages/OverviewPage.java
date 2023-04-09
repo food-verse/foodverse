@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import com.foodverse.overlays.OrderOverlay;
 import com.foodverse.overlays.ProfileOverlay;
 import com.foodverse.overlays.ShopOverlay;
-import com.foodverse.utility.InputForm;
 import com.foodverse.utility.Page;
 import com.foodverse.utility.Pages;
 import com.foodverse.utility.Router;
@@ -13,6 +12,7 @@ import com.foodverse.utility.core.Button.ButtonSize;
 import com.foodverse.utility.core.Button.ButtonType;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
+import com.foodverse.widgets.input.InputForm;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 

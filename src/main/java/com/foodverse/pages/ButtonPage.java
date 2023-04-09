@@ -16,8 +16,9 @@ import com.foodverse.widgets.text.Heading.HeadingSize;
 
 public final class ButtonPage extends Page {
 
-    @Override
-    public Component getRef() {
+    private final Component component;
+
+    public ButtonPage() {
         var panel = new JPanel();
         var text = new Heading("ButtonPage", HeadingSize.L);
         var openOverviewPage = new RectButton(
@@ -86,7 +87,12 @@ public final class ButtonPage extends Page {
             }
         }
         panel.setOpaque(false);
-        return panel;
+        component = panel;
+    }
+
+    @Override
+    public Component getRef() {
+        return component;
     }
 
 }

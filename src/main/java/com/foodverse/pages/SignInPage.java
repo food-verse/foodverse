@@ -13,8 +13,9 @@ import com.foodverse.widgets.text.Heading.HeadingSize;
 
 public final class SignInPage extends Page {
 
-    @Override
-    public Component getRef() {
+    private final Component component;
+
+    public SignInPage() {
         // Heading
         var panel = new JPanel();
         var text = new Heading("SignInPage", HeadingSize.L);
@@ -36,7 +37,12 @@ public final class SignInPage extends Page {
         panel.add(openOnboardingPage.getRef());
         panel.add(openOverviewPage.getRef());
         panel.setOpaque(false);
-        return panel;
+        component = panel;
+    }
+
+    @Override
+    public Component getRef() {
+        return component;
     }
 
 }

@@ -19,8 +19,9 @@ import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
 public final class TextPage extends Page {
 
-    @Override
-    public Component getRef() {
+    private final Component component;
+
+    public TextPage() {
         var panel = new JPanel();
         var text = new Heading("TextPage", HeadingSize.L);
         var openOverviewPage = new RectButton(
@@ -65,7 +66,12 @@ public final class TextPage extends Page {
             panel.add(textWidget.getRef());
         }
         panel.setOpaque(false);
-        return panel;
+        component = panel;
+    }
+
+    @Override
+    public Component getRef() {
+        return component;
     }
 
 }

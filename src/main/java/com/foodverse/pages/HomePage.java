@@ -12,6 +12,7 @@ import javax.swing.ScrollPaneConstants;
 import com.foodverse.models.Item;
 import com.foodverse.utility.core.layout.Align;
 import com.foodverse.utility.core.layout.EdgeInsets;
+import com.foodverse.utility.core.ui.Colors;
 import com.foodverse.utility.core.ui.ImageStyle;
 import com.foodverse.utility.core.ui.Button.ButtonSize;
 import com.foodverse.utility.core.ui.Button.ButtonType;
@@ -161,6 +162,8 @@ public final class HomePage extends Page {
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBackground(Colors.white);
         scrollPane.setBorder(null);
         return scrollPane;
     }

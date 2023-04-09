@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
+// import javax.swing.JCheckBox;
 // import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -56,21 +56,30 @@ public final class OrderOverlay extends Overlay {
                 payment.setPreferredSize(new Dimension(600, 100));
                 payment.setBackground(Colors.white);
 
+                var CardButton = new RectButton("Card",
+                                ButtonSize.S,
+                                ButtonType.PRIMARY,
+                                e -> {
+                                        panel.add(Carddetails(e));
+                                });
+
+                panel.add(CardButton.getRef());
+
                 // Card Details
 
-                var cardNumber = new JTextArea("Card Number ");
-                cardNumber.setBorder(boarder);
-                var Name = new JTextArea("Name ");
-                Name.setBorder(boarder);
-                var secCode = new JTextArea("Secret Code ");
-                secCode.setBorder(boarder);
-                var Date = new JTextArea("Day/Year ");
-                Date.setBorder(boarder);
+                // var cardNumber = new JTextArea("Card Number ");
+                // cardNumber.setBorder(boarder);
+                // var Name = new JTextArea("Name ");
+                // Name.setBorder(boarder);
+                // var secCode = new JTextArea("Secret Code ");
+                // secCode.setBorder(boarder);
+                // var Date = new JTextArea("Day/Year ");
+                // Date.setBorder(boarder);
 
-                payment.add(cardNumber);
-                payment.add(Name);
-                payment.add(secCode);
-                payment.add(Date);
+                // payment.add(cardNumber);
+                // payment.add(Name);
+                // payment.add(secCode);
+                // payment.add(Date);
 
                 // Buttons for payment
 
@@ -154,6 +163,26 @@ public final class OrderOverlay extends Overlay {
 
         private void showSuccessfulOrderMessage(ActionEvent e) {
                 JOptionPane.showMessageDialog(getFrame(), "Your order has been successfully registered!");
+        }
+
+        private JPanel Carddetails(ActionEvent e) {
+                var payment = new JPanel();
+                Border boarder = BorderFactory.createLineBorder(Colors.black);
+
+                var cardNumber = new JTextArea("Card Number ");
+                cardNumber.setBorder(boarder);
+                var Name = new JTextArea("Name ");
+                Name.setBorder(boarder);
+                var secCode = new JTextArea("Secret Code ");
+                secCode.setBorder(boarder);
+                var Date = new JTextArea("Day/Year ");
+                Date.setBorder(boarder);
+
+                payment.add(cardNumber);
+                payment.add(Name);
+                payment.add(secCode);
+                payment.add(Date);
+                return payment;
         }
 
 }

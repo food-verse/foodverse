@@ -91,13 +91,14 @@ public final class HomePage extends Page {
                 Align.CENTER);
         // Add the heading for the carousel to the main panel
         panel.add(paddedNearby.getRef());
-        //
-        var temp = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        temp.setOpaque(false);
-        // Creating
+        // Remove default padding of carousel with a temporary panel
+        var panelWithoutPad = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        panelWithoutPad.setOpaque(false);
+        // Creating carousel of nearby shops...
         var shopCarousel = new Row();
         for (int i = 0; i < 5; i++) {
-            // TODO: Remove
+            // Add samples of the ShopCard to the carousel
+            // TODO: Remove mock data
             shopCarousel.addWidget((new ShopCard(new ShopProps.Builder()
                     .thumbnail(ImageAsset.BURGER)
                     .shopName("Burgerlicious")
@@ -111,10 +112,10 @@ public final class HomePage extends Page {
                             .build(),
                     Align.FIRST_LINE_END);
         }
-        temp.add(shopCarousel.getRef());
+        panelWithoutPad.add(shopCarousel.getRef());
         // Add padding to shop carousel
         var paddedCarousel = new Row();
-        paddedCarousel.addComponent(temp, new EdgeInsets.Builder()
+        paddedCarousel.addComponent(panelWithoutPad, new EdgeInsets.Builder()
                 .symmetric(16, 48)
                 .bottom(24)
                 .build(),
@@ -154,7 +155,7 @@ public final class HomePage extends Page {
                 new Item("BBQ Burger XL with fries"), 1,
                 new Item("Pepsi Cola"), 1,
                 new Item("Onion Rings"), 1);
-        // Add sample of the OrderCard the the main panel
+        // Add sample of the OrderCard to the main panel
         // TODO: Remove mock data
         panel.add(new OrderCard(new OrderProps.Builder()
                 .thumbnail(ImageAsset.BURGER)

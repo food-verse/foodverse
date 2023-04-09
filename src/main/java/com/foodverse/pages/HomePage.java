@@ -20,6 +20,7 @@ import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.ImageAsset;
+import com.foodverse.views.ScrollView;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.card.ShopProps;
 import com.foodverse.widgets.layout.Carousel;
@@ -158,14 +159,9 @@ public final class HomePage extends Page {
         var orderCarousel = new Carousel(orderProps);
         // Add the carousel for the available offers to the main panel
         panel.add(orderCarousel.getRef());
-        // Add scrolling to the main panel
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getViewport().setOpaque(false);
-        scrollPane.setBackground(Colors.white);
-        scrollPane.setBorder(null);
-        return scrollPane;
+        // Wrap the main panel in a scroll view
+        ScrollView view = new ScrollView(panel);
+        return view.getRef();
     }
 
 }

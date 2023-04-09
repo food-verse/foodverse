@@ -1,4 +1,4 @@
-package com.foodverse.views;
+package com.foodverse.widgets.layout;
 
 import java.awt.Component;
 import javax.swing.JScrollPane;

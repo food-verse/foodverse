@@ -1,4 +1,4 @@
-package com.foodverse.utility;
+package com.foodverse.utility.local;
 
 import java.io.BufferedReader;
 import java.io.File;

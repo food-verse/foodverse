@@ -1,4 +1,4 @@
-package com.foodverse.utility;
+package com.foodverse.utility.local;
 
 enum Files {
     DATABASE("database.dat"), QUESTIONS("questions.txt");

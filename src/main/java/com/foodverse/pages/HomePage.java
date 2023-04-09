@@ -27,8 +27,6 @@ import com.foodverse.widgets.layout.Row;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.card.OfferProps;
 import com.foodverse.widgets.card.OrderProps;
-import com.foodverse.widgets.text.Heading;
-import com.foodverse.widgets.text.Heading.HeadingSize;
 
 public final class HomePage extends Page {
 

@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -61,16 +62,31 @@ public final class Router {
      * @param newOverlay The overlay to be shown
      */
     public static void openOverlay(Overlay newOverlay) {
+        Overlay oldOverlay = null;
+        try {
+            oldOverlay = overlays.pop();
+            overlays.push(oldOverlay);
+        } catch (NoSuchElementException e) {
+            logger.log(Level.WARNING, "Failed to open the overlay because the stack is empty.");
+        }
         overlays.push(newOverlay);
-        newOverlay.open();
+        if (oldOverlay != null) {
+            newOverlay.open(oldOverlay.getFrame());
+        } else {
+            newOverlay.open(frame);
+        }
     }
 
     /**
      * Closes the most recently pushed overlay.
      */
     public static void closeOverlay() {
-        Overlay oldOverlay = overlays.pop();
-        oldOverlay.close();
+        try {
+            Overlay oldOverlay = overlays.pop();
+            oldOverlay.close();
+        } catch (NoSuchElementException e) {
+            logger.log(Level.WARNING, "Failed to close the overlay because the stack is empty.");
+        }
     }
 
 }

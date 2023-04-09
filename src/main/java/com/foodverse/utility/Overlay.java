@@ -61,13 +61,14 @@ public abstract class Overlay extends Widget implements Identifiable {
      * Finally, the setVisible() method is called on the frame object with the argument true, which
      * makes the frame visible to the user.
      */
-    public void open() {
+    public void open(JFrame oldFrame) {
         if (dimension.getWidth() < frame.getPreferredSize().getWidth()
                 || dimension.getHeight() < frame.getPreferredSize().getHeight()) {
             frame.pack();
         } else {
             frame.setSize(dimension);
         }
+        frame.setLocationRelativeTo(oldFrame);
         frame.setVisible(true);
     }
 

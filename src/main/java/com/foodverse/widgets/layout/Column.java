@@ -1,19 +1,17 @@
-package com.foodverse.utility.core;
+package com.foodverse.widgets.layout;
 
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 import com.foodverse.utility.EdgeInsets;
 import com.foodverse.utility.Widget;
+import com.foodverse.utility.core.Align;
 
-public final class Row extends Widget {
+public final class Column extends Widget {
 
     private final JPanel component = new JPanel();
     private int order = 0;
 
-    public Row() {
+    public Column() {
         component.setLayout(new GridBagLayout());
         component.setOpaque(false);
     }
@@ -28,9 +26,9 @@ public final class Row extends Widget {
 
     public void addComponent(Component widget, EdgeInsets edgeInsets, Align align) {
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.fill = GridBagConstraints.VERTICAL;
         constraints.weightx = 1.0;
-        constraints.gridx = order++;
+        constraints.gridy = order++;
         constraints.anchor = align.getAnchor();
         constraints.insets = new Insets(
                 edgeInsets.getTop(), edgeInsets.getLeft(),

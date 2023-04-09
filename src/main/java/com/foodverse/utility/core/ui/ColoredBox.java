@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.RenderingHints;
 import javax.swing.JPanel;
 import com.foodverse.utility.Widget;
-import com.foodverse.utility.core.ui.ColoredBoxStyle.Builder;
 
 public final class ColoredBox extends JPanel {
 

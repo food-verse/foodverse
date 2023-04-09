@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.JPanel;
 import com.foodverse.utility.EdgeInsets;
+import com.foodverse.utility.Props;
 import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.Align;
 import com.foodverse.widgets.card.OfferCard;

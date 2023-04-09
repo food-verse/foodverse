@@ -17,6 +17,7 @@ import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.ImageAsset;
+import com.foodverse.views.ListTile;
 import com.foodverse.views.ScrollView;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.card.ShopProps;
@@ -78,14 +79,9 @@ public final class HomePage extends Page {
                 Align.CENTER);
         panel.add(paddedHeading.getRef());
         // Heading for the carousel of nearby shops
-        var nearbyText = new Heading("Nearby", HeadingSize.L);
-        var paddedNearby = new Row();
-        paddedNearby.addWidget(nearbyText, new EdgeInsets.Builder()
-                .left(48)
-                .build(),
-                Align.CENTER);
-        // Add the heading for the carousel to the main panel
-        panel.add(paddedNearby.getRef());
+        var nearbyTile = new ListTile("Nearby");
+        // Add the heading for the shops' carousel to the main panel
+        panel.add(nearbyTile.getRef());
         // TODO: Remove list of ShopCard props
         List<ShopProps> shopProps = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -102,13 +98,9 @@ public final class HomePage extends Page {
         // Add the carousel for the nearby shops to the main panel
         panel.add(shopCarousel.getRef());
         // Heading for the carousel of offers
-        var paddedOffers = new Row();
-        var offersText = new Heading("Offers", HeadingSize.L);
-        paddedOffers.addWidget(offersText, new EdgeInsets.Builder()
-                .left(48)
-                .build(),
-                Align.CENTER);
-        panel.add(paddedOffers.getRef());
+        var offersTile = new ListTile("Offers");
+        // Add the heading for the offers' carousel to the main panel
+        panel.add(offersTile.getRef());
         // TODO: Remove map of offers when the process of loading the offers is ready
         Map<Item, Integer> offerItems = Map.of(
                 new Item("Pizza Margarita + 2 Coca Cola -> 5.20€"), 1,
@@ -129,13 +121,9 @@ public final class HomePage extends Page {
         // Add the carousel for the available offers to the main panel
         panel.add(offerCarousel.getRef());
         // Heading for the carousel of recent orders
-        var paddedRecent = new Row();
-        var recentText = new Heading("Recent", HeadingSize.L);
-        paddedRecent.addWidget(recentText, new EdgeInsets.Builder()
-                .left(48)
-                .build(),
-                Align.CENTER);
-        panel.add(paddedRecent.getRef());
+        var ordersTile = new ListTile("Recent");
+        // Add the heading for the recent orders' carousel to the main panel
+        panel.add(ordersTile.getRef());
         // TODO: Remove map of items when the process of loading recent orders is ready
         Map<Item, Integer> orderItems = Map.of(
                 new Item("BBQ Burger XL with fries"), 1,

@@ -1,5 +1,6 @@
 package com.foodverse.utility.core;
 
+import java.awt.Color;
 import java.awt.font.TextAttribute;
 import java.util.Map;
 
@@ -8,12 +9,14 @@ public final class TextStyle {
     private final String fontFamily;
     private final FontWeight fontWeight;
     private final int fontSize;
+    private final Color color;
 
     public static class Builder {
 
         private String fontFamily = "Inter";
         private FontWeight fontWeight = FontWeight.REGULAR;
         private int fontSize = 12;
+        private Color color = Colors.black;
 
         public Builder family(String fontFamily) {
             this.fontFamily = fontFamily;
@@ -30,6 +33,11 @@ public final class TextStyle {
             return this;
         }
 
+        public Builder color(Color color) {
+            this.color = color;
+            return this;
+        }
+
         public TextStyle build() {
             return new TextStyle(this);
         }
@@ -39,6 +47,11 @@ public final class TextStyle {
         this.fontFamily = builder.fontFamily;
         this.fontWeight = builder.fontWeight;
         this.fontSize = builder.fontSize;
+        this.color = builder.color;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public Map<TextAttribute, Object> getAttributes() {

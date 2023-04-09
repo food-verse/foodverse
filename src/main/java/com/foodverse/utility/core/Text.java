@@ -11,6 +11,7 @@ public abstract class Text extends Widget {
 
     protected Text(String data, TextStyle textStyle) {
         component.setText(data);
+        component.setForeground(textStyle.getColor());
         component.setFont(new Font(textStyle.getAttributes()));
     }
 

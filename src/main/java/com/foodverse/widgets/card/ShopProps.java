@@ -1,8 +1,8 @@
 package com.foodverse.widgets.card;
 
+import com.foodverse.utility.Props;
 import com.foodverse.utility.core.ImageAsset;
 import com.foodverse.utility.core.ShopType;
-import com.foodverse.widgets.layout.Props;
 
 public final class ShopProps implements Props {
 

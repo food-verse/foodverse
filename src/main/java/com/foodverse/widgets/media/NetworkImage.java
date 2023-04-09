@@ -3,9 +3,9 @@ package com.foodverse.widgets.media;
 import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import com.foodverse.utility.AssetManager;
 import com.foodverse.utility.Widget;
-import com.foodverse.utility.core.ImageStyle;
+import com.foodverse.utility.core.ui.ImageStyle;
+import com.foodverse.utility.system.AssetManager;
 
 public final class NetworkImage extends Widget {
 

@@ -2,7 +2,6 @@ package com.foodverse.pages;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
 import java.util.Map;
 import javax.swing.Box;
 import javax.swing.BoxLayout;

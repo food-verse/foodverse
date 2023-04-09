@@ -16,7 +16,7 @@ public final class SignUpPage extends Page {
     @Override
     public Component getRef() {
         var panel = new JPanel();
-        var text = new Heading("SignInPage", HeadingSize.L);
+        var text = new Heading("SignUpPage", HeadingSize.L);
         var openOnboardingPage = new RectButton(
                 "Open OnboardingPage ->",
                 ButtonSize.S,
@@ -24,16 +24,16 @@ public final class SignUpPage extends Page {
                 e -> {
                     Router.pushPage(Pages.ONBOARDING);
                 });
-        var openHomePage = new RectButton(
-                "Open HomePage ->",
+        var openOverviewPage = new RectButton(
+                "Open OverviewPage ->",
                 ButtonSize.S,
                 ButtonType.SECONDARY,
                 e -> {
-                    Router.pushPage(Pages.HOME);
+                    Router.pushPage(Pages.OVERVIEW);
                 });
         panel.add(text.getRef());
         panel.add(openOnboardingPage.getRef());
-        panel.add(openHomePage.getRef());
+        panel.add(openOverviewPage.getRef());
         panel.setOpaque(false);
         return panel;
     }

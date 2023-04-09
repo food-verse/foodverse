@@ -20,15 +20,15 @@ public final class ButtonPage extends Page {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ButtonPage", HeadingSize.L);
-        var openHomePage = new RectButton(
-                "Open HomePage ->",
+        var openOverviewPage = new RectButton(
+                "Open OverviewPage ->",
                 ButtonSize.S,
                 ButtonType.SECONDARY,
                 e -> {
-                    Router.pushPage(Pages.HOME);
+                    Router.pushPage(Pages.OVERVIEW);
                 });
         panel.add(text.getRef());
-        panel.add(openHomePage.getRef());
+        panel.add(openOverviewPage.getRef());
         for (ButtonType type : ButtonType.values()) {
             for (ButtonSize size : ButtonSize.values()) {
                 var button = new RectButton("Label", size, type, e -> {

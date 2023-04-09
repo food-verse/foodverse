@@ -8,6 +8,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import com.foodverse.models.Item;
+import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.layout.Align;
 import com.foodverse.utility.core.layout.EdgeInsets;
 import com.foodverse.utility.core.ui.ImageStyle;
@@ -30,8 +31,9 @@ import com.foodverse.widgets.card.OrderProps;
 
 public final class HomePage extends Page {
 
-    @Override
-    public Component getRef() {
+    private final Widget widget;
+
+    public HomePage() {
         // Creating main panel...
         var panel = new JPanel();
         panel.setOpaque(false);
@@ -143,8 +145,12 @@ public final class HomePage extends Page {
         // Add the carousel for the available offers to the main panel
         panel.add(orderCarousel.getRef());
         // Wrap the main panel in a scroll view
-        ScrollView view = new ScrollView(panel);
-        return view.getRef();
+        widget = new ScrollView(panel);
+    }
+
+    @Override
+    public Component getRef() {
+        return widget.getRef();
     }
 
 }

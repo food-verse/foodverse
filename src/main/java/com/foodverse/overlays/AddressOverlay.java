@@ -2,10 +2,10 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import javax.swing.JPanel;
-import com.foodverse.utility.Overlay;
-import com.foodverse.utility.Router;
-import com.foodverse.utility.core.Button.ButtonSize;
-import com.foodverse.utility.core.Button.ButtonType;
+import com.foodverse.utility.core.ui.Button.ButtonSize;
+import com.foodverse.utility.core.ui.Button.ButtonType;
+import com.foodverse.utility.navigation.Overlay;
+import com.foodverse.utility.navigation.Router;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;

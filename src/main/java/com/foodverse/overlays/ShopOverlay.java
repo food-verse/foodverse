@@ -2,10 +2,10 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import javax.swing.JPanel;
-import com.foodverse.utility.Overlay;
-import com.foodverse.utility.Router;
-import com.foodverse.utility.core.Button.ButtonSize;
-import com.foodverse.utility.core.Button.ButtonType;
+import com.foodverse.utility.core.ui.Button.ButtonSize;
+import com.foodverse.utility.core.ui.Button.ButtonType;
+import com.foodverse.utility.navigation.Overlay;
+import com.foodverse.utility.navigation.Router;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
@@ -25,9 +25,10 @@ public class ShopOverlay extends Overlay {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            Router.closeOverlay();
-        });
+        var button =
+                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+                    Router.closeOverlay();
+                });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
@@ -189,7 +190,8 @@ public class ShopOverlay extends Overlay {
 
         }
 
-        private double calculateNewRate(Integer rateValue, double newrate, double oldrate, Integer numberofrates) {
+        private double calculateNewRate(Integer rateValue, double newrate, double oldrate,
+                Integer numberofrates) {
 
             newrate = oldrate + (newrate / numberofrates);
 

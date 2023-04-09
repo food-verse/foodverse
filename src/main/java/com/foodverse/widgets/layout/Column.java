@@ -2,9 +2,9 @@ package com.foodverse.widgets.layout;
 
 import java.awt.*;
 import javax.swing.*;
-import com.foodverse.utility.EdgeInsets;
 import com.foodverse.utility.Widget;
-import com.foodverse.utility.core.Align;
+import com.foodverse.utility.core.layout.Align;
+import com.foodverse.utility.core.layout.EdgeInsets;
 
 public final class Column extends Widget {
 

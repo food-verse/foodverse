@@ -1,13 +1,13 @@
 package com.foodverse.widgets.card;
 
 import java.awt.Component;
-import com.foodverse.utility.EdgeInsets;
 import com.foodverse.utility.Widget;
-import com.foodverse.utility.core.Align;
-import com.foodverse.utility.core.ColoredBox;
-import com.foodverse.utility.core.Colors;
-import com.foodverse.utility.core.ImageAsset;
-import com.foodverse.utility.core.ImageStyle;
+import com.foodverse.utility.core.layout.Align;
+import com.foodverse.utility.core.layout.EdgeInsets;
+import com.foodverse.utility.core.ui.ColoredBox;
+import com.foodverse.utility.core.ui.Colors;
+import com.foodverse.utility.core.ui.ImageAsset;
+import com.foodverse.utility.core.ui.ImageStyle;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.Row;
 import com.foodverse.widgets.media.Image;

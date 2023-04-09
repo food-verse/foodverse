@@ -1,11 +1,11 @@
 package com.foodverse.widgets.input;
 
 import java.awt.Component;
-import com.foodverse.utility.EdgeInsets;
-import com.foodverse.utility.TextField;
 import com.foodverse.utility.Widget;
-import com.foodverse.utility.core.Align;
-import com.foodverse.utility.core.Colors;
+import com.foodverse.utility.core.layout.Align;
+import com.foodverse.utility.core.layout.EdgeInsets;
+import com.foodverse.utility.core.ui.Colors;
+import com.foodverse.utility.core.ui.TextField;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Paragraph;

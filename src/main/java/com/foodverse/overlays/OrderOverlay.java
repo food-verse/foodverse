@@ -13,11 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
-import com.foodverse.utility.Overlay;
-import com.foodverse.utility.Router;
-import com.foodverse.utility.core.Colors;
-import com.foodverse.utility.core.Button.ButtonSize;
-import com.foodverse.utility.core.Button.ButtonType;
+import com.foodverse.utility.core.ui.Colors;
+import com.foodverse.utility.core.ui.Button.ButtonSize;
+import com.foodverse.utility.core.ui.Button.ButtonType;
+import com.foodverse.utility.navigation.Overlay;
+import com.foodverse.utility.navigation.Router;
 import com.foodverse.views.AddressView;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
@@ -162,7 +162,8 @@ public final class OrderOverlay extends Overlay {
         }
 
         private void showSuccessfulOrderMessage(ActionEvent e) {
-                JOptionPane.showMessageDialog(getFrame(), "Your order has been successfully registered!");
+                JOptionPane.showMessageDialog(getFrame(),
+                                "Your order has been successfully registered!");
         }
 
         private JPanel Carddetails(ActionEvent e) {

@@ -7,10 +7,10 @@ import com.foodverse.pages.OnboardingPage;
 import com.foodverse.pages.SignUpPage;
 import com.foodverse.pages.SignInPage;
 import com.foodverse.pages.TextPage;
-import com.foodverse.utility.Pages;
-import com.foodverse.utility.Router;
-import com.foodverse.utility.Shell;
-import com.foodverse.utility.ShellOptions;
+import com.foodverse.utility.navigation.Pages;
+import com.foodverse.utility.navigation.Router;
+import com.foodverse.utility.navigation.Shell;
+import com.foodverse.utility.navigation.ShellOptions;
 
 public final class App {
 

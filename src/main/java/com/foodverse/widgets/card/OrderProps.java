@@ -3,7 +3,7 @@ package com.foodverse.widgets.card;
 import java.util.Map;
 import com.foodverse.models.Item;
 import com.foodverse.utility.Props;
-import com.foodverse.utility.core.ImageAsset;
+import com.foodverse.utility.core.ui.ImageAsset;
 
 public final class OrderProps implements Props {
 

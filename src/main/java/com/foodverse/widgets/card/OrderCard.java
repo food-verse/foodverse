@@ -8,10 +8,10 @@ import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.Align;
 import com.foodverse.utility.core.ColoredBox;
 import com.foodverse.utility.core.Colors;
-import com.foodverse.utility.core.Column;
 import com.foodverse.utility.core.ImageAsset;
 import com.foodverse.utility.core.ImageStyle;
-import com.foodverse.utility.core.Row;
+import com.foodverse.widgets.layout.Column;
+import com.foodverse.widgets.layout.Row;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
@@ -31,7 +31,10 @@ public final class OrderCard extends Widget {
                 props.getPrice());
         // Creating text widgets...
         var priceText = new Label(price, LabelSize.XS, Colors.gray600);
-        var ratingText = new Label(String.valueOf(props.getRating()), LabelSize.M, Colors.orange);
+        var ratingText = new Label(
+                String.valueOf(props.getRating()),
+                LabelSize.M,
+                Colors.orange);
         var shopNameText = new Label(props.getShopName(), LabelSize.L);
         // Creating image widgets...
         var starImage = new Image(ImageAsset.STAR, new ImageStyle.Builder()
@@ -45,7 +48,10 @@ public final class OrderCard extends Widget {
         // Creating card's rating widget...
         var ratingWidget = new Row();
         ratingWidget.addWidget(ratingText, Align.LINE_START);
-        ratingWidget.addWidget(starImage, new EdgeInsets.Builder().left(2).build(), Align.LINE_END);
+        ratingWidget.addWidget(starImage, new EdgeInsets.Builder()
+                .left(2)
+                .build(),
+                Align.LINE_END);
         // Creating card's heading widget...
         var headingWidget = new Row();
         headingWidget.addWidget(shopNameText, new EdgeInsets.Builder()
@@ -56,7 +62,8 @@ public final class OrderCard extends Widget {
         // Creating card's list of items widget...
         var itemListWidget = new Column();
         for (Map.Entry<Item, Integer> entry : props.getItems().entrySet()) {
-            var itemContent = String.format("• %d %s", entry.getValue(), entry.getKey().getName());
+            var itemContent = String.format("• %d %s", entry.getValue(),
+                    entry.getKey().getName());
             var itemText = new Label(itemContent, LabelSize.XS, Colors.gray600);
             itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
         }

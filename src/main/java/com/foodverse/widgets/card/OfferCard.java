@@ -7,14 +7,14 @@ import com.foodverse.utility.EdgeInsets;
 import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.Align;
 import com.foodverse.utility.core.Colors;
-import com.foodverse.utility.core.Column;
 import com.foodverse.utility.core.ImageAsset;
 import com.foodverse.utility.core.ImageStyle;
-import com.foodverse.utility.core.Row;
 import com.foodverse.utility.core.Button.ButtonSize;
 import com.foodverse.utility.core.Button.ButtonType;
 import com.foodverse.utility.core.ColoredBox;
 import com.foodverse.widgets.button.PillButton;
+import com.foodverse.widgets.layout.Column;
+import com.foodverse.widgets.layout.Row;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
@@ -50,7 +50,10 @@ public final class OfferCard extends Widget {
         // Creating card's rating widget...
         var ratingWidget = new Row();
         ratingWidget.addWidget(ratingText, Align.LINE_START);
-        ratingWidget.addWidget(starImage, new EdgeInsets.Builder().left(2).build(), Align.LINE_END);
+        ratingWidget.addWidget(starImage, new EdgeInsets.Builder()
+                .left(2)
+                .build(),
+                Align.LINE_END);
         // Creating card's heading widget...
         var headingWidget = new Row();
         headingWidget.addWidget(shopNameText, new EdgeInsets.Builder()

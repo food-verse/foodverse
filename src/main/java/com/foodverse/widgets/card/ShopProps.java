@@ -2,8 +2,9 @@ package com.foodverse.widgets.card;
 
 import com.foodverse.utility.core.ImageAsset;
 import com.foodverse.utility.core.ShopType;
+import com.foodverse.widgets.layout.Props;
 
-public final class ShopProps {
+public final class ShopProps implements Props {
 
     private final ImageAsset thumbnail;
     private final String shopName;

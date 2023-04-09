@@ -3,8 +3,9 @@ package com.foodverse.widgets.card;
 import java.util.Map;
 import com.foodverse.models.Item;
 import com.foodverse.utility.core.ImageAsset;
+import com.foodverse.widgets.layout.Props;
 
-public final class OfferProps {
+public final class OfferProps implements Props {
 
     private final ImageAsset thumbnail;
     private final String shopName;
@@ -13,7 +14,7 @@ public final class OfferProps {
 
     public static class Builder {
 
-        private ImageAsset thumbnail = ImageAsset.BURGER;
+        private ImageAsset thumbnail = ImageAsset.SMALL_BURGER;
         private String shopName = "ShopName";
         private float rating = 0f;
         private Map<Item, Integer> items = Map.of();

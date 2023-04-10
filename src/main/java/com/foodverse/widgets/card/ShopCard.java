@@ -27,7 +27,7 @@ public final class ShopCard extends Widget {
     @Override
     public Component getRef() {
         var minOrder = String.format(
-                "%d’ | Ελάχιστη %.2f€",
+                "%d’ | Minimum %.2f€",
                 props.getPrepTime(),
                 props.getMinOrder());
         // Creating text widgets...

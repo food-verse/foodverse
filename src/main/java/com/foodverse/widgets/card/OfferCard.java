@@ -3,6 +3,7 @@ package com.foodverse.widgets.card;
 import java.awt.Component;
 import java.util.Map;
 import com.foodverse.models.Item;
+import com.foodverse.models.Offer;
 import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.layout.Align;
 import com.foodverse.utility.core.layout.EdgeInsets;
@@ -37,7 +38,7 @@ public final class OfferCard extends Widget {
                 });
         // Creating text widgets...
         var ratingText = new Label(String.valueOf(props.getRating()), LabelSize.M, Colors.orange);
-        var shopNameText = new Label(props.getShopName(), LabelSize.L);
+        var shopNameText = new Label(props.getName(), LabelSize.L);
         // Creating image widgets...
         var starImage = new Image(ImageAsset.STAR, new ImageStyle.Builder()
                 .width(16)
@@ -63,9 +64,16 @@ public final class OfferCard extends Widget {
         headingWidget.addWidget(ratingWidget, Align.LAST_LINE_END);
         // Creating card's list of items widget...
         var itemListWidget = new Column();
-        for (Map.Entry<Item, Integer> entry : props.getItems().entrySet()) {
-            var itemContent = String.format("• %d %s", entry.getValue(), entry.getKey().getName());
-            var itemText = new Label(itemContent, LabelSize.XS, Colors.gray600);
+        for (Offer offer : props.getOffers()) {
+            StringBuilder builder = new StringBuilder();
+            builder.append('•');
+            for (Map.Entry<Item, Integer> entry : offer.getItems().entrySet()) {
+                builder.append(String.format(" %d %s +",
+                        entry.getValue(), entry.getKey().getName()));
+            }
+            builder.setLength(Math.max(builder.length() - 1, 0));
+            builder.append(String.format("-> %.2f€", offer.getTotal()));
+            var itemText = new Label(builder.toString(), LabelSize.XS, Colors.gray600);
             itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
         }
         // Creating card's main content widget...
@@ -87,7 +95,7 @@ public final class OfferCard extends Widget {
                 .build(),
                 Align.LINE_START);
         imageCol.addWidget(thumbnailImage, Align.LINE_END);
-        // Add border to
+        // Add border to card
         return new ColoredBox(imageCol);
     }
 

@@ -12,7 +12,7 @@ public final class ListTile extends Widget {
     private final Row component = new Row();
 
     public ListTile(String data) {
-        var widgetText = new Heading("Nearby", HeadingSize.L);
+        var widgetText = new Heading(data, HeadingSize.L);
         component.addWidget(widgetText, new EdgeInsets.Builder()
                 .left(48)
                 .build(),

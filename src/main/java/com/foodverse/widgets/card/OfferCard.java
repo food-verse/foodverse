@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.util.Map;
 import com.foodverse.models.Item;
 import com.foodverse.models.Offer;
+import com.foodverse.overlays.ShopOverlay;
 import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.layout.Align;
 import com.foodverse.utility.core.layout.EdgeInsets;
@@ -12,6 +13,7 @@ import com.foodverse.utility.core.ui.Colors;
 import com.foodverse.utility.core.ui.ImageStyle;
 import com.foodverse.utility.core.ui.Button.ButtonSize;
 import com.foodverse.utility.core.ui.Button.ButtonType;
+import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.ImageAsset;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.layout.Column;
@@ -35,6 +37,7 @@ public final class OfferCard extends Widget {
                 ButtonSize.S,
                 ButtonType.SECONDARY,
                 e -> {
+                    Router.openOverlay(new ShopOverlay());
                 });
         // Creating text widgets...
         var ratingText = new Label(String.valueOf(props.getRating()), LabelSize.M, Colors.orange);

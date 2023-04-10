@@ -1,12 +1,14 @@
 package com.foodverse.widgets.card;
 
 import java.awt.Component;
+import com.foodverse.overlays.ShopOverlay;
 import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.layout.Align;
 import com.foodverse.utility.core.layout.EdgeInsets;
 import com.foodverse.utility.core.ui.ColoredBox;
 import com.foodverse.utility.core.ui.Colors;
 import com.foodverse.utility.core.ui.ImageStyle;
+import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.ImageAsset;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.Row;
@@ -86,7 +88,9 @@ public final class ShopCard extends Widget {
                 .build(),
                 Align.LAST_LINE_START);
         // Add border to card
-        return new ColoredBox(imageCol);
+        return new ColoredBox(imageCol, e -> {
+            Router.openOverlay(new ShopOverlay());
+        });
     }
 
 }

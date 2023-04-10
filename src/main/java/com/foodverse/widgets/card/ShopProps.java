@@ -7,28 +7,28 @@ import com.foodverse.utility.system.ImageAsset;
 public final class ShopProps implements Props {
 
     private final ImageAsset thumbnail;
-    private final String shopName;
+    private final String name;
     private final float rating;
     private final ShopType type;
-    private final float minimumOrder;
-    private final int time;
+    private final int prepTime;
+    private final float minOrder;
 
     public static class Builder {
 
         private ImageAsset thumbnail = ImageAsset.BURGER;
-        private String shopName = "ShopName";
+        private String name = "";
         private float rating = 0f;
         private ShopType type = ShopType.BURGER;
-        private float minimumOrder = 0f;
-        private int time = 0;
+        private int prepTime = 0;
+        private float minOrder = 0f;
 
         public Builder thumbnail(ImageAsset thumbnail) {
             this.thumbnail = thumbnail;
             return this;
         }
 
-        public Builder shopName(String name) {
-            this.shopName = name;
+        public Builder name(String name) {
+            this.name = name;
             return this;
         }
 
@@ -42,13 +42,13 @@ public final class ShopProps implements Props {
             return this;
         }
 
-        public Builder minimumOrder(float minimumOrder) {
-            this.minimumOrder = minimumOrder;
+        public Builder prepTime(int time) {
+            this.prepTime = time;
             return this;
         }
 
-        public Builder time(int time) {
-            this.time = time;
+        public Builder minOrder(float minimumOrder) {
+            this.minOrder = minimumOrder;
             return this;
         }
 
@@ -59,22 +59,22 @@ public final class ShopProps implements Props {
 
     private ShopProps(Builder builder) {
         this.thumbnail = builder.thumbnail;
-        this.shopName = builder.shopName;
+        this.name = builder.name;
         this.rating = builder.rating;
         this.type = builder.type;
-        this.minimumOrder = builder.minimumOrder;
-        this.time = builder.time;
+        this.minOrder = builder.minOrder;
+        this.prepTime = builder.prepTime;
     }
 
     public ImageAsset getThumbnail() {
         return thumbnail;
     }
 
-    public String getShopName() {
-        return shopName;
+    public String getName() {
+        return name;
     }
 
-    public double getRating() {
+    public float getRating() {
         return rating;
     }
 
@@ -82,12 +82,12 @@ public final class ShopProps implements Props {
         return type;
     }
 
-    public float getMinimumOrder() {
-        return minimumOrder;
+    public int getPrepTime() {
+        return prepTime;
     }
 
-    public int getTime() {
-        return time;
+    public float getMinOrder() {
+        return minOrder;
     }
 
 }

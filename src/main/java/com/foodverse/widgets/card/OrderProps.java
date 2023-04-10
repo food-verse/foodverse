@@ -8,7 +8,7 @@ import com.foodverse.utility.system.ImageAsset;
 public final class OrderProps implements Props {
 
     private final ImageAsset thumbnail;
-    private final String shopName;
+    private final String name;
     private final float rating;
     private final Map<Item, Integer> items;
     private final float price;
@@ -16,7 +16,7 @@ public final class OrderProps implements Props {
     public static class Builder {
 
         private ImageAsset thumbnail = ImageAsset.BURGER;
-        private String shopName = "ShopName";
+        private String name = "";
         private float rating = 0f;
         private Map<Item, Integer> items = Map.of();
         private float price = 0f;
@@ -26,8 +26,8 @@ public final class OrderProps implements Props {
             return this;
         }
 
-        public Builder shopName(String name) {
-            this.shopName = name;
+        public Builder name(String name) {
+            this.name = name;
             return this;
         }
 
@@ -54,7 +54,7 @@ public final class OrderProps implements Props {
 
     private OrderProps(Builder builder) {
         this.thumbnail = builder.thumbnail;
-        this.shopName = builder.shopName;
+        this.name = builder.name;
         this.rating = builder.rating;
         this.items = builder.items;
         this.price = builder.price;
@@ -64,8 +64,8 @@ public final class OrderProps implements Props {
         return thumbnail;
     }
 
-    public String getShopName() {
-        return shopName;
+    public String getName() {
+        return name;
     }
 
     public float getRating() {

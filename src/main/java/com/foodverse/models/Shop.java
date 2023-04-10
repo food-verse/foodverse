@@ -23,19 +23,23 @@ public class Shop {
     @SerializedName("minimum_order")
     private float minOrder;
 
+    @SerializedName("offers")
+    private List<Offer> offers;
+
     @SerializedName("menu")
     private List<Item> menu;
 
     public Shop() {}
 
     public Shop(String name, String address, float rating, ShopType type, int prepTime,
-            float minOrder, List<Item> menu) {
+            float minOrder, List<Offer> offers, List<Item> menu) {
         this.name = name;
         this.address = address;
         this.rating = rating;
         this.type = type;
         this.prepTime = prepTime;
         this.minOrder = minOrder;
+        this.offers = offers;
         this.menu = menu;
     }
 
@@ -85,6 +89,14 @@ public class Shop {
 
     public void setMinOrder(float minOrder) {
         this.minOrder = minOrder;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 
     public List<Item> getMenu() {

@@ -3,7 +3,7 @@ package com.foodverse.models;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class Shop {
+public final class Shop {
 
     @SerializedName("name")
     private String name;

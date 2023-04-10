@@ -1,6 +1,6 @@
 package com.foodverse.models;
 
-public class Item {
+public final class Item {
 
     private final String name;
 

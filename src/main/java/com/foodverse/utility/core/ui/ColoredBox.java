@@ -5,25 +5,37 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.function.Consumer;
 import javax.swing.JPanel;
 import com.foodverse.utility.Widget;
 
 public final class ColoredBox extends JPanel {
 
     private final ColoredBoxStyle style;
+    private final Consumer<MouseEvent> onPressed;
 
     public ColoredBox(Widget child) {
-        this(new ColoredBoxStyle.Builder().build(), child);
+        this(child, null);
     }
 
-    public ColoredBox(ColoredBoxStyle style, Widget child) {
+    public ColoredBox(Widget child, Consumer<MouseEvent> onPressed) {
+        this(child, onPressed, new ColoredBoxStyle.Builder().build());
+    }
+
+    public ColoredBox(Widget child, Consumer<MouseEvent> onPressed, ColoredBoxStyle style) {
         super(new GridBagLayout());
-        setForeground(style.getBorderColor());
-        setBackground(style.getFillColor());
-        setOpaque(false);
-        add(child.getRef());
-        setMaximumSize(getMinimumSize());
         this.style = style;
+        this.onPressed = onPressed;
+        add(child.getRef());
+        setOpaque(false);
+        setForeground(style.getBorderColor());
+        setBackground(style.getDefaultBackgroundColor());
+        if (onPressed != null) {
+            addMouseListener(new ColoredBoxListener());
+        }
+        setMaximumSize(getMinimumSize());
     }
 
     @Override
@@ -36,10 +48,38 @@ public final class ColoredBox extends JPanel {
         graphics.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setColor(style.getFillColor());
+        graphics.setColor(getBackground());
         graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
-        graphics.setColor(style.getBorderColor());
+        graphics.setColor(getForeground());
         graphics.drawRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
+    }
+
+    private class ColoredBoxListener extends MouseAdapter {
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            setBackground(style.getHoverBackgroundColor());
+            repaint();
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            setBackground(style.getDefaultBackgroundColor());
+            repaint();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            setBackground(style.getPressBackgroundColor());
+            repaint();
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            onPressed.accept(e);
+            mouseExited(e);
+        }
+
     }
 
 }

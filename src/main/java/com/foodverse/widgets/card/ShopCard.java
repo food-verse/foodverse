@@ -24,18 +24,18 @@ public final class ShopCard extends Widget {
 
     @Override
     public Component getRef() {
-        var minimumOrder = String.format(
+        var minOrder = String.format(
                 "%d’ | Ελάχιστη %.2f€",
-                props.getTime(),
-                props.getMinimumOrder());
+                props.getPrepTime(),
+                props.getMinOrder());
         // Creating text widgets...
-        var minimumOrderText = new Label(minimumOrder, LabelSize.XS, Colors.gray600);
+        var minOrderText = new Label(minOrder, LabelSize.XS, Colors.gray600);
         var shopTypeText = new Label(props.getType().toString(), LabelSize.XS, Colors.gray600);
         var ratingText = new Label(
                 String.valueOf(props.getRating()),
                 LabelSize.M,
                 Colors.orange);
-        var shopNameText = new Label(props.getShopName(), LabelSize.L);
+        var shopNameText = new Label(props.getName(), LabelSize.L);
         // Creating image widgets...
         var starImage = new Image(ImageAsset.STAR, new ImageStyle.Builder()
                 .width(16)
@@ -67,7 +67,7 @@ public final class ShopCard extends Widget {
                 .bottom(4)
                 .build(),
                 Align.FIRST_LINE_START);
-        infoWidget.addWidget(minimumOrderText, Align.LAST_LINE_START);
+        infoWidget.addWidget(minOrderText, Align.LAST_LINE_START);
         // Creating card's main content widget...
         var mainContentWidget = new Column();
         mainContentWidget.addWidget(headingWidget, new EdgeInsets.Builder()

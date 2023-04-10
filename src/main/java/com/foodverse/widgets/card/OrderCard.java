@@ -35,7 +35,7 @@ public final class OrderCard extends Widget {
                 String.valueOf(props.getRating()),
                 LabelSize.M,
                 Colors.orange);
-        var shopNameText = new Label(props.getShopName(), LabelSize.L);
+        var shopNameText = new Label(props.getName(), LabelSize.L);
         // Creating image widgets...
         var starImage = new Image(ImageAsset.STAR, new ImageStyle.Builder()
                 .width(16)
@@ -62,8 +62,8 @@ public final class OrderCard extends Widget {
         // Creating card's list of items widget...
         var itemListWidget = new Column();
         for (Map.Entry<Item, Integer> entry : props.getItems().entrySet()) {
-            var itemContent = String.format("• %d %s", entry.getValue(),
-                    entry.getKey().getName());
+            var itemContent = String.format("• %d %s",
+                    entry.getValue(), entry.getKey().getName());
             var itemText = new Label(itemContent, LabelSize.XS, Colors.gray600);
             itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
         }
@@ -88,7 +88,7 @@ public final class OrderCard extends Widget {
                 .bottom(16)
                 .build(),
                 Align.LAST_LINE_START);
-        // Add border to
+        // Add border to card
         return new ColoredBox(imageCol);
     }
 

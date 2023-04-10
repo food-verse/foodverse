@@ -22,7 +22,7 @@ public final class AssetManager {
     private AssetManager() {}
 
     public static void loadFont(String fontFamily) {
-        var dir = String.format("src/main/java/com/foodverse/assets/fonts/%s/", fontFamily);
+        var dir = String.format("assets/fonts/%s/", fontFamily);
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         File[] fontFiles = new File(dir).listFiles();
         if (fontFiles == null) {

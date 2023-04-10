@@ -2,12 +2,14 @@ package com.foodverse.pages;
 
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import com.foodverse.models.Item;
+import com.foodverse.models.Offer;
 import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.layout.Align;
 import com.foodverse.utility.core.layout.EdgeInsets;
@@ -87,10 +89,10 @@ public final class HomePage extends Page {
         for (int i = 0; i < 5; i++) {
             shopProps.add(new ShopProps.Builder()
                     .thumbnail(ImageAsset.BURGER)
-                    .shopName("Burgerlicious")
+                    .name("Burgerlicious")
                     .rating(5f)
-                    .minimumOrder(7f)
-                    .time(30)
+                    .minOrder(7f)
+                    .prepTime(30)
                     .build());
         }
         // Create a carousel for the nearby shops
@@ -102,18 +104,31 @@ public final class HomePage extends Page {
         // Add the heading for the offers' carousel to the main panel
         panel.add(offersTile.getRef());
         // TODO: Remove map of offers when the process of loading the offers is ready
-        Map<Item, Integer> offerItems = Map.of(
-                new Item("Pizza Margarita + 2 Coca Cola -> 5.20€"), 1,
-                new Item("Pizza Picolla + 1 Coca Cola -> 3.40€"), 1,
-                new Item("Pizza Al Forno + 2 Fanta -> 8.60€"), 1);
+        // Creating first offer...
+        Map<Item, Integer> firstOfferItems = new HashMap<>();
+        firstOfferItems.put(new Item("Pizza Margarita", 3.20f), 1);
+        firstOfferItems.put(new Item("Coca Cola", 1.30f), 2);
+        Offer firstOffer = new Offer(firstOfferItems, 5.20f);
+        // Creating second offer...
+        Map<Item, Integer> secondOfferItems = new HashMap<>();
+        secondOfferItems.put(new Item("Pizza Picolla", 4.30f), 1);
+        secondOfferItems.put(new Item("Coca Cola", 1.30f), 1);
+        Offer secondOffer = new Offer(secondOfferItems, 3.40f);
+        // Creating third offer...
+        Map<Item, Integer> thirdOfferItems = new HashMap<>();
+        thirdOfferItems.put(new Item("Pizza Al Forno", 2.90f), 1);
+        thirdOfferItems.put(new Item("Fanta", 1.30f), 2);
+        Offer thirdOffer = new Offer(firstOfferItems, 8.60f);
+        // Creating the array of offers...
+        Offer[] offerItems = {firstOffer, secondOffer, thirdOffer};
         // TODO: Remove list of OfferCard props
         List<OfferProps> offerProps = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
             offerProps.add(new OfferProps.Builder()
                     .thumbnail(ImageAsset.SMALL_BURGER)
-                    .shopName("Burgerlicious")
+                    .name("Burgerlicious")
                     .rating(5.0f)
-                    .items(offerItems)
+                    .offers(offerItems)
                     .build());
         }
         // Create a carousel for the available offers
@@ -126,15 +141,15 @@ public final class HomePage extends Page {
         panel.add(ordersTile.getRef());
         // TODO: Remove map of items when the process of loading recent orders is ready
         Map<Item, Integer> orderItems = Map.of(
-                new Item("BBQ Burger XL with fries"), 1,
-                new Item("Pepsi Cola"), 1,
-                new Item("Onion Rings"), 1);
+                new Item("BBQ Burger XL with fries", 0), 1,
+                new Item("Pepsi Cola", 0), 1,
+                new Item("Onion Rings", 0), 1);
         // TODO: Remove list of OfferCard props
         List<OrderProps> orderProps = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             orderProps.add(new OrderProps.Builder()
                     .thumbnail(ImageAsset.BURGER)
-                    .shopName("Burgerlicious")
+                    .name("Burgerlicious")
                     .rating(5f)
                     .items(orderItems)
                     .price(24.78f)

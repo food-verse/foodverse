@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import com.foodverse.models.Shop;
 import com.foodverse.models.UserCredentials;
 
 public final class Database {
@@ -12,9 +13,11 @@ public final class Database {
     private static final Random generator = new Random();
     private final int numberOfRecoveryQuestions = 3;
     private List<UserCredentials> users;
+    private List<Shop> shops;
 
     private Database() {
         users = FileManager.loadDatabase();
+        shops = FileManager.loadShops();
     }
 
     /**
@@ -62,6 +65,15 @@ public final class Database {
         users.add(user);
         FileManager.saveDatabase(users);
         users = FileManager.loadDatabase();
+    }
+
+    public Optional<Shop> findShopByName(String name) {
+        for (Shop shop : shops) {
+            if (shop.getName().equals(name)) {
+                return Optional.of(shop);
+            }
+        }
+        return Optional.empty();
     }
 
     public List<String> getRecoveryCredentials(UserCredentials user) {

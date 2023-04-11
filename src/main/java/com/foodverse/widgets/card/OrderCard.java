@@ -49,17 +49,14 @@ public final class OrderCard extends Widget {
                 .build());
         // Creating card's rating widget...
         var ratingWidget = new Row();
-        ratingWidget.addWidget(ratingText, Align.LINE_START);
-        ratingWidget.addWidget(starImage, new EdgeInsets.Builder()
-                .left(2)
+        ratingWidget.addWidget(ratingText, new EdgeInsets.Builder()
+                .right(2)
                 .build(),
-                Align.LINE_END);
+                Align.LINE_START);
+        ratingWidget.addWidget(starImage, Align.LINE_END);
         // Creating card's heading widget...
         var headingWidget = new Row();
-        headingWidget.addWidget(shopNameText, new EdgeInsets.Builder()
-                .right(57)
-                .build(),
-                Align.FIRST_LINE_START);
+        headingWidget.addWidget(shopNameText, Align.FIRST_LINE_START);
         headingWidget.addWidget(ratingWidget, Align.LAST_LINE_END);
         // Creating card's list of items widget...
         var itemListWidget = new Column();

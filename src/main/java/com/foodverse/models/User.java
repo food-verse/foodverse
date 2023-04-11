@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public final class User {
 
+    @SerializedName("id")
+    private String id;
+
     @SerializedName("name")
     private String name;
 
@@ -23,14 +26,23 @@ public final class User {
     @SerializedName("orders")
     private List<Order> orders;
 
-    public User(String name, String address, String phone, String email, Credentials credentials,
-            List<Order> orders) {
+    public User(String id, String name, String address, String phone, String email,
+            Credentials credentials, List<Order> orders) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
         this.credentials = credentials;
         this.orders = orders;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

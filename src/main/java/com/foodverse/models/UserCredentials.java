@@ -79,19 +79,4 @@ public final class UserCredentials implements Serializable {
         this.secondRecoveryAnswer = recoveryAnswer2;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(String.format("%s:\n", getClass().getSimpleName()));
-        builder.append(String.format("Username: %s\n", username));
-        builder.append(String.format("Password: %s\n", password));
-        builder.append(String.format("Email: %s\n", email));
-        builder.append(String.format("Address: %s\n", address));
-        builder.append(String.format("Phone: %s\n", phone));
-        builder.append(String.format("Recovery Answer 1: %s\n", firstRecoveryAnswer));
-        builder.append(String.format("Recovery Answer 2: %s\n", secondRecoveryAnswer));
-        builder.append("----------\n");
-        return builder.toString();
-    }
-
 }

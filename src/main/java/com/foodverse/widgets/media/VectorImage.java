@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.function.Consumer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import com.foodverse.utility.Widget;
+import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.system.AssetManager;
 
 public final class VectorImage extends Widget {

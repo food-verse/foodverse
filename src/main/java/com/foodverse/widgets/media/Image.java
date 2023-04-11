@@ -4,9 +4,9 @@ import java.awt.Component;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import com.foodverse.utility.Widget;
-import com.foodverse.utility.core.ui.ImageStyle;
+import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.system.AssetManager;
+import com.foodverse.utility.ui.ImageStyle;
 
 public final class Image extends Widget {
 
@@ -17,13 +17,6 @@ public final class Image extends Widget {
         File file = new File(String.format("assets/images/%s", assetName));
         AssetManager
                 .getImage(file, imageStyle.getWidth(), imageStyle.getHeight())
-                .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
-    }
-
-    public Image(IconAsset asset, ImageStyle imageStyle) {
-        component.setPreferredSize(imageStyle.getDimension());
-        AssetManager
-                .getImage(asset.getFile(), imageStyle.getWidth(), imageStyle.getHeight())
                 .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
     }
 

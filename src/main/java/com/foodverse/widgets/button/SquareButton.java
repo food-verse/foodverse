@@ -2,11 +2,11 @@ package com.foodverse.widgets.button;
 
 import java.awt.event.ActionEvent;
 import java.util.function.Consumer;
-import com.foodverse.utility.core.layout.EdgeInsets;
-import com.foodverse.utility.core.ui.Button;
-import com.foodverse.utility.core.ui.ButtonStyle;
-import com.foodverse.utility.core.ui.ButtonTheme;
-import com.foodverse.utility.core.ui.TextStyle;
+import com.foodverse.utility.layout.EdgeInsets;
+import com.foodverse.utility.ui.Button;
+import com.foodverse.utility.ui.ButtonStyle;
+import com.foodverse.utility.ui.ButtonTheme;
+import com.foodverse.utility.ui.TextStyle;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
 

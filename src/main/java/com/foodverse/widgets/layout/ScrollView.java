@@ -3,8 +3,8 @@ package com.foodverse.widgets.layout;
 import java.awt.Component;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import com.foodverse.utility.Widget;
-import com.foodverse.utility.core.ui.Colors;
+import com.foodverse.utility.core.Widget;
+import com.foodverse.utility.ui.Colors;
 
 public final class ScrollView extends Widget {
 

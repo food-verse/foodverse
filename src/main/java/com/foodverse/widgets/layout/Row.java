@@ -5,9 +5,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.JPanel;
-import com.foodverse.utility.Widget;
-import com.foodverse.utility.core.layout.Align;
-import com.foodverse.utility.core.layout.EdgeInsets;
+import com.foodverse.utility.core.Widget;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
 
 public final class Row extends Widget {
 

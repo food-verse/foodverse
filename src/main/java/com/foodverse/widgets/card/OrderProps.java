@@ -3,8 +3,8 @@ package com.foodverse.widgets.card;
 import java.util.Map;
 import com.foodverse.models.Order;
 import com.foodverse.models.Shop;
-import com.foodverse.utility.Props;
-import com.foodverse.utility.State;
+import com.foodverse.utility.core.Props;
+import com.foodverse.utility.core.State;
 import com.foodverse.utility.system.Database;
 import com.foodverse.widgets.media.AssetSize;
 

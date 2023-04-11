@@ -1,23 +1,25 @@
 package com.foodverse.overlays;
 
-import java.awt.Component;
-import javax.swing.JPanel;
-import com.foodverse.utility.core.ui.Button.ButtonSize;
-import com.foodverse.utility.core.ui.Button.ButtonType;
-import com.foodverse.utility.navigation.Overlay;
-import com.foodverse.utility.navigation.Router;
-import com.foodverse.widgets.button.PillButton;
-import com.foodverse.widgets.button.RectButton;
-import com.foodverse.widgets.text.Heading;
-import com.foodverse.widgets.text.Heading.HeadingSize;
 import java.awt.Color;
-
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// import java.awt.Graphics;
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import com.foodverse.utility.navigation.Overlay;
+import com.foodverse.utility.navigation.Router;
+import com.foodverse.utility.ui.Button.ButtonSize;
+import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.widgets.button.PillButton;
+import com.foodverse.widgets.button.RectButton;
+import com.foodverse.widgets.text.Heading;
+import com.foodverse.widgets.text.Heading.HeadingSize;
 
 public class ShopOverlay extends Overlay {
 

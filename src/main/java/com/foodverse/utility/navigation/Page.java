@@ -1,6 +1,6 @@
 package com.foodverse.utility.navigation;
 
-import com.foodverse.utility.Widget;
+import com.foodverse.utility.core.Widget;
 
 /**
  * The parent class of every page. Pages extending this class get their own id and can be later

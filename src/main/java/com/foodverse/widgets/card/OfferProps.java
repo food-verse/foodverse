@@ -3,7 +3,7 @@ package com.foodverse.widgets.card;
 import java.util.List;
 import com.foodverse.models.Offer;
 import com.foodverse.models.Shop;
-import com.foodverse.utility.Props;
+import com.foodverse.utility.core.Props;
 import com.foodverse.widgets.media.AssetSize;
 
 public final class OfferProps implements Props {

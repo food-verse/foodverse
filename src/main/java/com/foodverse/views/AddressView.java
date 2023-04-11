@@ -4,8 +4,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import com.foodverse.utility.Widget;
-import com.foodverse.utility.core.ui.Colors;
+import com.foodverse.utility.core.Widget;
+import com.foodverse.utility.ui.Colors;
 
 public final class AddressView extends Widget {
 

@@ -1,10 +1,10 @@
 package com.foodverse.widgets.text;
 
 import java.awt.Color;
-import com.foodverse.utility.core.ui.Colors;
-import com.foodverse.utility.core.ui.Text;
-import com.foodverse.utility.core.ui.TextStyle;
-import com.foodverse.utility.core.ui.TextStyle.FontWeight;
+import com.foodverse.utility.ui.Colors;
+import com.foodverse.utility.ui.Text;
+import com.foodverse.utility.ui.TextStyle;
+import com.foodverse.utility.ui.TextStyle.FontWeight;
 
 public final class Display extends Text {
 

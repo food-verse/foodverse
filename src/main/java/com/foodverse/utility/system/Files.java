@@ -3,7 +3,7 @@ package com.foodverse.utility.system;
 import java.io.File;
 
 enum Files {
-    DATABASE("database.dat"), SHOPS("shops.json"), QUESTIONS("questions.txt");
+    DATABASE("database.dat"), USERS("users.json"), SHOPS("shops.json"), QUESTIONS("questions.txt");
 
     private final String fileName;
 

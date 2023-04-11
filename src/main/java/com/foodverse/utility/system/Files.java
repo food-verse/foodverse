@@ -1,7 +1,9 @@
 package com.foodverse.utility.system;
 
+import java.io.File;
+
 enum Files {
-    DATABASE("database.dat"), QUESTIONS("questions.txt");
+    DATABASE("database.dat"), SHOPS("shops.json"), QUESTIONS("questions.txt");
 
     private final String fileName;
 
@@ -9,8 +11,8 @@ enum Files {
         this.fileName = fileName;
     }
 
-    public String getFileName() {
-        return fileName;
+    public File getFile() {
+        return new File(String.format("db/%s", fileName));
     }
 
 }

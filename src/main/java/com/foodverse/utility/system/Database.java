@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import com.foodverse.models.Shop;
-import com.foodverse.models.UserCredentials;
+import com.foodverse.models.User;
 
 public final class Database {
 
     private static Database database;
     private static final Random generator = new Random();
     private final int numberOfRecoveryQuestions = 3;
-    private List<UserCredentials> users;
+    private List<User> users;
     private List<Shop> shops;
 
     private Database() {
-        users = FileManager.loadDatabase();
+        users = FileManager.loadUsers();
         shops = FileManager.loadShops();
     }
 
@@ -33,10 +33,10 @@ public final class Database {
         return database;
     }
 
-    public Optional<UserCredentials> userExists(String username) {
+    public Optional<User> userExists(String id) {
         if (!users.isEmpty()) {
-            for (UserCredentials user : users) {
-                if (user.getUsername().equals(username)) {
+            for (User user : users) {
+                if (user.getId().equals(id)) {
                     return Optional.of(user);
                 }
             }
@@ -44,10 +44,11 @@ public final class Database {
         return Optional.empty();
     }
 
-    public Optional<UserCredentials> signIn(String username, String password) {
+    public Optional<User> signIn(String id, String password) {
         if (!users.isEmpty()) {
-            for (UserCredentials user : users) {
-                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            for (User user : users) {
+                if (user.getId().equals(id)
+                        && user.getCredentials().getPassword().equals(password)) {
                     return Optional.of(user);
                 }
             }
@@ -55,16 +56,16 @@ public final class Database {
         return Optional.empty();
     }
 
-    public void saveUser(UserCredentials user) {
-        for (UserCredentials credentials : users) {
-            if (credentials.getUsername().equals(user.getUsername())) {
+    public void saveUser(User user) {
+        for (User credentials : users) {
+            if (credentials.getId().equals(user.getId())) {
                 users.remove(user);
                 break;
             }
         }
         users.add(user);
-        FileManager.saveDatabase(users);
-        users = FileManager.loadDatabase();
+        FileManager.saveUsers(users);
+        users = FileManager.loadUsers();
     }
 
     public Optional<Shop> findShopByName(String name) {
@@ -76,15 +77,15 @@ public final class Database {
         return Optional.empty();
     }
 
-    public List<String> getRecoveryCredentials(UserCredentials user) {
+    public List<String> getRecoveryCredentials(User user) {
         List<String> credentials = new ArrayList<>();
         int randomNumber = generator.nextInt(1, numberOfRecoveryQuestions);
         String question = FileManager.getRandomRecoveryQuestion(randomNumber).get();
         String answer;
         if (randomNumber == 1) {
-            answer = user.getFirstRecoveryAnswer();
+            answer = user.getCredentials().getFirstRecoveryAnswer();
         } else {
-            answer = user.getSecondRecoveryAnswer();
+            answer = user.getCredentials().getSecondRecoveryAnswer();
         }
         credentials.add(question);
         credentials.add(answer);

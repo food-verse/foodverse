@@ -3,22 +3,16 @@ package com.foodverse.utility.system;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
-import com.foodverse.models.UserCredentials;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -29,51 +23,6 @@ public final class FileManager {
     private static final Gson gson = new Gson();
 
     private FileManager() {}
-
-    public static List<UserCredentials> loadDatabase() {
-        List<UserCredentials> loadedUsers = new ArrayList<>();
-        File file = Files.DATABASE.getFile();
-        if (file.exists()) {
-            try {
-                FileInputStream fileInputStream = new FileInputStream(file);
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                var list = (List<?>) objectInputStream.readObject();
-                for (Object user : list) {
-                    if (user instanceof UserCredentials) {
-                        loadedUsers.add((UserCredentials) user);
-                    }
-                }
-                fileInputStream.close();
-                objectInputStream.close();
-            } catch (IOException | ClassNotFoundException e) {
-                logger.log(Level.INFO, "Could not load database.");
-            }
-        } else {
-            logger.log(Level.INFO, "There is no such file: {0}", file.getName());
-        }
-        return loadedUsers;
-    }
-
-    public static void saveDatabase(List<UserCredentials> users) {
-        File file = Files.DATABASE.getFile();
-        if (!file.exists()) {
-            try {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            } catch (IOException e) {
-                logger.log(Level.INFO, "Could not create a file for saving the list of users.");
-            }
-        }
-        try {
-            FileOutputStream outputStream = new FileOutputStream(file);
-            ObjectOutputStream stream = new ObjectOutputStream(outputStream);
-            stream.writeObject(users);
-            outputStream.close();
-            stream.close();
-        } catch (IOException e) {
-            logger.log(Level.INFO, "Could not save user credentials to the database.");
-        }
-    }
 
     public static List<User> loadUsers() {
         File file = Files.USERS.getFile();

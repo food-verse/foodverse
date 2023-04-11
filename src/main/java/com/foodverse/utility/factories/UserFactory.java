@@ -55,6 +55,7 @@ public final class UserFactory {
 
         // Creating the user...
         var user = new User(
+                "emilysmith123",
                 "Emily Smith",
                 "123 Main St, Anytown, USA 12345",
                 "+1 (555) 555-1234",

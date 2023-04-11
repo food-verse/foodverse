@@ -1,25 +1,27 @@
 package com.foodverse.widgets.card;
 
+import java.util.List;
 import com.foodverse.models.Offer;
+import com.foodverse.models.Shop;
 import com.foodverse.utility.Props;
-import com.foodverse.utility.system.ImageAsset;
+import com.foodverse.widgets.media.AssetSize;
 
 public final class OfferProps implements Props {
 
-    private final ImageAsset thumbnail;
+    private final String thumbnail;
     private final String name;
     private final float rating;
-    private final Offer[] offers;
+    private final List<Offer> offers;
 
     public static class Builder {
 
-        private ImageAsset thumbnail = ImageAsset.SMALL_BURGER;
+        private String thumbnail = "";
         private String name = "";
         private float rating = 0f;
-        private Offer[] offers = {};
+        private List<Offer> offers = List.of();
 
-        public Builder thumbnail(ImageAsset thumbnail) {
-            this.thumbnail = thumbnail;
+        public Builder thumbnail(String assetName) {
+            this.thumbnail = assetName;
             return this;
         }
 
@@ -33,7 +35,7 @@ public final class OfferProps implements Props {
             return this;
         }
 
-        public Builder offers(Offer[] offers) {
+        public Builder offers(List<Offer> offers) {
             this.offers = offers;
             return this;
         }
@@ -51,7 +53,16 @@ public final class OfferProps implements Props {
         this.offers = builder.offers;
     }
 
-    public ImageAsset getThumbnail() {
+    public static OfferProps from(Shop shop) {
+        return new OfferProps.Builder()
+                .thumbnail(shop.getThumbnails().get(AssetSize.SMALL))
+                .name(shop.getName())
+                .rating(shop.getRating())
+                .offers(shop.getOffers())
+                .build();
+    }
+
+    public String getThumbnail() {
         return thumbnail;
     }
 
@@ -63,7 +74,7 @@ public final class OfferProps implements Props {
         return rating;
     }
 
-    public Offer[] getOffers() {
+    public List<Offer> getOffers() {
         return offers;
     }
 

@@ -1,12 +1,13 @@
 package com.foodverse.widgets.card;
 
+import com.foodverse.models.Shop;
 import com.foodverse.models.ShopType;
 import com.foodverse.utility.Props;
-import com.foodverse.utility.system.ImageAsset;
+import com.foodverse.widgets.media.AssetSize;
 
 public final class ShopProps implements Props {
 
-    private final ImageAsset thumbnail;
+    private final String thumbnail;
     private final String name;
     private final float rating;
     private final ShopType type;
@@ -15,15 +16,15 @@ public final class ShopProps implements Props {
 
     public static class Builder {
 
-        private ImageAsset thumbnail = ImageAsset.BURGER;
+        private String thumbnail = "";
         private String name = "";
         private float rating = 0f;
-        private ShopType type = ShopType.BURGER;
+        private ShopType type = ShopType.NONE;
         private int prepTime = 0;
         private float minOrder = 0f;
 
-        public Builder thumbnail(ImageAsset thumbnail) {
-            this.thumbnail = thumbnail;
+        public Builder thumbnail(String assetName) {
+            this.thumbnail = assetName;
             return this;
         }
 
@@ -66,7 +67,18 @@ public final class ShopProps implements Props {
         this.prepTime = builder.prepTime;
     }
 
-    public ImageAsset getThumbnail() {
+    public static ShopProps from(Shop shop) {
+        return new ShopProps.Builder()
+                .thumbnail(shop.getThumbnails().get(AssetSize.MEDIUM))
+                .name(shop.getName())
+                .rating(shop.getRating())
+                .type(shop.getType())
+                .minOrder(shop.getMinOrder())
+                .prepTime(shop.getPrepTime())
+                .build();
+    }
+
+    public String getThumbnail() {
         return thumbnail;
     }
 

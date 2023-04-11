@@ -3,11 +3,10 @@ package com.foodverse.widgets.card;
 import java.util.Map;
 import com.foodverse.models.Item;
 import com.foodverse.utility.Props;
-import com.foodverse.utility.system.ImageAsset;
 
 public final class OrderProps implements Props {
 
-    private final ImageAsset thumbnail;
+    private final String thumbnail;
     private final String name;
     private final float rating;
     private final Map<Item, Integer> items;
@@ -15,14 +14,14 @@ public final class OrderProps implements Props {
 
     public static class Builder {
 
-        private ImageAsset thumbnail = ImageAsset.BURGER;
+        private String thumbnail = "";
         private String name = "";
         private float rating = 0f;
         private Map<Item, Integer> items = Map.of();
         private float price = 0f;
 
-        public Builder thumbnail(ImageAsset thumbnail) {
-            this.thumbnail = thumbnail;
+        public Builder thumbnail(String assetName) {
+            this.thumbnail = assetName;
             return this;
         }
 
@@ -60,7 +59,7 @@ public final class OrderProps implements Props {
         this.price = builder.price;
     }
 
-    public ImageAsset getThumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 

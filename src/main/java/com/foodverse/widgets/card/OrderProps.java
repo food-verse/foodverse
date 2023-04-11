@@ -1,15 +1,19 @@
 package com.foodverse.widgets.card;
 
 import java.util.Map;
-import com.foodverse.models.Item;
+import com.foodverse.models.Order;
+import com.foodverse.models.Shop;
 import com.foodverse.utility.Props;
+import com.foodverse.utility.State;
+import com.foodverse.utility.system.Database;
+import com.foodverse.widgets.media.AssetSize;
 
 public final class OrderProps implements Props {
 
     private final String thumbnail;
     private final String name;
     private final float rating;
-    private final Map<Item, Integer> items;
+    private final Map<String, Integer> items;
     private final float price;
 
     public static class Builder {
@@ -17,7 +21,7 @@ public final class OrderProps implements Props {
         private String thumbnail = "";
         private String name = "";
         private float rating = 0f;
-        private Map<Item, Integer> items = Map.of();
+        private Map<String, Integer> items = Map.of();
         private float price = 0f;
 
         public Builder thumbnail(String assetName) {
@@ -35,7 +39,7 @@ public final class OrderProps implements Props {
             return this;
         }
 
-        public Builder items(Map<Item, Integer> items) {
+        public Builder items(Map<String, Integer> items) {
             this.items = items;
             return this;
         }
@@ -59,6 +63,23 @@ public final class OrderProps implements Props {
         this.price = builder.price;
     }
 
+    public static OrderProps from(Order order) {
+        State<Shop> foundShop = new State<Shop>(null);
+        Database.getInstance().findShopByName(order.getMerchant())
+                .ifPresent(shop -> foundShop.setValue(shop));
+        if (foundShop.getValue() != null) {
+            return new OrderProps.Builder()
+                    .thumbnail(foundShop.getValue().getThumbnails().get(AssetSize.MEDIUM))
+                    .name(foundShop.getValue().getName())
+                    .rating(foundShop.getValue().getRating())
+                    .items(order.getItems())
+                    .price(order.getTotal())
+                    .build();
+        } else {
+            return new OrderProps.Builder().build();
+        }
+    }
+
     public String getThumbnail() {
         return thumbnail;
     }
@@ -71,7 +92,7 @@ public final class OrderProps implements Props {
         return rating;
     }
 
-    public Map<Item, Integer> getItems() {
+    public Map<String, Integer> getItems() {
         return items;
     }
 

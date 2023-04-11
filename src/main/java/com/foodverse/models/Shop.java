@@ -1,6 +1,8 @@
 package com.foodverse.models;
 
 import java.util.List;
+import java.util.Map;
+import com.foodverse.widgets.media.AssetSize;
 import com.google.gson.annotations.SerializedName;
 
 public final class Shop {
@@ -17,6 +19,9 @@ public final class Shop {
     @SerializedName("type")
     private ShopType type;
 
+    @SerializedName("thumbnails")
+    private Map<AssetSize, String> thumbnails;
+
     @SerializedName("preparation_time")
     private int prepTime;
 
@@ -29,14 +34,14 @@ public final class Shop {
     @SerializedName("menu")
     private List<Item> menu;
 
-    public Shop() {}
-
-    public Shop(String name, String address, float rating, ShopType type, int prepTime,
-            float minOrder, List<Offer> offers, List<Item> menu) {
+    public Shop(String name, String address, float rating, ShopType type,
+            Map<AssetSize, String> thumbnails, int prepTime, float minOrder, List<Offer> offers,
+            List<Item> menu) {
         this.name = name;
         this.address = address;
         this.rating = rating;
         this.type = type;
+        this.thumbnails = thumbnails;
         this.prepTime = prepTime;
         this.minOrder = minOrder;
         this.offers = offers;
@@ -73,6 +78,14 @@ public final class Shop {
 
     public void setType(ShopType type) {
         this.type = type;
+    }
+
+    public Map<AssetSize, String> getThumbnails() {
+        return thumbnails;
+    }
+
+    public void setThumbnails(Map<AssetSize, String> thumbnails) {
+        this.thumbnails = thumbnails;
     }
 
     public int getPrepTime() {

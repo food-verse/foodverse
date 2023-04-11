@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.foodverse.models.Shop;
+import com.foodverse.models.User;
 import com.foodverse.models.UserCredentials;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -71,6 +72,38 @@ public final class FileManager {
             stream.close();
         } catch (IOException e) {
             logger.log(Level.INFO, "Could not save user credentials to the database.");
+        }
+    }
+
+    public static List<User> loadUsers() {
+        File file = Files.USERS.getFile();
+        if (file.exists()) {
+            Type userListType = new TypeToken<List<User>>() {}.getType();
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                return gson.fromJson(reader, userListType);
+            } catch (IOException e) {
+                logger.log(Level.INFO, "Could not load the list of users.");
+            }
+        } else {
+            logger.log(Level.INFO, "There is no such file: {0}", file.getName());
+        }
+        return List.of();
+    }
+
+    public static void saveUsers(List<User> users) {
+        File file = Files.USERS.getFile();
+        if (!file.exists()) {
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } catch (IOException e) {
+                logger.log(Level.INFO, "Could not create a file for saving the list of users.");
+            }
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            gson.toJson(users, writer);
+        } catch (IOException e) {
+            logger.log(Level.INFO, "Could not save the list of users.");
         }
     }
 

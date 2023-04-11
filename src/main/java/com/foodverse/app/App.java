@@ -17,6 +17,7 @@ public final class App {
     private App() {}
 
     public static void main(String[] args) {
+
         // Initialize the application
         ShellOptions options = new ShellOptions.Builder()
                 .width(1440)

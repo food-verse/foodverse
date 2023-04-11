@@ -14,6 +14,7 @@ public final class ShopFactory {
     private ShopFactory() {}
 
     private static List<Shop> generateShops() {
+
         // Creating menu for the burger shop...
         var burgerMenu = List.of(
                 new Item("Classic Burger", 7.99f),
@@ -26,6 +27,7 @@ public final class ShopFactory {
                 new Item("Coca Cola", 2.50f),
                 new Item("Fanta", 2.50f),
                 new Item("Soda", 2.00f));
+
         // Creating the burger shop...
         var burgerShop = new Shop(
                 "Burgerlicious",
@@ -39,7 +41,8 @@ public final class ShopFactory {
                 7.00f,
                 List.of(),
                 burgerMenu);
-        // Creating menu for pizzeria...
+
+        // Creating menu for pizza shop...
         var pizzeriaMenu = List.of(
                 new Item("Margherita Pizza", 12.99f),
                 new Item("Pepperoni Pizza", 14.99f),
@@ -51,7 +54,8 @@ public final class ShopFactory {
                 new Item("Pesto Pasta", 12.99f),
                 new Item("Garlic Knots", 5.99f),
                 new Item("Coca Cola", 2.50f));
-        // Creating the pizzeria...
+
+        // Creating the pizza shop...
         var pizzaShop = new Shop(
                 "Pizzantastic",
                 "42 Maple Street, Millfield, OH 45761",
@@ -64,6 +68,7 @@ public final class ShopFactory {
                 9.00f,
                 List.of(),
                 pizzeriaMenu);
+
         // Creating menu for the pasta shop...
         var pastaMenu = List.of(
                 new Item("Spaghetti Carbonara", 12.99f),
@@ -76,6 +81,7 @@ public final class ShopFactory {
                 new Item("Tiramisu", 7.99f),
                 new Item("Coca Cola", 2.50f),
                 new Item("Sprite", 2.50f));
+
         // Creating the pasta shop...
         var pastaShop = new Shop(
                 "La Pastaiole",
@@ -89,6 +95,7 @@ public final class ShopFactory {
                 15.00f,
                 List.of(),
                 pastaMenu);
+
         // Creating menu for the greek shop...
         var greekMenu = List.of(
                 new Item("Gyro Sandwich", 8.99f),
@@ -101,6 +108,7 @@ public final class ShopFactory {
                 new Item("Roasted Potatoes", 5.99f),
                 new Item("Coca Cola", 2.50f),
                 new Item("Sprite", 2.50f));
+
         // Creating offers for the greek shop...
         var greekOffers = List.of(
                 new Offer(Map.of(
@@ -115,6 +123,7 @@ public final class ShopFactory {
                         greekMenu.get(4).getName(), 1,
                         greekMenu.get(9).getName(), 1),
                         10.99f));
+
         // Creating the greek shop...
         var greekShop = new Shop(
                 "Ta Laladika",
@@ -128,6 +137,7 @@ public final class ShopFactory {
                 4.00f,
                 greekOffers,
                 greekMenu);
+
         // Creating menu for the mexican shop...
         var mexicanMenu = List.of(
                 new Item("Taco", 3.50f),
@@ -140,6 +150,7 @@ public final class ShopFactory {
                 new Item("Refried Beans", 2.99f),
                 new Item("Soda", 2.50f),
                 new Item("Sprite", 2.50f));
+
         // Creating offers for the mexican shop...
         var mexicanOffers = List.of(
                 new Offer(Map.of(
@@ -154,6 +165,7 @@ public final class ShopFactory {
                         mexicanMenu.get(4).getName(), 1,
                         mexicanMenu.get(7).getName(), 1),
                         11.99f));
+
         // Creating the mexican shop...
         var mexicanShop = new Shop(
                 "Taco Mia",
@@ -167,6 +179,7 @@ public final class ShopFactory {
                 10.00f,
                 mexicanOffers,
                 mexicanMenu);
+
         return List.of(burgerShop, pizzaShop, pastaShop, greekShop, mexicanShop);
     }
 

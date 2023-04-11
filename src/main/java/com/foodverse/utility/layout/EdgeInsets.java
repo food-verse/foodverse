@@ -1,4 +1,4 @@
-package com.foodverse.utility.core.layout;
+package com.foodverse.utility.layout;
 
 public final class EdgeInsets {
 

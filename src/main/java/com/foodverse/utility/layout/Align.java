@@ -1,4 +1,4 @@
-package com.foodverse.utility.core.layout;
+package com.foodverse.utility.layout;
 
 import java.awt.GridBagConstraints;
 

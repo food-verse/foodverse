@@ -3,6 +3,7 @@ package com.foodverse.utility.navigation;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import com.foodverse.utility.factories.ShopFactory;
+import com.foodverse.utility.factories.UserFactory;
 import com.foodverse.utility.system.AssetManager;
 
 public final class Shell {
@@ -16,6 +17,7 @@ public final class Shell {
 
     public static void init(ShellOptions options) {
         Shell.options = options;
+        UserFactory.generate();
         ShopFactory.generate();
         AssetManager.loadFont("Inter");
         AssetManager.loadFont("IBMPlexMono");

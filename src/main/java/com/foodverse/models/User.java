@@ -8,14 +8,27 @@ public final class User {
     @SerializedName("name")
     private String name;
 
+    @SerializedName("address")
+    private String address;
+
+    @SerializedName("phone")
+    private String phone;
+
+    @SerializedName("email")
+    private String email;
+
     @SerializedName("credentials")
-    private UserCredentials credentials;
+    private Credentials credentials;
 
     @SerializedName("orders")
     private List<Order> orders;
 
-    public User(String name, UserCredentials credentials, List<Order> orders) {
+    public User(String name, String address, String phone, String email, Credentials credentials,
+            List<Order> orders) {
         this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
         this.credentials = credentials;
         this.orders = orders;
     }
@@ -28,11 +41,35 @@ public final class User {
         this.name = name;
     }
 
-    public UserCredentials getCredentials() {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Credentials getCredentials() {
         return credentials;
     }
 
-    public void setCredentials(UserCredentials credentials) {
+    public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
     }
 

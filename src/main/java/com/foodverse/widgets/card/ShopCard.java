@@ -9,9 +9,9 @@ import com.foodverse.utility.core.ui.ColoredBox;
 import com.foodverse.utility.core.ui.Colors;
 import com.foodverse.utility.core.ui.ImageStyle;
 import com.foodverse.utility.navigation.Router;
-import com.foodverse.utility.system.ImageAsset;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.Row;
+import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
@@ -39,7 +39,7 @@ public final class ShopCard extends Widget {
                 Colors.orange);
         var shopNameText = new Label(props.getName(), LabelSize.L);
         // Creating image widgets...
-        var starImage = new Image(ImageAsset.STAR, new ImageStyle.Builder()
+        var starImage = new Image(IconAsset.STAR, new ImageStyle.Builder()
                 .width(16)
                 .height(16)
                 .build());
@@ -50,18 +50,15 @@ public final class ShopCard extends Widget {
         // Creating card's rating widget...
         var ratingWidget = new Row();
         ratingWidget.addWidget(ratingText, new EdgeInsets.Builder()
+                .right(2)
                 .build(),
-                Align.LINE_START);
+                Align.PAGE_START);
         ratingWidget.addWidget(starImage, new EdgeInsets.Builder()
-                .left(2)
                 .build(),
                 Align.LINE_END);
         // Creating card's heading widget...
         var headingWidget = new Row();
-        headingWidget.addWidget(shopNameText, new EdgeInsets.Builder()
-                .right(57)
-                .build(),
-                Align.FIRST_LINE_START);
+        headingWidget.addWidget(shopNameText, Align.FIRST_LINE_START);
         headingWidget.addWidget(ratingWidget, Align.LAST_LINE_END);
         // Creating card's information widget...
         var infoWidget = new Column();

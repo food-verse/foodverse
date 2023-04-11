@@ -19,8 +19,8 @@ public final class UserFactory {
         // Creating user's credentials...
         var credentials = new Credentials(
                 "XyZ987!",
-                null,
-                null);
+                "Bella",
+                "3");
 
         // Creating burger shops items for the burger order
         var burgerShopItems = Map.of(

@@ -11,9 +11,9 @@ import com.foodverse.utility.core.ui.ColoredBox;
 import com.foodverse.utility.core.ui.Colors;
 import com.foodverse.utility.core.ui.ImageStyle;
 import com.foodverse.utility.navigation.Router;
-import com.foodverse.utility.system.ImageAsset;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.Row;
+import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
@@ -39,7 +39,7 @@ public final class OrderCard extends Widget {
                 Colors.orange);
         var shopNameText = new Label(props.getName(), LabelSize.L);
         // Creating image widgets...
-        var starImage = new Image(ImageAsset.STAR, new ImageStyle.Builder()
+        var starImage = new Image(IconAsset.STAR, new ImageStyle.Builder()
                 .width(16)
                 .height(16)
                 .build());

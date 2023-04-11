@@ -2,7 +2,6 @@ package com.foodverse.widgets.card;
 
 import java.awt.Component;
 import java.util.Map;
-import com.foodverse.models.Item;
 import com.foodverse.models.Offer;
 import com.foodverse.overlays.ShopOverlay;
 import com.foodverse.utility.Widget;
@@ -14,10 +13,10 @@ import com.foodverse.utility.core.ui.ImageStyle;
 import com.foodverse.utility.core.ui.Button.ButtonSize;
 import com.foodverse.utility.core.ui.Button.ButtonType;
 import com.foodverse.utility.navigation.Router;
-import com.foodverse.utility.system.ImageAsset;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.Row;
+import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
@@ -43,7 +42,7 @@ public final class OfferCard extends Widget {
         var ratingText = new Label(String.valueOf(props.getRating()), LabelSize.M, Colors.orange);
         var shopNameText = new Label(props.getName(), LabelSize.L);
         // Creating image widgets...
-        var starImage = new Image(ImageAsset.STAR, new ImageStyle.Builder()
+        var starImage = new Image(IconAsset.STAR, new ImageStyle.Builder()
                 .width(16)
                 .height(16)
                 .build());
@@ -70,9 +69,9 @@ public final class OfferCard extends Widget {
         for (Offer offer : props.getOffers()) {
             StringBuilder builder = new StringBuilder();
             builder.append('•');
-            for (Map.Entry<Item, Integer> entry : offer.getItems().entrySet()) {
+            for (Map.Entry<String, Integer> entry : offer.getItems().entrySet()) {
                 builder.append(String.format(" %d %s +",
-                        entry.getValue(), entry.getKey().getName()));
+                        entry.getValue(), entry.getKey()));
             }
             builder.setLength(Math.max(builder.length() - 1, 0));
             builder.append(String.format("-> %.2f€", offer.getTotal()));

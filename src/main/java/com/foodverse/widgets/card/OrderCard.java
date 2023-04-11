@@ -2,7 +2,6 @@ package com.foodverse.widgets.card;
 
 import java.awt.Component;
 import java.util.Map;
-import com.foodverse.models.Item;
 import com.foodverse.overlays.OrderOverlay;
 import com.foodverse.utility.Widget;
 import com.foodverse.utility.core.layout.Align;
@@ -64,9 +63,8 @@ public final class OrderCard extends Widget {
 
         // Creating card's list of items widget...
         var itemListWidget = new Column();
-        for (Map.Entry<Item, Integer> entry : props.getItems().entrySet()) {
-            var itemContent = String.format("• %d %s",
-                    entry.getValue(), entry.getKey().getName());
+        for (Map.Entry<String, Integer> entry : props.getItems().entrySet()) {
+            var itemContent = String.format("• %d %s", entry.getValue(), entry.getKey());
             var itemText = new Label(itemContent, LabelSize.XS, Colors.gray600);
             itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
         }

@@ -3,7 +3,7 @@ package com.foodverse.widgets.media;
 import java.io.File;
 
 public enum IconAsset {
-    BRAND("brand.png"), STAR("rating_star.png"), AVATAR("avatar.png");
+    BRAND("brand.svg"), STAR("rating_star.svg"), AVATAR("avatar.svg");
 
     private final String fileName;
 

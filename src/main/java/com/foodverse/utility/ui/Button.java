@@ -1,9 +1,9 @@
-package com.foodverse.utility.core.ui;
+package com.foodverse.utility.ui;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.function.Consumer;
-import com.foodverse.utility.Widget;
+import com.foodverse.utility.core.Widget;
 
 public abstract class Button extends Widget {
 

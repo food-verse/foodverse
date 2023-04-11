@@ -1,4 +1,4 @@
-package com.foodverse.utility.core.ui;
+package com.foodverse.utility.ui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.function.Consumer;
 import javax.swing.JPanel;
-import com.foodverse.utility.Widget;
+import com.foodverse.utility.core.Widget;
 
 public final class ColoredBox extends JPanel {
 

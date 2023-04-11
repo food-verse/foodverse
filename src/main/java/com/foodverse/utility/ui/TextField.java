@@ -1,4 +1,4 @@
-package com.foodverse.utility.core.ui;
+package com.foodverse.utility.ui;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -6,7 +6,7 @@ import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
-import com.foodverse.utility.core.ui.Button.ButtonSize;
+import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.widgets.button.RectButton;
 
 public final class TextField extends JTextField {

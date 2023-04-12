@@ -12,6 +12,7 @@ public final class Database {
     private static Database database;
     private static final Random generator = new Random();
     private final int numberOfRecoveryQuestions = 3;
+    private User authenticatedUser;
     private List<User> users;
     private List<Shop> shops;
 
@@ -33,27 +34,36 @@ public final class Database {
         return database;
     }
 
-    public Optional<User> userExists(String id) {
+    public boolean userExists(String id) {
         if (!users.isEmpty()) {
             for (User user : users) {
                 if (user.getId().equals(id)) {
-                    return Optional.of(user);
+                    return true;
                 }
             }
         }
-        return Optional.empty();
+        return false;
     }
 
-    public Optional<User> signIn(String id, String password) {
+    public Optional<User> getAuthenticatedUser() {
+        return Optional.ofNullable(authenticatedUser);
+    }
+
+    public List<Shop> getShops() {
+        return shops;
+    }
+
+    public boolean signIn(String id, String password) {
         if (!users.isEmpty()) {
             for (User user : users) {
                 if (user.getId().equals(id)
                         && user.getCredentials().getPassword().equals(password)) {
-                    return Optional.of(user);
+                    authenticatedUser = user;
+                    return true;
                 }
             }
         }
-        return Optional.empty();
+        return false;
     }
 
     public void saveUser(User user) {

@@ -11,6 +11,8 @@ public final class URLHandler {
 
     private static final Logger logger = Logger.getLogger(URLHandler.class.getName());
 
+    private URLHandler() {}
+
     public static void open(String source) {
         if (Desktop.isDesktopSupported()) {
             Desktop desktop = Desktop.getDesktop();

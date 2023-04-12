@@ -1,7 +1,6 @@
 package com.foodverse.widgets.layout;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.JPanel;
@@ -9,6 +8,7 @@ import com.foodverse.utility.core.Props;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
+import com.foodverse.utility.ui.ColoredBox;
 import com.foodverse.widgets.card.OfferCard;
 import com.foodverse.widgets.card.OfferProps;
 import com.foodverse.widgets.card.OrderCard;
@@ -35,11 +35,22 @@ public final class Carousel extends Widget {
         var carousel = new Row();
         // If list of props is empty return an empty JPanel
         if (propList.isEmpty()) {
-            var warningText = new Label("Unfortunately, there is nothing to display.", LabelSize.L);
-            var emptyView = new JPanel();
-            emptyView.add(warningText.getRef());
-            emptyView.setPreferredSize(new Dimension(100, 100));
-            return emptyView;
+            var warningText = new Label("Unfortunately, there is nothing to display.",
+                    LabelSize.S);
+            var emptyView = new Row();
+            emptyView.addWidget(warningText, new EdgeInsets.Builder()
+                    .all(24)
+                    .build(),
+                    Align.CENTER);
+            var decoratedView = new ColoredBox(emptyView);
+            // Add padding to the empty view
+            var paddedView = new Row();
+            paddedView.addComponent(decoratedView, new EdgeInsets.Builder()
+                    .symmetric(16, 48)
+                    .bottom(24)
+                    .build(),
+                    Align.CENTER);
+            return paddedView.getRef();
         }
         // Adding list of widgets to the carousel...
         var list = (List<?>) propList;

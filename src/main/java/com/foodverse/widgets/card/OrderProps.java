@@ -1,10 +1,10 @@
 package com.foodverse.widgets.card;
 
 import java.util.Map;
+import java.util.Optional;
 import com.foodverse.models.Order;
 import com.foodverse.models.Shop;
 import com.foodverse.utility.core.Props;
-import com.foodverse.utility.core.State;
 import com.foodverse.utility.system.Database;
 import com.foodverse.widgets.media.AssetSize;
 
@@ -64,19 +64,20 @@ public final class OrderProps implements Props {
     }
 
     public static OrderProps from(Order order) {
-        State<Shop> foundShop = new State<Shop>(null);
-        Database.getInstance().findShopByName(order.getMerchant())
-                .ifPresent(shop -> foundShop.setValue(shop));
-        if (foundShop.getValue() != null) {
+        Optional<Shop> foundShop = Database.getInstance().findShopByName(order.getMerchant());
+        if (foundShop.isPresent()) {
             return new OrderProps.Builder()
-                    .thumbnail(foundShop.getValue().getThumbnails().get(AssetSize.MEDIUM))
-                    .name(foundShop.getValue().getName())
-                    .rating(foundShop.getValue().getRating())
+                    .thumbnail(foundShop.get().getThumbnails().get(AssetSize.MEDIUM))
+                    .name(foundShop.get().getName())
+                    .rating(foundShop.get().getRating())
                     .items(order.getItems())
                     .price(order.getTotal())
                     .build();
         } else {
-            return new OrderProps.Builder().build();
+            return new OrderProps.Builder()
+                    .items(order.getItems())
+                    .price(order.getTotal())
+                    .build();
         }
     }
 

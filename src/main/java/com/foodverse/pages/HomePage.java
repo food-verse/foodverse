@@ -18,6 +18,7 @@ import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
+import com.foodverse.utility.system.URLHandler;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;
@@ -62,7 +63,9 @@ public final class HomePage extends Page {
         headingRow.setLayout(new BoxLayout(headingRow, BoxLayout.X_AXIS));
 
         // Creating image widgets...
-        var brandImage = new VectorImage(IconAsset.BRAND);
+        var brandImage = new VectorImage(IconAsset.BRAND, e -> {
+            URLHandler.open("https://github.com/food-verse/foodverse");
+        });
         var avatarImage = new VectorImage(IconAsset.AVATAR, e -> {
             Router.openOverlay(new ProfileOverlay());
         });

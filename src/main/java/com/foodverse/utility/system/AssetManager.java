@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -61,10 +63,10 @@ public final class AssetManager {
         BufferedImage bufferedImage = null;
         Image scaledImage = null;
         try {
-            URL address = new URL(source);
+            URL address = new URI(source).toURL();
             bufferedImage = ImageIO.read(address);
             scaledImage = bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             logger.log(Level.INFO, "Could not load image from: {0}", source);
         }
         return Optional.ofNullable(scaledImage);

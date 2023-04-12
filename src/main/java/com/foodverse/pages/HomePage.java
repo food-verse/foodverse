@@ -3,6 +3,7 @@ package com.foodverse.pages;
 import java.awt.Component;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -11,13 +12,12 @@ import com.foodverse.models.Order;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 import com.foodverse.overlays.ProfileOverlay;
-import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
-import com.foodverse.utility.system.FileManager;
+import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;
@@ -34,9 +34,11 @@ import com.foodverse.widgets.card.OrderProps;
 
 public final class HomePage extends Page {
 
-    private final Widget widget;
+    @Override
+    public Component getRef() {
 
-    public HomePage() {
+        // Getting a reference to the database...
+        var db = Database.getInstance();
 
         // Creating main panel...
         var panel = new JPanel();
@@ -91,9 +93,8 @@ public final class HomePage extends Page {
         // Add the heading for the shops' carousel to the main panel
         panel.add(nearbyTile.getRef());
 
-        // Loading list of shops...
-        // TODO: Remove dependency to FileManager
-        List<Shop> shops = FileManager.loadShops();
+        // Getting the list of shops...
+        List<Shop> shops = db.getShops();
 
         // Turning Shop list into ShopProp list...
         List<ShopProps> shopProps = shops.stream()
@@ -132,15 +133,19 @@ public final class HomePage extends Page {
         // Add the heading for the recent orders' carousel to the main panel
         panel.add(ordersTile.getRef());
 
-        // TODO: Remove dependency to FileManager
-        // Loading the signed user...
-        User signedUser = FileManager.loadUsers().get(0);
+        // Getting the authenticated user...
+        Optional<User> signedUser = db.getAuthenticatedUser();
 
         // Turning signed user's order list into order prop list...
-        List<OrderProps> orderProps = signedUser.getOrders().stream()
-                .sorted(Comparator.comparing(Order::getDate).reversed())
-                .map(OrderProps::from)
-                .collect(Collectors.toList());
+        List<OrderProps> orderProps;
+        if (signedUser.isPresent()) {
+            orderProps = signedUser.get().getOrders().stream()
+                    .sorted(Comparator.comparing(Order::getDate).reversed())
+                    .map(OrderProps::from)
+                    .collect(Collectors.toList());
+        } else {
+            orderProps = List.of();
+        }
 
         // Create a carousel for the available offers
         var orderCarousel = new Carousel(orderProps);
@@ -149,13 +154,8 @@ public final class HomePage extends Page {
         panel.add(orderCarousel.getRef());
 
         // Wrap the main panel in a scroll view
-        widget = new ScrollView(panel);
+        return new ScrollView(panel).getRef();
 
-    }
-
-    @Override
-    public Component getRef() {
-        return widget.getRef();
     }
 
 }

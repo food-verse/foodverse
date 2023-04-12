@@ -15,13 +15,9 @@ import com.foodverse.overlays.ProfileOverlay;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Page;
-import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.system.URLHandler;
-import com.foodverse.utility.ui.Button.ButtonSize;
-import com.foodverse.utility.ui.Button.ButtonType;
-import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.card.ShopProps;
 import com.foodverse.widgets.layout.Carousel;
 import com.foodverse.widgets.layout.Column;
@@ -45,16 +41,6 @@ public final class HomePage extends Page {
         var panel = new JPanel();
         panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        // TODO: Remove when all the screens have been implemented
-        var openOverviewPage = new RectButton(
-                "Open OverviewPage ->",
-                ButtonSize.S,
-                ButtonType.SECONDARY,
-                e -> {
-                    Router.pushPage(Pages.OVERVIEW);
-                });
-        panel.add(openOverviewPage.getRef());
 
         // Row with the brand's logo and the user's avatar
         // Creating parent panel for the images...

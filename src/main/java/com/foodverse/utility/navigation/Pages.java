@@ -7,7 +7,13 @@ public enum Pages {
     REGISTER("SignUpPage"),
     HOME("HomePage"),
     TEXTS("TextPage"),
-    BUTTONS("ButtonPage");
+    BUTTONS("ButtonPage"),
+    SETTINGS("SettingsPage"),
+    PROFILE("ProfilePage"),
+    HISTORY("HistoryPage"),
+    ADDRESSES("AddressesPage"),
+    FAVOURITES("FavouritesPage"),
+    INFO("InfoPage");
 
     private final String id;
 

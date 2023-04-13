@@ -86,6 +86,13 @@ public final class OverviewPage extends Page {
                 e -> {
                     Router.pushPage(Pages.BUTTONS);
                 });
+        var openSettingsPage = new RectButton(
+                "Open Settings Page ->",
+                ButtonSize.S,
+                ButtonType.PRIMARY,
+                e -> {
+                    Router.pushPage(Pages.SETTINGS);
+                });
         var inputForm = new InputForm("Label", "Hint");
         var toggleButton = new PillButton("Toggle Field",
                 ButtonSize.S,
@@ -103,6 +110,7 @@ public final class OverviewPage extends Page {
         panel.add(openProfileOverlay.getRef());
         panel.add(openTextPage.getRef());
         panel.add(openButtonPage.getRef());
+        panel.add(openSettingsPage.getRef());
         panel.add(inputForm.getRef());
         panel.add(toggleButton.getRef());
         panel.setOpaque(false);

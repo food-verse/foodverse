@@ -2,6 +2,7 @@ package com.foodverse.pages;
 
 import java.awt.Component;
 import javax.swing.JPanel;
+import javax.swing.BoxLayout;
 import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -69,6 +70,7 @@ public final class SettingsPage extends Page {
         panel.add(openInfoPage.getRef());
         panel.add(openOnboardingPage.getRef());
         panel.setOpaque(false);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         component = panel;
     }
 

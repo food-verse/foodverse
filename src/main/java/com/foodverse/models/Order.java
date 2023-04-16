@@ -1,5 +1,7 @@
 package com.foodverse.models;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Map;
 import com.google.gson.annotations.SerializedName;
@@ -36,6 +38,13 @@ public final class Order {
         this.total = total;
         this.method = method;
         this.type = type;
+    }
+
+    public boolean isRecent() {
+        LocalDate startDate = LocalDate.now().minusDays(7);
+        LocalDate endDate = LocalDate.now();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return localDate.isAfter(startDate) || localDate.isBefore(endDate);
     }
 
     public String getMerchant() {

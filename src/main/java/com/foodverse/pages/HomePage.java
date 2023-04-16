@@ -129,6 +129,7 @@ public final class HomePage extends Page {
         List<OrderProps> orderProps;
         if (signedUser.isPresent()) {
             orderProps = signedUser.get().getOrders().stream()
+                    .filter(order -> order.isRecent())
                     .sorted(Comparator.comparing(Order::getDate).reversed())
                     .map(OrderProps::from)
                     .collect(Collectors.toList());
@@ -136,10 +137,10 @@ public final class HomePage extends Page {
             orderProps = List.of();
         }
 
-        // Create a carousel for the available offers
+        // Create a carousel for the recent orders
         var orderCarousel = new Carousel(orderProps);
 
-        // Add the carousel for the available offers to the main panel
+        // Add the carousel for the recent orders to the main panel
         panel.add(orderCarousel.getRef());
 
         // Wrap the main panel in a scroll view

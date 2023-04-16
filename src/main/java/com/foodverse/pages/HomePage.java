@@ -1,6 +1,7 @@
 package com.foodverse.pages;
 
 import java.awt.Component;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,7 @@ import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
+import com.foodverse.utility.system.DateUtils;
 import com.foodverse.utility.system.URLHandler;
 import com.foodverse.widgets.card.ShopProps;
 import com.foodverse.widgets.layout.Carousel;
@@ -128,8 +130,10 @@ public final class HomePage extends Page {
         // Turning signed user's order list into order prop list...
         List<OrderProps> orderProps;
         if (signedUser.isPresent()) {
+            var startDate = LocalDate.now().minusWeeks(1);
+            var endDate = LocalDate.now();
             orderProps = signedUser.get().getOrders().stream()
-                    .filter(order -> order.isRecent())
+                    .filter(order -> DateUtils.isInRange(order.getDate(), startDate, endDate))
                     .sorted(Comparator.comparing(Order::getDate).reversed())
                     .map(OrderProps::from)
                     .collect(Collectors.toList());

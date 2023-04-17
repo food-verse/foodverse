@@ -12,7 +12,7 @@ enum FileAsset {
     }
 
     public File getFile() {
-        return new File(String.format("assets/%s", fileName));
+        return new File(fileName);
     }
 
     public String getName() {

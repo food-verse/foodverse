@@ -31,7 +31,21 @@ public final class AssetManager {
 
     private AssetManager() {}
 
+    public static boolean isFontInstalled(String fontFamily) {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        String[] fonts = ge.getAvailableFontFamilyNames();
+        for (String font : fonts) {
+            if (font.equals(fontFamily)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void loadFont(String fontFamily) {
+        if (isFontInstalled(fontFamily)) {
+            return;
+        }
         var dir = String.format("assets/fonts/%s/", fontFamily);
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         File[] fontFiles = new File(dir).listFiles();
@@ -50,6 +64,9 @@ public final class AssetManager {
     }
 
     public static void loadFont(String fontFamily, List<String> fontFiles) {
+        if (isFontInstalled(fontFamily)) {
+            return;
+        }
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         for (String fontFile : fontFiles) {
             var fileName = String.format("fonts/%s/%s", fontFamily, fontFile);

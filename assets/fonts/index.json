@@ -1,0 +1,31 @@
+{
+  "fonts": {
+    "Inter": [
+      "Inter-Black.ttf",
+      "Inter-Bold.ttf",
+      "Inter-ExtraBold.ttf",
+      "Inter-ExtraLight.ttf",
+      "Inter-Light.ttf",
+      "Inter-Medium.ttf",
+      "Inter-Regular.ttf",
+      "Inter-SemiBold.ttf",
+      "Inter-Thin.ttf"
+    ],
+    "IBMPlexMono": [
+      "IBMPlexMono-Bold.ttf",
+      "IBMPlexMono-BoldItalic.ttf",
+      "IBMPlexMono-ExtraLight.ttf",
+      "IBMPlexMono-ExtraLightItalic.ttf",
+      "IBMPlexMono-Italic.ttf",
+      "IBMPlexMono-Light.ttf",
+      "IBMPlexMono-LightItalic.ttf",
+      "IBMPlexMono-Medium.ttf",
+      "IBMPlexMono-MediumItalic.ttf",
+      "IBMPlexMono-Regular.ttf",
+      "IBMPlexMono-SemiBold.ttf",
+      "IBMPlexMono-SemiBoldItalic.ttf",
+      "IBMPlexMono-Thin.ttf",
+      "IBMPlexMono-ThinItalic.ttf"
+    ]
+  }
+}

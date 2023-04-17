@@ -20,7 +20,7 @@ public final class App {
 
     public static void main(String[] args) {
 
-        // Set the environment mode to debug
+        // Set the environment mode
         EnvironmentOptions.setMode(Mode.DEBUG);
 
         // Initialize the application

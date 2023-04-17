@@ -15,4 +15,8 @@ public enum IconAsset {
         return new File(String.format("assets/icons/%s", fileName));
     }
 
+    public String getName() {
+        return String.format("icons/%s", fileName);
+    }
+
 }

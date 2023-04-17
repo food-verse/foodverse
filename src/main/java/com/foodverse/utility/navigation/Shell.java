@@ -5,6 +5,9 @@ import javax.swing.WindowConstants;
 import com.foodverse.utility.factories.ShopFactory;
 import com.foodverse.utility.factories.UserFactory;
 import com.foodverse.utility.system.AssetManager;
+import com.foodverse.utility.system.EnvironmentOptions;
+import com.foodverse.utility.system.FileManager;
+import com.foodverse.utility.system.EnvironmentOptions.Mode;
 
 public final class Shell {
 
@@ -19,8 +22,18 @@ public final class Shell {
         Shell.options = options;
         UserFactory.generate();
         ShopFactory.generate();
-        AssetManager.loadFont("Inter");
-        AssetManager.loadFont("IBMPlexMono");
+        if (EnvironmentOptions.getMode() == Mode.DEBUG) {
+            AssetManager.loadFont(options.getDefaultFont());
+            AssetManager.loadFont(options.getMonospacedFont());
+        } else {
+            var assetIndex = FileManager.loadAssetIndex();
+            AssetManager.loadFont(
+                    options.getDefaultFont(),
+                    assetIndex.getFonts().get(options.getDefaultFont()));
+            AssetManager.loadFont(
+                    options.getDefaultFont(),
+                    assetIndex.getFonts().get(options.getMonospacedFont()));
+        }
         frame.setSize(options.getDimension());
         frame.getContentPane().setBackground(options.getBackgroundColor());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

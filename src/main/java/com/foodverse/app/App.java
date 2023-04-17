@@ -27,6 +27,8 @@ public final class App {
         ShellOptions options = new ShellOptions.Builder()
                 .width(1440)
                 .height(1024)
+                .defaultFont("Inter")
+                .monospacedFont("IBMPlexMono")
                 .title("Foodiverse")
                 .build();
         Shell.init(options);

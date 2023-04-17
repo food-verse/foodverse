@@ -3,7 +3,7 @@ package com.foodverse.utility.system;
 import java.io.File;
 
 enum FileAsset {
-    CONFIG("config.json"), USERS("users.json"), SHOPS("shops.json");
+    CONFIG("files/config.json"), USERS("db/users.json"), SHOPS("db/shops.json");
 
     private final String fileName;
 
@@ -12,7 +12,11 @@ enum FileAsset {
     }
 
     public File getFile() {
-        return new File(String.format("db/%s", fileName));
+        return new File(String.format("assets/%s", fileName));
+    }
+
+    public String getName() {
+        return fileName;
     }
 
 }

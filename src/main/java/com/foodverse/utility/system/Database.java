@@ -1,22 +1,22 @@
 package com.foodverse.utility.system;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+import com.foodverse.models.Config;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 
 public final class Database {
 
     private static Database database;
-    private static final Random generator = new Random();
-    private final int numberOfRecoveryQuestions = 3;
+
+    private Config configuration;
     private User authenticatedUser;
     private List<User> users;
     private List<Shop> shops;
 
     private Database() {
+        configuration = FileManager.loadConfig();
         users = FileManager.loadUsers();
         shops = FileManager.loadShops();
     }
@@ -34,23 +34,12 @@ public final class Database {
         return database;
     }
 
-    public boolean userExists(String id) {
-        if (!users.isEmpty()) {
-            for (User user : users) {
-                if (user.getId().equals(id)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public Optional<Config> getConfiguration() {
+        return Optional.ofNullable(configuration);
     }
 
     public Optional<User> getAuthenticatedUser() {
         return Optional.ofNullable(authenticatedUser);
-    }
-
-    public List<Shop> getShops() {
-        return shops;
     }
 
     public boolean signIn(String id, String password) {
@@ -59,6 +48,17 @@ public final class Database {
                 if (user.getId().equals(id)
                         && user.getCredentials().getPassword().equals(password)) {
                     authenticatedUser = user;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean userExists(String id) {
+        if (!users.isEmpty()) {
+            for (User user : users) {
+                if (user.getId().equals(id)) {
                     return true;
                 }
             }
@@ -78,6 +78,10 @@ public final class Database {
         users = FileManager.loadUsers();
     }
 
+    public List<Shop> getShops() {
+        return shops;
+    }
+
     public Optional<Shop> findShopByName(String name) {
         for (Shop shop : shops) {
             if (shop.getName().equals(name)) {
@@ -85,21 +89,6 @@ public final class Database {
             }
         }
         return Optional.empty();
-    }
-
-    public List<String> getRecoveryCredentials(User user) {
-        List<String> credentials = new ArrayList<>();
-        int randomNumber = generator.nextInt(1, numberOfRecoveryQuestions);
-        String question = FileManager.getRandomRecoveryQuestion(randomNumber).get();
-        String answer;
-        if (randomNumber == 1) {
-            answer = user.getCredentials().getFirstRecoveryAnswer();
-        } else {
-            answer = user.getCredentials().getSecondRecoveryAnswer();
-        }
-        credentials.add(question);
-        credentials.add(answer);
-        return credentials;
     }
 
 }

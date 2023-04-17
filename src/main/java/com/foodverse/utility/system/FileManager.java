@@ -2,6 +2,7 @@ package com.foodverse.utility.system;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -40,7 +41,7 @@ public final class FileManager {
     public static Config loadConfig() {
         Type configType = new TypeToken<Config>() {}.getType();
         if (EnvironmentOptions.getMode() == Mode.DEBUG) {
-            var file = FileAsset.CONFIG.getFile();
+            var file = new File("assets/files/config.json");
             if (!file.exists()) {
                 logger.log(Level.INFO, "There is no such file: {0}", file.getName());
                 return null;
@@ -51,7 +52,7 @@ public final class FileManager {
                 logger.log(Level.INFO, "Could not load the application's configuration.");
             }
         } else {
-            var fileName = FileAsset.CONFIG.getName();
+            var fileName = "files/config.json";
             InputStream stream = ResourceHandler.loadResourceAsStream(fileName);
             if (stream == null) {
                 logger.log(Level.INFO, "There is no such file: {0}", fileName);
@@ -64,24 +65,6 @@ public final class FileManager {
             }
         }
         return null;
-    }
-
-    public static void saveConfig(Config config) {
-        var file = FileAsset.CONFIG.getFile();
-        if (!file.exists()) {
-            try {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            } catch (IOException e) {
-                logger.log(Level.INFO,
-                        "Could not create a file for saving the application's configuration.");
-            }
-        }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            gson.toJson(config, writer);
-        } catch (IOException e) {
-            logger.log(Level.INFO, "Could not save the application's configuration.");
-        }
     }
 
     public static List<User> loadUsers() {

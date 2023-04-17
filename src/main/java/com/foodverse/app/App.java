@@ -11,12 +11,17 @@ import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.navigation.Shell;
 import com.foodverse.utility.navigation.ShellOptions;
+import com.foodverse.utility.system.EnvironmentOptions;
+import com.foodverse.utility.system.EnvironmentOptions.Mode;
 
 public final class App {
 
     private App() {}
 
     public static void main(String[] args) {
+
+        // Set the environment mode to debug
+        EnvironmentOptions.setMode(Mode.DEBUG);
 
         // Initialize the application
         ShellOptions options = new ShellOptions.Builder()

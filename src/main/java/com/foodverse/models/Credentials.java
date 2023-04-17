@@ -1,5 +1,9 @@
 package com.foodverse.models;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import com.google.gson.annotations.SerializedName;
 
 public final class Credentials {
@@ -7,16 +11,14 @@ public final class Credentials {
     @SerializedName("password")
     private String password;
 
-    @SerializedName("recovery_answer_1")
-    private String firstRecoveryAnswer;
+    @SerializedName("recovery_answers")
+    private Map<Integer, String> recoveryAnswers;
 
-    @SerializedName("recovery_answer_2")
-    private String secondRecoveryAnswer;
-
-    public Credentials(String password, String firstRecoveryAnswer, String secondRecoveryAnswer) {
+    public Credentials(String password, List<String> recoveryAnswers) {
         this.password = password;
-        this.firstRecoveryAnswer = firstRecoveryAnswer;
-        this.secondRecoveryAnswer = secondRecoveryAnswer;
+        this.recoveryAnswers = IntStream.range(0, recoveryAnswers.size())
+                .boxed()
+                .collect(Collectors.toMap(i -> i, recoveryAnswers::get));
     }
 
     public String getPassword() {
@@ -27,21 +29,12 @@ public final class Credentials {
         this.password = password;
     }
 
-    public String getFirstRecoveryAnswer() {
-        return firstRecoveryAnswer;
+    public Map<Integer, String> getRecoveryAnswers() {
+        return recoveryAnswers;
     }
 
-    public void setFirstRecoveryAnswer(String firstRecoveryAnswer) {
-        this.firstRecoveryAnswer = firstRecoveryAnswer;
+    public void setRecoveryAnswers(Map<Integer, String> recoveryAnswers) {
+        this.recoveryAnswers = recoveryAnswers;
     }
-
-    public String getSecondRecoveryAnswer() {
-        return secondRecoveryAnswer;
-    }
-
-    public void setSecondRecoveryAnswer(String secondRecoveryAnswer) {
-        this.secondRecoveryAnswer = secondRecoveryAnswer;
-    }
-
 
 }

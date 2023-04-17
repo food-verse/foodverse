@@ -16,11 +16,15 @@ public final class UserFactory {
 
     private static List<User> generateUsers() {
 
+        // Creating user's recovery answers...
+        var recoveryAnswers = List.of(
+                "Fluffy",
+                "The Lord of the Rings");
+
         // Creating user's credentials...
         var credentials = new Credentials(
                 "XyZ987!",
-                "Bella",
-                "3");
+                recoveryAnswers);
 
         // Creating burger shops items for the burger order
         var burgerShopItems = Map.of(

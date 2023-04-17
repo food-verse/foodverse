@@ -9,10 +9,12 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +49,29 @@ public final class AssetManager {
         });
     }
 
+    public static void loadFont(String fontFamily, List<String> fontFiles) {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        for (String fontFile : fontFiles) {
+            var fileName = String.format("fonts/%s/%s", fontFamily, fontFile);
+            InputStream stream = ResourceHandler.loadResourceAsStream(fileName);
+            if (stream == null) {
+                logger.log(Level.INFO, "There is no such file: {0}", fontFile);
+                return;
+            }
+            try {
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, stream));
+            } catch (IOException | FontFormatException e) {
+                logger.log(Level.INFO, "Could not load \"{0}\" font family.", fontFamily);
+            } finally {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    logger.log(Level.INFO, "Failed to close stream for font file {0}", fontFile);
+                }
+            }
+        }
+    }
+
     public static Optional<Image> getImage(File imageFile, int width, int height) {
         BufferedImage bufferedImage = null;
         Image scaledImage = null;
@@ -55,6 +80,18 @@ public final class AssetManager {
             scaledImage = bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         } catch (IOException e) {
             logger.log(Level.INFO, "Could not load \"{0}\" image.", imageFile);
+        }
+        return Optional.ofNullable(scaledImage);
+    }
+
+    public static Optional<Image> getImage(URL imageURL, int width, int height) {
+        BufferedImage bufferedImage = null;
+        Image scaledImage = null;
+        try {
+            bufferedImage = ImageIO.read(imageURL);
+            scaledImage = bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            logger.log(Level.INFO, "Could not load \"{0}\" image.", imageURL.toString());
         }
         return Optional.ofNullable(scaledImage);
     }
@@ -73,14 +110,23 @@ public final class AssetManager {
     }
 
     public static Optional<Image> getVector(File vectorFile) {
+        try {
+            URL vectorURL = vectorFile.toURI().toURL();
+            return getVector(vectorURL);
+        } catch (MalformedURLException e) {
+            logger.log(Level.INFO, "Failed to convert file to URL: {0}", vectorFile.toString());
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<Image> getVector(URL vectorURL) {
         BufferedImage bufferedImage = null;
         try {
             // Create an SVGUniverse
             SVGUniverse universe = new SVGUniverse();
 
             // Load the SVG file into memory
-            URL address = vectorFile.toURI().toURL();
-            SVGDiagram diagram = universe.getDiagram(universe.loadSVG(address));
+            SVGDiagram diagram = universe.getDiagram(universe.loadSVG(vectorURL));
 
             // Create a Graphics2D that the SVG should be rendered to
             bufferedImage = new BufferedImage(
@@ -95,8 +141,8 @@ public final class AssetManager {
 
             // Render the SVG to the Graphics2D
             diagram.render(graphics);
-        } catch (MalformedURLException | SVGException e) {
-            logger.log(Level.INFO, "Could not load image from: {0}", vectorFile.getAbsolutePath());
+        } catch (SVGException e) {
+            logger.log(Level.INFO, "Could not load image from: {0}", vectorURL.toString());
         }
         return Optional.ofNullable(bufferedImage);
     }

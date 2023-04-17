@@ -25,7 +25,7 @@ public final class FileManager {
     private FileManager() {}
 
     public static Config loadConfig() {
-        File file = Files.CONFIG.getFile();
+        File file = FileAsset.CONFIG.getFile();
         if (file.exists()) {
             Type configType = new TypeToken<Config>() {}.getType();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -40,7 +40,7 @@ public final class FileManager {
     }
 
     public static void saveConfig(Config config) {
-        File file = Files.CONFIG.getFile();
+        File file = FileAsset.CONFIG.getFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
@@ -58,7 +58,7 @@ public final class FileManager {
     }
 
     public static List<User> loadUsers() {
-        File file = Files.USERS.getFile();
+        File file = FileAsset.USERS.getFile();
         if (file.exists()) {
             Type userListType = new TypeToken<List<User>>() {}.getType();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -73,7 +73,7 @@ public final class FileManager {
     }
 
     public static void saveUsers(List<User> users) {
-        File file = Files.USERS.getFile();
+        File file = FileAsset.USERS.getFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
@@ -90,7 +90,7 @@ public final class FileManager {
     }
 
     public static List<Shop> loadShops() {
-        File file = Files.SHOPS.getFile();
+        File file = FileAsset.SHOPS.getFile();
         if (file.exists()) {
             Type shopListType = new TypeToken<List<Shop>>() {}.getType();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -105,7 +105,7 @@ public final class FileManager {
     }
 
     public static void saveShops(List<Shop> shops) {
-        File file = Files.SHOPS.getFile();
+        File file = FileAsset.SHOPS.getFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();

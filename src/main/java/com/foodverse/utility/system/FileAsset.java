@@ -2,12 +2,12 @@ package com.foodverse.utility.system;
 
 import java.io.File;
 
-enum Files {
+enum FileAsset {
     CONFIG("config.json"), USERS("users.json"), SHOPS("shops.json");
 
     private final String fileName;
 
-    Files(String fileName) {
+    FileAsset(String fileName) {
         this.fileName = fileName;
     }
 

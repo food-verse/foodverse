@@ -3,6 +3,7 @@ package com.foodverse.utility.ui;
 import java.awt.Color;
 import java.awt.font.TextAttribute;
 import java.util.Map;
+import com.foodverse.utility.navigation.Shell;
 
 public final class TextStyle {
 
@@ -13,7 +14,7 @@ public final class TextStyle {
 
     public static class Builder {
 
-        private String fontFamily = "Inter";
+        private String fontFamily = Shell.getOptions().getDefaultFont();
         private FontWeight fontWeight = FontWeight.REGULAR;
         private int fontSize = 12;
         private Color color = Colors.black;

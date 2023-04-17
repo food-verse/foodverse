@@ -2,10 +2,11 @@ package com.foodverse.utility.system;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 import com.foodverse.models.Config;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
+import com.foodverse.utility.system.EnvironmentOptions.Mode;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -24,23 +26,48 @@ public final class FileManager {
 
     private FileManager() {}
 
+    public static AssetIndex loadAssetIndex() {
+        InputStream stream = ResourceHandler.loadResourceAsStream("fonts/index.json");
+        Type fontsType = new TypeToken<AssetIndex>() {}.getType();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream));) {
+            return gson.fromJson(reader, fontsType);
+        } catch (IOException e) {
+            logger.log(Level.INFO, "Could not load the index of fonts.");
+        }
+        return null;
+    }
+
     public static Config loadConfig() {
-        File file = FileAsset.CONFIG.getFile();
-        if (file.exists()) {
-            Type configType = new TypeToken<Config>() {}.getType();
+        Type configType = new TypeToken<Config>() {}.getType();
+        if (EnvironmentOptions.getMode() == Mode.DEBUG) {
+            var file = FileAsset.CONFIG.getFile();
+            if (!file.exists()) {
+                logger.log(Level.INFO, "There is no such file: {0}", file.getName());
+                return null;
+            }
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 return gson.fromJson(reader, configType);
             } catch (IOException e) {
                 logger.log(Level.INFO, "Could not load the application's configuration.");
             }
         } else {
-            logger.log(Level.INFO, "There is no such file: {0}", file.getName());
+            var fileName = FileAsset.CONFIG.getName();
+            InputStream stream = ResourceHandler.loadResourceAsStream(fileName);
+            if (stream == null) {
+                logger.log(Level.INFO, "There is no such file: {0}", fileName);
+                return null;
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream));) {
+                return gson.fromJson(reader, configType);
+            } catch (IOException e) {
+                logger.log(Level.INFO, "Could not load the application's configuration.");
+            }
         }
         return null;
     }
 
     public static void saveConfig(Config config) {
-        File file = FileAsset.CONFIG.getFile();
+        var file = FileAsset.CONFIG.getFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
@@ -58,7 +85,7 @@ public final class FileManager {
     }
 
     public static List<User> loadUsers() {
-        File file = FileAsset.USERS.getFile();
+        var file = FileAsset.USERS.getFile();
         if (file.exists()) {
             Type userListType = new TypeToken<List<User>>() {}.getType();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -73,7 +100,7 @@ public final class FileManager {
     }
 
     public static void saveUsers(List<User> users) {
-        File file = FileAsset.USERS.getFile();
+        var file = FileAsset.USERS.getFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
@@ -90,7 +117,7 @@ public final class FileManager {
     }
 
     public static List<Shop> loadShops() {
-        File file = FileAsset.SHOPS.getFile();
+        var file = FileAsset.SHOPS.getFile();
         if (file.exists()) {
             Type shopListType = new TypeToken<List<Shop>>() {}.getType();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -105,7 +132,7 @@ public final class FileManager {
     }
 
     public static void saveShops(List<Shop> shops) {
-        File file = FileAsset.SHOPS.getFile();
+        var file = FileAsset.SHOPS.getFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();

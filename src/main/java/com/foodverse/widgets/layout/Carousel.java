@@ -20,10 +20,10 @@ import com.foodverse.widgets.text.Label.LabelSize;
 
 public final class Carousel extends Widget {
 
-    private final List<? extends Props> propList;
+    private final List<? extends Props> propsList;
 
-    public Carousel(List<? extends Props> propList) {
-        this.propList = propList;
+    public Carousel(List<? extends Props> propsList) {
+        this.propsList = propsList;
     }
 
     @Override
@@ -34,7 +34,7 @@ public final class Carousel extends Widget {
         // Creating carousel...
         var carousel = new Row();
         // If list of props is empty return an empty JPanel
-        if (propList.isEmpty()) {
+        if (propsList.isEmpty()) {
             var warningText = new Label("Unfortunately, there is nothing to display.",
                     LabelSize.S);
             var emptyView = new Row();
@@ -53,8 +53,7 @@ public final class Carousel extends Widget {
             return paddedView.getRef();
         }
         // Adding list of widgets to the carousel...
-        var list = (List<?>) propList;
-        for (Object props : list) {
+        for (Props props : propsList) {
             if (props instanceof OfferProps) {
                 carousel.addWidget(new OfferCard((OfferProps) props),
                         new EdgeInsets.Builder()

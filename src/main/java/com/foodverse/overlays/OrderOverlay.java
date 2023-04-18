@@ -15,6 +15,7 @@ import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.utility.ui.Colors;
 import com.foodverse.views.AddressView;
+import com.foodverse.views.AmountView;
 import com.foodverse.views.PaymentView;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
@@ -53,14 +54,8 @@ public final class OrderOverlay extends Overlay {
                 panel.add(payment.getRef());
 
                 // Amount
-                var amount = new JPanel();
-                amount = new JPanel();
-                amount.setBorder(boarder);
-                amount.setPreferredSize(new Dimension(600, 100));
-                var amountLabel = new Label("Total:", LabelSize.L);
-                amount.add(amountLabel.getRef());
-                amount.setBackground(Colors.white);
-                panel.add(amount);
+                AmountView amount = new AmountView();
+                panel.add(amount.getRef());
 
                 // Products
                 var products = new JPanel();

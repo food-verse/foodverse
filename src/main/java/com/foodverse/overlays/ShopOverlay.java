@@ -20,6 +20,7 @@ import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
+import com.foodverse.widgets.layout.ScrollView;
 
 public class ShopOverlay extends Overlay {
 
@@ -27,10 +28,9 @@ public class ShopOverlay extends Overlay {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button =
-                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                    Router.closeOverlay();
-                });
+        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+            Router.closeOverlay();
+        });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
@@ -120,7 +120,7 @@ public class ShopOverlay extends Overlay {
         rate4.addActionListener(listener);
         rate5.addActionListener(listener);
 
-        return panel;
+        return new ScrollView(panel).getRef();
     }
 
     public void showItems(JPanel panel1) {

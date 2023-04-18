@@ -24,7 +24,6 @@ public final class PaymentView extends Widget {
         Border boarder = BorderFactory.createLineBorder(Colors.black);
 
         var payment = new JPanel();
-        payment.setBorder(boarder);
         payment.setPreferredSize(new Dimension(600, 100));
         payment.setBackground(Colors.white);
 

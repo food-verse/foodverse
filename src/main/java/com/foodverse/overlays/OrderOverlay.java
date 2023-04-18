@@ -4,12 +4,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
+
 import javax.swing.border.Border;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
@@ -17,6 +15,7 @@ import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.utility.ui.Colors;
 import com.foodverse.views.AddressView;
+import com.foodverse.views.PaymentView;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
@@ -50,51 +49,8 @@ public final class OrderOverlay extends Overlay {
 
                 // // Payment
 
-                var payment = new JPanel();
-                payment.setBorder(boarder);
-                payment.setPreferredSize(new Dimension(600, 100));
-                payment.setBackground(Colors.white);
-
-                // var CardButton = new RectButton("Card",
-                // ButtonSize.S,
-                // ButtonType.PRIMARY,
-                // e -> {
-                // Carddetails(e);
-                // });
-
-                // payment.add(CardButton.getRef());
-
-                // Card Details
-
-                var cardNumber = new JTextArea("Card Number ");
-                cardNumber.setBorder(boarder);
-                var Name = new JTextArea("Name ");
-                Name.setBorder(boarder);
-                var secCode = new JTextArea("Secret Code ");
-                secCode.setBorder(boarder);
-                var Date = new JTextArea("Day/Year ");
-                Date.setBorder(boarder);
-
-                payment.add(cardNumber);
-                payment.add(Name);
-                payment.add(secCode);
-                payment.add(Date);
-
-                // Buttons for payment
-
-                var CardDetails = new JRadioButton("Card ");
-                var Cash = new JRadioButton("Cash ");
-                var Take = new JRadioButton("Take away ");
-                var group = new ButtonGroup();
-                group.add(CardDetails);
-                group.add(Take);
-                group.add(Cash);
-
-                payment.add(CardDetails);
-                payment.add(Cash);
-                payment.add(Take);
-
-                panel.add(payment);
+                PaymentView payment = new PaymentView();
+                panel.add(payment.getRef());
 
                 // Amount
                 var amount = new JPanel();
@@ -165,23 +121,4 @@ public final class OrderOverlay extends Overlay {
                                 "Your order has been successfully registered!");
         }
 
-        // private JPanel Carddetails(ActionEvent e) {
-        // var payment = new JPanel();
-        // Border boarder = BorderFactory.createLineBorder(Colors.black);
-
-        // var cardNumber = new JTextArea("Card Number ");
-        // cardNumber.setBorder(boarder);
-        // var Name = new JTextArea("Name ");
-        // Name.setBorder(boarder);
-        // var secCode = new JTextArea("Secret Code ");
-        // secCode.setBorder(boarder);
-        // var Date = new JTextArea("Day/Year ");
-        // Date.setBorder(boarder);
-
-        // payment.add(cardNumber);
-        // payment.add(Name);
-        // payment.add(secCode);
-        // payment.add(Date);
-        // return payment;
-        // }
 }

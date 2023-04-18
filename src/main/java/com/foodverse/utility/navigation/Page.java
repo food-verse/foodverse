@@ -8,9 +8,4 @@ import com.foodverse.utility.core.Widget;
  */
 public abstract class Page extends Widget implements Identifiable {
 
-    @Override
-    public String getId() {
-        return getClass().getSimpleName();
-    }
-
 }

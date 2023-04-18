@@ -1,13 +1,13 @@
 package com.foodverse.utility.navigation;
 
 public enum Pages {
-    OVERVIEW("OverviewPage"),
-    ONBOARDING("OnboardingPage"),
-    LOGIN("SignInPage"),
-    REGISTER("SignUpPage"),
-    HOME("HomePage"),
-    TEXTS("TextPage"),
-    BUTTONS("ButtonPage");
+    OVERVIEW("Overview"),
+    ONBOARDING("Onboarding"),
+    LOGIN("Sign In"),
+    REGISTER("Sign Up"),
+    HOME("Home"),
+    TEXTS("Text"),
+    BUTTONS("Button");
 
     private final String id;
 

@@ -36,10 +36,6 @@ public abstract class Overlay extends Widget implements Identifiable {
         this(0, 0);
     }
 
-    public String getId() {
-        return getClass().getSimpleName();
-    }
-
     protected JFrame getFrame() {
         return frame;
     }

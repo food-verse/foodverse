@@ -10,7 +10,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.ButtonGroup;
-import javax.swing.*;
 
 public final class PaymentView extends Widget {
 

@@ -28,7 +28,7 @@ public final class FileManager {
     private FileManager() {}
 
     public static AssetIndex loadAssetIndex() {
-        InputStream stream = ResourceHandler.loadResourceAsStream("fonts/index.json");
+        InputStream stream = ResourceHandler.loadResourceAsStream("index.json");
         Type fontsType = new TypeToken<AssetIndex>() {}.getType();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream));) {
             return gson.fromJson(reader, fontsType);

@@ -66,9 +66,9 @@ public final class OfferCard extends Widget {
         headingWidget.addWidget(ratingWidget, Align.LAST_LINE_END);
 
         // Creating card's list of items widget...
+        var builder = new StringBuilder();
         var itemListWidget = new Column();
         for (Offer offer : props.getOffers()) {
-            StringBuilder builder = new StringBuilder();
             builder.append('•');
             for (Map.Entry<String, Integer> entry : offer.getItems().entrySet()) {
                 builder.append(String.format(" %d %s +",
@@ -78,6 +78,7 @@ public final class OfferCard extends Widget {
             builder.append(String.format("-> %.2f€", offer.getTotal()));
             var itemText = new Label(builder.toString(), LabelSize.XS, Colors.gray600);
             itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
+            builder.setLength(0);
         }
 
         // Creating card's main content widget...

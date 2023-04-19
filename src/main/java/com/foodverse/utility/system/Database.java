@@ -43,24 +43,23 @@ public final class Database {
     }
 
     public boolean signIn(String id, String password) {
-        if (!users.isEmpty()) {
-            for (User user : users) {
-                if (user.getId().equals(id)
-                        && user.getCredentials().getPassword().equals(password)) {
-                    authenticatedUser = user;
-                    return true;
-                }
+        for (User user : users) {
+            if (user.getId().equals(id) && user.getCredentials().getPassword().equals(password)) {
+                authenticatedUser = user;
+                return true;
             }
         }
         return false;
     }
 
+    public void signOut() {
+        authenticatedUser = null;
+    }
+
     public boolean userExists(String id) {
-        if (!users.isEmpty()) {
-            for (User user : users) {
-                if (user.getId().equals(id)) {
-                    return true;
-                }
+        for (User user : users) {
+            if (user.getId().equals(id)) {
+                return true;
             }
         }
         return false;

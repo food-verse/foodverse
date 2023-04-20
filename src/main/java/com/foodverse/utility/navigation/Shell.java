@@ -29,10 +29,10 @@ public final class Shell {
             var assetIndex = FileManager.loadAssetIndex();
             AssetManager.loadFont(
                     options.getDefaultFont(),
-                    assetIndex.getFonts().get(options.getDefaultFont()));
+                    assetIndex.fonts().get(options.getDefaultFont()));
             AssetManager.loadFont(
                     options.getDefaultFont(),
-                    assetIndex.getFonts().get(options.getMonospacedFont()));
+                    assetIndex.fonts().get(options.getMonospacedFont()));
         }
         frame.setSize(options.getDimension());
         frame.getContentPane().setBackground(options.getBackgroundColor());

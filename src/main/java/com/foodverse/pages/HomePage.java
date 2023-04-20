@@ -107,7 +107,7 @@ public final class HomePage extends Page {
 
         // Turning Shop list into ShopProp list...
         List<OfferProps> offerProps = shops.stream()
-                .filter(shop -> !shop.getOffers().isEmpty())
+                .filter(shop -> !shop.offers().isEmpty())
                 .map(OfferProps::from)
                 .sorted(Comparator.comparingDouble(OfferProps::rating).reversed())
                 .collect(Collectors.toList());
@@ -132,9 +132,9 @@ public final class HomePage extends Page {
         if (signedUser.isPresent()) {
             var startDate = LocalDate.now().minusWeeks(1);
             var endDate = LocalDate.now();
-            orderProps = signedUser.get().getOrders().stream()
-                    .filter(order -> DateUtils.isInRange(order.getDate(), startDate, endDate))
-                    .sorted(Comparator.comparing(Order::getDate).reversed())
+            orderProps = signedUser.get().orders().stream()
+                    .filter(order -> DateUtils.isInRange(order.date(), startDate, endDate))
+                    .sorted(Comparator.comparing(Order::date).reversed())
                     .map(OrderProps::from)
                     .collect(Collectors.toList());
         } else {

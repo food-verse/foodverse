@@ -44,7 +44,7 @@ public final class Database {
 
     public boolean signIn(String id, String password) {
         for (User user : users) {
-            if (user.getId().equals(id) && user.getCredentials().getPassword().equals(password)) {
+            if (user.id().equals(id) && user.credentials().password().equals(password)) {
                 authenticatedUser = user;
                 return true;
             }
@@ -58,7 +58,7 @@ public final class Database {
 
     public boolean userExists(String id) {
         for (User user : users) {
-            if (user.getId().equals(id)) {
+            if (user.id().equals(id)) {
                 return true;
             }
         }
@@ -67,7 +67,7 @@ public final class Database {
 
     public void saveUser(User user) {
         for (User credentials : users) {
-            if (credentials.getId().equals(user.getId())) {
+            if (credentials.id().equals(user.id())) {
                 users.remove(user);
                 break;
             }
@@ -83,7 +83,7 @@ public final class Database {
 
     public Optional<Shop> findShopByName(String name) {
         for (Shop shop : shops) {
-            if (shop.getName().equals(name)) {
+            if (shop.name().equals(name)) {
                 return Optional.of(shop);
             }
         }

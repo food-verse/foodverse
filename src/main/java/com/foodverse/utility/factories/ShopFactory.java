@@ -112,16 +112,16 @@ public final class ShopFactory {
         // Creating offers for the greek shop...
         var greekOffers = List.of(
                 new Offer(Map.of(
-                        greekMenu.get(0).getName(), 2,
-                        greekMenu.get(8).getName(), 1),
+                        greekMenu.get(0).name(), 2,
+                        greekMenu.get(8).name(), 1),
                         15.99f),
                 new Offer(Map.of(
-                        greekMenu.get(2).getName(), 1,
-                        greekMenu.get(1).getName(), 1),
+                        greekMenu.get(2).name(), 1,
+                        greekMenu.get(1).name(), 1),
                         18.99f),
                 new Offer(Map.of(
-                        greekMenu.get(4).getName(), 1,
-                        greekMenu.get(9).getName(), 1),
+                        greekMenu.get(4).name(), 1,
+                        greekMenu.get(9).name(), 1),
                         10.99f));
 
         // Creating the greek shop...
@@ -154,16 +154,16 @@ public final class ShopFactory {
         // Creating offers for the mexican shop...
         var mexicanOffers = List.of(
                 new Offer(Map.of(
-                        mexicanMenu.get(0).getName(), 2,
-                        mexicanMenu.get(8).getName(), 1),
+                        mexicanMenu.get(0).name(), 2,
+                        mexicanMenu.get(8).name(), 1),
                         6.99f),
                 new Offer(Map.of(
-                        mexicanMenu.get(1).getName(), 2,
-                        mexicanMenu.get(9).getName(), 1),
+                        mexicanMenu.get(1).name(), 2,
+                        mexicanMenu.get(9).name(), 1),
                         13.99f),
                 new Offer(Map.of(
-                        mexicanMenu.get(4).getName(), 1,
-                        mexicanMenu.get(7).getName(), 1),
+                        mexicanMenu.get(4).name(), 1,
+                        mexicanMenu.get(7).name(), 1),
                         11.99f));
 
         // Creating the mexican shop...

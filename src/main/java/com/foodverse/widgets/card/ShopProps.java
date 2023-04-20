@@ -15,12 +15,12 @@ public record ShopProps(
 
     public static ShopProps from(Shop shop) {
         return new ShopProps(
-            shop.getThumbnails().get(AssetSize.MEDIUM),
-            shop.getName(),
-            shop.getRating(),
-            shop.getType(),
-            shop.getPrepTime(),
-            shop.getMinOrder());
+            shop.thumbnails().get(AssetSize.MEDIUM),
+            shop.name(),
+            shop.rating(),
+            shop.type(),
+            shop.prepTime(),
+            shop.minOrder());
     }
 
 }

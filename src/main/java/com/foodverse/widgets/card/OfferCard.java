@@ -71,12 +71,12 @@ public final class OfferCard extends Widget {
         var itemListWidget = new Column();
         for (Offer offer : props.offers()) {
             builder.append('•');
-            for (Map.Entry<String, Integer> entry : offer.getItems().entrySet()) {
+            for (Map.Entry<String, Integer> entry : offer.items().entrySet()) {
                 builder.append(String.format(" %d %s +",
                         entry.getValue(), entry.getKey()));
             }
             builder.setLength(Math.max(builder.length() - 1, 0));
-            builder.append(String.format("-> %.2f€", offer.getTotal()));
+            builder.append(String.format("-> %.2f€", offer.total()));
             var itemText = new Label(builder.toString(), LabelSize.XS, Colors.gray600);
             itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
             builder.setLength(0);

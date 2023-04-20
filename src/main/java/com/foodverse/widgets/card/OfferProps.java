@@ -15,10 +15,10 @@ public record OfferProps(
 
     public static OfferProps from(Shop shop) {
         return new OfferProps(
-            shop.getThumbnails().get(AssetSize.SMALL),
-            shop.getName(),
-            shop.getRating(),
-            shop.getOffers());
+            shop.thumbnails().get(AssetSize.SMALL),
+            shop.name(),
+            shop.rating(),
+            shop.offers());
     }
 
 }

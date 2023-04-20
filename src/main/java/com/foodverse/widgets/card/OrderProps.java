@@ -17,16 +17,16 @@ public record OrderProps(
     float price) implements Props {
 
     public static OrderProps from(Order order) {
-        Optional<Shop> foundShop = Database.getInstance().findShopByName(order.getMerchant());
+        Optional<Shop> foundShop = Database.getInstance().findShopByName(order.merchant());
         if (foundShop.isPresent()) {
             return new OrderProps(
-                foundShop.get().getThumbnails().get(AssetSize.MEDIUM),
-                foundShop.get().getName(),
-                foundShop.get().getRating(),
-                order.getItems(),
-                order.getTotal());
+                foundShop.get().thumbnails().get(AssetSize.MEDIUM),
+                foundShop.get().name(),
+                foundShop.get().rating(),
+                order.items(),
+                order.total());
         } else {
-            return new OrderProps("", "", 0f, order.getItems(), order.getTotal());
+            return new OrderProps("", "", 0f, order.items(), order.total());
         }
     }
 

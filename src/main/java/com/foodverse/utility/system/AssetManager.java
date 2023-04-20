@@ -11,16 +11,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import javax.imageio.ImageIO;
+import com.foodverse.utility.system.EnvironmentOptions.Mode;
 import com.kitfox.svg.SVGDiagram;
 import com.kitfox.svg.SVGException;
 import com.kitfox.svg.SVGUniverse;
@@ -29,9 +30,18 @@ public final class AssetManager {
 
     private static final Logger logger = Logger.getLogger(AssetManager.class.getName());
 
+    // The directory of the assets
+    private static final String dir = EnvironmentOptions.getMode() == Mode.DEBUG ? "assets" : "";
+
+    // A Map object holding the vector images loaded from the assets.
+    private static final Map<String, BufferedImage> savedVectors = new HashMap<>();
+
+    // A Map object holding the raster images loaded from the assets.
+    private static final Map<String, BufferedImage> savedImages = new HashMap<>();
+
     private AssetManager() {}
 
-    public static boolean isFontInstalled(String fontFamily) {
+    private static boolean isFontInstalled(String fontFamily) {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         String[] fonts = ge.getAvailableFontFamilyNames();
         for (String font : fonts) {
@@ -89,61 +99,56 @@ public final class AssetManager {
         }
     }
 
-    public static Optional<Image> getImage(File imageFile, int width, int height) {
-        BufferedImage bufferedImage = null;
-        Image scaledImage = null;
-        try {
-            bufferedImage = ImageIO.read(imageFile);
-            scaledImage = bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            logger.log(Level.INFO, "Could not load \"{0}\" image.", imageFile);
-        }
-        return Optional.ofNullable(scaledImage);
+    public static Optional<Image> getVector(String assetName) {
+        return Optional.ofNullable(savedVectors.get(assetName));
     }
 
-    public static Optional<Image> getImage(URL imageURL, int width, int height) {
-        BufferedImage bufferedImage = null;
-        Image scaledImage = null;
-        try {
-            bufferedImage = ImageIO.read(imageURL);
-            scaledImage = bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            logger.log(Level.INFO, "Could not load \"{0}\" image.", imageURL.toString());
-        }
-        return Optional.ofNullable(scaledImage);
-    }
-
-    public static Optional<Image> getImage(String source, int width, int height) {
-        BufferedImage bufferedImage = null;
-        Image scaledImage = null;
-        try {
-            URL address = new URI(source).toURL();
-            bufferedImage = ImageIO.read(address);
-            scaledImage = bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        } catch (IOException | URISyntaxException e) {
-            logger.log(Level.INFO, "Could not load image from: {0}", source);
-        }
-        return Optional.ofNullable(scaledImage);
-    }
-
-    public static Optional<Image> getVector(File vectorFile) {
-        try {
-            URL vectorURL = vectorFile.toURI().toURL();
-            return getVector(vectorURL);
-        } catch (MalformedURLException e) {
-            logger.log(Level.INFO, "Failed to convert file to URL: {0}", vectorFile.toString());
+    public static Optional<Image> getImage(String assetName, int width, int height) {
+        BufferedImage bufferedImage = savedImages.get(assetName);
+        if (bufferedImage != null) {
+            return Optional.of(bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH));
         }
         return Optional.empty();
     }
 
-    public static Optional<Image> getVector(URL vectorURL) {
+    public static void loadIcons(List<String> assets) {
+        for (String asset : assets) {
+            var assetLocation = dir.isEmpty()
+                    ? String.format("icons/%s", asset)
+                    : String.format("%s/icons/%s", dir, asset);
+            savedVectors.putIfAbsent(asset, loadVector(assetLocation));
+        }
+    }
+
+    public static void loadImages(List<String> assets) {
+        for (String asset : assets) {
+            var assetLocation = dir.isEmpty()
+                    ? String.format("images/%s", asset)
+                    : String.format("%s/images/%s", dir, asset);
+            savedImages.putIfAbsent(asset, loadImage(assetLocation));
+        }
+    }
+
+    private static BufferedImage loadVector(String source) {
         BufferedImage bufferedImage = null;
         try {
             // Create an SVGUniverse
             SVGUniverse universe = new SVGUniverse();
 
             // Load the SVG file into memory
-            SVGDiagram diagram = universe.getDiagram(universe.loadSVG(vectorURL));
+            URL assetAddress;
+            if (EnvironmentOptions.getMode() == Mode.DEBUG) {
+                try {
+                    File assetFile = new File(source);
+                    assetAddress = assetFile.toURI().toURL();
+                } catch (MalformedURLException e) {
+                    logger.log(Level.INFO, "Failed to convert source to URL: {0}", source);
+                    return null;
+                }
+            } else {
+                assetAddress = ResourceHandler.loadResourceAsURL(source);
+            }
+            SVGDiagram diagram = universe.getDiagram(universe.loadSVG(assetAddress));
 
             // Create a Graphics2D that the SVG should be rendered to
             bufferedImage = new BufferedImage(
@@ -159,9 +164,25 @@ public final class AssetManager {
             // Render the SVG to the Graphics2D
             diagram.render(graphics);
         } catch (SVGException e) {
-            logger.log(Level.INFO, "Could not load image from: {0}", vectorURL.toString());
+            logger.log(Level.INFO, "Could not load image from: {0}", source);
         }
-        return Optional.ofNullable(bufferedImage);
+        return bufferedImage;
+    }
+
+    private static BufferedImage loadImage(String source) {
+        BufferedImage bufferedImage = null;
+        try {
+            if (EnvironmentOptions.getMode() == Mode.DEBUG) {
+                File assetFile = new File(source);
+                bufferedImage = ImageIO.read(assetFile);
+            } else {
+                URL assetAddress = ResourceHandler.loadResourceAsURL(source);
+                bufferedImage = ImageIO.read(assetAddress);
+            }
+        } catch (IOException e) {
+            logger.log(Level.INFO, "Could not load \"{0}\" image.", source);
+        }
+        return bufferedImage;
     }
 
 }

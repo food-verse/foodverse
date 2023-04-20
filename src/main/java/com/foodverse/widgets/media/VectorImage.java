@@ -8,9 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.system.AssetManager;
-import com.foodverse.utility.system.EnvironmentOptions;
-import com.foodverse.utility.system.ResourceHandler;
-import com.foodverse.utility.system.EnvironmentOptions.Mode;
 
 public final class VectorImage extends Widget {
 
@@ -23,15 +20,9 @@ public final class VectorImage extends Widget {
 
     public VectorImage(IconAsset asset, Consumer<MouseEvent> onPressed) {
         this.onPressed = onPressed;
-        if (EnvironmentOptions.getMode() == Mode.DEBUG) {
-            AssetManager
-                    .getVector(asset.getFile())
-                    .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
-        } else {
-            AssetManager
-                    .getVector(ResourceHandler.loadResourceAsURL(asset.getName()))
-                    .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
-        }
+        AssetManager
+                .getVector(asset.getName())
+                .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
         if (onPressed != null) {
             component.addMouseListener(new VectorImageListener());
         }

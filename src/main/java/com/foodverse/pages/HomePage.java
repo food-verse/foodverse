@@ -33,11 +33,12 @@ import com.foodverse.widgets.card.OrderProps;
 
 public final class HomePage extends Page {
 
-    @Override
-    public Component getRef() {
+    private final Component component;
 
-        // Getting a reference to the database...
-        var db = Database.getInstance();
+    // Getting a reference to the database...
+    private final Database db = Database.getInstance();
+
+    public HomePage() {
 
         // Creating main panel...
         var panel = new JPanel();
@@ -148,8 +149,13 @@ public final class HomePage extends Page {
         panel.add(orderCarousel.getRef());
 
         // Wrap the main panel in a scroll view
-        return new ScrollView(panel).getRef();
+        component = new ScrollView(panel).getRef();
 
+    }
+
+    @Override
+    public Component getRef() {
+        return component;
     }
 
 }

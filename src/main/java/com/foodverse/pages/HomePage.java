@@ -90,7 +90,7 @@ public final class HomePage extends Page {
         // Turning Shop list into ShopProp list...
         List<ShopProps> shopProps = shops.stream()
                 .map(ShopProps::from)
-                .sorted(Comparator.comparingDouble(ShopProps::getRating).reversed())
+                .sorted(Comparator.comparingDouble(ShopProps::rating).reversed())
                 .collect(Collectors.toList());
 
         // Create a carousel for the nearby shops
@@ -109,7 +109,7 @@ public final class HomePage extends Page {
         List<OfferProps> offerProps = shops.stream()
                 .filter(shop -> !shop.getOffers().isEmpty())
                 .map(OfferProps::from)
-                .sorted(Comparator.comparingDouble(OfferProps::getRating).reversed())
+                .sorted(Comparator.comparingDouble(OfferProps::rating).reversed())
                 .collect(Collectors.toList());
 
         // Create a carousel for the available offers

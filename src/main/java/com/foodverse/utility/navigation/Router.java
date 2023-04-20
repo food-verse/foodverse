@@ -70,8 +70,10 @@ public final class Router {
             // Intentionally left empty
         }
         overlays.push(newOverlay);
+        newOverlay.inflate(newOverlay);
         if (oldOverlay != null) {
             newOverlay.open(oldOverlay.getFrame());
+            oldOverlay.close();
         } else {
             newOverlay.open(frame);
         }
@@ -83,6 +85,12 @@ public final class Router {
     public static void closeOverlay() {
         try {
             Overlay oldOverlay = overlays.pop();
+            try {
+                Overlay prevOverlay = overlays.pop();
+                openOverlay(prevOverlay);
+            } catch (NoSuchElementException e) {
+                // Intentionally left empty
+            }
             oldOverlay.close();
         } catch (NoSuchElementException e) {
             logger.log(Level.WARNING, "Failed to close the overlay because the stack is empty.");

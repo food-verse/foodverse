@@ -1,6 +1,7 @@
 package com.foodverse.widgets.card;
 
 import java.awt.Component;
+
 import com.foodverse.overlays.ShopOverlay;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
@@ -30,21 +31,21 @@ public final class ShopCard extends Widget {
 
         var minOrder = String.format(
                 "%d’ | Minimum %.2f€",
-                props.getPrepTime(),
-                props.getMinOrder());
+                props.prepTime(),
+                props.minOrder());
 
         // Creating text widgets...
         var minOrderText = new Label(minOrder, LabelSize.XS, Colors.gray600);
-        var shopTypeText = new Label(props.getType().toString(), LabelSize.XS, Colors.gray600);
+        var shopTypeText = new Label(props.type().toString(), LabelSize.XS, Colors.gray600);
         var ratingText = new Label(
-                String.valueOf(props.getRating()),
+                String.valueOf(props.rating()),
                 LabelSize.M,
                 Colors.orange);
-        var shopNameText = new Label(props.getName(), LabelSize.L);
+        var shopNameText = new Label(props.name(), LabelSize.L);
 
         // Creating image widgets...
         var starImage = new VectorImage(IconAsset.STAR);
-        var thumbnailImage = new Image(props.getThumbnail(), new ImageStyle.Builder()
+        var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
                 .width(240)
                 .height(100)
                 .build());

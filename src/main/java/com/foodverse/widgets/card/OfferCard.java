@@ -2,6 +2,7 @@ package com.foodverse.widgets.card;
 
 import java.awt.Component;
 import java.util.Map;
+
 import com.foodverse.models.Offer;
 import com.foodverse.overlays.ShopOverlay;
 import com.foodverse.utility.core.Widget;
@@ -42,12 +43,12 @@ public final class OfferCard extends Widget {
                 });
 
         // Creating text widgets...
-        var ratingText = new Label(String.valueOf(props.getRating()), LabelSize.M, Colors.orange);
-        var shopNameText = new Label(props.getName(), LabelSize.L);
+        var ratingText = new Label(String.valueOf(props.rating()), LabelSize.M, Colors.orange);
+        var shopNameText = new Label(props.name(), LabelSize.L);
 
         // Creating image widgets...
         var starImage = new VectorImage(IconAsset.STAR);
-        var thumbnailImage = new Image(props.getThumbnail(), new ImageStyle.Builder()
+        var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
                 .width(160)
                 .height(180)
                 .build());
@@ -68,7 +69,7 @@ public final class OfferCard extends Widget {
         // Creating card's list of items widget...
         var builder = new StringBuilder();
         var itemListWidget = new Column();
-        for (Offer offer : props.getOffers()) {
+        for (Offer offer : props.offers()) {
             builder.append('•');
             for (Map.Entry<String, Integer> entry : offer.getItems().entrySet()) {
                 builder.append(String.format(" %d %s +",

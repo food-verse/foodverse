@@ -8,7 +8,7 @@ import com.foodverse.models.User;
 
 public final class Database {
 
-    private static Database database;
+    private static Database database = new Database();
 
     private Config configuration;
     private User authenticatedUser;
@@ -22,15 +22,11 @@ public final class Database {
     }
 
     /**
-     * Returns the database instance. If the database hasn't been instantiated yet, it creates a new
-     * one and the new instance gets returned.
+     * Returns the database instance.
      *
      * @return {@link Database} The database instance
      */
     public static Database getInstance() {
-        if (database == null) {
-            database = new Database();
-        }
         return database;
     }
 

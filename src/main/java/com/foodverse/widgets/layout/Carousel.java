@@ -54,20 +54,20 @@ public final class Carousel extends Widget {
         }
         // Adding list of widgets to the carousel...
         for (Props props : propsList) {
-            if (props instanceof OfferProps) {
-                carousel.addWidget(new OfferCard((OfferProps) props),
+            if (props instanceof OfferProps p) {
+                carousel.addWidget(new OfferCard(p),
                         new EdgeInsets.Builder()
                                 .right(8)
                                 .build(),
                         Align.FIRST_LINE_END);
-            } else if (props instanceof OrderProps) {
-                carousel.addWidget(new OrderCard((OrderProps) props),
+            } else if (props instanceof OrderProps p) {
+                carousel.addWidget(new OrderCard(p),
                         new EdgeInsets.Builder()
                                 .right(8)
                                 .build(),
                         Align.FIRST_LINE_END);
-            } else if (props instanceof ShopProps) {
-                carousel.addWidget(new ShopCard((ShopProps) props),
+            } else if (props instanceof ShopProps p) {
+                carousel.addWidget(new ShopCard(p),
                         new EdgeInsets.Builder()
                                 .right(8)
                                 .build(),

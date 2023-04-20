@@ -12,4 +12,9 @@ public record User(
     @SerializedName("email") String email,
     @SerializedName("credentials") Credentials credentials,
     @SerializedName("orders") List<Order> orders) {
+
+    public User withCredentials(Credentials credentials) {
+        return new User(id, name, address, phone, email, credentials, orders);
+    }
+
 }

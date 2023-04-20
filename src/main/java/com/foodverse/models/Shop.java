@@ -16,4 +16,9 @@ public record Shop(
     @SerializedName("minimum_order") float minOrder,
     @SerializedName("offers") List<Offer> offers,
     @SerializedName("menu") List<Item> menu) {
+
+    public Shop withRating(float rating) {
+        return new Shop(name, address, rating, type, thumbnails, prepTime, minOrder, offers, menu);
+    }
+
 }

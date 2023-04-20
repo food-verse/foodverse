@@ -17,4 +17,8 @@ public record Credentials(
             .collect(Collectors.toMap(i -> i, recoveryAnswers::get)));
     }
 
+    public Credentials withPassword(String password) {
+        return new Credentials(password, recoveryAnswers);
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.foodverse.utility.system;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import com.foodverse.models.Config;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
@@ -12,8 +12,8 @@ public final class Database {
 
     private Config configuration;
     private User authenticatedUser;
-    private List<User> users;
-    private List<Shop> shops;
+    private Set<User> users;
+    private Set<Shop> shops;
 
     private Database() {
         configuration = FileManager.loadConfig();
@@ -48,6 +48,10 @@ public final class Database {
         return false;
     }
 
+    public void signUp(User user) {
+
+    }
+
     public void signOut() {
         authenticatedUser = null;
     }
@@ -61,19 +65,31 @@ public final class Database {
         return false;
     }
 
-    public void saveUser(User user) {
-        for (User credentials : users) {
-            if (credentials.id().equals(user.id())) {
+    public void saveUser(User newUser) {
+        for (User user : users) {
+            if (user.id().equals(newUser.id())) {
                 users.remove(user);
                 break;
             }
         }
-        users.add(user);
+        users.add(newUser);
         FileManager.saveUsers(users);
         users = FileManager.loadUsers();
     }
 
-    public List<Shop> getShops() {
+    public void saveShop(Shop newShop) {
+        for (Shop shop : shops) {
+            if (shop.name().equals(newShop.name())) {
+                shops.remove(shop);
+                break;
+            }
+        }
+        shops.add(newShop);
+        FileManager.saveShops(shops);
+        shops = FileManager.loadShops();
+    }
+
+    public Set<Shop> getShops() {
         return shops;
     }
 

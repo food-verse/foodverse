@@ -56,7 +56,7 @@ public final class OverviewPage extends Page {
                 ButtonSize.S,
                 ButtonType.PRIMARY,
                 e -> {
-                    Router.openOverlay(new ShopOverlay());
+                    Router.openOverlay(new ShopOverlay("Ta Laladika"));
                 });
         var openOrderOverlay = new RectButton(
                 "Open OrderOverlay ->",

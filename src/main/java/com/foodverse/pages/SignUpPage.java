@@ -17,13 +17,16 @@ public final class SignUpPage extends Page {
 
     private final Component component;
 
+    // Getting a reference to the database...
+    private final Database db = Database.getInstance();
+
+    // Getting a reference to the input validator...
+    private final InputValidation validator = InputValidation.getInstance();
+
     public SignUpPage() {
 
-        // Getting a reference to the database...
-        var db = Database.getInstance();
-
-        // Getting a reference to the input validator...
-        var validator = InputValidation.getInstance();
+        //
+        validator.isIdValid("emilysmith123");
 
         var panel = new JPanel();
         var text = new Heading("Sign Up", HeadingSize.L);

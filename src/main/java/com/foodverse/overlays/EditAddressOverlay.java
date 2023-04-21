@@ -4,6 +4,7 @@ import java.awt.Component;
 import javax.swing.JPanel;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
+import com.foodverse.utility.ui.TextField;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;
@@ -20,10 +21,22 @@ public class EditAddressOverlay extends Overlay {
         // creating the page panel.
         var panel = new JPanel();
         var text = new Heading("Add Address", HeadingSize.L);
-        var address = new InputForm("Address", " ");
-        var floor = new InputForm("Floor", " ");
-        var bell = new InputForm("Bell", " ");
-        var comments = new InputForm("Comments", " ");
+
+        //
+        var addressField = new TextField();
+        var addressForm = new InputForm("Address", " ", addressField);
+
+        //
+        var floorField = new TextField();
+        var floorForm = new InputForm("Floor", " ", floorField);
+
+        //
+        var bellField = new TextField();
+        var bellForm = new InputForm("Bell", " ", bellField);
+
+        //
+        var commentsField = new TextField();
+        var commentsForm = new InputForm("Comments", " ", commentsField);
 
         // Confirm the new Address that's gonna be added to the AddressesPage using the static
         // method addAddress.
@@ -46,10 +59,10 @@ public class EditAddressOverlay extends Overlay {
 
         // Adding the components to the panel
         panel.add(text.getRef());
-        panel.add(address.getRef());
-        panel.add(floor.getRef());
-        panel.add(bell.getRef());
-        panel.add(comments.getRef());
+        panel.add(addressForm.getRef());
+        panel.add(floorForm.getRef());
+        panel.add(bellForm.getRef());
+        panel.add(commentsForm.getRef());
         panel.add(confirmButton.getRef());
         panel.add(returnButton.getRef());
         panel.setOpaque(false);

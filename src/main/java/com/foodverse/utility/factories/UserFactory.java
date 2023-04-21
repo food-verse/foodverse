@@ -3,6 +3,7 @@ package com.foodverse.utility.factories;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import com.foodverse.models.Credentials;
 import com.foodverse.models.Order;
 import com.foodverse.models.OrderType;
@@ -14,7 +15,7 @@ public final class UserFactory {
 
     private UserFactory() {}
 
-    private static List<User> generateUsers() {
+    private static Set<User> generateUsers() {
 
         // Creating user's recovery answers...
         var recoveryAnswers = List.of(
@@ -67,7 +68,7 @@ public final class UserFactory {
                 credentials,
                 recentOrders);
 
-        return List.of(user);
+        return Set.of(user);
     }
 
     public static void generate() {

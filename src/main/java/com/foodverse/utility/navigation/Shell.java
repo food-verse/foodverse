@@ -34,8 +34,6 @@ public final class Shell {
                     options.getDefaultFont(),
                     assetIndex.fonts().get(options.getMonospacedFont()));
         }
-        AssetManager.loadImages(assetIndex.images());
-        AssetManager.loadIcons(assetIndex.icons());
         frame.setSize(options.getDimension());
         frame.getContentPane().setBackground(options.getBackgroundColor());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

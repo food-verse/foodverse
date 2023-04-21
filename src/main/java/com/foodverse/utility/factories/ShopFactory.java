@@ -2,6 +2,7 @@ package com.foodverse.utility.factories;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import com.foodverse.models.Item;
 import com.foodverse.models.Offer;
 import com.foodverse.models.Shop;
@@ -13,7 +14,7 @@ public final class ShopFactory {
 
     private ShopFactory() {}
 
-    private static List<Shop> generateShops() {
+    private static Set<Shop> generateShops() {
 
         // Creating menu for the burger shop...
         var burgerMenu = List.of(
@@ -180,7 +181,7 @@ public final class ShopFactory {
                 mexicanOffers,
                 mexicanMenu);
 
-        return List.of(burgerShop, pizzaShop, pastaShop, greekShop, mexicanShop);
+        return Set.of(burgerShop, pizzaShop, pastaShop, greekShop, mexicanShop);
     }
 
     public static void generate() {

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,13 +14,13 @@ import com.foodverse.models.Order;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 import com.foodverse.overlays.ProfileOverlay;
+import com.foodverse.utility.common.DateUtils;
+import com.foodverse.utility.common.URLHandler;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
-import com.foodverse.utility.system.DateUtils;
-import com.foodverse.utility.system.URLHandler;
 import com.foodverse.widgets.card.ShopProps;
 import com.foodverse.widgets.layout.Carousel;
 import com.foodverse.widgets.layout.Column;
@@ -86,7 +87,7 @@ public final class HomePage extends Page {
         panel.add(nearbyTile.getRef());
 
         // Getting the list of shops...
-        List<Shop> shops = db.getShops();
+        Set<Shop> shops = db.getShops();
 
         // Turning Shop list into ShopProp list...
         List<ShopProps> shopProps = shops.stream()

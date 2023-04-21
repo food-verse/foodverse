@@ -2,13 +2,10 @@ package com.foodverse.app;
 
 import javax.swing.SwingUtilities;
 
-import com.foodverse.pages.ButtonPage;
 import com.foodverse.pages.HomePage;
-import com.foodverse.pages.OverviewPage;
 import com.foodverse.pages.OnboardingPage;
 import com.foodverse.pages.SignUpPage;
 import com.foodverse.pages.SignInPage;
-import com.foodverse.pages.TextPage;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.navigation.Shell;
@@ -41,17 +38,14 @@ public final class App {
                     .build();
             Shell.init(options);
 
-            // Add pages to the router
-            Router.addPage(new OverviewPage());
+            // Add and push the OnboardingPage page to the router
             Router.addPage(new OnboardingPage());
+            Router.pushPage(Pages.ONBOARDING);
+
+            // Add the rest of the pages to the router
             Router.addPage(new SignInPage());
             Router.addPage(new SignUpPage());
             Router.addPage(new HomePage());
-            Router.addPage(new TextPage());
-            Router.addPage(new ButtonPage());
-
-            // Push OverviewPage page to the router
-            Router.pushPage(Pages.OVERVIEW);
 
             // Render the application
             Shell.render();

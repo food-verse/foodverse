@@ -100,33 +100,21 @@ public final class AssetManager {
     }
 
     public static Optional<Image> getVector(String assetName) {
-        return Optional.ofNullable(savedVectors.get(assetName));
+        return Optional.ofNullable(savedVectors.computeIfAbsent(assetName, source -> {
+            String assetLocation = getAssetLocation(AssetType.VECTOR, source);
+            return loadVector(assetLocation);
+        }));
     }
 
     public static Optional<Image> getImage(String assetName, int width, int height) {
-        BufferedImage bufferedImage = savedImages.get(assetName);
+        BufferedImage bufferedImage = savedImages.computeIfAbsent(assetName, source -> {
+            String assetLocation = getAssetLocation(AssetType.RASTER, source);
+            return loadImage(assetLocation);
+        });
         if (bufferedImage != null) {
             return Optional.of(bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH));
         }
         return Optional.empty();
-    }
-
-    public static void loadIcons(List<String> assets) {
-        for (String asset : assets) {
-            var assetLocation = dir.isEmpty()
-                    ? String.format("icons/%s", asset)
-                    : String.format("%s/icons/%s", dir, asset);
-            savedVectors.putIfAbsent(asset, loadVector(assetLocation));
-        }
-    }
-
-    public static void loadImages(List<String> assets) {
-        for (String asset : assets) {
-            var assetLocation = dir.isEmpty()
-                    ? String.format("images/%s", asset)
-                    : String.format("%s/images/%s", dir, asset);
-            savedImages.putIfAbsent(asset, loadImage(assetLocation));
-        }
     }
 
     private static BufferedImage loadVector(String source) {
@@ -183,6 +171,17 @@ public final class AssetManager {
             logger.log(Level.INFO, "Could not load \"{0}\" image.", source);
         }
         return bufferedImage;
+    }
+
+    private static String getAssetLocation(AssetType assetType, String assetName) {
+        var type = assetType == AssetType.VECTOR ? "icons" : "images";
+        return dir.isEmpty()
+                ? String.format("%s/%s", type, assetName)
+                : String.format("%s/%s/%s", dir, type, assetName);
+    }
+
+    private enum AssetType {
+        VECTOR, RASTER
     }
 
 }

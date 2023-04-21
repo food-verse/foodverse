@@ -42,13 +42,13 @@ public final class App {
             Router.addPage(new OnboardingPage());
             Router.pushPage(Pages.ONBOARDING);
 
+            // Render the application
+            Shell.render();
+
             // Add the rest of the pages to the router
             Router.addPage(new SignInPage());
             Router.addPage(new SignUpPage());
             Router.addPage(new HomePage());
-
-            // Render the application
-            Shell.render();
 
         });
 

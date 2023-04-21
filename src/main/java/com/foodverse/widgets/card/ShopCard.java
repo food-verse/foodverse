@@ -94,7 +94,7 @@ public final class ShopCard extends Widget {
 
         // Add border to card
         return new ColoredBox(imageCol, e -> {
-            Router.openOverlay(new ShopOverlay());
+            Router.openOverlay(new ShopOverlay(props.name()));
         });
 
     }

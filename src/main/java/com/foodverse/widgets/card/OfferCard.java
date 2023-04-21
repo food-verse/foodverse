@@ -39,7 +39,7 @@ public final class OfferCard extends Widget {
                 ButtonSize.S,
                 ButtonType.SECONDARY,
                 e -> {
-                    Router.openOverlay(new ShopOverlay());
+                    Router.openOverlay(new ShopOverlay(props.name()));
                 });
 
         // Creating text widgets...

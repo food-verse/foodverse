@@ -32,16 +32,16 @@ public class ShopOverlay extends Overlay {
 
     public ShopOverlay(String merchant) {
         db.findShopByName(merchant).ifPresentOrElse(shop -> {
-            System.out.println(shop);
+            // System.out.println(shop);
         }, () -> {
-            System.out.println("Merchant not found");
+            // System.out.println("Merchant not found");
         });
         // Alternative
         Optional<Shop> shop = db.findShopByName(merchant);
         if (shop.isPresent()) {
-            System.out.println(shop.get());
+            // System.out.println(shop.get());
         } else {
-            System.out.println("Merchant not found");
+            // System.out.println("Merchant not found");
         }
     }
 

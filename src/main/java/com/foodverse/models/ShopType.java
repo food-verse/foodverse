@@ -1,7 +1,6 @@
 package com.foodverse.models;
 
 public enum ShopType {
-    NONE("Unspecified"),
     BURGER("Burger"),
     PIZZA("Pizza"),
     PASTA("Pasta"),

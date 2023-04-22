@@ -6,29 +6,53 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Optional;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import com.foodverse.models.Shop;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
+import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
+import com.foodverse.widgets.layout.ScrollView;
 
 public class ShopOverlay extends Overlay {
+
+    // Getting a reference to the database...
+    private final Database db = Database.getInstance();
+
+    public ShopOverlay(String merchant) {
+        db.findShopByName(merchant).ifPresentOrElse(shop -> {
+            // System.out.println(shop);
+        }, () -> {
+            // System.out.println("Merchant not found");
+        });
+        // Alternative
+        Optional<Shop> shop = db.findShopByName(merchant);
+        if (shop.isPresent()) {
+            // System.out.println(shop.get());
+        } else {
+            // System.out.println("Merchant not found");
+        }
+    }
 
     @Override
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button =
-                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+        var button = new PillButton("Close ShopOverlay ->",
+                ButtonSize.XS,
+                ButtonType.SECONDARY,
+                e -> {
                     Router.closeOverlay();
                 });
         panel.add(text.getRef());
@@ -120,7 +144,7 @@ public class ShopOverlay extends Overlay {
         rate4.addActionListener(listener);
         rate5.addActionListener(listener);
 
-        return panel;
+        return new ScrollView(panel).getRef();
     }
 
     public void showItems(JPanel panel1) {

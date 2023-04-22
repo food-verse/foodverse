@@ -1,4 +1,4 @@
-package com.foodverse.utility.system;
+package com.foodverse.utility.common;
 
 import java.awt.Desktop;
 import java.io.IOException;

@@ -1,7 +1,6 @@
 package com.foodverse.widgets.media;
 
 import java.awt.Component;
-import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import com.foodverse.utility.core.Widget;
@@ -14,9 +13,8 @@ public final class Image extends Widget {
 
     public Image(String assetName, ImageStyle imageStyle) {
         component.setPreferredSize(imageStyle.getDimension());
-        File file = new File(String.format("assets/images/%s", assetName));
         AssetManager
-                .getImage(file, imageStyle.getWidth(), imageStyle.getHeight())
+                .getImage(assetName, imageStyle.getWidth(), imageStyle.getHeight())
                 .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
     }
 

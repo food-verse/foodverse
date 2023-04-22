@@ -2,6 +2,7 @@ package com.foodverse.widgets.card;
 
 import java.awt.Component;
 import java.util.Map;
+
 import com.foodverse.overlays.OrderOverlay;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
@@ -31,19 +32,19 @@ public final class OrderCard extends Widget {
 
         var price = String.format(
                 "Price: %.2f€",
-                props.getPrice());
+                props.price());
 
         // Creating text widgets...
         var priceText = new Label(price, LabelSize.XS, Colors.gray600);
         var ratingText = new Label(
-                String.valueOf(props.getRating()),
+                String.valueOf(props.rating()),
                 LabelSize.M,
                 Colors.orange);
-        var shopNameText = new Label(props.getName(), LabelSize.L);
+        var shopNameText = new Label(props.name(), LabelSize.L);
 
         // Creating image widgets...
         var starImage = new VectorImage(IconAsset.STAR);
-        var thumbnailImage = new Image(props.getThumbnail(), new ImageStyle.Builder()
+        var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
                 .width(240)
                 .height(100)
                 .build());
@@ -63,7 +64,7 @@ public final class OrderCard extends Widget {
 
         // Creating card's list of items widget...
         var itemListWidget = new Column();
-        for (Map.Entry<String, Integer> entry : props.getItems().entrySet()) {
+        for (Map.Entry<String, Integer> entry : props.items().entrySet()) {
             var itemContent = String.format("• %d %s", entry.getValue(), entry.getKey());
             var itemText = new Label(itemContent, LabelSize.XS, Colors.gray600);
             itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);

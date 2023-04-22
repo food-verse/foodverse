@@ -6,13 +6,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.foodverse.models.Config;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
+import com.foodverse.utility.system.EnvironmentOptions.Mode;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -24,10 +27,50 @@ public final class FileManager {
 
     private FileManager() {}
 
-    public static List<User> loadUsers() {
-        File file = Files.USERS.getFile();
+    public static AssetIndex loadAssetIndex() {
+        InputStream stream = ResourceHandler.loadResourceAsStream("index.json");
+        Type fontsType = new TypeToken<AssetIndex>() {}.getType();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream));) {
+            return gson.fromJson(reader, fontsType);
+        } catch (IOException e) {
+            logger.log(Level.INFO, "Could not load the index of fonts.");
+        }
+        return null;
+    }
+
+    public static Config loadConfig() {
+        Type configType = new TypeToken<Config>() {}.getType();
+        if (EnvironmentOptions.getMode() == Mode.DEBUG) {
+            var file = new File("assets/files/config.json");
+            if (!file.exists()) {
+                logger.log(Level.INFO, "There is no such file: {0}", file.getName());
+                return null;
+            }
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                return gson.fromJson(reader, configType);
+            } catch (IOException e) {
+                logger.log(Level.INFO, "Could not load the application's configuration.");
+            }
+        } else {
+            var fileName = "files/config.json";
+            InputStream stream = ResourceHandler.loadResourceAsStream(fileName);
+            if (stream == null) {
+                logger.log(Level.INFO, "There is no such file: {0}", fileName);
+                return null;
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream));) {
+                return gson.fromJson(reader, configType);
+            } catch (IOException e) {
+                logger.log(Level.INFO, "Could not load the application's configuration.");
+            }
+        }
+        return null;
+    }
+
+    public static Set<User> loadUsers() {
+        var file = FileAsset.USERS.getFile();
         if (file.exists()) {
-            Type userListType = new TypeToken<List<User>>() {}.getType();
+            Type userListType = new TypeToken<Set<User>>() {}.getType();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 return gson.fromJson(reader, userListType);
             } catch (IOException e) {
@@ -36,11 +79,11 @@ public final class FileManager {
         } else {
             logger.log(Level.INFO, "There is no such file: {0}", file.getName());
         }
-        return List.of();
+        return Set.of();
     }
 
-    public static void saveUsers(List<User> users) {
-        File file = Files.USERS.getFile();
+    public static void saveUsers(Set<User> users) {
+        var file = FileAsset.USERS.getFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
@@ -56,10 +99,10 @@ public final class FileManager {
         }
     }
 
-    public static List<Shop> loadShops() {
-        File file = Files.SHOPS.getFile();
+    public static Set<Shop> loadShops() {
+        var file = FileAsset.SHOPS.getFile();
         if (file.exists()) {
-            Type shopListType = new TypeToken<List<Shop>>() {}.getType();
+            Type shopListType = new TypeToken<Set<Shop>>() {}.getType();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 return gson.fromJson(reader, shopListType);
             } catch (IOException e) {
@@ -68,11 +111,11 @@ public final class FileManager {
         } else {
             logger.log(Level.INFO, "There is no such file: {0}", file.getName());
         }
-        return List.of();
+        return Set.of();
     }
 
-    public static void saveShops(List<Shop> shops) {
-        File file = Files.SHOPS.getFile();
+    public static void saveShops(Set<Shop> shops) {
+        var file = FileAsset.SHOPS.getFile();
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
@@ -86,32 +129,6 @@ public final class FileManager {
         } catch (IOException e) {
             logger.log(Level.INFO, "Could not save the list of shops.");
         }
-    }
-
-    public static Optional<String> getRandomRecoveryQuestion(int questionIndex) {
-        File file = Files.QUESTIONS.getFile();
-        String question = null;
-        int index = 1;
-        if (file.exists()) {
-            try {
-                FileReader fileReader = new FileReader(file);
-                BufferedReader bufferedReader = new BufferedReader(fileReader);
-                while ((question = bufferedReader.readLine()) != null) {
-                    if (index == questionIndex) {
-                        break;
-                    } else {
-                        index++;
-                    }
-                }
-                bufferedReader.close();
-                fileReader.close();
-            } catch (IOException e) {
-                logger.log(Level.INFO, "Could not load questions from: {0}", file.getName());
-            }
-        } else {
-            logger.log(Level.INFO, "There is no such file: {0}", file.getName());
-        }
-        return Optional.ofNullable(question);
     }
 
 }

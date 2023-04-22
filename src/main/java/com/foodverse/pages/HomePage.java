@@ -1,9 +1,11 @@
 package com.foodverse.pages;
 
 import java.awt.Component;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,12 +14,13 @@ import com.foodverse.models.Order;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 import com.foodverse.overlays.ProfileOverlay;
+import com.foodverse.utility.common.DateUtils;
+import com.foodverse.utility.common.URLHandler;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
-import com.foodverse.utility.system.URLHandler;
 import com.foodverse.widgets.card.ShopProps;
 import com.foodverse.widgets.layout.Carousel;
 import com.foodverse.widgets.layout.Column;
@@ -31,11 +34,12 @@ import com.foodverse.widgets.card.OrderProps;
 
 public final class HomePage extends Page {
 
-    @Override
-    public Component getRef() {
+    private final Component component;
 
-        // Getting a reference to the database...
-        var db = Database.getInstance();
+    // Getting a reference to the database...
+    private final Database db = Database.getInstance();
+
+    public HomePage() {
 
         // Creating main panel...
         var panel = new JPanel();
@@ -83,12 +87,12 @@ public final class HomePage extends Page {
         panel.add(nearbyTile.getRef());
 
         // Getting the list of shops...
-        List<Shop> shops = db.getShops();
+        Set<Shop> shops = db.getShops();
 
         // Turning Shop list into ShopProp list...
         List<ShopProps> shopProps = shops.stream()
                 .map(ShopProps::from)
-                .sorted(Comparator.comparingDouble(ShopProps::getRating).reversed())
+                .sorted(Comparator.comparingDouble(ShopProps::rating).reversed())
                 .collect(Collectors.toList());
 
         // Create a carousel for the nearby shops
@@ -105,9 +109,9 @@ public final class HomePage extends Page {
 
         // Turning Shop list into ShopProp list...
         List<OfferProps> offerProps = shops.stream()
-                .filter(shop -> !shop.getOffers().isEmpty())
+                .filter(shop -> !shop.offers().isEmpty())
                 .map(OfferProps::from)
-                .sorted(Comparator.comparingDouble(OfferProps::getRating).reversed())
+                .sorted(Comparator.comparingDouble(OfferProps::rating).reversed())
                 .collect(Collectors.toList());
 
         // Create a carousel for the available offers
@@ -128,23 +132,31 @@ public final class HomePage extends Page {
         // Turning signed user's order list into order prop list...
         List<OrderProps> orderProps;
         if (signedUser.isPresent()) {
-            orderProps = signedUser.get().getOrders().stream()
-                    .sorted(Comparator.comparing(Order::getDate).reversed())
+            var startDate = LocalDate.now().minusWeeks(1);
+            var endDate = LocalDate.now();
+            orderProps = signedUser.get().orders().stream()
+                    .filter(order -> DateUtils.isInRange(order.date(), startDate, endDate))
+                    .sorted(Comparator.comparing(Order::date).reversed())
                     .map(OrderProps::from)
                     .collect(Collectors.toList());
         } else {
             orderProps = List.of();
         }
 
-        // Create a carousel for the available offers
+        // Create a carousel for the recent orders
         var orderCarousel = new Carousel(orderProps);
 
-        // Add the carousel for the available offers to the main panel
+        // Add the carousel for the recent orders to the main panel
         panel.add(orderCarousel.getRef());
 
         // Wrap the main panel in a scroll view
-        return new ScrollView(panel).getRef();
+        component = new ScrollView(panel).getRef();
 
+    }
+
+    @Override
+    public Component getRef() {
+        return component;
     }
 
 }

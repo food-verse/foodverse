@@ -21,7 +21,7 @@ public final class VectorImage extends Widget {
     public VectorImage(IconAsset asset, Consumer<MouseEvent> onPressed) {
         this.onPressed = onPressed;
         AssetManager
-                .getVector(asset.getFile())
+                .getVector(asset.getName())
                 .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
         if (onPressed != null) {
             component.addMouseListener(new VectorImageListener());

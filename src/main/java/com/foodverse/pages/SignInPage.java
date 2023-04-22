@@ -16,32 +16,25 @@ public final class SignInPage extends Page {
 
     private final Component component;
 
-    public SignInPage() {
+    // Getting a reference to the database...
+    private final Database db = Database.getInstance();
 
-        // Getting a reference to the database...
-        var db = Database.getInstance();
+    public SignInPage() {
 
         // Heading
         var panel = new JPanel();
-        var text = new Heading("SignInPage", HeadingSize.L);
+        var text = new Heading("Sign In", HeadingSize.L);
         var openOnboardingPage = new RectButton(
-                "Open OnboardingPage ->",
-                ButtonSize.S,
-                ButtonType.PRIMARY,
-                e -> {
-                    Router.pushPage(Pages.ONBOARDING);
-                });
-        var openOverviewPage = new RectButton(
-                "Open OverviewPage ->",
+                "<- Back",
                 ButtonSize.S,
                 ButtonType.SECONDARY,
                 e -> {
-                    Router.pushPage(Pages.OVERVIEW);
+                    Router.pushPage(Pages.ONBOARDING);
                 });
         var signInButton = new RectButton(
-                "Sign In ->",
+                String.format("%s ->", getId()),
                 ButtonSize.S,
-                ButtonType.TERTIARY,
+                ButtonType.PRIMARY,
                 e -> {
                     if (db.signIn("emilysmith123", "XyZ987!")) {
                         Router.pushPage(Pages.HOME);
@@ -49,7 +42,6 @@ public final class SignInPage extends Page {
                 });
         panel.add(text.getRef());
         panel.add(openOnboardingPage.getRef());
-        panel.add(openOverviewPage.getRef());
         panel.add(signInButton.getRef());
         panel.setOpaque(false);
         component = panel;

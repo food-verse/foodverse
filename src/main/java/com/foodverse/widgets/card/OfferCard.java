@@ -2,6 +2,7 @@ package com.foodverse.widgets.card;
 
 import java.awt.Component;
 import java.util.Map;
+
 import com.foodverse.models.Offer;
 import com.foodverse.overlays.ShopOverlay;
 import com.foodverse.utility.core.Widget;
@@ -38,16 +39,16 @@ public final class OfferCard extends Widget {
                 ButtonSize.S,
                 ButtonType.SECONDARY,
                 e -> {
-                    Router.openOverlay(new ShopOverlay());
+                    Router.openOverlay(new ShopOverlay(props.name()));
                 });
 
         // Creating text widgets...
-        var ratingText = new Label(String.valueOf(props.getRating()), LabelSize.M, Colors.orange);
-        var shopNameText = new Label(props.getName(), LabelSize.L);
+        var ratingText = new Label(String.valueOf(props.rating()), LabelSize.M, Colors.orange);
+        var shopNameText = new Label(props.name(), LabelSize.L);
 
         // Creating image widgets...
         var starImage = new VectorImage(IconAsset.STAR);
-        var thumbnailImage = new Image(props.getThumbnail(), new ImageStyle.Builder()
+        var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
                 .width(160)
                 .height(180)
                 .build());
@@ -66,18 +67,19 @@ public final class OfferCard extends Widget {
         headingWidget.addWidget(ratingWidget, Align.LAST_LINE_END);
 
         // Creating card's list of items widget...
+        var builder = new StringBuilder();
         var itemListWidget = new Column();
-        for (Offer offer : props.getOffers()) {
-            StringBuilder builder = new StringBuilder();
+        for (Offer offer : props.offers()) {
             builder.append('•');
-            for (Map.Entry<String, Integer> entry : offer.getItems().entrySet()) {
+            for (Map.Entry<String, Integer> entry : offer.items().entrySet()) {
                 builder.append(String.format(" %d %s +",
                         entry.getValue(), entry.getKey()));
             }
             builder.setLength(Math.max(builder.length() - 1, 0));
-            builder.append(String.format("-> %.2f€", offer.getTotal()));
+            builder.append(String.format("-> %.2f€", offer.total()));
             var itemText = new Label(builder.toString(), LabelSize.XS, Colors.gray600);
             itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
+            builder.setLength(0);
         }
 
         // Creating card's main content widget...

@@ -17,26 +17,18 @@ public final class OnboardingPage extends Page {
 
     public OnboardingPage() {
         var panel = new JPanel();
-        var text = new Heading("OnboardingPage", HeadingSize.L);
-        var openOverviewPage = new RectButton(
-                "Open OverviewPage ->",
+        var text = new Heading("Onboarding", HeadingSize.L);
+        var signInPageButton = new RectButton(
+                "Sign In ->",
                 ButtonSize.S,
                 ButtonType.PRIMARY,
-                e -> {
-                    Router.pushPage(Pages.OVERVIEW);
-                });
-        var signInPageButton = new RectButton(
-                "SignInPage ->",
-                ButtonSize.S,
-                ButtonType.SECONDARY,
                 e -> Router.pushPage(Pages.LOGIN));
         var signUpPageButton = new RectButton(
-                "SignUpPage ->",
+                "Sign Up ->",
                 ButtonSize.S,
                 ButtonType.SECONDARY,
                 e -> Router.pushPage(Pages.REGISTER));
         panel.add(text.getRef());
-        panel.add(openOverviewPage.getRef());
         panel.add(signInPageButton.getRef());
         panel.add(signUpPageButton.getRef());
         panel.setOpaque(false);

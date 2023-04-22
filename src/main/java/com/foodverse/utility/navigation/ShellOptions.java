@@ -9,6 +9,8 @@ public final class ShellOptions {
     private final int width;
     private final int height;
     private final Color backgroundColor;
+    private final String defaultFont;
+    private final String monospacedFont;
     private final String title;
 
     public static class Builder {
@@ -16,6 +18,8 @@ public final class ShellOptions {
         private int width = 0;
         private int height = 0;
         private Color backgroundColor = Colors.white;
+        private String defaultFont = "Inter";
+        private String monospacedFont = "IBMPlexMono";
         private String title = "";
 
         public Builder width(int width) {
@@ -33,6 +37,16 @@ public final class ShellOptions {
             return this;
         }
 
+        public Builder defaultFont(String fontFamily) {
+            this.defaultFont = fontFamily;
+            return this;
+        }
+
+        public Builder monospacedFont(String fontFamily) {
+            this.monospacedFont = fontFamily;
+            return this;
+        }
+
         public Builder title(String title) {
             this.title = title;
             return this;
@@ -47,6 +61,8 @@ public final class ShellOptions {
         this.width = builder.width;
         this.height = builder.height;
         this.backgroundColor = builder.backgroundColor;
+        this.defaultFont = builder.defaultFont;
+        this.monospacedFont = builder.monospacedFont;
         this.title = builder.title;
     }
 
@@ -60,6 +76,14 @@ public final class ShellOptions {
 
     public Color getBackgroundColor() {
         return backgroundColor;
+    }
+
+    public String getDefaultFont() {
+        return defaultFont;
+    }
+
+    public String getMonospacedFont() {
+        return monospacedFont;
     }
 
     public String getTitle() {

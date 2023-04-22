@@ -1,6 +1,7 @@
 package com.foodverse.widgets.text;
 
 import java.awt.Color;
+import com.foodverse.utility.navigation.Shell;
 import com.foodverse.utility.ui.Colors;
 import com.foodverse.utility.ui.Text;
 import com.foodverse.utility.ui.TextStyle;
@@ -26,7 +27,9 @@ public final class Paragraph extends Text {
 
     public static TextStyle getTextStyle(ParagraphSize fontSize, boolean isMono, Color color) {
         return new TextStyle.Builder()
-                .family(isMono ? "IBM Plex Mono" : "Inter")
+                .family(isMono
+                        ? Shell.getOptions().getMonospacedFont()
+                        : Shell.getOptions().getDefaultFont())
                 .weight(FontWeight.REGULAR)
                 .size(fontSize.getSize())
                 .color(color)

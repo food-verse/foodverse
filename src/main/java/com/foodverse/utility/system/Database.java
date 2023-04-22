@@ -1,105 +1,105 @@
 package com.foodverse.utility.system;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+import java.util.Set;
+import com.foodverse.models.Config;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 
 public final class Database {
 
-    private static Database database;
-    private static final Random generator = new Random();
-    private final int numberOfRecoveryQuestions = 3;
+    private static Database database = new Database();
+
+    private Config configuration;
     private User authenticatedUser;
-    private List<User> users;
-    private List<Shop> shops;
+    private Set<User> users;
+    private Set<Shop> shops;
 
     private Database() {
+        configuration = FileManager.loadConfig();
         users = FileManager.loadUsers();
         shops = FileManager.loadShops();
     }
 
     /**
-     * Returns the database instance. If the database hasn't been instantiated yet, it creates a new
-     * one and the new instance gets returned.
+     * Returns the database instance.
      *
      * @return {@link Database} The database instance
      */
     public static Database getInstance() {
-        if (database == null) {
-            database = new Database();
-        }
         return database;
     }
 
-    public boolean userExists(String id) {
-        if (!users.isEmpty()) {
-            for (User user : users) {
-                if (user.getId().equals(id)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public Optional<Config> getConfiguration() {
+        return Optional.ofNullable(configuration);
     }
 
     public Optional<User> getAuthenticatedUser() {
         return Optional.ofNullable(authenticatedUser);
     }
 
-    public List<Shop> getShops() {
-        return shops;
-    }
-
     public boolean signIn(String id, String password) {
-        if (!users.isEmpty()) {
-            for (User user : users) {
-                if (user.getId().equals(id)
-                        && user.getCredentials().getPassword().equals(password)) {
-                    authenticatedUser = user;
-                    return true;
-                }
+        for (User user : users) {
+            if (user.id().equals(id) && user.credentials().password().equals(password)) {
+                authenticatedUser = user;
+                return true;
             }
         }
         return false;
     }
 
-    public void saveUser(User user) {
-        for (User credentials : users) {
-            if (credentials.getId().equals(user.getId())) {
+    public void signUp(User user) {
+
+    }
+
+    public void signOut() {
+        authenticatedUser = null;
+    }
+
+    public boolean userExists(String id) {
+        for (User user : users) {
+            if (user.id().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void saveUser(User newUser) {
+        for (User user : users) {
+            if (user.id().equals(newUser.id())) {
                 users.remove(user);
                 break;
             }
         }
-        users.add(user);
+        users.add(newUser);
         FileManager.saveUsers(users);
         users = FileManager.loadUsers();
     }
 
+    public void saveShop(Shop newShop) {
+        for (Shop shop : shops) {
+            if (shop.name().equals(newShop.name())) {
+                shops.remove(shop);
+                break;
+            }
+        }
+        shops.add(newShop);
+        FileManager.saveShops(shops);
+        shops = FileManager.loadShops();
+    }
+
+    public Set<Shop> getShops() {
+        return shops;
+    }
+
     public Optional<Shop> findShopByName(String name) {
         for (Shop shop : shops) {
-            if (shop.getName().equals(name)) {
+            if (shop.name().equals(name)) {
                 return Optional.of(shop);
             }
         }
         return Optional.empty();
-    }
-
-    public List<String> getRecoveryCredentials(User user) {
-        List<String> credentials = new ArrayList<>();
-        int randomNumber = generator.nextInt(1, numberOfRecoveryQuestions);
-        String question = FileManager.getRandomRecoveryQuestion(randomNumber).get();
-        String answer;
-        if (randomNumber == 1) {
-            answer = user.getCredentials().getFirstRecoveryAnswer();
-        } else {
-            answer = user.getCredentials().getSecondRecoveryAnswer();
-        }
-        credentials.add(question);
-        credentials.add(answer);
-        return credentials;
     }
 
 }

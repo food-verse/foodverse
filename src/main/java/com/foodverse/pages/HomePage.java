@@ -21,6 +21,8 @@ import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
+import com.foodverse.widgets.card.OfferProps;
+import com.foodverse.widgets.card.OrderProps;
 import com.foodverse.widgets.card.ShopProps;
 import com.foodverse.widgets.layout.Carousel;
 import com.foodverse.widgets.layout.Column;
@@ -29,12 +31,11 @@ import com.foodverse.widgets.layout.Row;
 import com.foodverse.widgets.layout.ScrollView;
 import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.VectorImage;
-import com.foodverse.widgets.card.OfferProps;
-import com.foodverse.widgets.card.OrderProps;
 
 public final class HomePage extends Page {
 
-    private final Component component;
+    private final JPanel panel;
+    private boolean didRender = false;
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
@@ -42,13 +43,13 @@ public final class HomePage extends Page {
     public HomePage() {
 
         // Creating main panel...
-        var panel = new JPanel();
+        panel = new JPanel();
         panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Row with the brand's logo and the user's avatar
         // Creating parent panel for the images...
-        JPanel headingRow = new JPanel();
+        var headingRow = new JPanel();
         headingRow.setOpaque(false);
         headingRow.setLayout(new BoxLayout(headingRow, BoxLayout.X_AXIS));
 
@@ -126,6 +127,19 @@ public final class HomePage extends Page {
         // Add the heading for the recent orders' carousel to the main panel
         panel.add(ordersTile.getRef());
 
+    }
+
+    @Override
+    public Component getRef() {
+
+        // Remove the last component (carousel) if the page has already rendered once
+        if (!didRender) {
+            didRender = true;
+        } else {
+            int lastComponentIndex = panel.getComponentCount() - 1;
+            panel.remove(lastComponentIndex);
+        }
+
         // Getting the authenticated user...
         Optional<User> signedUser = db.getAuthenticatedUser();
 
@@ -150,13 +164,8 @@ public final class HomePage extends Page {
         panel.add(orderCarousel.getRef());
 
         // Wrap the main panel in a scroll view
-        component = new ScrollView(panel).getRef();
+        return new ScrollView(panel).getRef();
 
-    }
-
-    @Override
-    public Component getRef() {
-        return component;
     }
 
 }

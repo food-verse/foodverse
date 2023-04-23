@@ -72,7 +72,9 @@ public final class UserFactory {
     }
 
     public static void generate() {
-        FileManager.saveUsers(generateUsers());
+        if (FileManager.loadUsers().isEmpty()) {
+            FileManager.saveUsers(generateUsers());
+        }
     }
 
 }

@@ -111,8 +111,8 @@ public final class HomePage extends Page {
         // Turning Shop list into ShopProp list...
         List<OfferProps> offerProps = shops.stream()
                 .filter(shop -> !shop.offers().isEmpty())
+                .sorted(Comparator.comparingDouble(Shop::rating).reversed())
                 .map(OfferProps::from)
-                .sorted(Comparator.comparingDouble(OfferProps::rating).reversed())
                 .collect(Collectors.toList());
 
         // Create a carousel for the available offers

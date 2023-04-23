@@ -12,7 +12,6 @@ import com.foodverse.widgets.media.AssetSize;
 public record OrderProps(
     String thumbnail,
     String name,
-    float rating,
     Map<String, Integer> items,
     float price) implements Props {
 
@@ -22,11 +21,10 @@ public record OrderProps(
             return new OrderProps(
                 foundShop.get().thumbnails().get(AssetSize.MEDIUM),
                 foundShop.get().name(),
-                foundShop.get().rating(),
                 order.items(),
                 order.total());
         } else {
-            return new OrderProps("", "", 0f, order.items(), order.total());
+            return new OrderProps("", "", order.items(), order.total());
         }
     }
 

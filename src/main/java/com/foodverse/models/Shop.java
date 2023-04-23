@@ -10,6 +10,7 @@ public record Shop(
     @SerializedName("name") String name,
     @SerializedName("address") String address,
     @SerializedName("rating") float rating,
+    @SerializedName("reviews") int reviews,
     @SerializedName("type") ShopType type,
     @SerializedName("thumbnails") Map<AssetSize, String> thumbnails,
     @SerializedName("preparation_time") int prepTime,
@@ -18,7 +19,8 @@ public record Shop(
     @SerializedName("menu") List<Item> menu) {
 
     public Shop withRating(float rating) {
-        return new Shop(name, address, rating, type, thumbnails, prepTime, minOrder, offers, menu);
+        return new Shop(name, address, rating, reviews, type, thumbnails, prepTime, minOrder,
+            offers, menu);
     }
 
 }

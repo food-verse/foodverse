@@ -2,6 +2,7 @@ package com.foodverse.models;
 
 public enum ShopType {
     BURGER("Burger"),
+    DONUT("Donut"),
     PIZZA("Pizza"),
     PASTA("Pasta"),
     GREEK("Greek"),

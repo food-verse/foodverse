@@ -52,7 +52,7 @@ public final class ShopCard extends Widget {
         // Creating image widgets...
         var starImage = new VectorImage(IconAsset.STAR);
         var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
-                .width(240)
+                .width(200)
                 .height(100)
                 .build());
 

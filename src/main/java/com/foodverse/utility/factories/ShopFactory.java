@@ -144,6 +144,34 @@ public final class ShopFactory {
             greekOffers,
             greekMenu);
 
+        // Creating menu for the donut shop...
+        var donutMenu = List.of(
+            new Item("Glazed Donut", 1.99f),
+            new Item("Chocolate Donut", 2.49f),
+            new Item("Sprinkled Donut", 2.49f),
+            new Item("Boston Cream Donut", 2.99f),
+            new Item("Maple Bar Donut", 2.99f),
+            new Item("Apple Fritter", 3.49f),
+            new Item("Cinnamon Roll", 3.49f),
+            new Item("Coffee", 1.99f),
+            new Item("Milk", 2.49f),
+            new Item("Orange Juice", 2.49f));
+
+        // Creating the donut shop...
+        var donutShop = new Shop(
+            "Sweet o’ Clock",
+            "123 Main Street, Anytown, USA",
+            4.5f,
+            50,
+            ShopType.DONUT,
+            Map.of(
+                AssetSize.SMALL, "donut-small.png",
+                AssetSize.MEDIUM, "donut-medium.png"),
+            20,
+            5.00f,
+            List.of(),
+            donutMenu);
+
         // Creating menu for the mexican shop...
         var mexicanMenu = List.of(
             new Item("Taco", 3.50f),
@@ -187,7 +215,7 @@ public final class ShopFactory {
             mexicanOffers,
             mexicanMenu);
 
-        return Set.of(burgerShop, pizzaShop, pastaShop, greekShop, mexicanShop);
+        return Set.of(burgerShop, donutShop, pizzaShop, pastaShop, greekShop, mexicanShop);
     }
 
     public static void generate() {

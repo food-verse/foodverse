@@ -38,7 +38,7 @@ public final class OrderCard extends Widget {
 
         // Creating image widgets...
         var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
-                .width(240)
+                .width(200)
                 .height(100)
                 .build());
 

@@ -27,22 +27,5 @@
       "IBMPlexMono-Thin.ttf",
       "IBMPlexMono-ThinItalic.ttf"
     ]
-  },
-  "icons": [
-    "avatar.svg",
-    "brand.svg",
-    "rating_star.svg"
-  ],
-  "images": [
-    "burger-small.png",
-    "burger-medium.png",
-    "greek-small.png",
-    "greek-medium.png",
-    "mexican-small.png",
-    "mexican-medium.png",
-    "pasta-small.png",
-    "pasta-medium.png",
-    "pizza-small.png",
-    "pizza-medium.png"
-  ]
+  }
 }

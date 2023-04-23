@@ -16,7 +16,9 @@ import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.media.VectorImage;
 import com.foodverse.widgets.text.Label;
+import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Label.LabelSize;
+import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
 public final class ShopCard extends Widget {
 
@@ -35,13 +37,17 @@ public final class ShopCard extends Widget {
                 props.minOrder());
 
         // Creating text widgets...
-        var minOrderText = new Label(minOrder, LabelSize.XS, Colors.gray600);
-        var shopTypeText = new Label(props.type().toString(), LabelSize.XS, Colors.gray600);
+        var shopNameText = new Label(props.name(), LabelSize.L);
         var ratingText = new Label(
                 String.valueOf(props.rating()),
-                LabelSize.M,
+                LabelSize.S,
                 Colors.orange);
-        var shopNameText = new Label(props.name(), LabelSize.L);
+        var reviewsText = new Paragraph(
+                String.format("(%s)", props.reviews()),
+                ParagraphSize.XS,
+                Colors.gray600);
+        var shopTypeText = new Label(props.type().toString(), LabelSize.XS, Colors.gray600);
+        var minOrderText = new Label(minOrder, LabelSize.XS, Colors.gray600);
 
         // Creating image widgets...
         var starImage = new VectorImage(IconAsset.STAR);
@@ -52,11 +58,15 @@ public final class ShopCard extends Widget {
 
         // Creating card's rating widget...
         var ratingWidget = new Row();
-        ratingWidget.addWidget(ratingText, new EdgeInsets.Builder()
+        ratingWidget.addWidget(starImage, new EdgeInsets.Builder()
                 .right(2)
                 .build(),
-                Align.PAGE_START);
-        ratingWidget.addWidget(starImage, new EdgeInsets.Builder()
+                Align.LINE_START);
+        ratingWidget.addWidget(ratingText, new EdgeInsets.Builder()
+                .right(4)
+                .build(),
+                Align.CENTER);
+        ratingWidget.addWidget(reviewsText, new EdgeInsets.Builder()
                 .build(),
                 Align.LINE_END);
 
@@ -75,8 +85,12 @@ public final class ShopCard extends Widget {
 
         // Creating card's main content widget...
         var mainContentWidget = new Column();
-        mainContentWidget.addWidget(headingWidget, new EdgeInsets.Builder()
-                .bottom(16)
+        mainContentWidget.addWidget(shopNameText, new EdgeInsets.Builder()
+                .bottom(8)
+                .build(),
+                Align.FIRST_LINE_START);
+        mainContentWidget.addWidget(ratingWidget, new EdgeInsets.Builder()
+                .bottom(8)
                 .build(),
                 Align.FIRST_LINE_START);
         mainContentWidget.addWidget(infoWidget, Align.LAST_LINE_START);

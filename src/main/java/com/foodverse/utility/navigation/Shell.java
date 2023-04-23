@@ -22,11 +22,11 @@ public final class Shell {
         Shell.options = options;
         UserFactory.generate();
         ShopFactory.generate();
-        var assetIndex = FileManager.loadAssetIndex();
         if (EnvironmentOptions.getMode() == Mode.DEBUG) {
             AssetManager.loadFont(options.getDefaultFont());
             AssetManager.loadFont(options.getMonospacedFont());
         } else {
+            var assetIndex = FileManager.loadAssetIndex();
             AssetManager.loadFont(
                     options.getDefaultFont(),
                     assetIndex.fonts().get(options.getDefaultFont()));

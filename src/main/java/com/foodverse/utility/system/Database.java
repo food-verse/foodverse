@@ -30,7 +30,6 @@ public final class Database {
      * @return {@link Database} The database instance
      */
     public static Database getInstance() {
-        System.out.println(SingletonHelper.INSTANCE.hashCode());
         return SingletonHelper.INSTANCE;
     }
 

@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.widgets.button.RectButton;
-import com.foodverse.widgets.layout.SizedBox;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.utility.ui.TextField;

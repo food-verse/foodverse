@@ -219,9 +219,7 @@ public final class ShopFactory {
     }
 
     public static void generate() {
-        if (FileManager.loadShops().isEmpty()) {
-            FileManager.saveShops(generateShops());
-        }
+        FileManager.saveShops(generateShops());
     }
 
 }

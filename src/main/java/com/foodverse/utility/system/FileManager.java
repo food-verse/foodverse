@@ -39,9 +39,10 @@ public final class FileManager {
     }
 
     public static Config loadConfig() {
+        String fileName = FileAsset.CONFIG.getName();
         Type configType = new TypeToken<Config>() {}.getType();
         if (EnvironmentOptions.getMode() == Mode.DEBUG) {
-            var file = new File("assets/files/config.json");
+            File file = new File(String.format("assets/%s", fileName));
             if (!file.exists()) {
                 logger.log(Level.INFO, "There is no such file: {0}", file.getName());
                 return null;
@@ -52,7 +53,6 @@ public final class FileManager {
                 logger.log(Level.INFO, "Could not load the application's configuration.");
             }
         } else {
-            var fileName = "files/config.json";
             InputStream stream = ResourceHandler.loadResourceAsStream(fileName);
             if (stream == null) {
                 logger.log(Level.INFO, "There is no such file: {0}", fileName);

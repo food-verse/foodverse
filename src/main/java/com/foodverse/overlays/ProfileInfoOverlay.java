@@ -45,8 +45,6 @@ public final class ProfileInfoOverlay extends Overlay {
 
 
         // adding the components to the panel
-        var box = new SizedBox(1, 1);
-        panel.add(box.getRef());
         panel.add(text.getRef());
         panel.add(emailText.getRef());
         panel.add(emailField);

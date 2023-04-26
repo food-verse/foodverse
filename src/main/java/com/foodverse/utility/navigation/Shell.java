@@ -20,16 +20,18 @@ public final class Shell {
 
     public static void init(ShellOptions options) {
         Shell.options = options;
-        if (FileManager.loadUsers().isEmpty()) {
-            UserFactory.generate();
-        }
-        if (FileManager.loadShops().isEmpty()) {
-            ShopFactory.generate();
-        }
         if (EnvironmentOptions.getMode() == Mode.DEBUG) {
+            UserFactory.generate();
+            ShopFactory.generate();
             AssetManager.loadFont(options.getDefaultFont());
             AssetManager.loadFont(options.getMonospacedFont());
         } else {
+            if (FileManager.loadUsers().isEmpty()) {
+                UserFactory.generate();
+            }
+            if (FileManager.loadShops().isEmpty()) {
+                ShopFactory.generate();
+            }
             var assetIndex = FileManager.loadAssetIndex();
             AssetManager.loadFont(
                     options.getDefaultFont(),

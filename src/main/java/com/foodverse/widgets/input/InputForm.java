@@ -14,23 +14,14 @@ import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
 public final class InputForm extends Widget {
 
-    private final String label;
-    private final String caption;
-    private final TextField textField;
+    private final Column formWidget = new Column();
 
     public InputForm(String label, String caption, TextField textField) {
-        this.label = label;
-        this.caption = caption;
-        this.textField = textField;
-    }
 
-    @Override
-    public Component getRef() {
-        // Creating form's column widget...
-        var formWidget = new Column();
         // Creating text widgets...
         var labelText = new Label(label, LabelSize.S);
         var hintText = new Paragraph(caption, ParagraphSize.S, Colors.gray600);
+
         // Adding the components of the form to its column...
         formWidget.addWidget(labelText, new EdgeInsets.Builder()
                 .bottom(8)
@@ -43,6 +34,10 @@ public final class InputForm extends Widget {
                 .top(8)
                 .build(),
                 Align.LAST_LINE_START);
+    }
+
+    @Override
+    public Component getRef() {
         return formWidget.getRef();
     }
 

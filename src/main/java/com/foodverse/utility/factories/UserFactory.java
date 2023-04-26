@@ -63,7 +63,9 @@ public final class UserFactory {
         var user = new User(
             "emilysmith123",
             "Emily Smith",
-            "123 Main St, Anytown, USA 12345",
+            List.of(
+                "123 Main St, Anytown, USA 12345",
+                "456 Maple St, Anycity, USA 54321"),
             "+1 (555) 555-1234",
             "emilysmith123@gmail.com",
             credentials,

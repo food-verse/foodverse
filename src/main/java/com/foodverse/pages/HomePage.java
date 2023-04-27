@@ -2,6 +2,7 @@ package com.foodverse.pages;
 
 import java.awt.Component;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -145,8 +146,8 @@ public final class HomePage extends Page {
         // Turning signed user's order list into order prop list...
         List<OrderProps> orderProps;
         if (signedUser.isPresent()) {
-            var startDate = LocalDate.now().minusWeeks(1);
-            var endDate = LocalDate.now();
+            var startDate = LocalDate.now(ZoneId.systemDefault()).minusWeeks(1);
+            var endDate = LocalDate.now(ZoneId.systemDefault());
             orderProps = signedUser.get().orders().stream()
                     .filter(order -> DateUtils.isInRange(order.date(), startDate, endDate))
                     .sorted(Comparator.comparing(Order::date).reversed())

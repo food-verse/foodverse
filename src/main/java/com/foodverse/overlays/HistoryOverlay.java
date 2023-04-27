@@ -27,6 +27,7 @@ public final class HistoryOverlay extends Overlay {
     private ArrayList<String> items = new ArrayList<>();
     private double totalPrice;
 
+    @Override
     public Component getRef() {
 
         // creating the main panel of the page

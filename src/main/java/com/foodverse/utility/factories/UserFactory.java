@@ -1,5 +1,6 @@
 package com.foodverse.utility.factories;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -68,9 +69,12 @@ public final class UserFactory {
             "+1 (555) 555-1234",
             "emilysmith123@gmail.com",
             credentials,
+            List.of(
+                "Sweet o’ Clock",
+                "Taco Mia"),
             recentOrders);
 
-        return List.of(user);
+        return new ArrayList<>(List.of(user));
     }
 
     public static void generate() {

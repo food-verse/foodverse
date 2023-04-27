@@ -72,25 +72,38 @@ public class Database {
     }
 
     public void updateUser(User newUser) {
+        boolean found = false;
         for (User user : users) {
             if (user.equals(newUser)) {
+                found = true;
                 users.remove(user);
                 break;
             }
         }
-        users.add(newUser);
-        CompletableFuture.runAsync(() -> FileManager.saveUsers(users));
+        if (found) {
+            users.add(newUser);
+            CompletableFuture.runAsync(() -> FileManager.saveUsers(users));
+        }
+    }
+
+    public void addShop(Shop shop) {
+        shops.add(shop);
+        CompletableFuture.runAsync(() -> FileManager.saveShops(shops));
     }
 
     public void updateShop(Shop newShop) {
+        boolean found = false;
         for (Shop shop : shops) {
             if (shop.equals(newShop)) {
+                found = true;
                 shops.remove(shop);
                 break;
             }
         }
-        shops.add(newShop);
-        CompletableFuture.runAsync(() -> FileManager.saveShops(shops));
+        if (found) {
+            shops.add(newShop);
+            CompletableFuture.runAsync(() -> FileManager.saveShops(shops));
+        }
     }
 
     public List<Shop> getShops() {

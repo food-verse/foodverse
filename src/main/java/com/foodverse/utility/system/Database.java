@@ -1,19 +1,20 @@
 package com.foodverse.utility.system;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import com.foodverse.models.Config;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 
-public final class Database {
+public class Database {
 
     private Config configuration;
     private User authenticatedUser;
-    private Set<User> users;
-    private Set<Shop> shops;
+    protected List<User> users;
+    protected List<Shop> shops;
 
-    private Database() {
+    protected Database() {
         configuration = FileManager.loadConfig();
         users = FileManager.loadUsers();
         shops = FileManager.loadShops();
@@ -52,7 +53,9 @@ public final class Database {
     }
 
     public void signUp(User user) {
-
+        authenticatedUser = user;
+        users.add(user);
+        CompletableFuture.runAsync(() -> FileManager.saveUsers(users));
     }
 
     public void signOut() {
@@ -68,31 +71,29 @@ public final class Database {
         return false;
     }
 
-    public void saveUser(User newUser) {
+    public void updateUser(User newUser) {
         for (User user : users) {
-            if (user.id().equals(newUser.id())) {
+            if (user.equals(newUser)) {
                 users.remove(user);
                 break;
             }
         }
         users.add(newUser);
-        FileManager.saveUsers(users);
-        users = FileManager.loadUsers();
+        CompletableFuture.runAsync(() -> FileManager.saveUsers(users));
     }
 
-    public void saveShop(Shop newShop) {
+    public void updateShop(Shop newShop) {
         for (Shop shop : shops) {
-            if (shop.name().equals(newShop.name())) {
+            if (shop.equals(newShop)) {
                 shops.remove(shop);
                 break;
             }
         }
         shops.add(newShop);
-        FileManager.saveShops(shops);
-        shops = FileManager.loadShops();
+        CompletableFuture.runAsync(() -> FileManager.saveShops(shops));
     }
 
-    public Set<Shop> getShops() {
+    public List<Shop> getShops() {
         return shops;
     }
 

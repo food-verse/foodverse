@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -88,7 +87,7 @@ public final class HomePage extends Page {
         panel.add(nearbyTile.getRef());
 
         // Getting the list of shops...
-        Set<Shop> shops = db.getShops();
+        List<Shop> shops = db.getShops();
 
         // Turning Shop list into ShopProp list...
         List<ShopProps> shopProps = shops.stream()

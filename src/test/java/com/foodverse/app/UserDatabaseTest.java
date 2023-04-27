@@ -27,7 +27,7 @@ class UserDatabaseTest {
     @Test
     public void testSignIn() {
 
-        // Creating a fake user
+        // Creating a fake user...
         User user = getFakeUser();
 
         // Signing up the user to the database...
@@ -50,7 +50,7 @@ class UserDatabaseTest {
     @Test
     public void testSignUp() throws InterruptedException {
 
-        // Creating a fake user
+        // Creating a fake user...
         User user = getFakeUser();
 
         // Signing up the user to the database...
@@ -77,16 +77,16 @@ class UserDatabaseTest {
     @Test
     public void testUserExists() {
 
-        // Creating a fake user
+        // Creating a fake user...
         User user = getFakeUser();
 
         // Signing up the user to the database...
         db.signUp(user);
 
-        // Testing if the user exists in the database using its username
+        // Testing if the user exists in the database using its username...
         assertTrue(db.userExists("johndoe456"));
 
-        // Testing with a non-existing username
+        // Testing with a non-existing username...
         assertFalse(db.userExists("janesmith789"));
 
     }
@@ -94,7 +94,7 @@ class UserDatabaseTest {
     @Test
     public void testUpdateUser() throws InterruptedException {
 
-        // Creating a fake user
+        // Creating a fake user...
         User user = getFakeUser();
 
         // Signing up the user to the database...
@@ -102,13 +102,13 @@ class UserDatabaseTest {
 
         // Creating new user's recovery answers...
         var recoveryAnswers = List.of(
-                "Superman",
-                "Batman");
+            "Superman",
+            "Batman");
 
         // Creating new user's credentials...
         var credentials = new Credentials(
-                "NewPassword123!",
-                recoveryAnswers);
+            "NewPassword123!",
+            recoveryAnswers);
 
         // Creating a new user with the updated credentials...
         User newUser = user.withCredentials(credentials);
@@ -132,25 +132,25 @@ class UserDatabaseTest {
 
         // Creating user's recovery answers...
         var recoveryAnswers = List.of(
-                "Scooby Doo",
-                "Harry Potter");
+            "Scooby Doo",
+            "Harry Potter");
 
         // Creating user's credentials...
         var credentials = new Credentials(
-                "Abc123!",
-                recoveryAnswers);
+            "Abc123!",
+            recoveryAnswers);
 
         // Creating the user...
         var user = new User(
-                "johndoe456",
-                "John Doe",
-                List.of(
-                        "789 Oak St, Anytown, USA 12345",
-                        "321 Pine St, Anycity, USA 54321"),
-                "+1 (555) 555-5678",
-                "johndoe456@gmail.com",
-                credentials,
-                List.of());
+            "johndoe456",
+            "John Doe",
+            List.of(
+                "789 Oak St, Anytown, USA 12345",
+                "321 Pine St, Anycity, USA 54321"),
+            "+1 (555) 555-5678",
+            "johndoe456@gmail.com",
+            credentials,
+            List.of());
 
         return user;
     }

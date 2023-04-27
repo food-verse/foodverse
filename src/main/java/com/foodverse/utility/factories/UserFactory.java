@@ -41,7 +41,7 @@ public final class UserFactory {
             "Coca Cola", 2);
 
         // Creating user's recent orders...
-        var recentOrders = List.of(
+        var recentOrders = new ArrayList<>(List.of(
             new Order(
                 "Burgerlicious",
                 new Date(),
@@ -57,21 +57,21 @@ public final class UserFactory {
                 0.5f,
                 33.98f,
                 PaymentMethod.CASH,
-                OrderType.TAKE_AWAY));
+                OrderType.TAKE_AWAY)));
 
         // Creating the user...
         var user = new User(
             "emilysmith123",
             "Emily Smith",
-            List.of(
+            new ArrayList<>(List.of(
                 "123 Main St, Anytown, USA 12345",
-                "456 Maple St, Anycity, USA 54321"),
+                "456 Maple St, Anycity, USA 54321")),
             "+1 (555) 555-1234",
             "emilysmith123@gmail.com",
             credentials,
-            List.of(
+            new ArrayList<>(List.of(
                 "Sweet o’ Clock",
-                "Taco Mia"),
+                "Taco Mia")),
             recentOrders);
 
         return new ArrayList<>(List.of(user));

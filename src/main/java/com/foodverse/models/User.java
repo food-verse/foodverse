@@ -15,6 +15,18 @@ public record User(
     @SerializedName("favorites") List<String> favorites,
     @SerializedName("orders") List<Order> orders) {
 
+    public User withName(String name) {
+        return new User(id, name, addresses, phone, email, credentials, favorites, orders);
+    }
+
+    public User withPhone(String phone) {
+        return new User(id, name, addresses, phone, email, credentials, favorites, orders);
+    }
+
+    public User withEmail(String email) {
+        return new User(id, name, addresses, phone, email, credentials, favorites, orders);
+    }
+
     public User withCredentials(Credentials credentials) {
         return new User(id, name, addresses, phone, email, credentials, favorites, orders);
     }

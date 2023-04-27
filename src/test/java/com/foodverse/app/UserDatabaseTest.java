@@ -150,6 +150,7 @@ class UserDatabaseTest {
             "+1 (555) 555-5678",
             "johndoe456@gmail.com",
             credentials,
+            List.of(),
             List.of());
 
         return user;

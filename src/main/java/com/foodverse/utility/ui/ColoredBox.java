@@ -1,5 +1,6 @@
 package com.foodverse.utility.ui;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.function.Consumer;
 import javax.swing.JPanel;
+
 import com.foodverse.utility.core.Widget;
 
 public final class ColoredBox extends JPanel {
@@ -34,6 +36,7 @@ public final class ColoredBox extends JPanel {
         setBackground(style.getDefaultBackgroundColor());
         if (onPressed != null) {
             addMouseListener(new ColoredBoxListener());
+            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         }
         setMaximumSize(getMinimumSize());
     }
@@ -46,8 +49,8 @@ public final class ColoredBox extends JPanel {
         int height = getHeight();
         Graphics2D graphics = (Graphics2D) g;
         graphics.setRenderingHint(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
+            RenderingHints.KEY_ANTIALIASING,
+            RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setColor(getBackground());
         graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
         graphics.setColor(getForeground());

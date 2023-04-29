@@ -11,7 +11,8 @@ import com.foodverse.widgets.button.RectButton;
 
 public final class TextField extends JTextField {
 
-    private Shape shape;
+    private static final long serialVersionUID = 1L;
+	private Shape shape;
     private ButtonTheme theme = new ButtonTheme.Builder()
             .defaultBackgroundColor(Colors.buttonSecondaryFill)
             .defaultTextColor(Colors.buttonSecondaryText)

@@ -11,7 +11,8 @@ import javax.swing.JButton;
 
 final class BaseButton extends JButton {
 
-    private ButtonStyle buttonStyle;
+    private static final long serialVersionUID = 1L;
+	private ButtonStyle buttonStyle;
     private boolean isEnabled;
 
     public void setStyle(ButtonStyle buttonStyle) {

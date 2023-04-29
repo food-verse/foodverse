@@ -15,7 +15,8 @@ import com.foodverse.utility.core.Widget;
 
 public final class ColoredBox extends JPanel {
 
-    private final ColoredBoxStyle style;
+    private static final long serialVersionUID = 1L;
+	private final ColoredBoxStyle style;
     private final Consumer<MouseEvent> onPressed;
 
     public ColoredBox(Widget child) {

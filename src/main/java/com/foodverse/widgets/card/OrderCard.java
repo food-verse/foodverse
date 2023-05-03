@@ -88,7 +88,7 @@ public final class OrderCard extends Widget {
 
         // Add border to card
         return new ColoredBox(imageCol, e -> {
-            Router.openOverlay(new OrderOverlay());
+            Router.openOverlay(new OrderOverlay(props.name(), props.items()));
         });
 
     }

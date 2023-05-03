@@ -83,7 +83,7 @@ public final class OrderOverlay extends Overlay {
                 ButtonSize.S,
                 ButtonType.PRIMARY,
                 e -> {
-                    showSuccessfulOrderMessage(e);
+                    showSuccessfulOrderMessage();
                 });
 
         panel.add(checkoutButton.getRef());

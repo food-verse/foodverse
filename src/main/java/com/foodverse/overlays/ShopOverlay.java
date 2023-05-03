@@ -52,9 +52,10 @@ public class ShopOverlay extends Overlay {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            Router.closeOverlay();
-        });
+        var button =
+                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+                    Router.closeOverlay();
+                });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
@@ -114,92 +115,5 @@ public class ShopOverlay extends Overlay {
     // g.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
     // }
 
-    class RadioButtonListener implements ActionListener {
 
-        private JRadioButton rate1;
-        private JRadioButton rate2;
-        private JRadioButton rate3;
-        private JRadioButton rate4;
-        private JRadioButton rate5;
-
-        public RadioButtonListener(JRadioButton rate1, JRadioButton rate2, JRadioButton rate3,
-                JRadioButton rate4, JRadioButton rate5) {
-            this.rate1 = rate1;
-            this.rate2 = rate2;
-            this.rate3 = rate3;
-            this.rate4 = rate4;
-            this.rate5 = rate5;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            double newrate = 0, oldrate = 0;
-            Integer numberofrates = 0;
-
-            if (e.getSource() == rate1) {
-                numberofrates++;
-                System.out.println(rate1.getText());
-                calculateNewRate(1, newrate, oldrate, numberofrates);
-            } else if (e.getSource() == rate2) {
-                System.out.println(rate2.getText());
-            } else if (e.getSource() == rate3) {
-                System.out.println(rate3.getText());
-            } else if (e.getSource() == rate4) {
-                System.out.println(rate4.getText());
-            } else if (e.getSource() == rate5) {
-                System.out.println(rate5.getText());
-            }
-
-        }
-
-        private double calculateNewRate(Integer rateValue, double newrate, double oldrate,
-                Integer numberofrates) {
-
-            newrate = oldrate + (newrate / numberofrates);
-
-            return newrate;
-
-        }
-
-    }
-
-    // Choose one button for rate
-
-    // public void actionPerformed(ActionEvent e, Integer rateValue, double newrate,
-    // double oldrate,
-    // Integer numberofrates) {
-
-    // numberofrates++;
-
-    // if (e.getSource().equals("rate1")) {
-
-    // calculateNewRate(1, newrate, oldrate, numberofrates);
-    // } else if (e.getSource().equals("rate2")) {
-    // calculateNewRate(1, newrate, oldrate, numberofrates);
-    // } else if (e.getSource().equals("rate3")) {
-    // calculateNewRate(1, newrate, oldrate, numberofrates);
-    // } else if (e.getSource().equals("rate4")) {
-    // calculateNewRate(1, newrate, oldrate, numberofrates);
-    // } else if (e.getSource().equals("rate5")) {
-
-    // }
-
-    // }
-
-    // // Culculate New Rate
-
-    // private double calculateNewRate(Integer rateValue, double newrate, double
-    // oldrate, Integer numberofrates) {
-
-    // newrate = oldrate + (newrate / numberofrates);
-
-    // return newrate;
-
-    // }
-
-    // // Add products in the cart
-
-    // private void addproducts() {
-
-    // }
 }

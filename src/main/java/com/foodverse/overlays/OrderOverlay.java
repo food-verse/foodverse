@@ -60,6 +60,7 @@ public final class OrderOverlay extends Overlay {
                 TipsView tips = new TipsView();
                 panel.add(tips.getRef());
 
+                // Checkout complete the order
                 var checkoutButton = new RectButton("Checkout ->",
                                 ButtonSize.S,
                                 ButtonType.PRIMARY,

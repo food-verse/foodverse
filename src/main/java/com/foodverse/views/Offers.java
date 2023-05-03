@@ -23,9 +23,9 @@ public final class Offers extends Widget {
         panel.setBackground(Color.lightGray);
         panel.add(offers);
 
-        JScrollPane scroll1 = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        panel.add(scroll1);
+        // JScrollPane scroll1 = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        // JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        // panel.add(scroll1);
 
         return panel;
 

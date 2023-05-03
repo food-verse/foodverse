@@ -36,9 +36,9 @@ public final class MenuView extends Widget {
         panel.setBackground(Color.lightGray);
         panel.add(menu);
 
-        JScrollPane scroll2 = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        panel.add(scroll2);
+        // JScrollPane scroll2 = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        // JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        // panel.add(scroll2);
 
         panel1.add(panel);
         return panel1;

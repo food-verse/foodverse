@@ -12,12 +12,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+
+import com.foodverse.models.Offer;
 import com.foodverse.models.Shop;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.views.MenuView;
+import com.foodverse.views.Offers;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
@@ -48,31 +52,20 @@ public class ShopOverlay extends Overlay {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button =
-                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                    Router.closeOverlay();
-                });
+        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+            Router.closeOverlay();
+        });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
 
-
         // offers
-        var panel1 = new JPanel();
+        Offers offer = new Offers();
+        panel.add(offer.getRef());
 
-        var offers = new JLabel("Offers");
-        offers.setFont(new Font("Courier New", Font.BOLD, 25));
-        offers.setForeground(Color.white);
-
-        panel1.setPreferredSize(new Dimension(1300, 300));
-        panel1.setBackground(Color.lightGray);
-        panel1.add(offers);
-
-        JScrollPane scroll1 = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        panel.add(scroll1);
-
-
+        // Menu
+        MenuView menu = new MenuView();
+        panel.add(menu.getRef());
 
         // this.showItems(panel1);
         // this.showItems(panel2);
@@ -87,7 +80,6 @@ public class ShopOverlay extends Overlay {
         // panel.setOpaque(false);
 
         // panel.add(panel3);
-
 
         return new ScrollView(panel).getRef();
     }

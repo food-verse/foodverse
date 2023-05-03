@@ -22,7 +22,7 @@ public final class AmountView extends Widget {
         // Border boarder = BorderFactory.createLineBorder(Colors.black);
 
         var amount = new JPanel();
-        amount = new JPanel();
+
         // amount.setBorder(boarder);
         amount.setPreferredSize(new Dimension(600, 100));
         var amountLabel = new Label("Total:", LabelSize.L);

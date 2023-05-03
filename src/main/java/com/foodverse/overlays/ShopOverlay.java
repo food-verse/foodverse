@@ -22,6 +22,7 @@ import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.views.MenuView;
 import com.foodverse.views.Offers;
+import com.foodverse.views.showItemsView;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
@@ -82,26 +83,16 @@ public class ShopOverlay extends Overlay {
 
         // panel.add(panel3);
 
+
+        for (var i = 0; i < 3; i++) {
+            showItemsView showItems = new showItemsView();
+            panel.add(showItems.getRef());
+        }
+
         return new ScrollView(panel).getRef();
     }
 
-    public void showItems(JPanel panel1) {
 
-        for (var i = 0; i < 3; i++) {
-            var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                // addproducts();
-
-            });
-            var panel4 = new JPanel();
-            var menuItem = new JLabel("Item");
-
-            panel4.setPreferredSize(new Dimension(1200, 60));
-            panel4.add(menuItem);
-            panel4.add(productAddButton.getRef());
-            panel1.add(panel4);
-        }
-
-    }
 
     private void showSuccessfulOrderMessage(ActionEvent e) {
         JOptionPane.showMessageDialog(getFrame(), "We will deal with this later");

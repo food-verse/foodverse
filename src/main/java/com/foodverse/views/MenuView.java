@@ -1,12 +1,14 @@
 package com.foodverse.views;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import com.foodverse.utility.core.Widget;
-import com.kitfox.svg.Font;
+import java.awt.Font;
+
 
 public class MenuView {
 
@@ -24,10 +26,11 @@ public class MenuView {
             panel.setBackground(Color.lightGray);
             panel.add(menu);
 
-            JScrollPane scroll2 = new JScrollPane(panel2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+            JScrollPane scroll2 = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                     JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
             panel.add(scroll2);
 
+            return panel;
         }
     }
 }

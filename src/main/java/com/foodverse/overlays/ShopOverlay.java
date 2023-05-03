@@ -74,23 +74,6 @@ public class ShopOverlay extends Overlay {
         panel.add(scroll1);
 
 
-        // menu
-        var panel2 = new JPanel();
-
-        var menu = new JLabel("Menu  ");
-        menu.setFont(new Font("Courier New", Font.BOLD, 25));
-        menu.setForeground(Color.white);
-
-        panel2.setPreferredSize(new Dimension(1300, 300));
-        panel2.setBackground(Color.lightGray);
-        panel2.add(menu);
-
-        JScrollPane scroll2 = new JScrollPane(panel2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        panel.add(scroll2);
-
-
-
         // store's rate
         double rateNumber = 5.5;
         var rateNumberLabel = new JLabel(Double.toString(rateNumber) + " ");

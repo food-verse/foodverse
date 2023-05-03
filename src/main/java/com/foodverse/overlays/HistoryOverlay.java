@@ -66,7 +66,6 @@ public final class HistoryOverlay extends Overlay {
                 });
 
         mainPanel.add(openSettingsPage.getRef());
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setOpaque(false);
         return mainPanel;
     }

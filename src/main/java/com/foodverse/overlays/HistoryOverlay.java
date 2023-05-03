@@ -3,17 +3,15 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.widgets.button.RectButton;
-import com.foodverse.widgets.media.Image;
-import com.foodverse.utility.ui.ImageStyle;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.views.OrderView;
 
 public final class HistoryOverlay extends Overlay {
 
@@ -42,11 +40,11 @@ public final class HistoryOverlay extends Overlay {
         items.add("Coca-Cola: 3");
         totalPrice = 31.47;
 
-        // creating subPanels for every order using the method createSubPanel. Then we add the
+        // creating subPanels for every order using the OrderView class. Then we add the
         // subPanel to the main panel.
         for (int i = 0; i < orderCount; i++) {
-            var subPanel = createSubPanel(i);
-            mainPanel.add(subPanel);
+            var subPanel = new OrderView(i, orderCount, pictureAsset, storeName, date, items, totalPrice);
+            mainPanel.add(subPanel.getRef());
 
             pictureAsset = "pizza.jpg";
             storeName = "Pizzantastic";
@@ -68,51 +66,9 @@ public final class HistoryOverlay extends Overlay {
                 });
 
         mainPanel.add(openSettingsPage.getRef());
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setOpaque(false);
         return mainPanel;
-    }
-
-    // method that creates and returns a subPanel that displays one order
-    public JPanel createSubPanel(int i) {
-        var subPanel = new JPanel();
-
-        // Shows the user which is his first order and which is his latest
-        if (i == 0) {
-            var subtext = new Heading("(first order)", HeadingSize.XS);
-            subPanel.add(subtext.getRef());
-        }
-        if (orderCount - i == 1) {
-            var subtext = new Heading("(earliest order)", HeadingSize.XS);
-            subPanel.add(subtext.getRef());
-        }
-
-        // show order's data and adding the components to the subPanel
-        var picture = new Image(pictureAsset, new ImageStyle.Builder()
-                .width(300)
-                .height(200)
-                .build());
-        var storeText = new Heading("Store's name:" + storeName, HeadingSize.M);
-        var dateText = new Heading("(Date):" + date, HeadingSize.M);
-        var itemsText = new Heading("Items:", HeadingSize.M);
-
-        subPanel.add(picture.getRef());
-        subPanel.add(storeText.getRef());
-        subPanel.add(dateText.getRef());
-        subPanel.add(itemsText.getRef());
-
-        for (String item : items) {
-            itemsText = new Heading(item, HeadingSize.M);
-            subPanel.add(itemsText.getRef());
-        }
-
-        var totalPriceText =
-                new Heading("Total: " + Double.toString(totalPrice) + " $", HeadingSize.M);
-        subPanel.add(totalPriceText.getRef());
-
-        subPanel.setOpaque(false);
-        subPanel.setBorder(BorderFactory.createEtchedBorder());
-        subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
-        return subPanel;
     }
 
 }

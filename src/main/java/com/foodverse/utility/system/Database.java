@@ -8,8 +8,6 @@ import com.foodverse.models.User;
 
 public final class Database {
 
-    private static Database database = new Database();
-
     private Config configuration;
     private User authenticatedUser;
     private Set<User> users;
@@ -21,13 +19,18 @@ public final class Database {
         shops = FileManager.loadShops();
     }
 
+    private static class SingletonHelper {
+        private static final Database INSTANCE = new Database();
+    }
+
     /**
-     * Returns the database instance.
+     * Returns the database instance. If the database hasn't been instantiated yet, it creates a new
+     * one and the new instance gets returned.
      *
      * @return {@link Database} The database instance
      */
     public static Database getInstance() {
-        return database;
+        return SingletonHelper.INSTANCE;
     }
 
     public Optional<Config> getConfiguration() {

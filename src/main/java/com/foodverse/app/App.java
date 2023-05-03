@@ -30,12 +30,12 @@ public final class App {
 
             // Initialize the application
             ShellOptions options = new ShellOptions.Builder()
-                    .width(1440)
-                    .height(1024)
-                    .defaultFont("Inter")
-                    .monospacedFont("IBMPlexMono")
-                    .title("Foodiverse")
-                    .build();
+                .width(1440)
+                .height(1024)
+                .defaultFont("Inter")
+                .monospacedFont("IBMPlexMono")
+                .title("Foodiverse")
+                .build();
             Shell.init(options);
 
             // Add and push the OnboardingPage page to the router

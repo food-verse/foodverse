@@ -9,6 +9,7 @@ public record ShopProps(
     String thumbnail,
     String name,
     float rating,
+    int reviews,
     ShopType type,
     int prepTime,
     float minOrder) implements Props {
@@ -18,6 +19,7 @@ public record ShopProps(
             shop.thumbnails().get(AssetSize.MEDIUM),
             shop.name(),
             shop.rating(),
+            shop.reviews(),
             shop.type(),
             shop.prepTime(),
             shop.minOrder());

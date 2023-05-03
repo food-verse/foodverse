@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Optional;
-import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -49,81 +48,34 @@ public class ShopOverlay extends Overlay {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button = new PillButton("Close ShopOverlay ->",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
+        var button =
+                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
                     Router.closeOverlay();
                 });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
 
-        // panel creation
+
+        // offers
         var panel1 = new JPanel();
-        var panel2 = new JPanel();
-        var panel3 = new JPanel();
 
-        // store's rate
-        double rateNumber = 5.5;
-        var rateNumberLabel = new JLabel(Double.toString(rateNumber) + " ");
-        rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
-
-        // label with the word Rate
-        var wordRate = new JLabel("Rate ");
-        wordRate.setFont(new Font("Courier New", Font.BOLD, 25));
-
-        // radioButtons with the ratings 1-5
-        var rate1 = new JRadioButton("1 ");
-        var rate2 = new JRadioButton("2 ");
-        var rate3 = new JRadioButton("3 ");
-        var rate4 = new JRadioButton("4 ");
-        var rate5 = new JRadioButton("5 ");
-
-        var group = new ButtonGroup();
-        group.add(rate1);
-        group.add(rate2);
-        group.add(rate3);
-        group.add(rate4);
-        group.add(rate5);
-
-        // creation, size, colour of offers and menu
         var offers = new JLabel("Offers");
-        var menu = new JLabel("Menu  ");
-
         offers.setFont(new Font("Courier New", Font.BOLD, 25));
-        menu.setFont(new Font("Courier New", Font.BOLD, 25));
         offers.setForeground(Color.white);
-        menu.setForeground(Color.white);
 
-        // adding elements to the panels
         panel1.setPreferredSize(new Dimension(1300, 300));
         panel1.setBackground(Color.lightGray);
         panel1.add(offers);
 
-        panel2.setPreferredSize(new Dimension(1300, 300));
-        panel2.setBackground(Color.lightGray);
-        panel2.add(menu);
-
-        panel3.add(rateNumberLabel);
-        panel3.add(wordRate);
-        panel3.add(rate1);
-        panel3.add(rate2);
-        panel3.add(rate3);
-        panel3.add(rate4);
-        panel3.add(rate5);
-
-        this.showItems(panel1);
-        this.showItems(panel2);
-
-        // adding scrolling bars at panel1 and panel2
         JScrollPane scroll1 = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         panel.add(scroll1);
 
-        JScrollPane scroll2 = new JScrollPane(panel2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        panel.add(scroll2);
+
+
+        // this.showItems(panel1);
+        // this.showItems(panel2);
 
         // RectButton "Bug" to appear the OrderOverlay
         var bugButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
@@ -134,15 +86,8 @@ public class ShopOverlay extends Overlay {
 
         // panel.setOpaque(false);
 
-        panel.add(panel3);
+        // panel.add(panel3);
 
-        RadioButtonListener listener = new RadioButtonListener(rate1, rate2, rate3,
-                rate4, rate5);
-        rate1.addActionListener(listener);
-        rate2.addActionListener(listener);
-        rate3.addActionListener(listener);
-        rate4.addActionListener(listener);
-        rate5.addActionListener(listener);
 
         return new ScrollView(panel).getRef();
     }
@@ -185,8 +130,7 @@ public class ShopOverlay extends Overlay {
         private JRadioButton rate4;
         private JRadioButton rate5;
 
-        public RadioButtonListener(JRadioButton rate1, JRadioButton rate2,
-                JRadioButton rate3,
+        public RadioButtonListener(JRadioButton rate1, JRadioButton rate2, JRadioButton rate3,
                 JRadioButton rate4, JRadioButton rate5) {
             this.rate1 = rate1;
             this.rate2 = rate2;

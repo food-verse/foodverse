@@ -43,7 +43,7 @@ public final class TextField extends JTextField {
 
     public void toggle() {
         isEnabled = !isEnabled;
-        setFocusable(isEnabled);
+        setEnabled(isEnabled);
         applyStyle();
     }
 

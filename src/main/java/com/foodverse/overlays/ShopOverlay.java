@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Optional;
-import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -74,42 +73,9 @@ public class ShopOverlay extends Overlay {
         panel.add(scroll1);
 
 
-        // store's rate
-        double rateNumber = 5.5;
-        var rateNumberLabel = new JLabel(Double.toString(rateNumber) + " ");
-        rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
 
-        // label with the word Rate
-        var wordRate = new JLabel("Rate ");
-        wordRate.setFont(new Font("Courier New", Font.BOLD, 25));
-
-        // radioButtons with the ratings 1-5
-        var rate1 = new JRadioButton("1 ");
-        var rate2 = new JRadioButton("2 ");
-        var rate3 = new JRadioButton("3 ");
-        var rate4 = new JRadioButton("4 ");
-        var rate5 = new JRadioButton("5 ");
-
-        var group = new ButtonGroup();
-        group.add(rate1);
-        group.add(rate2);
-        group.add(rate3);
-        group.add(rate4);
-        group.add(rate5);
-
-        // adding rate elements panel3
-        var panel3 = new JPanel();
-
-        panel3.add(rateNumberLabel);
-        panel3.add(wordRate);
-        panel3.add(rate1);
-        panel3.add(rate2);
-        panel3.add(rate3);
-        panel3.add(rate4);
-        panel3.add(rate5);
-
-        this.showItems(panel1);
-        this.showItems(panel2);
+        // this.showItems(panel1);
+        // this.showItems(panel2);
 
         // RectButton "Bug" to appear the OrderOverlay
         var bugButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
@@ -120,14 +86,8 @@ public class ShopOverlay extends Overlay {
 
         // panel.setOpaque(false);
 
-        panel.add(panel3);
+        // panel.add(panel3);
 
-        RadioButtonListener listener = new RadioButtonListener(rate1, rate2, rate3, rate4, rate5);
-        rate1.addActionListener(listener);
-        rate2.addActionListener(listener);
-        rate3.addActionListener(listener);
-        rate4.addActionListener(listener);
-        rate5.addActionListener(listener);
 
         return new ScrollView(panel).getRef();
     }

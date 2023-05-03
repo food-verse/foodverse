@@ -1,15 +1,12 @@
 package com.foodverse.views;
 
 import java.awt.Component;
-import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.widgets.button.PillButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 

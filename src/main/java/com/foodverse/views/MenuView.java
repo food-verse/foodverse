@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.ui.Colors;
 import java.awt.Font;

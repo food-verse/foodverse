@@ -8,7 +8,6 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.foodverse.utility.core.Widget;
-import javax.swing.JScrollPane;
 
 public final class Offers extends Widget {
     @Override

@@ -1,19 +1,10 @@
 package com.foodverse.overlays;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Optional;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-
-import com.foodverse.models.Offer;
 import com.foodverse.models.Shop;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;

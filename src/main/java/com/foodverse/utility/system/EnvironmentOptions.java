@@ -15,7 +15,7 @@ public final class EnvironmentOptions {
     }
 
     public enum Mode {
-        DEBUG, RELEASE;
+        DEBUG, RELEASE
     }
 
 }

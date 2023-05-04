@@ -2,14 +2,15 @@ package com.foodverse.pages;
 
 import java.awt.Component;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+
 import com.foodverse.models.Order;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
@@ -35,10 +36,11 @@ import com.foodverse.widgets.media.VectorImage;
 public final class HomePage extends Page {
 
     private final JPanel panel;
-    private boolean didRender = false;
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
+
+    private boolean didRender = false;
 
     public HomePage() {
 
@@ -66,7 +68,7 @@ public final class HomePage extends Page {
         paddedAvatar.addWidget(avatarImage, new EdgeInsets.Builder()
                 .top(8)
                 .build(),
-                Align.FIRST_LINE_END);
+            Align.FIRST_LINE_END);
 
         // Add images to the parent panel
         headingRow.add(brandImage.getRef());
@@ -78,7 +80,7 @@ public final class HomePage extends Page {
         paddedHeading.addComponent(headingRow, new EdgeInsets.Builder()
                 .symmetric(40, 48)
                 .build(),
-                Align.CENTER);
+            Align.CENTER);
         panel.add(paddedHeading.getRef());
 
         // Heading for the carousel of nearby shops
@@ -88,13 +90,13 @@ public final class HomePage extends Page {
         panel.add(nearbyTile.getRef());
 
         // Getting the list of shops...
-        Set<Shop> shops = db.getShops();
+        List<Shop> shops = db.getShops();
 
         // Turning Shop list into ShopProp list...
         List<ShopProps> shopProps = shops.stream()
-                .map(ShopProps::from)
-                .sorted(Comparator.comparingDouble(ShopProps::rating).reversed())
-                .collect(Collectors.toList());
+            .map(ShopProps::from)
+            .sorted(Comparator.comparingDouble(ShopProps::rating).reversed())
+            .collect(Collectors.toList());
 
         // Create a carousel for the nearby shops
         var shopCarousel = new Carousel(shopProps);
@@ -110,10 +112,10 @@ public final class HomePage extends Page {
 
         // Turning Shop list into ShopProp list...
         List<OfferProps> offerProps = shops.stream()
-                .filter(shop -> !shop.offers().isEmpty())
-                .sorted(Comparator.comparingDouble(Shop::rating).reversed())
-                .map(OfferProps::from)
-                .collect(Collectors.toList());
+            .filter(shop -> !shop.offers().isEmpty())
+            .sorted(Comparator.comparingDouble(Shop::rating).reversed())
+            .map(OfferProps::from)
+            .collect(Collectors.toList());
 
         // Create a carousel for the available offers
         var offerCarousel = new Carousel(offerProps);
@@ -146,13 +148,13 @@ public final class HomePage extends Page {
         // Turning signed user's order list into order prop list...
         List<OrderProps> orderProps;
         if (signedUser.isPresent()) {
-            var startDate = LocalDate.now().minusWeeks(1);
-            var endDate = LocalDate.now();
+            var startDate = LocalDate.now(ZoneId.systemDefault()).minusWeeks(1);
+            var endDate = LocalDate.now(ZoneId.systemDefault());
             orderProps = signedUser.get().orders().stream()
-                    .filter(order -> DateUtils.isInRange(order.date(), startDate, endDate))
-                    .sorted(Comparator.comparing(Order::date).reversed())
-                    .map(OrderProps::from)
-                    .collect(Collectors.toList());
+                .filter(order -> DateUtils.isInRange(order.date(), startDate, endDate))
+                .sorted(Comparator.comparing(Order::date).reversed())
+                .map(OrderProps::from)
+                .collect(Collectors.toList());
         } else {
             orderProps = List.of();
         }

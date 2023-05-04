@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.JPanel;
+
 import com.foodverse.utility.core.Props;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
@@ -36,12 +37,12 @@ public final class Carousel extends Widget {
         // If list of props is empty return an empty JPanel
         if (propsList.isEmpty()) {
             var warningText = new Label("Unfortunately, there is nothing to display.",
-                    LabelSize.S);
+                LabelSize.S);
             var emptyView = new Row();
             emptyView.addWidget(warningText, new EdgeInsets.Builder()
                     .all(24)
                     .build(),
-                    Align.CENTER);
+                Align.CENTER);
             var decoratedView = new ColoredBox(emptyView);
             // Add padding to the empty view
             var paddedView = new Row();
@@ -49,29 +50,29 @@ public final class Carousel extends Widget {
                     .symmetric(16, 48)
                     .bottom(24)
                     .build(),
-                    Align.CENTER);
+                Align.CENTER);
             return paddedView.getRef();
         }
         // Adding list of widgets to the carousel...
         for (Props props : propsList) {
             if (props instanceof OfferProps p) {
                 carousel.addWidget(new OfferCard(p),
-                        new EdgeInsets.Builder()
-                                .right(8)
-                                .build(),
-                        Align.FIRST_LINE_END);
+                    new EdgeInsets.Builder()
+                        .right(8)
+                        .build(),
+                    Align.FIRST_LINE_END);
             } else if (props instanceof OrderProps p) {
                 carousel.addWidget(new OrderCard(p),
-                        new EdgeInsets.Builder()
-                                .right(8)
-                                .build(),
-                        Align.FIRST_LINE_END);
+                    new EdgeInsets.Builder()
+                        .right(8)
+                        .build(),
+                    Align.FIRST_LINE_END);
             } else if (props instanceof ShopProps p) {
                 carousel.addWidget(new ShopCard(p),
-                        new EdgeInsets.Builder()
-                                .right(8)
-                                .build(),
-                        Align.FIRST_LINE_END);
+                    new EdgeInsets.Builder()
+                        .right(8)
+                        .build(),
+                    Align.FIRST_LINE_END);
             }
         }
         panelWithoutPad.add(carousel.getRef());
@@ -81,7 +82,7 @@ public final class Carousel extends Widget {
                 .symmetric(16, 48)
                 .bottom(24)
                 .build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
         return paddedCarousel.getRef();
     }
 

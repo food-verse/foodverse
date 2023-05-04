@@ -35,20 +35,20 @@ public final class OfferCard extends Widget {
 
         // Creating button widgets...
         var openOrderButton = new PillButton("Order ->",
-                ButtonSize.S,
-                ButtonType.SECONDARY,
-                e -> {
-                    Router.openOverlay(new ShopOverlay(props.name()));
-                });
+            ButtonSize.S,
+            ButtonType.SECONDARY,
+            e -> {
+                Router.openOverlay(new ShopOverlay(props.name()));
+            });
 
         // Creating text widgets...
         var shopNameText = new Label(props.name(), LabelSize.L);
 
         // Creating image widgets...
         var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
-                .width(160)
-                .height(180)
-                .build());
+            .width(160)
+            .height(180)
+            .build());
 
         // Creating card's list of items widget...
         int widgetCount = 0;
@@ -58,7 +58,7 @@ public final class OfferCard extends Widget {
             builder.append('•');
             for (Map.Entry<String, Integer> entry : offer.items().entrySet()) {
                 builder.append(String.format(" %d %s +",
-                        entry.getValue(), entry.getKey()));
+                    entry.getValue(), entry.getKey()));
             }
             builder.setLength(Math.max(builder.length() - 1, 0));
             builder.append(String.format("-> %.2f€", offer.total()));
@@ -84,12 +84,12 @@ public final class OfferCard extends Widget {
         mainContentWidget.addWidget(shopNameText, new EdgeInsets.Builder()
                 .bottom(16)
                 .build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
         mainContentWidget.addWidget(itemListWidget, Align.LINE_START);
         mainContentWidget.addWidget(openOrderButton, new EdgeInsets.Builder()
                 .top(24)
                 .build(),
-                Align.LAST_LINE_START);
+            Align.LAST_LINE_START);
 
         // Adding the card's thumbnail widget to the main content...
         var imageCol = new Row();
@@ -97,7 +97,7 @@ public final class OfferCard extends Widget {
                 .all(16)
                 .left(20)
                 .build(),
-                Align.LINE_START);
+            Align.LINE_START);
         imageCol.addWidget(thumbnailImage, Align.LINE_END);
 
         // Add border to card

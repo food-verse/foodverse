@@ -1,6 +1,7 @@
 package com.foodverse.widgets.layout;
 
 import java.awt.Component;
+
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -16,7 +17,7 @@ public final class ListTile extends Widget {
         component.addWidget(widgetText, new EdgeInsets.Builder()
                 .left(48)
                 .build(),
-                Align.CENTER);
+            Align.CENTER);
     }
 
     @Override

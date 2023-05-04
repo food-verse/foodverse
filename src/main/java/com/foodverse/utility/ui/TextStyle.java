@@ -3,6 +3,7 @@ package com.foodverse.utility.ui;
 import java.awt.Color;
 import java.awt.font.TextAttribute;
 import java.util.Map;
+
 import com.foodverse.utility.navigation.Shell;
 
 public final class TextStyle {
@@ -57,10 +58,10 @@ public final class TextStyle {
 
     public Map<TextAttribute, Object> getAttributes() {
         return Map.of(
-                TextAttribute.FAMILY, fontFamily,
-                TextAttribute.WEIGHT, fontWeight.getWeight(),
-                TextAttribute.SIZE, fontSize,
-                TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
+            TextAttribute.FAMILY, fontFamily,
+            TextAttribute.WEIGHT, fontWeight.getWeight(),
+            TextAttribute.SIZE, fontSize,
+            TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
     }
 
     public enum FontWeight {

@@ -29,8 +29,8 @@ public final class OrderCard extends Widget {
     public Component getRef() {
 
         var price = String.format(
-                "Price: %.2f€",
-                props.price());
+            "Price: %.2f€",
+            props.price());
 
         // Creating text widgets...
         var priceText = new Label(price, LabelSize.XS, Colors.gray600);
@@ -38,9 +38,9 @@ public final class OrderCard extends Widget {
 
         // Creating image widgets...
         var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
-                .width(200)
-                .height(100)
-                .build());
+            .width(200)
+            .height(100)
+            .build());
 
         // Creating card's list of items widget...
         int widgetCount = 0;
@@ -68,12 +68,12 @@ public final class OrderCard extends Widget {
         mainContentWidget.addWidget(shopNameText, new EdgeInsets.Builder()
                 .bottom(8)
                 .build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
         mainContentWidget.addWidget(itemListWidget, Align.LINE_START);
         mainContentWidget.addWidget(priceText, new EdgeInsets.Builder()
                 .top(16)
                 .build(),
-                Align.LAST_LINE_START);
+            Align.LAST_LINE_START);
 
         // Adding the card's thumbnail widget to the main content...
         var imageCol = new Column();
@@ -84,7 +84,7 @@ public final class OrderCard extends Widget {
                 .right(12)
                 .bottom(16)
                 .build(),
-                Align.LAST_LINE_START);
+            Align.LAST_LINE_START);
 
         // Add border to card
         return new ColoredBox(imageCol, e -> {

@@ -15,7 +15,7 @@ import com.foodverse.widgets.text.Heading.HeadingSize;
 public final class AddressesOverlay extends Overlay {
 
     // page's main panel
-    private static JPanel mainPanel = new JPanel();
+    private JPanel mainPanel = new JPanel();
 
     // creating the main panel
     public AddressesOverlay() {
@@ -49,7 +49,7 @@ public final class AddressesOverlay extends Overlay {
     // static method that creates a subPanel of a new address, taken the data from the AddAddress
     // Page.
     // It then adds the subPanel to the main panel.
-    public static void addAddress(String address, String floor, String bell, String comments) {
+    public void addAddress(String address, String floor, String bell, String comments) {
         var subPanel = new JPanel();
         var addressText = new Heading("Address: " + address, HeadingSize.M);
         var floorText = new Heading("Floor: " + floor, HeadingSize.M);

@@ -1,6 +1,7 @@
 package com.foodverse.widgets.text;
 
 import java.awt.Color;
+
 import com.foodverse.utility.navigation.Shell;
 import com.foodverse.utility.ui.Colors;
 import com.foodverse.utility.ui.Text;
@@ -27,13 +28,13 @@ public final class Display extends Text {
 
     public static TextStyle getTextStyle(DisplaySize fontSize, boolean isMono, Color color) {
         return new TextStyle.Builder()
-                .family(isMono
-                        ? Shell.getOptions().getMonospacedFont()
-                        : Shell.getOptions().getDefaultFont())
-                .weight(FontWeight.MEDIUM)
-                .size(fontSize.getSize())
-                .color(color)
-                .build();
+            .family(isMono
+                ? Shell.getOptions().getMonospacedFont()
+                : Shell.getOptions().getDefaultFont())
+            .weight(FontWeight.MEDIUM)
+            .size(fontSize.getSize())
+            .color(color)
+            .build();
     }
 
     public static TextStyle getTextStyle(DisplaySize fontSize, boolean isMono) {

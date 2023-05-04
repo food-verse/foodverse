@@ -2,7 +2,7 @@ package com.foodverse.utility.input;
 
 public final class InputValidation {
 
-    private static InputValidation inputValidation = new InputValidation();
+    private static final InputValidation inputValidation = new InputValidation();
 
     private InputValidation() {}
 

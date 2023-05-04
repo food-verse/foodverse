@@ -2,6 +2,7 @@ package com.foodverse.pages;
 
 import java.awt.Component;
 import javax.swing.JPanel;
+
 import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -19,15 +20,15 @@ public final class OnboardingPage extends Page {
         var panel = new JPanel();
         var text = new Heading("Onboarding", HeadingSize.L);
         var signInPageButton = new RectButton(
-                "Sign In ->",
-                ButtonSize.S,
-                ButtonType.PRIMARY,
-                e -> Router.pushPage(Pages.LOGIN));
+            "Sign In ->",
+            ButtonSize.S,
+            ButtonType.PRIMARY,
+            e -> Router.pushPage(Pages.LOGIN));
         var signUpPageButton = new RectButton(
-                "Sign Up ->",
-                ButtonSize.S,
-                ButtonType.SECONDARY,
-                e -> Router.pushPage(Pages.REGISTER));
+            "Sign Up ->",
+            ButtonSize.S,
+            ButtonType.SECONDARY,
+            e -> Router.pushPage(Pages.REGISTER));
         panel.add(text.getRef());
         panel.add(signInPageButton.getRef());
         panel.add(signUpPageButton.getRef());

@@ -11,6 +11,7 @@ import javax.swing.JButton;
 
 final class BaseButton extends JButton {
 
+    private static final long serialVersionUID = 1L;
     private ButtonStyle buttonStyle;
     private boolean isEnabled;
 
@@ -51,9 +52,9 @@ final class BaseButton extends JButton {
         Font font = getFont();
         FontMetrics fontMetrics = getFontMetrics(font);
         int textWidth = fontMetrics.stringWidth(getText()) + buttonStyle.getPadding().getLeft()
-                + buttonStyle.getPadding().getRight();
+            + buttonStyle.getPadding().getRight();
         int textHeight = fontMetrics.getHeight() + buttonStyle.getPadding().getTop()
-                + buttonStyle.getPadding().getBottom();
+            + buttonStyle.getPadding().getBottom();
         if (buttonStyle.getMinimumWidth() > textWidth) {
             textWidth = buttonStyle.getMinimumWidth();
         }
@@ -64,8 +65,8 @@ final class BaseButton extends JButton {
     protected void paintComponent(Graphics g) {
         g.setColor(getBackground());
         g.fillRoundRect(0, 0, getWidth(), getHeight(),
-                buttonStyle.getBorderRadius(),
-                buttonStyle.getBorderRadius());
+            buttonStyle.getBorderRadius(),
+            buttonStyle.getBorderRadius());
         super.paintComponent(g);
     }
 

@@ -9,9 +9,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.foodverse.models.Config;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
@@ -29,8 +31,9 @@ public final class FileManager {
 
     public static AssetIndex loadAssetIndex() {
         InputStream stream = ResourceHandler.loadResourceAsStream("index.json");
-        Type fontsType = new TypeToken<AssetIndex>() {}.getType();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream));) {
+        Type fontsType = new TypeToken<AssetIndex>() {
+        }.getType();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
             return gson.fromJson(reader, fontsType);
         } catch (IOException e) {
             logger.log(Level.INFO, "Could not load the index of fonts.");
@@ -40,7 +43,8 @@ public final class FileManager {
 
     public static Config loadConfig() {
         String fileName = FileAsset.CONFIG.getName();
-        Type configType = new TypeToken<Config>() {}.getType();
+        Type configType = new TypeToken<Config>() {
+        }.getType();
         if (EnvironmentOptions.getMode() == Mode.DEBUG) {
             File file = new File(String.format("assets/%s", fileName));
             if (!file.exists()) {
@@ -58,7 +62,7 @@ public final class FileManager {
                 logger.log(Level.INFO, "There is no such file: {0}", fileName);
                 return null;
             }
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream));) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
                 return gson.fromJson(reader, configType);
             } catch (IOException e) {
                 logger.log(Level.INFO, "Could not load the application's configuration.");
@@ -67,10 +71,11 @@ public final class FileManager {
         return null;
     }
 
-    public static Set<User> loadUsers() {
+    public static List<User> loadUsers() {
         var file = FileAsset.USERS.getFile();
         if (file.exists()) {
-            Type userListType = new TypeToken<Set<User>>() {}.getType();
+            Type userListType = new TypeToken<List<User>>() {
+            }.getType();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 return gson.fromJson(reader, userListType);
             } catch (IOException e) {
@@ -79,10 +84,10 @@ public final class FileManager {
         } else {
             logger.log(Level.INFO, "There is no such file: {0}", file.getName());
         }
-        return Set.of();
+        return new ArrayList<>();
     }
 
-    public static void saveUsers(Set<User> users) {
+    public static void saveUsers(List<User> users) {
         var file = FileAsset.USERS.getFile();
         if (!file.exists()) {
             try {
@@ -99,10 +104,11 @@ public final class FileManager {
         }
     }
 
-    public static Set<Shop> loadShops() {
+    public static List<Shop> loadShops() {
         var file = FileAsset.SHOPS.getFile();
         if (file.exists()) {
-            Type shopListType = new TypeToken<Set<Shop>>() {}.getType();
+            Type shopListType = new TypeToken<List<Shop>>() {
+            }.getType();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 return gson.fromJson(reader, shopListType);
             } catch (IOException e) {
@@ -111,10 +117,10 @@ public final class FileManager {
         } else {
             logger.log(Level.INFO, "There is no such file: {0}", file.getName());
         }
-        return Set.of();
+        return new ArrayList<>();
     }
 
-    public static void saveShops(Set<Shop> shops) {
+    public static void saveShops(List<Shop> shops) {
         var file = FileAsset.SHOPS.getFile();
         if (!file.exists()) {
             try {

@@ -1,19 +1,21 @@
 package com.foodverse.utility.system;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+
 import com.foodverse.models.Config;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 
-public final class Database {
+public class Database {
 
-    private Config configuration;
+    private final Config configuration;
     private User authenticatedUser;
-    private Set<User> users;
-    private Set<Shop> shops;
+    protected List<User> users;
+    protected List<Shop> shops;
 
-    private Database() {
+    protected Database() {
         configuration = FileManager.loadConfig();
         users = FileManager.loadUsers();
         shops = FileManager.loadShops();
@@ -52,7 +54,9 @@ public final class Database {
     }
 
     public void signUp(User user) {
-
+        authenticatedUser = user;
+        users.add(user);
+        CompletableFuture.runAsync(() -> FileManager.saveUsers(users));
     }
 
     public void signOut() {
@@ -68,31 +72,42 @@ public final class Database {
         return false;
     }
 
-    public void saveUser(User newUser) {
+    public void updateUser(User newUser) {
+        boolean found = false;
         for (User user : users) {
-            if (user.id().equals(newUser.id())) {
+            if (user.equals(newUser)) {
+                found = true;
                 users.remove(user);
                 break;
             }
         }
-        users.add(newUser);
-        FileManager.saveUsers(users);
-        users = FileManager.loadUsers();
+        if (found) {
+            users.add(newUser);
+            CompletableFuture.runAsync(() -> FileManager.saveUsers(users));
+        }
     }
 
-    public void saveShop(Shop newShop) {
+    public void addShop(Shop shop) {
+        shops.add(shop);
+        CompletableFuture.runAsync(() -> FileManager.saveShops(shops));
+    }
+
+    public void updateShop(Shop newShop) {
+        boolean found = false;
         for (Shop shop : shops) {
-            if (shop.name().equals(newShop.name())) {
+            if (shop.equals(newShop)) {
+                found = true;
                 shops.remove(shop);
                 break;
             }
         }
-        shops.add(newShop);
-        FileManager.saveShops(shops);
-        shops = FileManager.loadShops();
+        if (found) {
+            shops.add(newShop);
+            CompletableFuture.runAsync(() -> FileManager.saveShops(shops));
+        }
     }
 
-    public Set<Shop> getShops() {
+    public List<Shop> getShops() {
         return shops;
     }
 

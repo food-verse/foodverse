@@ -50,8 +50,8 @@ public final class Router {
         } else {
             String shellTitle = Shell.getOptions().getTitle();
             String frameTitle = shellTitle.isBlank()
-                    ? p.getId()
-                    : String.format("%s | %s", shellTitle, p.getId());
+                ? p.getId()
+                : String.format("%s | %s", shellTitle, p.getId());
             frame.setTitle(frameTitle);
             frame.getContentPane().removeAll();
             frame.getContentPane().add(p.getRef());

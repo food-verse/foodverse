@@ -8,7 +8,6 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.foodverse.utility.core.Widget;
-import javax.swing.JScrollPane;
 
 public final class Offers extends Widget {
     @Override
@@ -23,9 +22,9 @@ public final class Offers extends Widget {
         panel.setBackground(Color.lightGray);
         panel.add(offers);
 
-        JScrollPane scroll1 = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        panel.add(scroll1);
+        // JScrollPane scroll1 = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        // JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        // panel.add(scroll1);
 
         return panel;
 

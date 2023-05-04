@@ -2,7 +2,7 @@ package com.foodverse.utility.navigation;
 
 public interface Identifiable {
 
-    public default String getId() {
+    default String getId() {
         String className = getClass().getSimpleName();
         String parentClassName = getClass().getSuperclass().getSimpleName();
         String[] words = className.split("(?=\\p{Upper})");

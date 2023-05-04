@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import javax.imageio.ImageIO;
+
 import com.foodverse.utility.system.EnvironmentOptions.Mode;
 import com.kitfox.svg.SVGDiagram;
 import com.kitfox.svg.SVGException;
@@ -66,7 +67,7 @@ public final class AssetManager {
         Stream.of(fontFiles).map(File::getName).forEach(fontName -> {
             try {
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT,
-                        new File(String.format("%s%s", dir, fontName))));
+                    new File(String.format("%s%s", dir, fontName))));
             } catch (IOException | FontFormatException e) {
                 logger.log(Level.INFO, "Could not load \"{0}\" font family.", fontFamily);
             }
@@ -140,14 +141,14 @@ public final class AssetManager {
 
             // Create a Graphics2D that the SVG should be rendered to
             bufferedImage = new BufferedImage(
-                    Math.round(diagram.getWidth()),
-                    Math.round(diagram.getHeight()),
-                    BufferedImage.TYPE_INT_ARGB);
+                Math.round(diagram.getWidth()),
+                Math.round(diagram.getHeight()),
+                BufferedImage.TYPE_INT_ARGB);
             Graphics2D graphics = bufferedImage.createGraphics();
             graphics.setRenderingHint(
-                    RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.setRenderingHint(
-                    RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
             // Render the SVG to the Graphics2D
             diagram.render(graphics);
@@ -176,8 +177,8 @@ public final class AssetManager {
     private static String getAssetLocation(AssetType assetType, String assetName) {
         var type = assetType == AssetType.VECTOR ? "icons" : "images";
         return dir.isEmpty()
-                ? String.format("%s/%s", type, assetName)
-                : String.format("%s/%s/%s", dir, type, assetName);
+            ? String.format("%s/%s", type, assetName)
+            : String.format("%s/%s/%s", dir, type, assetName);
     }
 
     private enum AssetType {

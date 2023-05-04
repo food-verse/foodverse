@@ -6,26 +6,28 @@ import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
+
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.widgets.button.RectButton;
 
 public final class TextField extends JTextField {
 
+    private static final long serialVersionUID = 1L;
     private Shape shape;
-    private ButtonTheme theme = new ButtonTheme.Builder()
-            .defaultBackgroundColor(Colors.buttonSecondaryFill)
-            .defaultTextColor(Colors.buttonSecondaryText)
-            .hoverBackgroundColor(Colors.buttonSecondaryHover)
-            .hoverTextColor(Colors.buttonSecondaryText)
-            .pressBackgroundColor(Colors.buttonSecondaryActive)
-            .pressTextColor(Colors.buttonSecondaryText)
-            .build();
+    private final ButtonTheme theme = new ButtonTheme.Builder()
+        .defaultBackgroundColor(Colors.buttonSecondaryFill)
+        .defaultTextColor(Colors.buttonSecondaryText)
+        .hoverBackgroundColor(Colors.buttonSecondaryHover)
+        .hoverTextColor(Colors.buttonSecondaryText)
+        .pressBackgroundColor(Colors.buttonSecondaryActive)
+        .pressTextColor(Colors.buttonSecondaryText)
+        .build();
     private boolean isEnabled = true;
     private ButtonStyle buttonStyle = RectButton.getButtonStyle(
-            isEnabled,
-            ButtonSize.S,
-            theme,
-            false);
+        isEnabled,
+        ButtonSize.S,
+        theme,
+        false);
 
     public TextField() {
         setFont(new Font(buttonStyle.getTextStyle().getAttributes()));

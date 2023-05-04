@@ -3,7 +3,6 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.widgets.text.Heading;
@@ -43,7 +42,8 @@ public final class HistoryOverlay extends Overlay {
         // creating subPanels for every order using the OrderView class. Then we add the
         // subPanel to the main panel.
         for (int i = 0; i < orderCount; i++) {
-            var subPanel = new OrderView(i, orderCount, pictureAsset, storeName, date, items, totalPrice);
+            var subPanel =
+                    new OrderView(i, orderCount, pictureAsset, storeName, date, items, totalPrice);
             mainPanel.add(subPanel.getRef());
 
             pictureAsset = "pizza.jpg";
@@ -66,7 +66,6 @@ public final class HistoryOverlay extends Overlay {
                 });
 
         mainPanel.add(openSettingsPage.getRef());
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setOpaque(false);
         return mainPanel;
     }

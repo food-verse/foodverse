@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 import java.util.function.Consumer;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+
 import com.foodverse.utility.core.Widget;
 
 /**
@@ -26,8 +27,8 @@ public abstract class Overlay extends Widget implements Identifiable {
     /**
      * Creates a new {@link Overlay} with the specified width and height.
      *
-     * @param width The preferred width for the page
-     * @param height The preferred height for the page
+     * @param width   The preferred width for the page
+     * @param height  The preferred height for the page
      * @param onClose A callback to be executed when the window is closed
      */
     protected Overlay(int width, int height, Consumer<WindowEvent> onClose) {
@@ -73,7 +74,7 @@ public abstract class Overlay extends Widget implements Identifiable {
      */
     public void open(JFrame oldFrame) {
         if (dimension.getWidth() < frame.getPreferredSize().getWidth()
-                || dimension.getHeight() < frame.getPreferredSize().getHeight()) {
+            || dimension.getHeight() < frame.getPreferredSize().getHeight()) {
             frame.pack();
         } else {
             frame.setSize(dimension);

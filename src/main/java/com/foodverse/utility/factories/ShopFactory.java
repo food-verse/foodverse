@@ -1,8 +1,8 @@
 package com.foodverse.utility.factories;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.foodverse.models.Item;
 import com.foodverse.models.Offer;
@@ -15,7 +15,7 @@ public final class ShopFactory {
 
     private ShopFactory() {}
 
-    private static Set<Shop> generateShops() {
+    private static List<Shop> generateShops() {
 
         // Creating menu for the burger shop...
         var burgerMenu = List.of(
@@ -34,6 +34,7 @@ public final class ShopFactory {
         var burgerShop = new Shop(
             "Burgerlicious",
             "7890 Cherry Lane, Westwood, CA 90290",
+            "345-678-9012",
             5.0f,
             264,
             ShopType.BURGER,
@@ -62,6 +63,7 @@ public final class ShopFactory {
         var pizzaShop = new Shop(
             "Pizzantastic",
             "42 Maple Street, Millfield, OH 45761",
+            "567-890-1234",
             4.7f,
             97,
             ShopType.PIZZA,
@@ -90,6 +92,7 @@ public final class ShopFactory {
         var pastaShop = new Shop(
             "La Pastaiole",
             "315 Elmwood Avenue, Riverdale, NY 10471",
+            "890-123-4567",
             3.9f,
             432,
             ShopType.PASTA,
@@ -133,6 +136,7 @@ public final class ShopFactory {
         var greekShop = new Shop(
             "Ta Laladika",
             "2245 Oakwood Drive, Silverton, TX 79257",
+            "432-109-8765",
             4.2f,
             178,
             ShopType.GREEK,
@@ -161,6 +165,7 @@ public final class ShopFactory {
         var donutShop = new Shop(
             "Sweet o’ Clock",
             "123 Main Street, Anytown, USA",
+            "654-321-0987",
             4.5f,
             50,
             ShopType.DONUT,
@@ -204,6 +209,7 @@ public final class ShopFactory {
         var mexicanShop = new Shop(
             "Taco Mia",
             "1667 Rosewood Court, Pineville, LA 71360",
+            "987-654-3210",
             4.9f,
             341,
             ShopType.MEXICAN,
@@ -215,7 +221,13 @@ public final class ShopFactory {
             mexicanOffers,
             mexicanMenu);
 
-        return Set.of(burgerShop, donutShop, pizzaShop, pastaShop, greekShop, mexicanShop);
+        return new ArrayList<>(List.of(
+            burgerShop,
+            donutShop,
+            pizzaShop,
+            pastaShop,
+            greekShop,
+            mexicanShop));
     }
 
     public static void generate() {

@@ -1,11 +1,13 @@
 package com.foodverse.widgets.media;
 
+import java.awt.Cursor;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.function.Consumer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.system.AssetManager;
 
@@ -21,11 +23,17 @@ public final class VectorImage extends Widget {
     public VectorImage(IconAsset asset, Consumer<MouseEvent> onPressed) {
         this.onPressed = onPressed;
         AssetManager
-                .getVector(asset.getName())
-                .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
+            .getVector(asset.getName())
+            .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
         if (onPressed != null) {
             component.addMouseListener(new VectorImageListener());
+            component.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         }
+    }
+
+    @Override
+    public Component getRef() {
+        return component;
     }
 
     private class VectorImageListener extends MouseAdapter {
@@ -35,11 +43,6 @@ public final class VectorImage extends Widget {
             onPressed.accept(e);
         }
 
-    }
-
-    @Override
-    public Component getRef() {
-        return component;
     }
 
 }

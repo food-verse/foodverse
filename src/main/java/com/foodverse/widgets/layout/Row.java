@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.JPanel;
+
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -34,8 +35,8 @@ public final class Row extends Widget {
         constraints.gridx = order++;
         constraints.anchor = align.getAnchor();
         constraints.insets = new Insets(
-                edgeInsets.getTop(), edgeInsets.getLeft(),
-                edgeInsets.getBottom(), edgeInsets.getRight());
+            edgeInsets.getTop(), edgeInsets.getLeft(),
+            edgeInsets.getBottom(), edgeInsets.getRight());
         component.add(widget, constraints);
     }
 

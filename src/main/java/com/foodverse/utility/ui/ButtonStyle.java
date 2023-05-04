@@ -1,6 +1,7 @@
 package com.foodverse.utility.ui;
 
 import java.awt.Color;
+
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
@@ -17,15 +18,15 @@ public final class ButtonStyle {
     public static class Builder {
 
         private ButtonTheme buttonTheme = new ButtonTheme.Builder()
-                .defaultBackgroundColor(Colors.buttonPrimaryFill)
-                .defaultTextColor(Colors.buttonPrimaryText)
-                .hoverBackgroundColor(Colors.buttonPrimaryHover)
-                .hoverTextColor(Colors.buttonPrimaryText)
-                .pressBackgroundColor(Colors.buttonPrimaryActive)
-                .pressTextColor(Colors.buttonPrimaryText)
-                .disabledBackgroundColor(Colors.buttonDisabledFill)
-                .disabledTextColor(Colors.buttonDisabledText)
-                .build();
+            .defaultBackgroundColor(Colors.buttonPrimaryFill)
+            .defaultTextColor(Colors.buttonPrimaryText)
+            .hoverBackgroundColor(Colors.buttonPrimaryHover)
+            .hoverTextColor(Colors.buttonPrimaryText)
+            .pressBackgroundColor(Colors.buttonPrimaryActive)
+            .pressTextColor(Colors.buttonPrimaryText)
+            .disabledBackgroundColor(Colors.buttonDisabledFill)
+            .disabledTextColor(Colors.buttonDisabledText)
+            .build();
         private TextStyle textStyle = Label.getTextStyle(LabelSize.XS);
         private EdgeInsets padding = new EdgeInsets.Builder().build();
         private int minimumWidth = 0;

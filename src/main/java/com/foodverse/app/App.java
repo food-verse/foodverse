@@ -24,7 +24,7 @@ public final class App {
 
         // Launch the application in the event dispatch thread
         SwingUtilities.invokeLater(() -> {
-    
+
             // Set the environment mode
             EnvironmentOptions.setMode(Mode.DEBUG);
 

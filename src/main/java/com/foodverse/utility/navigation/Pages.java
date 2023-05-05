@@ -1,7 +1,6 @@
 package com.foodverse.utility.navigation;
 
 public enum Pages {
-
     ONBOARDING("Onboarding"),
     LOGIN("Sign In"),
     REGISTER("Sign Up"),

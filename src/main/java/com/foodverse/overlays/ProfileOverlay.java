@@ -2,7 +2,9 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import java.util.Optional;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import com.foodverse.models.User;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
@@ -43,44 +45,56 @@ public class ProfileOverlay extends Overlay {
 
         // Buttons that lead to the various settings we can use
         var openProfilePage = new RectButton(
-                "Profile Info ->",
-                ButtonSize.S,
-                ButtonType.SECONDARY,
-                e -> {
-                    Router.openOverlay(new ProfileInfoOverlay());
-                });
+            "Profile Info ->",
+            ButtonSize.S,
+            ButtonType.SECONDARY,
+            e -> {
+                Router.openOverlay(new ProfileInfoOverlay());
+            });
         var openAddressesPage = new RectButton(
-                "Addresses ->",
-                ButtonSize.S,
-                ButtonType.SECONDARY,
-                e -> {
-                    Router.openOverlay(new AddressesOverlay());
-                });
+            "Addresses ->",
+            ButtonSize.S,
+            ButtonType.SECONDARY,
+            e -> {
+                Router.openOverlay(new AddressesOverlay());
+            });
         var openFavoritesPage = new RectButton(
-                "Favorites ->",
-                ButtonSize.S,
-                ButtonType.SECONDARY,
-                e -> {
-                    Router.openOverlay(new FavoritesOverlay());
-                });
+            "Favorites ->",
+            ButtonSize.S,
+            ButtonType.SECONDARY,
+            e -> {
+                Router.openOverlay(new FavoritesOverlay());
+            });
         var openHistoryPage = new RectButton(
-                "History ->",
-                ButtonSize.S,
-                ButtonType.SECONDARY,
-                e -> {
-                    Router.openOverlay(new HistoryOverlay());
-                });
+            "History ->",
+            ButtonSize.S,
+            ButtonType.SECONDARY,
+            e -> {
+                Router.openOverlay(new HistoryOverlay());
+            });
 
         // Signing out...
         var signOutButton = new RectButton(
-                "Sign Out ->",
-                ButtonSize.S,
-                ButtonType.PRIMARY,
-                e -> {
+            "Sign Out ->",
+            ButtonSize.S,
+            ButtonType.PRIMARY,
+            e -> {
+                Object[] options = {"Cancel", "Sign Out"};
+                var option = JOptionPane.showOptionDialog(
+                    null,
+                    "Are you sure you want to sign out?",
+                    "Sign Out",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[1]);
+                if (option == JOptionPane.NO_OPTION) {
                     db.signOut();
                     Router.closeOverlay();
                     Router.pushPage(Pages.LOGIN);
-                });
+                }
+            });
 
         // adding all the buttons to the panel
         panel.add(text.getRef());

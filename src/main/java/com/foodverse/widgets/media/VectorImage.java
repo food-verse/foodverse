@@ -17,15 +17,16 @@ public final class VectorImage extends Widget {
     private final Consumer<MouseEvent> onPressed;
 
     public VectorImage(IconAsset asset) {
-        this(asset, null);
+        this(asset, null, null);
     }
 
-    public VectorImage(IconAsset asset, Consumer<MouseEvent> onPressed) {
+    public VectorImage(IconAsset asset, Consumer<MouseEvent> onPressed, String ariaLabel) {
         this.onPressed = onPressed;
         AssetManager
             .getVector(asset.getName())
             .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
         if (onPressed != null) {
+            component.setToolTipText(ariaLabel);
             component.addMouseListener(new VectorImageListener());
             component.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         }

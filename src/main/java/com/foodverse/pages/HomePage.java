@@ -56,12 +56,13 @@ public final class HomePage extends Page {
         headingRow.setLayout(new BoxLayout(headingRow, BoxLayout.X_AXIS));
 
         // Creating image widgets...
+        var repositoryUrl = "https://github.com/food-verse/foodverse";
         var brandImage = new VectorImage(IconAsset.BRAND, e -> {
-            URLHandler.open("https://github.com/food-verse/foodverse");
-        });
+            URLHandler.open(repositoryUrl);
+        }, repositoryUrl);
         var avatarImage = new VectorImage(IconAsset.AVATAR, e -> {
             Router.openOverlay(new ProfileOverlay());
-        });
+        }, "Profile");
 
         // Add padding to avatar
         var paddedAvatar = new Column();

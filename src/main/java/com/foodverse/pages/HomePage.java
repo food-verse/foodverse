@@ -110,7 +110,7 @@ public final class HomePage extends Page {
         // Add the heading for the offers' carousel to the main panel
         panel.add(offersTile.getRef());
 
-        // Turning Shop list into ShopProp list...
+        // Turning Shop list into OfferProp list...
         List<OfferProps> offerProps = shops.stream()
             .filter(shop -> !shop.offers().isEmpty())
             .sorted(Comparator.comparingDouble(Shop::rating).reversed())
@@ -145,7 +145,7 @@ public final class HomePage extends Page {
         // Getting the authenticated user...
         Optional<User> signedUser = db.getAuthenticatedUser();
 
-        // Turning signed user's order list into order prop list...
+        // Turning signed user's order list into OrderProp list...
         List<OrderProps> orderProps;
         if (signedUser.isPresent()) {
             var startDate = LocalDate.now(ZoneId.systemDefault()).minusWeeks(1);

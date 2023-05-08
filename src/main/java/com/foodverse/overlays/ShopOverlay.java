@@ -44,10 +44,9 @@ public class ShopOverlay extends Overlay {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button =
-                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                    Router.closeOverlay();
-                });
+        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+            Router.closeOverlay();
+        });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
@@ -76,8 +75,6 @@ public class ShopOverlay extends Overlay {
         });
 
         panel.add(OrderButton.getRef());
-
-        // panel.setOpaque(false);
 
         // panel.add(panel3);
 

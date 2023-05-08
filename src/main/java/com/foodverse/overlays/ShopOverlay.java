@@ -81,10 +81,6 @@ public class ShopOverlay extends Overlay {
 
         // panel.add(panel3);
 
-        for (var i = 0; i < 3; i++) {
-            showItemsView showItems = new showItemsView();
-            panel.add(showItems.getRef());
-        }
 
         return new ScrollView(panel).getRef();
     }

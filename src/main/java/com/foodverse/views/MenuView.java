@@ -14,13 +14,10 @@ public final class MenuView extends Widget {
 
     @Override
     public Component getRef() {
+
         var panel = new JPanel();
         var panel1 = new JPanel();
 
-
-        panel.setBorder(BorderFactory.createLineBorder(Colors.black));
-        panel.setPreferredSize(new Dimension(1250, 100));
-        panel.setBackground(Colors.white);
 
         panel1.setBorder(BorderFactory.createLineBorder(Colors.black));
         panel1.setPreferredSize(new Dimension(1250, 100));
@@ -31,15 +28,23 @@ public final class MenuView extends Widget {
         menu.setFont(new Font("Courier New", Font.BOLD, 25));
         menu.setForeground(Color.white);
 
+
         panel.setPreferredSize(new Dimension(1300, 300));
         panel.setBackground(Color.lightGray);
         panel.add(menu);
+
+
+        for (var i = 0; i < 3; i++) {
+            showItemsView showItems = new showItemsView();
+            panel.add(showItems.getRef());
+        }
 
         // JScrollPane scroll2 = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
         // JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         // panel.add(scroll2);
 
         panel1.add(panel);
+
         return panel1;
     }
 }

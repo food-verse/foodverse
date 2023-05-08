@@ -1,12 +1,16 @@
 package com.foodverse.views;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.widgets.button.PillButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import com.foodverse.utility.ui.Colors;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 
@@ -52,6 +56,15 @@ public final class RateView extends Widget {
 
         // adding rate elements panel3
         var panel = new JPanel();
+        var panel1 = new JPanel();
+
+        panel1.setBorder(BorderFactory.createLineBorder(Color.black));
+        panel1.setPreferredSize(new Dimension(500, 100));
+        panel1.setBackground(Colors.white);
+
+
+        panel.setPreferredSize(new Dimension(500, 100));
+        panel.setBackground(Color.lightGray);
 
         panel.add(rateNumberLabel);
         panel.add(wordRate);
@@ -61,8 +74,9 @@ public final class RateView extends Widget {
         panel.add(rate4.getRef());
         panel.add(rate5.getRef());
 
+        panel1.add(panel);
 
-        return panel;
+        return panel1;
 
     }
 

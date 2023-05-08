@@ -22,18 +22,18 @@ public final class Offers extends Widget {
         offers.setFont(new Font("Courier New", Font.BOLD, 25));
         offers.setForeground(Color.white);
 
-
+        // outer panel
         panel1.setBorder(BorderFactory.createLineBorder(Colors.black));
-        panel1.setPreferredSize(new Dimension(1250, 100));
+        panel1.setPreferredSize(new Dimension(300, 100));
         panel1.setBackground(Colors.white);
 
-
-        panel.setPreferredSize(new Dimension(1300, 300));
+        // inner panel
+        panel.setPreferredSize(new Dimension(1300, 200));
         panel.setBackground(Color.lightGray);
         panel.add(offers);
 
 
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 2; i++) {
             showItemsView showItems = new showItemsView();
             panel.add(showItems.getRef());
         }

@@ -19,8 +19,9 @@ public final class MenuView extends Widget {
         var panel1 = new JPanel();
 
 
+        // outer panel
         panel1.setBorder(BorderFactory.createLineBorder(Colors.black));
-        panel1.setPreferredSize(new Dimension(1250, 100));
+        panel1.setPreferredSize(new Dimension(1000, 100));
         panel1.setBackground(Colors.white);
 
 
@@ -29,6 +30,7 @@ public final class MenuView extends Widget {
         menu.setForeground(Color.white);
 
 
+        // inner panel
         panel.setPreferredSize(new Dimension(1300, 300));
         panel.setBackground(Color.lightGray);
         panel.add(menu);

@@ -12,6 +12,7 @@ import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.views.MenuView;
 import com.foodverse.views.Offers;
+import com.foodverse.views.RateView;
 import com.foodverse.views.showItemsView;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
@@ -43,9 +44,10 @@ public class ShopOverlay extends Overlay {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            Router.closeOverlay();
-        });
+        var button =
+                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+                    Router.closeOverlay();
+                });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
@@ -58,6 +60,10 @@ public class ShopOverlay extends Overlay {
         // Menu
         MenuView menu = new MenuView();
         panel.add(menu.getRef());
+
+        // Rate
+        RateView rate = new RateView();
+        panel.add(rate.getRef());
 
         // this.showItems(panel1);
         // this.showItems(panel2);

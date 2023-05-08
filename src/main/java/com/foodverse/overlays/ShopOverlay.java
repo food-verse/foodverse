@@ -70,14 +70,13 @@ public class ShopOverlay extends Overlay {
         // RectButton "Bug" to appear the OrderOverlay
 
         var OrderButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
-            OrderOverlay Order = new OrderOverlay(null, null);
-            panel.add(Order.getRef());
+            Router.openOverlay(new OrderOverlay(null, null));
+
         });
 
         panel.add(OrderButton.getRef());
 
         // panel.add(panel3);
-
 
         return new ScrollView(panel).getRef();
     }

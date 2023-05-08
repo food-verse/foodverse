@@ -1,11 +1,8 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
 import java.util.Optional;
-
 import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import com.foodverse.models.Shop;
 import com.foodverse.utility.navigation.Overlay;
@@ -66,11 +63,7 @@ public class ShopOverlay extends Overlay {
         // this.showItems(panel2);
 
         // RectButton "Bug" to appear the OrderOverlay
-        var bugButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
-            showSuccessfulOrderMessage(e);
-        });
 
-        panel.add(bugButton.getRef());
         var OrderButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
             OrderOverlay Order = new OrderOverlay(null, null);
             panel.add(Order.getRef());
@@ -88,10 +81,6 @@ public class ShopOverlay extends Overlay {
         }
 
         return new ScrollView(panel).getRef();
-    }
-
-    private void showSuccessfulOrderMessage(ActionEvent e) {
-        JOptionPane.showMessageDialog(getFrame(), "We will deal with this later");
     }
 
     // public void paint(Graphics g)

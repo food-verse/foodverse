@@ -6,6 +6,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.ui.Colors;
+// import com.foodverse.widgets.card.OrderCard;
+
 import javax.swing.JLabel;
 
 public final class AddressView extends Widget {
@@ -17,6 +19,8 @@ public final class AddressView extends Widget {
         panel.setPreferredSize(new Dimension(1250, 100));
         panel.setBackground(Colors.white);
 
+        // OrderCard acard = new OrderCard(null);
+        // panel.add(acard.getRef());
         JLabel address = new JLabel("Street: " + "\n");
         JLabel address2 = new JLabel("Number: " + "\n");
         JLabel address3 = new JLabel("floor: " + "\n");

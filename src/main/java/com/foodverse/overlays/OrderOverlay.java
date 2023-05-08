@@ -3,6 +3,8 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -58,6 +60,7 @@ public final class OrderOverlay extends Overlay {
                 });
         panel.add(button.getRef());
         panel.add(orderLabel.getRef());
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Address
         AddressView view = new AddressView();

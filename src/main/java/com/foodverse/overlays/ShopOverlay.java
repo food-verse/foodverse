@@ -75,6 +75,7 @@ public class ShopOverlay extends Overlay {
 
         // RectButton "Bug" to appear the OrderOverlay
         var OrderButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
+            Router.closeOverlay();
             Router.openOverlay(new OrderOverlay(null, null));
 
         });

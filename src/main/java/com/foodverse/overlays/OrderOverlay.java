@@ -87,6 +87,7 @@ public final class OrderOverlay extends Overlay {
                 ButtonType.PRIMARY,
                 e -> {
                     showSuccessfulOrderMessage();
+                    Router.closeOverlay();
                 });
 
         panel.add(checkoutButton.getRef());

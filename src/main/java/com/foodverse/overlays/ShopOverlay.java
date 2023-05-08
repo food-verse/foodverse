@@ -3,6 +3,8 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.Optional;
+
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import com.foodverse.models.Shop;
@@ -44,13 +46,13 @@ public class ShopOverlay extends Overlay {
     public Component getRef() {
         var panel = new JPanel();
         var text = new Heading("ShopOverlay", HeadingSize.L);
-        var button =
-                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                    Router.closeOverlay();
-                });
+        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+            Router.closeOverlay();
+        });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // offers
         Offers offer = new Offers();
@@ -69,11 +71,16 @@ public class ShopOverlay extends Overlay {
         });
 
         panel.add(bugButton.getRef());
+        var OrderButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
+            OrderOverlay Order = new OrderOverlay(null, null);
+            panel.add(Order.getRef());
+        });
+
+        panel.add(OrderButton.getRef());
 
         // panel.setOpaque(false);
 
         // panel.add(panel3);
-
 
         for (var i = 0; i < 3; i++) {
             showItemsView showItems = new showItemsView();
@@ -82,8 +89,6 @@ public class ShopOverlay extends Overlay {
 
         return new ScrollView(panel).getRef();
     }
-
-
 
     private void showSuccessfulOrderMessage(ActionEvent e) {
         JOptionPane.showMessageDialog(getFrame(), "We will deal with this later");
@@ -96,6 +101,5 @@ public class ShopOverlay extends Overlay {
     // g.drawLine(2000, 222, 0, 222);
     // g.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
     // }
-
 
 }

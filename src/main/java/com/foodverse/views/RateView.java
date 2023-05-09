@@ -5,33 +5,32 @@ import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.foodverse.models.Shop;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.widgets.button.PillButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
+import java.util.Optional;
+
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 
-
 public final class RateView extends Widget {
 
-    @Override
-    public Component getRef() {
+    private final Component component;
 
-        // store's rate
-        double rateNumber = 5.5;
-        var rateNumberLabel = new JLabel(Double.toString(rateNumber) + " ");
-        rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
+    public RateView(Optional<Shop> shop) {
 
         // label with the word Rate
         var wordRate = new JLabel("Rate ");
         wordRate.setFont(new Font("Courier New", Font.BOLD, 25));
 
         // radioButtons with the ratings 1-5
-        var numberOfRates = 0;
-        var oldRate = 0;
+        var numberOfRates = shop.get().reviews();
+        var oldRate = shop.get().rating();
         var newRate = 0;
-
 
         var rate1 = new PillButton("1", ButtonSize.XS, ButtonType.SECONDARY, e -> {
             actionPerformed(e, newRate, oldRate, numberOfRates);
@@ -49,15 +48,17 @@ public final class RateView extends Widget {
             actionPerformed(e, newRate, oldRate, numberOfRates);
         });
 
-
+        // store's rate
+        DecimalFormat df = new DecimalFormat("#.#");
+        String oneDigitRate = df.format(oldRate);
+        var rateNumberLabel = new JLabel((oneDigitRate) + " ");
+        rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
 
         // adding rate elements panel3
         var panel = new JPanel();
 
-
         panel.setPreferredSize(new Dimension(500, 100));
         panel.setBackground(Color.white);
-
 
         panel.add(rateNumberLabel);
         panel.add(wordRate);
@@ -67,11 +68,14 @@ public final class RateView extends Widget {
         panel.add(rate4.getRef());
         panel.add(rate5.getRef());
 
-
-        return panel;
-
+        component = panel;
     }
 
+    @Override
+    public Component getRef() {
+        return component;
+
+    }
 
     // Choose one button for rate
 
@@ -98,16 +102,17 @@ public final class RateView extends Widget {
 
     private double calculateNewRate(Integer rateValue, double newRate, double oldRate,
             Integer numberOfRates) {
+        System.out.println("hiiiiiiiiiii");
         if (numberOfRates != 0) {
             newRate = oldRate + (rateValue / numberOfRates);
+
         } else {
             newRate = oldRate;
         }
+        System.out.println(newRate);
 
         return newRate;
 
     }
 
-
 }
-

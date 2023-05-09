@@ -67,7 +67,7 @@ public class ShopOverlay extends Overlay {
         panel.add(menu.getRef());
 
         // Rate
-        RateView rate = new RateView();
+        RateView rate = new RateView(shop);
         panel.add(rate.getRef());
 
         // RectButton "Bug" to appear the OrderOverlay

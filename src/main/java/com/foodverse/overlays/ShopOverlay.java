@@ -1,11 +1,11 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
-import java.util.List;
 import java.util.Optional;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+
 import com.foodverse.models.Shop;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;

@@ -44,9 +44,7 @@ public class ShopOverlay extends Overlay {
 
         Optional<Shop> shop = db.findShopByName(merchant);
         if (shop.isPresent()) {
-            System.out.println(shop);
             name = shop.get().name();
-
         } else {
             System.out.println("Merchant not found");
         }

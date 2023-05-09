@@ -29,7 +29,7 @@ public final class RateView extends Widget {
         var wordRate = new JLabel("Rate ");
         wordRate.setFont(new Font("Courier New", Font.BOLD, 25));
 
-        // radioButtons with the ratings 1-5
+        // convert old rate into string in order to pass it in a JLabel
         var oldRate = shop.get().rating();
         var oldRateAsAString = Float.toString(oldRate);
         var rateNumberLabel = new JLabel(oldRateAsAString);
@@ -60,7 +60,7 @@ public final class RateView extends Widget {
         panel.setPreferredSize(new Dimension(500, 100));
         panel.setBackground(Color.white);
 
-        // adding rate elements to panel
+        // add rate elements to panel
         panel.add(wordRate);
         panel.add(rateNumberLabel);
         panel.add(rate1.getRef());
@@ -99,27 +99,34 @@ public final class RateView extends Widget {
             thankYouForRatingUsMessage(rate1.getRef());
         } else if (e.getSource() == rate2.getRef()) {
             newRate = calculateNewRate(2, oldRate, numberOfRates);
+            thankYouForRatingUsMessage(rate2.getRef());
         } else if (e.getSource() == rate3.getRef()) {
             newRate = calculateNewRate(3, oldRate, numberOfRates);
+            thankYouForRatingUsMessage(rate3.getRef());
         } else if (e.getSource() == rate4.getRef()) {
             newRate = calculateNewRate(4, oldRate, numberOfRates);
+            thankYouForRatingUsMessage(rate4.getRef());
         } else if (e.getSource() == rate5.getRef()) {
             newRate = calculateNewRate(5, oldRate, numberOfRates);
+            thankYouForRatingUsMessage(rate5.getRef());
         }
 
         return newRate;
     }
 
+    // create a JFrame in which it is appeared "Thank you for rating us!" message
     private void thankYouForRatingUsMessage(Component button) {
+
         JFrame frame = new JFrame();
         JLabel message = new JLabel("Thank you for rating us!");
+
         message.setFont(new Font("Courier New", Font.BOLD, 24));
+
         frame.getContentPane().add(message);
         frame.setSize(400, 200);
         frame.setLocationRelativeTo(button);
         frame.setVisible(true);
     }
-
 
     // calculate new rate
     private double calculateNewRate(Integer rateValue, double oldRate, Integer numberOfRates) {

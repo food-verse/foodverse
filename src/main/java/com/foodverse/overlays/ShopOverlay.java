@@ -57,8 +57,10 @@ public class ShopOverlay extends Overlay {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // offers
-        Offers offer = new Offers();
-        panel.add(offer.getRef());
+        if (!shop.get().offers().isEmpty()) {
+            Offers offer = new Offers(shop);
+            panel.add(offer.getRef());
+        }
 
         // Menu
         MenuView menu = new MenuView(shop);

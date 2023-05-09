@@ -12,6 +12,7 @@ import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.views.EmptyView;
 import com.foodverse.views.MenuView;
 import com.foodverse.views.Offers;
 import com.foodverse.views.RateView;
@@ -48,18 +49,23 @@ public class ShopOverlay extends Overlay {
 
         var panel = new JPanel();
         var text = new Heading(name, HeadingSize.L);
-        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            Router.closeOverlay();
-        });
+        var button = new PillButton(
+            "Close ShopOverlay ->",
+            ButtonSize.XS,
+            ButtonType.SECONDARY,
+            e -> {
+                Router.closeOverlay();
+            });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // offers
-        if (!shop.get().offers().isEmpty()) {
-            Offers offer = new Offers(shop);
-            panel.add(offer.getRef());
+        if (shop.get().offers().isEmpty()) {
+            panel.add(new EmptyView().getRef());
+        } else {
+            panel.add(new Offers(shop).getRef());
         }
 
         // Menu
@@ -71,11 +77,15 @@ public class ShopOverlay extends Overlay {
         panel.add(rate.getRef());
 
         // RectButton "Bug" to appear the OrderOverlay
-        var OrderButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
-            Router.closeOverlay();
-            Router.openOverlay(new OrderOverlay(merchant, null));
+        var OrderButton = new RectButton(
+            "Bag",
+            ButtonSize.S,
+            ButtonType.PRIMARY,
+            e -> {
+                Router.closeOverlay();
+                Router.openOverlay(new OrderOverlay(merchant, null));
 
-        });
+            });
 
         panel.add(OrderButton.getRef());
 
@@ -86,13 +96,5 @@ public class ShopOverlay extends Overlay {
     public Component getRef() {
         return component;
     }
-
-    // public void paint(Graphics g)
-    // {
-    // super.paint(g);
-    // g.setColor(Color.white);
-    // g.drawLine(2000, 222, 0, 222);
-    // g.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
-    // }
 
 }

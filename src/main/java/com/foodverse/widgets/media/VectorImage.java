@@ -14,17 +14,21 @@ import com.foodverse.utility.system.AssetManager;
 public final class VectorImage extends Widget {
 
     private final JLabel component = new JLabel();
-    private final Consumer<MouseEvent> onPressed;
+    private Consumer<MouseEvent> onPressed;
 
     public VectorImage(IconAsset asset) {
         this(asset, null, null);
     }
 
     public VectorImage(IconAsset asset, Consumer<MouseEvent> onPressed, String ariaLabel) {
-        this.onPressed = onPressed;
         AssetManager
             .getVector(asset.getName())
             .ifPresent(bufferedImage -> component.setIcon(new ImageIcon(bufferedImage)));
+        onPressed(onPressed, ariaLabel);
+    }
+
+    public void onPressed(Consumer<MouseEvent> onPressed, String ariaLabel) {
+        this.onPressed = onPressed;
         if (onPressed != null) {
             component.setToolTipText(ariaLabel);
             component.addMouseListener(new VectorImageListener());

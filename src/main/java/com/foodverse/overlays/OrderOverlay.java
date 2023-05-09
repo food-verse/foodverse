@@ -44,9 +44,14 @@ public final class OrderOverlay extends Overlay {
         Optional<User> signedUser = db.getAuthenticatedUser();
         if (signedUser.isPresent()) {
             // System.out.println(signedUser.get());
+            // signedUser.get().orders().add(items);
         } else {
             // System.out.println("Authenticated user not found");
         }
+
+        // for (String item : items.keySet()) {
+        // System.out.println(item);
+        // }
 
         // Heading
         var panel = new JPanel();
@@ -75,7 +80,7 @@ public final class OrderOverlay extends Overlay {
         panel.add(amount.getRef());
 
         // Products
-        ProductView products = new ProductView();
+        ProductView products = new ProductView(items);
         panel.add(products.getRef());
 
         // Tips

@@ -12,17 +12,36 @@ public final class ListTile extends Widget {
 
     private final Row component = new Row();
 
-    public ListTile(String data) {
-        var widgetText = new Heading(data, HeadingSize.L);
+    public ListTile(String data, ListTileSize size) {
+        var widgetText = new Heading(data, size.getSize());
         component.addWidget(widgetText, new EdgeInsets.Builder()
-                .left(48)
+                .left(size == ListTileSize.M ? 48 : 40)
                 .build(),
             Align.CENTER);
+    }
+
+    public ListTile(String data) {
+        this(data, ListTileSize.M);
     }
 
     @Override
     public Component getRef() {
         return component.getRef();
+    }
+
+    public enum ListTileSize {
+        S(HeadingSize.M), M(HeadingSize.L);
+
+        private final HeadingSize size;
+
+        ListTileSize(HeadingSize size) {
+            this.size = size;
+        }
+
+        public HeadingSize getSize() {
+            return size;
+        }
+
     }
 
 }

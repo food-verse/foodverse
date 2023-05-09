@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.foodverse.models.User;
+import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -82,7 +83,7 @@ public class ProfileOverlay extends Overlay {
                 Object[] options = {"Cancel", "Sign Out"};
                 var option = JOptionPane.showOptionDialog(
                     null,
-                    "Are you sure you want to sign out?",
+                    UIConstants.SIGN_OUT_CONFIRM_MESSAGE,
                     "Sign Out",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE,

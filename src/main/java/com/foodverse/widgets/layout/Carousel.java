@@ -9,15 +9,13 @@ import com.foodverse.utility.core.Props;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
-import com.foodverse.utility.ui.ColoredBox;
+import com.foodverse.views.EmptyView;
 import com.foodverse.widgets.card.OfferCard;
 import com.foodverse.widgets.card.OfferProps;
 import com.foodverse.widgets.card.OrderCard;
 import com.foodverse.widgets.card.OrderProps;
 import com.foodverse.widgets.card.ShopCard;
 import com.foodverse.widgets.card.ShopProps;
-import com.foodverse.widgets.text.Label;
-import com.foodverse.widgets.text.Label.LabelSize;
 
 public final class Carousel extends Widget {
 
@@ -36,22 +34,7 @@ public final class Carousel extends Widget {
         var carousel = new Row();
         // If list of props is empty return an empty JPanel
         if (propsList.isEmpty()) {
-            var warningText = new Label("Unfortunately, there is nothing to display.",
-                LabelSize.S);
-            var emptyView = new Row();
-            emptyView.addWidget(warningText, new EdgeInsets.Builder()
-                    .all(24)
-                    .build(),
-                Align.CENTER);
-            var decoratedView = new ColoredBox(emptyView);
-            // Add padding to the empty view
-            var paddedView = new Row();
-            paddedView.addComponent(decoratedView, new EdgeInsets.Builder()
-                    .symmetric(16, 48)
-                    .bottom(24)
-                    .build(),
-                Align.CENTER);
-            return paddedView.getRef();
+            return new EmptyView().getRef();
         }
         // Adding list of widgets to the carousel...
         for (Props props : propsList) {

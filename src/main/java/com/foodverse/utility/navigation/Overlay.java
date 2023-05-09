@@ -25,7 +25,8 @@ public abstract class Overlay extends Widget implements Identifiable {
     private final Consumer<WindowEvent> onClose;
 
     /**
-     * Creates a new {@link Overlay} with the specified width and height.
+     * Creates a new {@link Overlay} with the specified width, height and a callback to be executed
+     * when the window is closed.
      *
      * @param width   The preferred width for the page
      * @param height  The preferred height for the page
@@ -38,6 +39,17 @@ public abstract class Overlay extends Widget implements Identifiable {
         frame.setTitle(getId());
         frame.addWindowListener(new OverlayListener());
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+    }
+
+    /**
+     * Creates a new {@link Overlay} with the specified width and height.
+     *
+     * @param width   The preferred width for the page
+     * @param height  The preferred height for the page
+     * @param onClose A callback to be executed when the window is closed
+     */
+    protected Overlay(int width, int height) {
+        this(width, height, null);
     }
 
     /**

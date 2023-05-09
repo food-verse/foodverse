@@ -39,24 +39,47 @@ public final class Offers extends Widget {
             Map<String, Integer> items = shop.get().offers().get(i).items();
             JLabel offerTotal = new JLabel();
             // print the contents of the items map
+            var k = 0;
             for (String item : items.keySet()) {
-                var offerName = new JLabel(item);
+
+                k++;
+                var offerName = new JLabel();
+
+                if (k == shop.get().offers().get(i).items().size()) {
+                    offerName.setText(item + " ->");
+                } else {
+                    offerName.setText(item + " + ");
+                }
+
+                var offerQuantity = new JLabel();
+
+                var quantity = items.get(item);
+                var quantityAsAString = Integer.toString(quantity);
+
                 var price = shop.get().menu().get(i).price();
                 var priceAsAString = Float.toString(price);
+
                 offerTotal.setText(priceAsAString);
+                offerQuantity.setText(quantityAsAString);
+
+                itemPanel.add(offerQuantity);
                 itemPanel.add(offerName);
+
                 panel.add(itemPanel);
 
             }
+
             itemPanel.add(offerTotal);
+
+            var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+
+            });
+
+            itemPanel.add(productAddButton.getRef());
 
             itemPanel.setPreferredSize(new Dimension(1500, 60));
 
         }
-
-        var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-
-        });
 
         // JScrollPane scroll1 = new JScrollPane(panel,
         // JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,

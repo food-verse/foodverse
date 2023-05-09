@@ -32,54 +32,38 @@ public final class RateView extends Widget {
         wordRate.setFont(new Font("Courier New", Font.BOLD, 25));
 
         // radioButtons with the ratings 1-5
-        // var numberOfRates = shop.get().reviews();
         var oldRate = shop.get().rating();
+        var oldRateAsAString = Float.toString(oldRate);
+        var rateNumberLabel = new JLabel(oldRateAsAString);
 
+        rateNumberLabel.setText(oldRate + " ");
+
+        var numberOfRates = shop.get().reviews();
+
+        // create PillButtons rate1 - rate5
         rate1 = new PillButton("1", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            var numberOfRates = shop.get().reviews();
-            numberOfRates++;
-            double newRate = actionPerformed(e, oldRate, numberOfRates);
-            // System.out.println("kkkkk " + newRate);
-
-            DecimalFormat df = new DecimalFormat("#0.00");
-            String oneDigitRate = df.format(newRate);
-            // System.out.println("hiiii" + oneDigitRate);
-            var rateNumberLabel = new JLabel((oneDigitRate) + " ");
-            rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
+            example(numberOfRates, e, oldRate, rateNumberLabel);
         });
         rate2 = new PillButton("2", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            var numberOfRates = shop.get().reviews();
-            numberOfRates++;
-            double newRate = actionPerformed(e, oldRate, numberOfRates);
+            example(numberOfRates, e, oldRate, rateNumberLabel);
         });
         rate3 = new PillButton("3", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            var numberOfRates = shop.get().reviews();
-            numberOfRates++;
-            double newRate = actionPerformed(e, oldRate, numberOfRates);
+            example(numberOfRates, e, oldRate, rateNumberLabel);
         });
         rate4 = new PillButton("4", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            var numberOfRates = shop.get().reviews();
-            numberOfRates++;
-            double newRate = actionPerformed(e, oldRate, numberOfRates);
+            example(numberOfRates, e, oldRate, rateNumberLabel);
         });
         rate5 = new PillButton("5", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            var numberOfRates = shop.get().reviews();
-            numberOfRates++;
-            double newRate = actionPerformed(e, oldRate, numberOfRates);
+            example(numberOfRates, e, oldRate, rateNumberLabel);
         });
 
-        // store's rate
-        // DecimalFormat df = new DecimalFormat("#.#");
-        // String oneDigitRate = df.format(oldRate);
-        // var rateNumberLabel = new JLabel((oneDigitRate) + " ");
-        // rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
-
-        // adding rate elements panel
+        // set size and color for the panel
         panel.setPreferredSize(new Dimension(500, 100));
         panel.setBackground(Color.white);
 
-        // panel.add(rateNumberLabel);
+        // adding rate elements to panel
         panel.add(wordRate);
+        panel.add(rateNumberLabel);
         panel.add(rate1.getRef());
         panel.add(rate2.getRef());
         panel.add(rate3.getRef());
@@ -92,19 +76,25 @@ public final class RateView extends Widget {
     @Override
     public Component getRef() {
         return component;
-
     }
 
-    // Choose one button for rate
+    private void example(Integer numberOfRates, ActionEvent e, float oldRate, JLabel rateNumberLabel) {
 
+        numberOfRates++;
+        double newRate = actionPerformed(e, oldRate, numberOfRates);
+
+        DecimalFormat df = new DecimalFormat("#0.00");
+        String oneDigitRate = df.format(newRate);
+        rateNumberLabel.setText(oneDigitRate + " ");
+        rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
+    }
+
+    // call calculateNewRate for each PillButton (rate1 - rate5)
     public double actionPerformed(ActionEvent e, double oldRate, Integer numberOfRates) {
 
         double newRate = 0;
 
         if (e.getSource() == rate1.getRef()) {
-
-            // System.out.println("gggggggggggggggggg");
-
             newRate = calculateNewRate(1, oldRate, numberOfRates);
         } else if (e.getSource() == rate2.getRef()) {
             newRate = calculateNewRate(2, oldRate, numberOfRates);
@@ -115,25 +105,17 @@ public final class RateView extends Widget {
         } else if (e.getSource() == rate5.getRef()) {
             newRate = calculateNewRate(5, oldRate, numberOfRates);
         }
+
         return newRate;
     }
 
-    // Calculate New Rate
-
-    private double calculateNewRate(Integer rateValue, double oldRate,
-            Integer numberOfRates) {
+    // calculate new rate
+    private double calculateNewRate(Integer rateValue, double oldRate, Integer numberOfRates) {
 
         double newRate = 0;
-        if (numberOfRates != 0) {
-            newRate = (oldRate * (numberOfRates - 1) + rateValue) / numberOfRates;
 
-        } else {
-            newRate = oldRate;
-        }
-        System.out.println(newRate);
+        newRate = (oldRate * (numberOfRates - 1) + rateValue) / numberOfRates;
 
         return newRate;
-
     }
-
 }

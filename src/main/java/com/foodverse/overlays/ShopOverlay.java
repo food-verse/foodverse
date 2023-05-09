@@ -2,6 +2,7 @@ package com.foodverse.overlays;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.util.Optional;
 
 import javax.swing.BoxLayout;
@@ -15,7 +16,6 @@ import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.views.EmptyView;
-import com.foodverse.views.MenuView;
 import com.foodverse.views.Offers;
 import com.foodverse.views.RateView;
 import com.foodverse.widgets.button.PillButton;
@@ -77,8 +77,38 @@ public class ShopOverlay extends Overlay {
         }
 
         // Menu
-        MenuView menu = new MenuView(shop);
-        panel.add(menu.getRef());
+        var menu = new JLabel("Menu  ");
+        menu.setFont(new Font("Courier New", Font.BOLD, 25));
+        menu.setForeground(Color.black);
+
+        panel.add(menu);
+
+        for (int i = 0; i < shop.get().menu().size(); i++) {
+
+            var itemPanel = new JPanel();
+
+            itemPanel.setPreferredSize(new Dimension(1500, 60));
+
+            var x = shop.get().menu().get(i).name();
+            var price = shop.get().menu().get(i).price();
+            var priceAsAString = Float.toString(price);
+            var menuName = new JLabel(x);
+            var menuPrice = new JLabel(priceAsAString);
+
+            var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+                // actionPerformed(e, x, 1, shop);
+            });
+
+            itemPanel.add(menuName);
+            itemPanel.add(menuPrice);
+            itemPanel.add(productAddButton.getRef());
+
+            panel.add(itemPanel);
+
+        }
+
+        panel.setPreferredSize(new Dimension(1400, 300));
+        panel.setBackground(Color.white);
 
         // Rate
         RateView rate = new RateView(shop);

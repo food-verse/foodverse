@@ -5,7 +5,7 @@ import com.foodverse.models.ShopType;
 import com.foodverse.utility.core.Props;
 import com.foodverse.widgets.media.AssetSize;
 
-public record ShopProps(
+public record ShopCardProps(
     String thumbnail,
     String name,
     float rating,
@@ -14,8 +14,8 @@ public record ShopProps(
     int prepTime,
     float minOrder) implements Props {
 
-    public static ShopProps from(Shop shop) {
-        return new ShopProps(
+    public static ShopCardProps from(Shop shop) {
+        return new ShopCardProps(
             shop.thumbnails().get(AssetSize.MEDIUM),
             shop.name(),
             shop.rating(),

@@ -22,9 +22,9 @@ import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
 public final class ShopCard extends Widget {
 
-    private final ShopProps props;
+    private final ShopCardProps props;
 
-    public ShopCard(ShopProps props) {
+    public ShopCard(ShopCardProps props) {
         this.props = props;
     }
 
@@ -52,23 +52,23 @@ public final class ShopCard extends Widget {
         // Creating image widgets...
         var starImage = new VectorImage(IconAsset.STAR);
         var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
-                .width(200)
-                .height(100)
-                .build());
+            .width(200)
+            .height(100)
+            .build());
 
         // Creating card's rating widget...
         var ratingWidget = new Row();
         ratingWidget.addWidget(starImage, new EdgeInsets.Builder()
                 .right(2)
                 .build(),
-                Align.LINE_START);
+            Align.LINE_START);
         ratingWidget.addWidget(ratingText, new EdgeInsets.Builder()
                 .right(4)
                 .build(),
-                Align.CENTER);
+            Align.CENTER);
         ratingWidget.addWidget(reviewsText, new EdgeInsets.Builder()
                 .build(),
-                Align.LINE_END);
+            Align.LINE_END);
 
         // Creating card's heading widget...
         var headingWidget = new Row();
@@ -80,7 +80,7 @@ public final class ShopCard extends Widget {
         infoWidget.addWidget(shopTypeText, new EdgeInsets.Builder()
                 .bottom(4)
                 .build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
         infoWidget.addWidget(minOrderText, Align.LAST_LINE_START);
 
         // Creating card's main content widget...
@@ -88,11 +88,11 @@ public final class ShopCard extends Widget {
         mainContentWidget.addWidget(shopNameText, new EdgeInsets.Builder()
                 .bottom(8)
                 .build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
         mainContentWidget.addWidget(ratingWidget, new EdgeInsets.Builder()
                 .bottom(8)
                 .build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
         mainContentWidget.addWidget(infoWidget, Align.LAST_LINE_START);
 
         // Adding the card's thumbnail widget to the main content...
@@ -104,7 +104,7 @@ public final class ShopCard extends Widget {
                 .right(12)
                 .bottom(16)
                 .build(),
-                Align.LAST_LINE_START);
+            Align.LAST_LINE_START);
 
         // Add border to card
         return new ColoredBox(imageCol, e -> {

@@ -18,10 +18,10 @@ import com.foodverse.widgets.text.Label.LabelSize;
 
 public final class OrderCard extends Widget {
 
-    private final OrderProps props;
+    private final OrderCardProps props;
     private final int numberOfLines = 3;
 
-    public OrderCard(OrderProps props) {
+    public OrderCard(OrderCardProps props) {
         this.props = props;
     }
 

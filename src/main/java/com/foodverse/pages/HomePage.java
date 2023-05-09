@@ -22,9 +22,9 @@ import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Page;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
-import com.foodverse.widgets.card.OfferProps;
-import com.foodverse.widgets.card.OrderProps;
-import com.foodverse.widgets.card.ShopProps;
+import com.foodverse.widgets.card.OfferCardProps;
+import com.foodverse.widgets.card.OrderCardProps;
+import com.foodverse.widgets.card.ShopCardProps;
 import com.foodverse.widgets.layout.Carousel;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ListTile;
@@ -94,9 +94,9 @@ public final class HomePage extends Page {
         List<Shop> shops = db.getShops();
 
         // Turning Shop list into ShopProp list...
-        List<ShopProps> shopProps = shops.stream()
-            .map(ShopProps::from)
-            .sorted(Comparator.comparingDouble(ShopProps::rating).reversed())
+        List<ShopCardProps> shopProps = shops.stream()
+            .map(ShopCardProps::from)
+            .sorted(Comparator.comparingDouble(ShopCardProps::rating).reversed())
             .collect(Collectors.toList());
 
         // Create a carousel for the nearby shops
@@ -112,10 +112,10 @@ public final class HomePage extends Page {
         panel.add(offersTile.getRef());
 
         // Turning Shop list into OfferProp list...
-        List<OfferProps> offerProps = shops.stream()
+        List<OfferCardProps> offerProps = shops.stream()
             .filter(shop -> !shop.offers().isEmpty())
             .sorted(Comparator.comparingDouble(Shop::rating).reversed())
-            .map(OfferProps::from)
+            .map(OfferCardProps::from)
             .collect(Collectors.toList());
 
         // Create a carousel for the available offers
@@ -147,14 +147,14 @@ public final class HomePage extends Page {
         Optional<User> signedUser = db.getAuthenticatedUser();
 
         // Turning signed user's order list into OrderProp list...
-        List<OrderProps> orderProps;
+        List<OrderCardProps> orderProps;
         if (signedUser.isPresent()) {
             var startDate = LocalDate.now(ZoneId.systemDefault()).minusWeeks(1);
             var endDate = LocalDate.now(ZoneId.systemDefault());
             orderProps = signedUser.get().orders().stream()
                 .filter(order -> DateUtils.isInRange(order.date(), startDate, endDate))
                 .sorted(Comparator.comparing(Order::date).reversed())
-                .map(OrderProps::from)
+                .map(OrderCardProps::from)
                 .collect(Collectors.toList());
         } else {
             orderProps = List.of();

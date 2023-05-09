@@ -23,10 +23,10 @@ import com.foodverse.widgets.text.Label.LabelSize;
 
 public final class OfferCard extends Widget {
 
-    private final OfferProps props;
+    private final OfferCardProps props;
     private final int numberOfLines = 3;
 
-    public OfferCard(OfferProps props) {
+    public OfferCard(OfferCardProps props) {
         this.props = props;
     }
 

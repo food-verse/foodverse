@@ -11,11 +11,11 @@ import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.views.EmptyView;
 import com.foodverse.widgets.card.OfferCard;
-import com.foodverse.widgets.card.OfferProps;
+import com.foodverse.widgets.card.OfferCardProps;
 import com.foodverse.widgets.card.OrderCard;
-import com.foodverse.widgets.card.OrderProps;
+import com.foodverse.widgets.card.OrderCardProps;
 import com.foodverse.widgets.card.ShopCard;
-import com.foodverse.widgets.card.ShopProps;
+import com.foodverse.widgets.card.ShopCardProps;
 
 public final class Carousel extends Widget {
 
@@ -38,19 +38,19 @@ public final class Carousel extends Widget {
         }
         // Adding list of widgets to the carousel...
         for (Props props : propsList) {
-            if (props instanceof OfferProps p) {
+            if (props instanceof OfferCardProps p) {
                 carousel.addWidget(new OfferCard(p),
                     new EdgeInsets.Builder()
                         .right(8)
                         .build(),
                     Align.FIRST_LINE_END);
-            } else if (props instanceof OrderProps p) {
+            } else if (props instanceof OrderCardProps p) {
                 carousel.addWidget(new OrderCard(p),
                     new EdgeInsets.Builder()
                         .right(8)
                         .build(),
                     Align.FIRST_LINE_END);
-            } else if (props instanceof ShopProps p) {
+            } else if (props instanceof ShopCardProps p) {
                 carousel.addWidget(new ShopCard(p),
                     new EdgeInsets.Builder()
                         .right(8)

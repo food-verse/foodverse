@@ -2,8 +2,9 @@ package com.foodverse.views;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.text.DecimalFormat;
+
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.ui.Colors;
@@ -25,11 +26,12 @@ public final class AmountView extends Widget {
 
         var amount = new JPanel();
 
-        var totalString = Float.toString(total);
+        DecimalFormat df = new DecimalFormat("#0.00");
+        String towDigitTotal = df.format(total);
 
         // amount.setBorder(boarder);
         amount.setPreferredSize(new Dimension(600, 100));
-        var amountLabel = new Label("Total: " + totalString, LabelSize.L);
+        var amountLabel = new Label("Total: " + towDigitTotal, LabelSize.L);
         amount.add(amountLabel.getRef());
         amount.setBackground(Colors.white);
         panel.add(amount);

@@ -2,6 +2,8 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import java.util.List;
+import java.util.Optional;
+
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import com.foodverse.models.Shop;
@@ -23,9 +25,9 @@ public class ShopOverlay extends Overlay {
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
+    private final Component component;
 
     public ShopOverlay(String merchant) {
-
 
         // db.findShopByName(merchant).ifPresentOrElse(shop -> {
         // System.out.println(shop);
@@ -33,28 +35,22 @@ public class ShopOverlay extends Overlay {
         // // System.out.println("Merchant not found");
         // });
         // // Alternative
+        var name = " ";
 
-        // Optional<Shop> shop = db.findShopByName(merchant);
-        // if (shop.isPresent()) {
-        // System.out.println(shop);
-        // } else {
-        // System.out.println("Merchant not found");
-        // }
-    }
+        Optional<Shop> shop = db.findShopByName(merchant);
+        if (shop.isPresent()) {
+            System.out.println(shop);
+            name = shop.get().name();
 
-    @Override
-    public Component getRef() {
-
-        List<Shop> shops = db.getShops();
-
-        var name = shops.get(0).name();
+        } else {
+            System.out.println("Merchant not found");
+        }
 
         var panel = new JPanel();
         var text = new Heading(name, HeadingSize.L);
-        var button =
-                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                    Router.closeOverlay();
-                });
+        var button = new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
+            Router.closeOverlay();
+        });
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
@@ -65,25 +61,28 @@ public class ShopOverlay extends Overlay {
         panel.add(offer.getRef());
 
         // Menu
-        MenuView menu = new MenuView();
+        MenuView menu = new MenuView(shop);
         panel.add(menu.getRef());
 
         // Rate
         RateView rate = new RateView();
         panel.add(rate.getRef());
 
-
         // RectButton "Bug" to appear the OrderOverlay
         var OrderButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
             Router.closeOverlay();
-            Router.openOverlay(new OrderOverlay(null, null));
+            Router.openOverlay(new OrderOverlay(merchant, null));
 
         });
 
         panel.add(OrderButton.getRef());
 
+        component = new ScrollView(panel).getRef();
+    }
 
-        return new ScrollView(panel).getRef();
+    @Override
+    public Component getRef() {
+        return component;
     }
 
     // public void paint(Graphics g)

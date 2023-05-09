@@ -3,6 +3,7 @@ package com.foodverse.views;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.foodverse.models.Shop;
@@ -40,19 +41,19 @@ public final class RateView extends Widget {
 
         // create PillButtons rate1 - rate5
         rate1 = new PillButton("1", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            example(numberOfRates, e, oldRate, rateNumberLabel);
+            convertNumberOfRatesIntoTwoDigitNumber(numberOfRates, e, oldRate, rateNumberLabel);
         });
         rate2 = new PillButton("2", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            example(numberOfRates, e, oldRate, rateNumberLabel);
+            convertNumberOfRatesIntoTwoDigitNumber(numberOfRates, e, oldRate, rateNumberLabel);
         });
         rate3 = new PillButton("3", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            example(numberOfRates, e, oldRate, rateNumberLabel);
+            convertNumberOfRatesIntoTwoDigitNumber(numberOfRates, e, oldRate, rateNumberLabel);
         });
         rate4 = new PillButton("4", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            example(numberOfRates, e, oldRate, rateNumberLabel);
+            convertNumberOfRatesIntoTwoDigitNumber(numberOfRates, e, oldRate, rateNumberLabel);
         });
         rate5 = new PillButton("5", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-            example(numberOfRates, e, oldRate, rateNumberLabel);
+            convertNumberOfRatesIntoTwoDigitNumber(numberOfRates, e, oldRate, rateNumberLabel);
         });
 
         // set size and color for the panel
@@ -76,7 +77,8 @@ public final class RateView extends Widget {
         return component;
     }
 
-    private void example(Integer numberOfRates, ActionEvent e, float oldRate, JLabel rateNumberLabel) {
+    private void convertNumberOfRatesIntoTwoDigitNumber(Integer numberOfRates, ActionEvent e,
+            float oldRate, JLabel rateNumberLabel) {
 
         numberOfRates++;
         double newRate = actionPerformed(e, oldRate, numberOfRates);
@@ -94,6 +96,7 @@ public final class RateView extends Widget {
 
         if (e.getSource() == rate1.getRef()) {
             newRate = calculateNewRate(1, oldRate, numberOfRates);
+            thankYouForRatingUsMessage(rate1.getRef());
         } else if (e.getSource() == rate2.getRef()) {
             newRate = calculateNewRate(2, oldRate, numberOfRates);
         } else if (e.getSource() == rate3.getRef()) {
@@ -106,6 +109,17 @@ public final class RateView extends Widget {
 
         return newRate;
     }
+
+    private void thankYouForRatingUsMessage(Component button) {
+        JFrame frame = new JFrame();
+        JLabel message = new JLabel("Thank you for rating us!");
+        message.setFont(new Font("Courier New", Font.BOLD, 24));
+        frame.getContentPane().add(message);
+        frame.setSize(400, 200);
+        frame.setLocationRelativeTo(button);
+        frame.setVisible(true);
+    }
+
 
     // calculate new rate
     private double calculateNewRate(Integer rateValue, double oldRate, Integer numberOfRates) {

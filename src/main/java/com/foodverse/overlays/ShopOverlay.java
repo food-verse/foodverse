@@ -3,6 +3,8 @@ package com.foodverse.overlays;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.swing.BoxLayout;
@@ -76,6 +78,8 @@ public class ShopOverlay extends Overlay {
             panel.add(new Offers(shop).getRef());
         }
 
+        // Create a map for the choosen items
+        Map<String, Integer> addproducts = new HashMap<>();
         // Menu
         var menu = new JLabel("Menu  ");
         menu.setFont(new Font("Courier New", Font.BOLD, 25));
@@ -96,7 +100,7 @@ public class ShopOverlay extends Overlay {
             var menuPrice = new JLabel(priceAsAString);
 
             var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                // actionPerformed(e, x, 1, shop);
+                addproducts.put(x, 1);
             });
 
             itemPanel.add(menuName);
@@ -121,7 +125,7 @@ public class ShopOverlay extends Overlay {
                 ButtonType.PRIMARY,
                 e -> {
                     Router.closeOverlay();
-                    Router.openOverlay(new OrderOverlay(merchant, null));
+                    Router.openOverlay(new OrderOverlay(merchant, addproducts));
 
                 });
 

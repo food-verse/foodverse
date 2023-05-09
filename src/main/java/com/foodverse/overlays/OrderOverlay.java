@@ -33,12 +33,12 @@ public final class OrderOverlay extends Overlay {
 
     public OrderOverlay(String merchant, Map<String, Integer> items) {
 
-        // Getting the authenticated user...
-        db.getAuthenticatedUser().ifPresentOrElse(signedUser -> {
-            // System.out.println(signedUser);
-        }, () -> {
-            // System.out.println("Authenticated user not found");
-        });
+        // // Getting the authenticated user...
+        // db.getAuthenticatedUser().ifPresentOrElse(signedUser -> {
+        // // System.out.println(signedUser);
+        // }, () -> {
+        // // System.out.println("Authenticated user not found");
+        // });
 
         // Alternative
         Optional<User> signedUser = db.getAuthenticatedUser();
@@ -63,7 +63,7 @@ public final class OrderOverlay extends Overlay {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Address
-        AddressView view = new AddressView();
+        AddressView view = new AddressView(signedUser);
         panel.add(view.getRef());
 
         // Payment

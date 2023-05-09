@@ -80,6 +80,7 @@ public class ShopOverlay extends Overlay {
 
         // Create a map for the choosen items
         Map<String, Integer> addproducts = new HashMap<>();
+
         // Menu
         var menu = new JLabel("Menu  ");
         menu.setFont(new Font("Courier New", Font.BOLD, 25));

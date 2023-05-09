@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
@@ -44,7 +45,7 @@ public final class OrderOverlay extends Overlay {
         Optional<User> signedUser = db.getAuthenticatedUser();
         if (signedUser.isPresent()) {
             // System.out.println(signedUser.get());
-            // signedUser.get().orders().add(items);
+            // signedUser.get().orders().add();
         } else {
             // System.out.println("Authenticated user not found");
         }
@@ -76,7 +77,16 @@ public final class OrderOverlay extends Overlay {
         panel.add(payment.getRef());
 
         // Amount
-        AmountView amount = new AmountView();
+        Optional<Shop> shop = db.findShopByName(merchant);
+        float total = 0;
+        for (int j = 0; j < shop.get().menu().size(); j++) {
+            for (String item : items.keySet()) {
+                if (item.equals(shop.get().menu().get(j).name())) {
+                    total = total + shop.get().menu().get(j).price();
+                }
+            }
+        }
+        AmountView amount = new AmountView(total);
         panel.add(amount.getRef());
 
         // Products

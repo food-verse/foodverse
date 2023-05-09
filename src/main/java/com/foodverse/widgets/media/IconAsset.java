@@ -1,7 +1,11 @@
 package com.foodverse.widgets.media;
 
 public enum IconAsset {
-    BRAND("brand.svg"), STAR("rating-star.svg"), AVATAR("avatar.svg");
+    AVATAR("avatar.svg"),
+    BRAND("brand.svg"),
+    HEART("heart.svg"),
+    HEART_FILL("heart-fill.svg"),
+    STAR("rating-star.svg");
 
     private final String fileName;
 

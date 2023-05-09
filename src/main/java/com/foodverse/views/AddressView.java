@@ -2,8 +2,12 @@ package com.foodverse.views;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Optional;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
+import com.foodverse.models.User;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.ui.Colors;
 // import com.foodverse.widgets.card.OrderCard;
@@ -11,9 +15,9 @@ import com.foodverse.utility.ui.Colors;
 import javax.swing.JLabel;
 
 public final class AddressView extends Widget {
+    private final Component component;
 
-    @Override
-    public Component getRef() {
+    public AddressView(Optional<User> user) {
         var panel = new JPanel();
         panel.setBorder(BorderFactory.createLineBorder(Colors.black));
         panel.setPreferredSize(new Dimension(1250, 100));
@@ -21,14 +25,19 @@ public final class AddressView extends Widget {
 
         // OrderCard acard = new OrderCard(null);
         // panel.add(acard.getRef());
-        JLabel address = new JLabel("Street: " + "\n");
-        JLabel address2 = new JLabel("Number: " + "\n");
-        JLabel address3 = new JLabel("floor: " + "\n");
+        JLabel address = new JLabel("Street: " + user.get().addresses() + "\n");
+        JLabel address2 = new JLabel("Number: " + user.get().phone() + "\n");
+        // JLabel address3 = new JLabel("floor: "+ user.get() + "\n");
         panel.add(address);
         panel.add(address2);
-        panel.add(address3);
+        // panel.add(address3);
 
-        return panel;
+        component = panel;
+    }
+
+    @Override
+    public Component getRef() {
+        return component;
     }
 
 }

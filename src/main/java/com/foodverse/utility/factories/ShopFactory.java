@@ -40,7 +40,8 @@ public final class ShopFactory {
             ShopType.BURGER,
             Map.of(
                 AssetSize.SMALL, "burger-small.png",
-                AssetSize.MEDIUM, "burger-medium.png"),
+                AssetSize.MEDIUM, "burger-medium.png",
+                AssetSize.LARGE, "burger-large.jpg"),
             30,
             7.00f,
             List.of(),
@@ -69,7 +70,8 @@ public final class ShopFactory {
             ShopType.PIZZA,
             Map.of(
                 AssetSize.SMALL, "pizza-small.png",
-                AssetSize.MEDIUM, "pizza-medium.png"),
+                AssetSize.MEDIUM, "pizza-medium.png",
+                AssetSize.LARGE, "pizza-large.jpg"),
             15,
             9.00f,
             List.of(),
@@ -98,7 +100,8 @@ public final class ShopFactory {
             ShopType.PASTA,
             Map.of(
                 AssetSize.SMALL, "pasta-small.png",
-                AssetSize.MEDIUM, "pasta-medium.png"),
+                AssetSize.MEDIUM, "pasta-medium.png",
+                AssetSize.LARGE, "pasta-large.jpg"),
             30,
             15.00f,
             List.of(),
@@ -142,7 +145,8 @@ public final class ShopFactory {
             ShopType.GREEK,
             Map.of(
                 AssetSize.SMALL, "greek-small.png",
-                AssetSize.MEDIUM, "greek-medium.png"),
+                AssetSize.MEDIUM, "greek-medium.png",
+                AssetSize.LARGE, "greek-large.jpg"),
             5,
             4.00f,
             greekOffers,
@@ -171,7 +175,8 @@ public final class ShopFactory {
             ShopType.DONUT,
             Map.of(
                 AssetSize.SMALL, "donut-small.png",
-                AssetSize.MEDIUM, "donut-medium.png"),
+                AssetSize.MEDIUM, "donut-medium.png",
+                AssetSize.LARGE, "donut-large.jpg"),
             20,
             5.00f,
             List.of(),
@@ -215,7 +220,8 @@ public final class ShopFactory {
             ShopType.MEXICAN,
             Map.of(
                 AssetSize.SMALL, "mexican-small.png",
-                AssetSize.MEDIUM, "mexican-medium.png"),
+                AssetSize.MEDIUM, "mexican-medium.png",
+                AssetSize.LARGE, "mexican-large.jpg"),
             45,
             10.00f,
             mexicanOffers,

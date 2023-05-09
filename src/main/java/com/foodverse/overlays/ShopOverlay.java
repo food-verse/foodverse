@@ -1,11 +1,13 @@
 package com.foodverse.overlays;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.util.Optional;
 
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import java.awt.Font;
 import com.foodverse.models.Shop;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
@@ -50,18 +52,24 @@ public class ShopOverlay extends Overlay {
         var panel = new JPanel();
         var text = new Heading(name, HeadingSize.L);
         var button = new PillButton(
-            "Close ShopOverlay ->",
-            ButtonSize.XS,
-            ButtonType.SECONDARY,
-            e -> {
-                Router.closeOverlay();
-            });
+                "Close ShopOverlay ->",
+                ButtonSize.XS,
+                ButtonType.SECONDARY,
+                e -> {
+                    Router.closeOverlay();
+                });
+        var offers = new JLabel("Offers");
+
         panel.add(text.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // offers
+        panel.add(offers);
+        offers.setFont(new Font("Courier New", Font.BOLD, 25));
+        offers.setForeground(Color.black);
+
         if (shop.get().offers().isEmpty()) {
             panel.add(new EmptyView().getRef());
         } else {
@@ -78,14 +86,14 @@ public class ShopOverlay extends Overlay {
 
         // RectButton "Bug" to appear the OrderOverlay
         var OrderButton = new RectButton(
-            "Bag",
-            ButtonSize.S,
-            ButtonType.PRIMARY,
-            e -> {
-                Router.closeOverlay();
-                Router.openOverlay(new OrderOverlay(merchant, null));
+                "Bag",
+                ButtonSize.S,
+                ButtonType.PRIMARY,
+                e -> {
+                    Router.closeOverlay();
+                    Router.openOverlay(new OrderOverlay(merchant, null));
 
-            });
+                });
 
         panel.add(OrderButton.getRef());
 

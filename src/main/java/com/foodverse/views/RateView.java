@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import com.foodverse.models.Shop;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.widgets.button.PillButton;
@@ -13,14 +12,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.text.DecimalFormat;
 import java.util.Optional;
-
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 
 public final class RateView extends Widget {
 
     private final Component component;
-
     private PillButton rate1, rate2, rate3, rate4, rate5;
 
     public RateView(Optional<Shop> shop) {
@@ -37,6 +34,7 @@ public final class RateView extends Widget {
         var rateNumberLabel = new JLabel(oldRateAsAString);
 
         rateNumberLabel.setText(oldRate + " ");
+        rateNumberLabel.setFont(new Font("Courier New", Font.BOLD, 24));
 
         var numberOfRates = shop.get().reviews();
 

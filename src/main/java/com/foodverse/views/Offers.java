@@ -3,7 +3,7 @@ package com.foodverse.views;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
+
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,14 +23,8 @@ public final class Offers extends Widget {
 
         var panel = new JPanel();
 
-        var offers = new JLabel(
-                "Offers");
-        offers.setFont(new Font("Courier New", Font.BOLD, 25));
-        offers.setForeground(Color.black);
-
         panel.setPreferredSize(new Dimension(1400, 300));
         panel.setBackground(Color.white);
-        panel.add(offers);
 
         for (int i = 0; i < shop.get().offers().size(); i++) {
 

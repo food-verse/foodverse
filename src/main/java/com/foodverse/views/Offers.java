@@ -3,13 +3,10 @@ package com.foodverse.views;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-
 import java.util.Map;
 import java.util.Optional;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import com.foodverse.models.Shop;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.ui.Button.ButtonSize;
@@ -40,9 +37,9 @@ public final class Offers extends Widget {
                 var offerName = new JLabel();
 
                 if (k == shop.get().offers().get(i).items().size()) {
-                    offerName.setText(item + " ->");
+                    offerName.setText(item + "  -> ");
                 } else {
-                    offerName.setText(item + " + ");
+                    offerName.setText(item + "  + ");
                 }
 
                 var offerQuantity = new JLabel();
@@ -81,12 +78,10 @@ public final class Offers extends Widget {
         // panel.add(scroll1);
 
         component = panel;
-
     }
 
     @Override
     public Component getRef() {
         return component;
     }
-
 }

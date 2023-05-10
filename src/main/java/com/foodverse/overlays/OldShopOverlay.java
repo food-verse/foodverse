@@ -50,17 +50,17 @@ public class OldShopOverlay extends Overlay {
         }
 
         var panel = new JPanel();
-        var text = new Heading(name, HeadingSize.L);
-        var button = new PillButton(
-                "Close ShopOverlay ->",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
+        var nameHeading = new Heading(name, HeadingSize.L);
+
+
+
+        var button =
+                new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
                     Router.closeOverlay();
                 });
         var offers = new JLabel("Offers");
 
-        panel.add(text.getRef());
+        panel.add(nameHeading.getRef());
         panel.add(button.getRef());
         panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -118,15 +118,11 @@ public class OldShopOverlay extends Overlay {
         panel.add(rate.getRef());
 
         // RectButton "Bug" to appear the OrderOverlay
-        var OrderButton = new RectButton(
-                "Bag",
-                ButtonSize.S,
-                ButtonType.PRIMARY,
-                e -> {
-                    Router.closeOverlay();
-                    Router.openOverlay(new OrderOverlay(merchant, addproducts));
+        var OrderButton = new RectButton("Bag", ButtonSize.S, ButtonType.PRIMARY, e -> {
+            Router.closeOverlay();
+            Router.openOverlay(new OrderOverlay(merchant, addproducts));
 
-                });
+        });
 
         panel.add(OrderButton.getRef());
 

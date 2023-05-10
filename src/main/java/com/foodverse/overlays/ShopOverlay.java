@@ -16,6 +16,8 @@ import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.media.VectorImage;
+import com.foodverse.widgets.text.Heading;
+import com.foodverse.widgets.text.Heading.HeadingSize;
 
 public final class ShopOverlay extends Overlay {
 
@@ -38,6 +40,10 @@ public final class ShopOverlay extends Overlay {
             return new EmptyView().getRef();
         }
 
+        // pass the name of the shop in a variable
+        var name = " ";
+        name = shop.get().name();
+
         var column = new Column();
 
         // Remove the default padding of the shop with a temporary panel
@@ -49,34 +55,30 @@ public final class ShopOverlay extends Overlay {
         panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+        // create heading with the name of the shop and put it in the panel
+        var nameHeading = new Heading(name, HeadingSize.L);
+        panel.add(nameHeading.getRef());
+
         //
         var props = ShopProps.from(shop.get());
 
         // Creating image widgets...
-        var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
-                .width(800)
-                .height(200)
-                .build());
+        var thumbnailImage = new Image(props.thumbnail(),
+                new ImageStyle.Builder().width(800).height(200).build());
         var heartImage = new VectorImage(IconAsset.HEART);
         var heartFillImage = new VectorImage(IconAsset.HEART_FILL);
 
         // Add padding to heart
         var paddedImage = new Column();
-        paddedImage.addWidget(thumbnailImage, new EdgeInsets.Builder()
-                .all(0)
-                .build(),
+        paddedImage.addWidget(thumbnailImage, new EdgeInsets.Builder().all(0).build(),
                 Align.FIRST_LINE_START);
 
         var paddedHeartImage = new Column();
-        paddedHeartImage.addWidget(heartImage, new EdgeInsets.Builder()
-                .all(4)
-                .build(),
+        paddedHeartImage.addWidget(heartImage, new EdgeInsets.Builder().all(4).build(),
                 Align.FIRST_LINE_START);
 
         var paddedHeartFillImage = new Column();
-        paddedHeartFillImage.addWidget(heartFillImage, new EdgeInsets.Builder()
-                .all(4)
-                .build(),
+        paddedHeartFillImage.addWidget(heartFillImage, new EdgeInsets.Builder().all(4).build(),
                 Align.FIRST_LINE_START);
 
         heartImage.onPressed(e -> {
@@ -95,15 +97,12 @@ public final class ShopOverlay extends Overlay {
 
         panel.add(heartImage.getRef());
 
-        column.addWidget(thumbnailImage, new EdgeInsets.Builder()
-                .all(0)
-                .build(),
+        column.addWidget(thumbnailImage, new EdgeInsets.Builder().all(0).build(),
                 Align.FIRST_LINE_START);
-        column.addComponent(panel, new EdgeInsets.Builder()
-                .all(0)
-                .build(),
-                Align.LAST_LINE_START);
+        column.addComponent(panel, new EdgeInsets.Builder().all(0).build(), Align.LAST_LINE_START);
         return column.getRef();
     }
+
+
 
 }

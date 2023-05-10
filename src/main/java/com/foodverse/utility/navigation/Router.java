@@ -76,10 +76,10 @@ public final class Router {
         overlays.push(newOverlay);
         newOverlay.inflate(newOverlay);
         if (oldOverlay != null) {
-            newOverlay.open(oldOverlay.getFrame());
+            newOverlay.open();
             oldOverlay.close();
         } else {
-            newOverlay.open(frame);
+            newOverlay.open();
         }
     }
 

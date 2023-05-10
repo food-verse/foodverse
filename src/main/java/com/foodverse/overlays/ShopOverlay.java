@@ -142,7 +142,7 @@ public final class ShopOverlay extends Overlay {
 
             var itemPanel = new JPanel();
 
-            itemPanel.setPreferredSize(new Dimension(1500, 60));
+            itemPanel.setPreferredSize(new Dimension(200, 40));
 
             var x = shop.get().menu().get(i).name();
             var price = shop.get().menu().get(i).price();
@@ -164,7 +164,6 @@ public final class ShopOverlay extends Overlay {
 
         }
 
-        panel.setPreferredSize(new Dimension(1400, 300));
         panel.setBackground(Color.white);
 
         // Rate

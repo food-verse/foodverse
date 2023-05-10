@@ -51,7 +51,7 @@ public final class ProfileInfoOverlay extends Overlay {
                 ButtonType.PRIMARY,
                 e -> {
                     // check if the data given by the user are valid. If yes it updates the user, if not it shows an error message
-                    if ((!emailField.getText().contains("@")) && (!emailField.getText().endsWith(".com"))) {
+                    if ((!emailField.getText().contains("@")) || (!emailField.getText().endsWith(".com"))) {
                         JOptionPane.showMessageDialog(null, "Email address is not valid", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     else if (!isValidNumber(phoneNumberField.getText())) {
@@ -60,9 +60,9 @@ public final class ProfileInfoOverlay extends Overlay {
                     else {
                         // creating a new user with the updated data
                         User updatedUser = user.withEmail(emailField.getText())
-                                .withId(idField.getText())
-                                .withName(nameField.getText())
-                                .withPhone(phoneNumberField.getText());
+                                               .withId(idField.getText())
+                                               .withName(nameField.getText())
+                                               .withPhone(phoneNumberField.getText());
 
                         // updating the user in the database
                         db.updateUser(updatedUser);

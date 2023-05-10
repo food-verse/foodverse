@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

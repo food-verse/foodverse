@@ -1,6 +1,7 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.util.Map;
 import java.util.Optional;
 
@@ -13,17 +14,19 @@ import com.foodverse.models.User;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
+import com.foodverse.utility.ui.Colors;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.views.AddressView;
 import com.foodverse.views.AmountView;
 import com.foodverse.views.PaymentView;
 import com.foodverse.views.ProductView;
-import com.foodverse.views.TipsView;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
+import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Heading.HeadingSize;
+import com.foodverse.widgets.text.Label.LabelSize;
 
 public final class OrderOverlay extends Overlay {
 
@@ -94,9 +97,44 @@ public final class OrderOverlay extends Overlay {
         panel.add(products.getRef());
 
         // Tips
-        TipsView tips = new TipsView();
-        panel.add(tips.getRef());
+        // TipsView tips = new TipsView();
+        // panel.add(tips.getRef());
 
+        var tips = new JPanel();
+        tips.setPreferredSize(new Dimension(1200, 80));
+        tips.setBackground(Colors.white);
+        var tipLabel = new Label("Tips:", LabelSize.L);
+        tips.add(tipLabel.getRef());
+
+        var tip1 = new PillButton("0.5$",
+                ButtonSize.XS,
+                ButtonType.SECONDARY,
+                e -> {
+
+                });
+        var tip2 = new PillButton("1$",
+                ButtonSize.XS,
+                ButtonType.SECONDARY,
+                e -> {
+                });
+        var tip3 = new PillButton("2$",
+                ButtonSize.XS,
+                ButtonType.SECONDARY,
+                e -> {
+                });
+        var tip4 = new PillButton("5$",
+                ButtonSize.XS,
+                ButtonType.SECONDARY,
+                e -> {
+                });
+
+        tips.add(tip1.getRef());
+        tips.add(tip2.getRef());
+        tips.add(tip3.getRef());
+        tips.add(tip4.getRef());
+        panel.add(tips);
+
+        // Check out button
         var checkoutButton = new RectButton("Checkout ->",
                 ButtonSize.S,
                 ButtonType.PRIMARY,

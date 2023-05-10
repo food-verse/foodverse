@@ -52,20 +52,24 @@ public class OldShopOverlay extends Overlay {
         var panel = new JPanel();
         var nameHeading = new Heading(name, HeadingSize.L);
 
+        panel.add(nameHeading.getRef());
+
+        panel.setOpaque(false);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
 
 
         var button =
                 new PillButton("Close ShopOverlay ->", ButtonSize.XS, ButtonType.SECONDARY, e -> {
                     Router.closeOverlay();
                 });
-        var offers = new JLabel("Offers");
 
-        panel.add(nameHeading.getRef());
+
         panel.add(button.getRef());
-        panel.setOpaque(false);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // offers
+        var offers = new JLabel("Offers");
+
         panel.add(offers);
         offers.setFont(new Font("Courier New", Font.BOLD, 25));
         offers.setForeground(Color.black);
@@ -75,6 +79,8 @@ public class OldShopOverlay extends Overlay {
         } else {
             panel.add(new Offers(shop).getRef());
         }
+
+
 
         // Create a map for the choosen items
         Map<String, Integer> addproducts = new HashMap<>();

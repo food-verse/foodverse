@@ -1,6 +1,5 @@
 package com.foodverse.utility.navigation;
 
-import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.function.Consumer;
@@ -18,9 +17,6 @@ public abstract class Overlay extends Widget implements Identifiable {
     // The underlying frame holding our widgets
     private final JFrame frame = new JFrame();
 
-    // The preferred size for the page
-    private final Dimension dimension;
-
     // A callback to be executed when the window is closed
     private final Consumer<WindowEvent> onClose;
 
@@ -34,10 +30,11 @@ public abstract class Overlay extends Widget implements Identifiable {
      */
     protected Overlay(int width, int height, Consumer<WindowEvent> onClose) {
         this.onClose = onClose;
-        dimension = new Dimension(width, height);
         frame.getContentPane().setBackground(Shell.getOptions().getBackgroundColor());
+        frame.setSize(width, height);
         frame.setTitle(getId());
         frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.addWindowListener(new OverlayListener());
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
@@ -76,28 +73,14 @@ public abstract class Overlay extends Widget implements Identifiable {
     }
 
     /**
-     * It automatically sizes the window to fit its contents if the dimensions are smaller than the
-     * preferred size, and sets the window size to match the dimensions if they are greater than or
-     * equal to the preferred size. This sets the size of the frame to match the dimensions
-     * provided.
-     * <p>
-     * Finally, the setVisible() method is called on the frame object with the argument true, which
-     * makes the frame visible to the user.
+     * Opens the overlay by setting its frame's visibility to true.
      */
-    public void open(JFrame oldFrame) {
-        if (dimension.getWidth() < frame.getPreferredSize().getWidth()
-            || dimension.getHeight() < frame.getPreferredSize().getHeight()) {
-            frame.pack();
-        } else {
-            frame.setSize(dimension);
-        }
-        frame.setLocationRelativeTo(oldFrame);
+    public void open() {
         frame.setVisible(true);
     }
 
     /**
-     * Hides the graphical user interface window by setting the visibility of the page's frame to
-     * false.
+     * Closes the overlay by setting its frame's visibility to false.
      */
     public void close() {
         frame.setVisible(false);

@@ -2,11 +2,11 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import java.util.Optional;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import com.foodverse.models.User;
-import com.foodverse.utility.common.UIConstants;
+import com.foodverse.pages.HomePage;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -21,23 +21,20 @@ public class ProfileOverlay extends Overlay {
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
+    
+    private User user;
 
     @Override
     public Component getRef() {
 
         // Getting the authenticated user...
-        db.getAuthenticatedUser().ifPresentOrElse(signedUser -> {
-            // System.out.println(signedUser);
-        }, () -> {
-            // System.out.println("Authenticated user not found");
-        });
-
-        // Alternative
         Optional<User> signedUser = db.getAuthenticatedUser();
         if (signedUser.isPresent()) {
-            // System.out.println(signedUser.get());
+            user = signedUser.get();
         } else {
-            // System.out.println("Authenticated user not found");
+            JOptionPane.showMessageDialog(null, "Authenticated User is not found", "Error", JOptionPane.ERROR_MESSAGE);
+            close();
+            Router.pushPage(Pages.HOME);
         }
 
         // Creating the page panel
@@ -50,14 +47,14 @@ public class ProfileOverlay extends Overlay {
             ButtonSize.S,
             ButtonType.SECONDARY,
             e -> {
-                Router.openOverlay(new ProfileInfoOverlay());
+                Router.openOverlay(new ProfileInfoOverlay(user, db));
             });
         var openAddressesPage = new RectButton(
             "Addresses ->",
             ButtonSize.S,
             ButtonType.SECONDARY,
             e -> {
-                Router.openOverlay(new AddressesOverlay());
+                Router.openOverlay(new AddressesOverlay(user, db));
             });
         var openFavoritesPage = new RectButton(
             "Favorites ->",
@@ -71,7 +68,7 @@ public class ProfileOverlay extends Overlay {
             ButtonSize.S,
             ButtonType.SECONDARY,
             e -> {
-                Router.openOverlay(new HistoryOverlay());
+                Router.openOverlay(new HistoryOverlay(user, db));
             });
 
         // Signing out...

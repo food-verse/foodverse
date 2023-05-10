@@ -32,25 +32,25 @@ public final class ShopCard extends Widget {
     public Component getRef() {
 
         var minOrder = String.format(
-                "%d’ | Minimum %.2f€",
-                props.prepTime(),
-                props.minOrder());
+            "%d’ | Minimum %.2f€",
+            props.prepTime(),
+            props.minOrder());
 
         // Creating text widgets...
         var shopNameText = new Label(props.name(), LabelSize.L);
         var ratingText = new Label(
-                String.valueOf(props.rating()),
-                LabelSize.S,
-                Colors.orange);
+            String.valueOf(props.rating()),
+            LabelSize.S,
+            Colors.orange);
         var reviewsText = new Paragraph(
-                String.format("(%s)", props.reviews()),
-                ParagraphSize.XS,
-                Colors.gray600);
+            String.format("(%s)", props.reviews()),
+            ParagraphSize.XS,
+            Colors.gray600);
         var shopTypeText = new Label(props.type().toString(), LabelSize.XS, Colors.gray600);
         var minOrderText = new Label(minOrder, LabelSize.XS, Colors.gray600);
 
         // Creating image widgets...
-        var starImage = new VectorImage(IconAsset.STAR);
+        var starImage = new VectorImage(IconAsset.STAR_SMALL_FILL);
         var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
             .width(200)
             .height(100)

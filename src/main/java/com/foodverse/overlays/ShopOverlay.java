@@ -59,9 +59,6 @@ public final class ShopOverlay extends Overlay {
         // var name = " ";
         var name = shop.get().name();
 
-        // props.name();
-
-
         var column = new Column();
 
         // Remove the default padding of the shop with a temporary panel
@@ -119,7 +116,6 @@ public final class ShopOverlay extends Overlay {
         panel.add(heartImage.getRef());
 
         // offers
-        // var offers = new JLabel("Offers");
         var offersTile = new ListTile("Offers");
 
         panel.add(offersTile.getRef());
@@ -135,11 +131,12 @@ public final class ShopOverlay extends Overlay {
         // props.offers();
 
         // Menu
-        var menu = new JLabel("Menu  ");
-        menu.setFont(new Font("Courier New", Font.BOLD, 25));
-        menu.setForeground(Color.black);
+        var menuTile = new ListTile("Menu");
+        // var menu = new JLabel("Menu ");
+        // menuTitle.setFont(new Font("Courier New", Font.BOLD, 25));
+        // menutitle.setForeground(Color.black);
 
-        panel.add(menu);
+        panel.add(menuTile.getRef());
 
         for (int i = 0; i < shop.get().menu().size(); i++) {
 
@@ -151,7 +148,7 @@ public final class ShopOverlay extends Overlay {
             var price = shop.get().menu().get(i).price();
             var priceAsAString = Float.toString(price);
             var menuName = new JLabel(x);
-            var menuPrice = new JLabel(priceAsAString);
+            var menuPrice = new JLabel(priceAsAString + " \u20AC");
 
             var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
                 addproducts.put(x, 1);
@@ -160,6 +157,8 @@ public final class ShopOverlay extends Overlay {
             itemPanel.add(menuName);
             itemPanel.add(menuPrice);
             itemPanel.add(productAddButton.getRef());
+
+            itemPanel.setBackground(Color.white);
 
             panel.add(itemPanel);
 

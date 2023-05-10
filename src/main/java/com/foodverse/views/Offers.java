@@ -29,6 +29,7 @@ public final class Offers extends Widget {
 
             Map<String, Integer> items = shop.get().offers().get(i).items();
             JLabel offerTotal = new JLabel();
+
             // print the contents of the items map
             var k = 0;
             for (String item : items.keySet()) {
@@ -37,9 +38,10 @@ public final class Offers extends Widget {
                 var offerName = new JLabel();
 
                 if (k == shop.get().offers().get(i).items().size()) {
-                    offerName.setText(item + "  -> ");
+                    // offerName.setText("<html>" + item + "<br>" + "</html>");
+                    offerName.setText(item + " ");
                 } else {
-                    offerName.setText(item + "  + ");
+                    offerName.setText(item + "  & ");
                 }
 
                 var offerQuantity = new JLabel();
@@ -50,7 +52,7 @@ public final class Offers extends Widget {
                 var price = shop.get().menu().get(i).price();
                 var priceAsAString = Float.toString(price);
 
-                offerTotal.setText(priceAsAString);
+                offerTotal.setText(priceAsAString + " \u20AC");
                 offerQuantity.setText(quantityAsAString);
 
                 itemPanel.add(offerQuantity);
@@ -70,6 +72,7 @@ public final class Offers extends Widget {
 
             itemPanel.setPreferredSize(new Dimension(1500, 60));
 
+            itemPanel.setBackground(Color.white);
         }
 
         // JScrollPane scroll1 = new JScrollPane(panel,

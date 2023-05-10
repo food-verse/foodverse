@@ -3,9 +3,12 @@ package com.foodverse.widgets.media;
 public enum IconAsset {
     AVATAR("avatar.svg"),
     BRAND("brand.svg"),
-    HEART("heart.svg"),
     HEART_FILL("heart-fill.svg"),
-    STAR("rating-star.svg");
+    HEART("heart.svg"),
+    LOCATION("location.svg"),
+    STAR_MEDIUM_FILL("star_medium_fill.svg"),
+    STAR_MEDIUM_OUTLINE("star_medium_outline.svg"),
+    STAR_SMALL_FILL("star_small_fill.svg");
 
     private final String fileName;
 

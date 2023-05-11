@@ -1,5 +1,6 @@
 package com.foodverse.utility.navigation;
 
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.function.Consumer;
@@ -20,6 +21,11 @@ public abstract class Overlay extends Widget implements Identifiable {
     // A callback to be executed when the window is closed
     private final Consumer<WindowEvent> onClose;
 
+    // The preferred size for the overlay
+    private final Dimension dimension;
+
+    private boolean shouldPack = false;
+
     /**
      * Creates a new {@link Overlay} with the specified width, height and a callback to be executed
      * when the window is closed.
@@ -30,11 +36,10 @@ public abstract class Overlay extends Widget implements Identifiable {
      */
     protected Overlay(int width, int height, Consumer<WindowEvent> onClose) {
         this.onClose = onClose;
+        this.dimension = new Dimension(width, height);
         frame.getContentPane().setBackground(Shell.getOptions().getBackgroundColor());
-        frame.setSize(width, height);
         frame.setTitle(getId());
         frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
         frame.addWindowListener(new OverlayListener());
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
@@ -54,6 +59,7 @@ public abstract class Overlay extends Widget implements Identifiable {
      */
     protected Overlay() {
         this(0, 0, null);
+        shouldPack = true;
     }
 
     /**
@@ -76,6 +82,12 @@ public abstract class Overlay extends Widget implements Identifiable {
      * Opens the overlay by setting its frame's visibility to true.
      */
     public void open() {
+        if (shouldPack) {
+            frame.pack();
+        } else {
+            frame.setSize(dimension);
+        }
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

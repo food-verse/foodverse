@@ -10,7 +10,6 @@ import java.util.Optional;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.Font;
 import com.foodverse.models.Shop;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -115,6 +114,15 @@ public final class ShopOverlay extends Overlay {
 
         panel.add(heartImage.getRef());
 
+        // preparation time
+        var prepTime = new ListTile(
+                shop.get().type() + " " + props.prepTime() + "'  |  Minimum " + props.minOrder() + "$");
+        panel.add(prepTime.getRef());
+
+        // Shop's address
+        // var shopsAddress = new ListTile(props.address());
+        panel.add(new EmptyView(props.address()).getRef());
+
         // offers
         var offersTile = new ListTile("Offers");
 
@@ -171,7 +179,7 @@ public final class ShopOverlay extends Overlay {
         panel.add(rate.getRef());
 
         // RectButton "Cart" to appear the OrderOverlay
-        var OrderButton = new RectButton("Cart", ButtonSize.S, ButtonType.PRIMARY, e -> {
+        var OrderButton = new RectButton("Cart", ButtonSize.L, ButtonType.PRIMARY, e -> {
             Router.closeOverlay();
             Router.openOverlay(new OrderOverlay(merchant, addproducts));
 

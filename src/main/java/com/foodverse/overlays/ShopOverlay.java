@@ -10,7 +10,6 @@ import java.util.Optional;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.Font;
 import com.foodverse.models.Shop;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;

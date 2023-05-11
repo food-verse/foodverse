@@ -1,9 +1,9 @@
-package com.foodverse.pages;
+package com.foodverse.overlays;
 
 import java.awt.Component;
 import javax.swing.JPanel;
 
-import com.foodverse.utility.navigation.Page;
+import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
@@ -13,36 +13,30 @@ import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 
-public final class SignInPage extends Page {
+public final class SignInOverlay extends Overlay {
 
     private final Component component;
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
 
-    public SignInPage() {
+    public SignInOverlay() {
+        super(600, 524);
 
         // Heading
         var panel = new JPanel();
-        var text = new Heading("Sign In", HeadingSize.L);
-        var openOnboardingPage = new RectButton(
-            "<- Back",
-            ButtonSize.S,
-            ButtonType.SECONDARY,
-            e -> {
-                Router.pushPage(Pages.ONBOARDING);
-            });
+        var text = new Heading("Sign In", HeadingSize.XXL);
         var signInButton = new RectButton(
-            String.format("%s ->", getId()),
-            ButtonSize.S,
+            "Sign In",
+            ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
                 if (db.signIn("emilysmith123", "XyZ987!")) {
                     Router.pushPage(Pages.HOME);
+                    Router.closeOverlay();
                 }
             });
         panel.add(text.getRef());
-        panel.add(openOnboardingPage.getRef());
         panel.add(signInButton.getRef());
         panel.setOpaque(false);
         component = panel;

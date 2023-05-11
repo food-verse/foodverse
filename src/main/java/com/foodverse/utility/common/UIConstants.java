@@ -2,8 +2,7 @@ package com.foodverse.utility.common;
 
 public final class UIConstants {
 
-    private UIConstants() {
-    }
+    private UIConstants() {}
 
     public static final String INVALID_CREDENTIALS_TITLE = "Invalid Credentials";
     public static final String INVALID_CREDENTIALS_DESCRIPTION =

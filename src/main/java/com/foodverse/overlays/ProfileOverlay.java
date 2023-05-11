@@ -2,11 +2,10 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import java.util.Optional;
-
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import com.foodverse.models.User;
-import com.foodverse.pages.HomePage;
+import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -24,9 +23,12 @@ public class ProfileOverlay extends Overlay {
     
     private User user;
 
-    @Override
-    public Component getRef() {
+    private Component component;
 
+    public ProfileOverlay() {
+
+        super(400, 400);
+        
         // Getting the authenticated user...
         Optional<User> signedUser = db.getAuthenticatedUser();
         if (signedUser.isPresent()) {
@@ -54,7 +56,7 @@ public class ProfileOverlay extends Overlay {
             ButtonSize.S,
             ButtonType.SECONDARY,
             e -> {
-                Router.openOverlay(new AddressesOverlay(user, db));
+                Router.openOverlay(new AddressesOverlay());
             });
         var openFavoritesPage = new RectButton(
             "Favorites ->",
@@ -68,7 +70,7 @@ public class ProfileOverlay extends Overlay {
             ButtonSize.S,
             ButtonType.SECONDARY,
             e -> {
-                Router.openOverlay(new HistoryOverlay(user, db));
+                Router.openOverlay(new HistoryOverlay());
             });
 
         // Signing out...
@@ -102,8 +104,12 @@ public class ProfileOverlay extends Overlay {
         panel.add(openHistoryPage.getRef());
         panel.add(signOutButton.getRef());
         panel.setOpaque(false);
-        return panel;
+        component = panel;
+    }
 
+    @Override
+    public Component getRef() {
+        return component;
     }
 
 }

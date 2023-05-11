@@ -191,7 +191,7 @@ public final class ShopOverlay extends Overlay {
 
         column.addWidget(thumbnailImage, new EdgeInsets.Builder().all(0).build(),
                 Align.FIRST_LINE_START);
-        column.addComponent(panel, new EdgeInsets.Builder().all(0).build(), Align.LAST_LINE_START);
+        column.addComponent(panel, new EdgeInsets.Builder().left(150).build(), Align.LAST_LINE_START);
         // return column.getRef();
         return new ScrollView(column.getRef()).getRef();
     }

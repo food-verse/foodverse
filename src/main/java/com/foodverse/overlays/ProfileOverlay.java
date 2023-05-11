@@ -1,9 +1,10 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.util.Optional;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.navigation.Overlay;
@@ -13,6 +14,8 @@ import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;
+import com.foodverse.widgets.modal.Alert;
+import com.foodverse.widgets.modal.Dialog;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 
@@ -20,23 +23,22 @@ public class ProfileOverlay extends Overlay {
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
-    
+
     private User user;
 
-    private Component component;
+    private final Component component;
 
     public ProfileOverlay() {
 
         super(400, 400);
-        
+
         // Getting the authenticated user...
         Optional<User> signedUser = db.getAuthenticatedUser();
         if (signedUser.isPresent()) {
             user = signedUser.get();
         } else {
-            JOptionPane.showMessageDialog(null, "Authenticated User is not found", "Error", JOptionPane.ERROR_MESSAGE);
-            close();
-            Router.pushPage(Pages.HOME);
+            Router.openOverlay(new Alert("Error", "Authenticated User is not found"));
+            Router.closeOverlay();
         }
 
         // Creating the page panel
@@ -79,21 +81,7 @@ public class ProfileOverlay extends Overlay {
             ButtonSize.S,
             ButtonType.PRIMARY,
             e -> {
-                Object[] options = {"Cancel", "Sign Out"};
-                var option = JOptionPane.showOptionDialog(
-                    null,
-                    UIConstants.SIGN_OUT_CONFIRM_MESSAGE,
-                    "Sign Out",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    options,
-                    options[1]);
-                if (option == JOptionPane.NO_OPTION) {
-                    db.signOut();
-                    Router.closeOverlay();
-                    Router.pushPage(Pages.LOGIN);
-                }
+                signOutAction(e);
             });
 
         // adding all the buttons to the panel
@@ -110,6 +98,18 @@ public class ProfileOverlay extends Overlay {
     @Override
     public Component getRef() {
         return component;
+    }
+
+    private void signOutAction(ActionEvent e) {
+        Router.openOverlay(new Dialog(
+            "Sign Out",
+            UIConstants.SIGN_OUT_CONFIRM_MESSAGE,
+            "Sign Out",
+            event -> {
+                db.signOut();
+                Router.closeOverlay();
+                Router.pushPage(Pages.ONBOARDING);
+            }));
     }
 
 }

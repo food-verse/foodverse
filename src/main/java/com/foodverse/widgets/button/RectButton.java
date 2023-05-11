@@ -7,7 +7,7 @@ import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.ui.Button;
 import com.foodverse.utility.ui.ButtonStyle;
 import com.foodverse.utility.ui.ButtonTheme;
-import com.foodverse.utility.ui.TextStyle;
+import com.foodverse.utility.ui.FontStyle;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
 
@@ -36,32 +36,32 @@ public final class RectButton extends Button {
 
     public static ButtonStyle getButtonStyle(boolean isEnabled, ButtonSize buttonSize,
             ButtonTheme buttonTheme, boolean isMono) {
-        final TextStyle textStyle;
+        final FontStyle fontStyle;
         final EdgeInsets padding = new EdgeInsets.Builder().symmetric(6, 10).build();
         final int borderRadius = 8;
         switch (buttonSize) {
-            default:
             case XS:
-                textStyle = Label.getTextStyle(LabelSize.XS, isMono);
+                fontStyle = Label.getFontStyle(LabelSize.XS, isMono);
                 break;
             case S:
-                textStyle = Label.getTextStyle(LabelSize.S, isMono);
+                fontStyle = Label.getFontStyle(LabelSize.S, isMono);
                 break;
             case M:
-                textStyle = Label.getTextStyle(LabelSize.M, isMono);
+                fontStyle = Label.getFontStyle(LabelSize.M, isMono);
                 break;
+            default:
             case L:
-                textStyle = Label.getTextStyle(LabelSize.L, isMono);
+                fontStyle = Label.getFontStyle(LabelSize.L, isMono);
                 break;
         }
         return new ButtonStyle.Builder()
-                .buttonTheme(buttonTheme)
-                .textStyle(textStyle)
-                .padding(padding)
-                .minimumWidth(52)
-                .borderRadius(borderRadius)
-                .isEnabled(isEnabled)
-                .build();
+            .buttonTheme(buttonTheme)
+            .textStyle(fontStyle)
+            .padding(padding)
+            .minimumWidth(52)
+            .borderRadius(borderRadius)
+            .isEnabled(isEnabled)
+            .build();
     }
 
 }

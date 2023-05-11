@@ -21,7 +21,7 @@ final class BaseButton extends JButton {
     }
 
     public void init() {
-        setFont(new Font(buttonStyle.getTextStyle().getAttributes()));
+        setFont(new Font(buttonStyle.getFontStyle().getAttributes()));
         setPreferredSize(getButtonSize());
         setMinimumSize(getButtonSize());
         setMaximumSize(getButtonSize());

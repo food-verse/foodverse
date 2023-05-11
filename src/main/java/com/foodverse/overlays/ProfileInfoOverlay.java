@@ -22,6 +22,8 @@ public final class ProfileInfoOverlay extends Overlay {
     private Component component;
 
     public ProfileInfoOverlay(User user, Database db) {
+        
+        super(400, 400);
 
         // creating the page panel
         var panel = new JPanel();

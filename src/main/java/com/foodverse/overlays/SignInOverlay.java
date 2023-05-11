@@ -3,6 +3,7 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import javax.swing.JPanel;
 
+import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -10,6 +11,7 @@ import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;
+import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 
@@ -34,6 +36,11 @@ public final class SignInOverlay extends Overlay {
                 if (db.signIn("emilysmith123", "XyZ987!")) {
                     Router.pushPage(Pages.HOME);
                     Router.closeOverlay();
+                } else {
+                    Router.openOverlay(new Alert(
+                        UIConstants.INVALID_CREDENTIALS_TITLE,
+                        UIConstants.INVALID_CREDENTIALS_DESCRIPTION)
+                    );
                 }
             });
         panel.add(text.getRef());

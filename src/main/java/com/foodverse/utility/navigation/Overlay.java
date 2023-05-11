@@ -81,13 +81,13 @@ public abstract class Overlay extends Widget implements Identifiable {
     /**
      * Opens the overlay by setting its frame's visibility to true.
      */
-    public void open() {
+    public void open(JFrame oldFrame) {
         if (shouldPack) {
             frame.pack();
         } else {
             frame.setSize(dimension);
         }
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(oldFrame);
         frame.setVisible(true);
     }
 

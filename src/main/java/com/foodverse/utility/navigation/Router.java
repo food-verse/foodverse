@@ -27,7 +27,8 @@ public final class Router {
     // A reference to the main frame of the application
     private static final JFrame frame = Shell.getFrame();
 
-    private Router() {}
+    private Router() {
+    }
 
     /**
      * Adds the specified page to the router.
@@ -66,21 +67,9 @@ public final class Router {
      * @param newOverlay The overlay to be shown
      */
     public static void openOverlay(Overlay newOverlay) {
-        Overlay oldOverlay = null;
-        try {
-            oldOverlay = overlays.pop();
-            overlays.push(oldOverlay);
-        } catch (NoSuchElementException e) {
-            // Intentionally left empty
-        }
         overlays.push(newOverlay);
         newOverlay.inflate(newOverlay);
-        if (oldOverlay != null) {
-            newOverlay.open();
-            oldOverlay.close();
-        } else {
-            newOverlay.open();
-        }
+        newOverlay.open(frame);
     }
 
     /**
@@ -89,12 +78,6 @@ public final class Router {
     public static void closeOverlay() {
         try {
             Overlay oldOverlay = overlays.pop();
-            try {
-                Overlay prevOverlay = overlays.pop();
-                openOverlay(prevOverlay);
-            } catch (NoSuchElementException e) {
-                // Intentionally left empty
-            }
             oldOverlay.close();
         } catch (NoSuchElementException e) {
             logger.log(Level.WARNING, "Failed to close the overlay because the stack is empty.");

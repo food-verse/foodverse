@@ -4,8 +4,6 @@ import javax.swing.SwingUtilities;
 
 import com.foodverse.pages.HomePage;
 import com.foodverse.pages.OnboardingPage;
-import com.foodverse.pages.SignUpPage;
-import com.foodverse.pages.SignInPage;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.navigation.Shell;
@@ -46,8 +44,6 @@ public final class App {
             Shell.render();
 
             // Add the rest of the pages to the router
-            Router.addPage(new SignInPage());
-            Router.addPage(new SignUpPage());
             Router.addPage(new HomePage());
 
         });

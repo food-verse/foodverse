@@ -30,7 +30,7 @@ public final class TextField extends JTextField {
         false);
 
     public TextField() {
-        setFont(new Font(buttonStyle.getTextStyle().getAttributes()));
+        setFont(new Font(buttonStyle.getFontStyle().getAttributes()));
         setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
         setOpaque(false);
         setEnabled(isEnabled);

@@ -9,7 +9,7 @@ import com.foodverse.widgets.text.Label.LabelSize;
 public final class ButtonStyle {
 
     private final ButtonTheme buttonTheme;
-    private final TextStyle textStyle;
+    private final FontStyle fontStyle;
     private final EdgeInsets padding;
     private final int minimumWidth;
     private final int borderRadius;
@@ -27,7 +27,7 @@ public final class ButtonStyle {
             .disabledBackgroundColor(Colors.buttonDisabledFill)
             .disabledTextColor(Colors.buttonDisabledText)
             .build();
-        private TextStyle textStyle = Label.getTextStyle(LabelSize.XS);
+        private FontStyle fontStyle = Label.getFontStyle(LabelSize.XS, false);
         private EdgeInsets padding = new EdgeInsets.Builder().build();
         private int minimumWidth = 0;
         private int borderRadius = 8;
@@ -38,8 +38,8 @@ public final class ButtonStyle {
             return this;
         }
 
-        public Builder textStyle(TextStyle textStyle) {
-            this.textStyle = textStyle;
+        public Builder textStyle(FontStyle fontStyle) {
+            this.fontStyle = fontStyle;
             return this;
         }
 
@@ -70,7 +70,7 @@ public final class ButtonStyle {
 
     private ButtonStyle(Builder builder) {
         this.buttonTheme = builder.buttonTheme;
-        this.textStyle = builder.textStyle;
+        this.fontStyle = builder.fontStyle;
         this.padding = builder.padding;
         this.minimumWidth = builder.minimumWidth;
         this.borderRadius = builder.borderRadius;
@@ -109,8 +109,8 @@ public final class ButtonStyle {
         return buttonTheme.getDisabledTextColor();
     }
 
-    public TextStyle getTextStyle() {
-        return textStyle;
+    public FontStyle getFontStyle() {
+        return fontStyle;
     }
 
     public EdgeInsets getPadding() {

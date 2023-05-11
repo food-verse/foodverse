@@ -1,37 +1,27 @@
 package com.foodverse.utility.ui;
 
 import java.awt.Color;
-import java.awt.font.TextAttribute;
-import java.util.Map;
-
-import com.foodverse.utility.navigation.Shell;
+import javax.swing.SwingConstants;
 
 public final class TextStyle {
 
-    private final String fontFamily;
-    private final FontWeight fontWeight;
-    private final int fontSize;
+    private final TextAlign textAlign;
+    private final boolean isMono;
     private final Color color;
 
     public static class Builder {
 
-        private String fontFamily = Shell.getOptions().getDefaultFont();
-        private FontWeight fontWeight = FontWeight.REGULAR;
-        private int fontSize = 12;
+        private TextAlign textAlign = TextAlign.LEFT;
+        private boolean isMono = false;
         private Color color = Colors.black;
 
-        public Builder family(String fontFamily) {
-            this.fontFamily = fontFamily;
+        public Builder textAlign(TextAlign textAlign) {
+            this.textAlign = textAlign;
             return this;
         }
 
-        public Builder weight(FontWeight fontWeight) {
-            this.fontWeight = fontWeight;
-            return this;
-        }
-
-        public Builder size(int fontSize) {
-            this.fontSize = fontSize;
+        public Builder isMono(boolean isMono) {
+            this.isMono = isMono;
             return this;
         }
 
@@ -46,37 +36,37 @@ public final class TextStyle {
     }
 
     private TextStyle(Builder builder) {
-        this.fontFamily = builder.fontFamily;
-        this.fontWeight = builder.fontWeight;
-        this.fontSize = builder.fontSize;
+        this.textAlign = builder.textAlign;
         this.color = builder.color;
+        this.isMono = builder.isMono;
+    }
+
+    public TextAlign getTextAlign() {
+        return textAlign;
     }
 
     public Color getColor() {
         return color;
     }
 
-    public Map<TextAttribute, Object> getAttributes() {
-        return Map.of(
-            TextAttribute.FAMILY, fontFamily,
-            TextAttribute.WEIGHT, fontWeight.getWeight(),
-            TextAttribute.SIZE, fontSize,
-            TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
+    public boolean isMono() {
+        return isMono;
     }
 
-    public enum FontWeight {
-        LIGHT(0.75f), REGULAR(1.0f), MEDIUM(1.5f), SEMIBOLD(1.75f), BOLD(2.0f);
+    public enum TextAlign {
+        LEFT(SwingConstants.LEFT), CENTER(SwingConstants.CENTER), RIGHT(SwingConstants.RIGHT);
 
-        private final Float weight;
+        private final int alignment;
 
-        FontWeight(Float weight) {
-            this.weight = weight;
+        TextAlign(int alignment) {
+            this.alignment = alignment;
         }
 
-        public Float getWeight() {
-            return weight;
+        public int getAlignment() {
+            return alignment;
         }
 
     }
 
 }
+

@@ -60,7 +60,6 @@ public final class ProfileInfoOverlay extends Overlay {
                     else {
                         // creating a new user with the updated data
                         User updatedUser = user.withEmail(emailField.getText())
-                                               .withId(idField.getText())
                                                .withName(nameField.getText())
                                                .withPhone(phoneNumberField.getText());
 

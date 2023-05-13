@@ -52,7 +52,7 @@ public final class SignInOverlay extends Overlay {
 
                 // JOptionPane.showMessageDialog(null, "Email:" + textEmailField.getText() + "
                 // Password: " + textPasswordField.getText());
-                if (db.signIn(textEmailField.getText(), textPasswordField.getText())) {
+                if (db.signIn(textEmailField.getText(), new String(textPasswordField.getPassword()))) {
 
                     Router.pushPage(Pages.HOME);
                     Router.closeOverlay();

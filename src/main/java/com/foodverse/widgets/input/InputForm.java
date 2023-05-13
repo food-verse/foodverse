@@ -1,23 +1,23 @@
 package com.foodverse.widgets.input;
 
 import java.awt.Component;
+import javax.swing.JTextField;
 
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.ui.Colors;
-import com.foodverse.utility.ui.TextField;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.text.Label;
-import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Label.LabelSize;
+import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
 public final class InputForm extends Widget {
 
     private final Column formWidget = new Column();
 
-    public InputForm(String label, String caption, TextField textField) {
+    public InputForm(String label, String caption, JTextField textField) {
 
         // Creating text widgets...
         var labelText = new Label(label, LabelSize.S);

@@ -61,7 +61,6 @@ public final class UserFactory {
 
         // Creating the user...
         var user = new User(
-            "emilysmith123",
             "Emily Smith",
             new ArrayList<>(List.of(
                 "123 Main St, Anytown, USA 12345",

@@ -24,6 +24,24 @@ public final class UIConstants {
             + "may reset your password or contact our<br>"
             + "support team for further assistance.</html>";
 
+    //Invalid credentials format for sign up
+    public static final String INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE = "Invalid Data Format";
+    public static final String INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_DESCRIPTION =
+        "<html>There is an error with the given credentials.<br>"
+            + "Please make sure that you filled all the<br>"
+            + "input fields correctly.<br>"
+            + "Phone must be 10 digits long.<br>"
+            + "Also email must include @ and .<br>"
+            + "Last but not least password must be at least 8 characters long.<br>"
+            + "If you continue having problems you can ask<br>"
+            + "our support team for further assistance.</html>";
+
+    //Invalid recovery answers
+    public static final String INVALID_RECOVERY_ANSWERS_INPUT_TITLE = "Invalid Recovery Answers Input";
+    public static final String INVALID_RECOVERY_ANSWERS_INPUT_DESCRIPTION =
+        "<html>There is an error with your input<br>"
+            + "Please make sure that you have filled all the fields</html>";
+
     // Sign out alert
     public static final String SIGN_OUT_CONFIRM_MESSAGE = "Are you sure you want to sign out?";
     public static final String EMPTY_STATE_MESSAGE = "Unfortunately, there is nothing to display.";

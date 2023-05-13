@@ -25,6 +25,10 @@ public final class Column extends Widget {
         addComponent(widget.getRef(), edgeInsets, align);
     }
 
+    public void addComponent(Component widget, Align align) {
+        addComponent(widget, new EdgeInsets.Builder().build(), align);
+    }
+
     public void addComponent(Component widget, EdgeInsets edgeInsets, Align align) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.VERTICAL;

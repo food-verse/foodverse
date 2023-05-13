@@ -11,6 +11,7 @@ import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.utility.ui.SecureTextField;
 import com.foodverse.utility.ui.TextField;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
@@ -41,7 +42,7 @@ public final class SignInOverlay extends Overlay {
         var explanationParagraph = new Paragraph("Please sign to your account", ParagraphSize.M);
         var textEmailField = new TextField();
         var emailInput = new InputForm("Email", "", textEmailField);
-        var textPasswordField = new TextField();
+        var textPasswordField = new SecureTextField();
         var passwordInput = new InputForm("Password", "", textPasswordField);
         var signInButton = new RectButton(
             "Sign In",

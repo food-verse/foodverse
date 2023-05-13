@@ -35,15 +35,15 @@ class UserDatabaseTest {
 
         // Test the user sign-in...
         // First, test with correct credentials...
-        assertTrue(db.signIn("johndoe456", "Abc123!"));
+        assertTrue(db.signIn("johndoe456@gmail.com", "Abc123!"));
         Optional<User> authenticatedUser = db.getAuthenticatedUser();
         assertTrue(authenticatedUser.isPresent());
-        assertEquals("johndoe456", authenticatedUser.get().id());
+        assertEquals("johndoe456@gmail.com", authenticatedUser.get().email());
         assertEquals("John Doe", authenticatedUser.get().name());
 
         // Then, test with wrong password and wrong username...
-        assertFalse(db.signIn("johndoe456", "WrongPassword123"));
-        assertFalse(db.signIn("janesmith789", "Abc123!"));
+        assertFalse(db.signIn("johndoe456@gmail.com", "WrongPassword123"));
+        assertFalse(db.signIn("janesmith789@gmail.com", "Abc123!"));
 
     }
 
@@ -61,7 +61,7 @@ class UserDatabaseTest {
 
         // Verifying that the saved user exists and matches the original user...
         assertTrue(savedUser.isPresent());
-        assertEquals("johndoe456", savedUser.get().id());
+        assertEquals("johndoe456@gmail.com", savedUser.get().email());
         assertEquals("John Doe", savedUser.get().name());
 
         // Ensure that the saved user has been written to the file system...
@@ -84,10 +84,10 @@ class UserDatabaseTest {
         db.signUp(user);
 
         // Testing if the user exists in the database using its username...
-        assertTrue(db.userExists("johndoe456"));
+        assertTrue(db.userExists("johndoe456@gmail.com"));
 
         // Testing with a non-existing username...
-        assertFalse(db.userExists("janesmith789"));
+        assertFalse(db.userExists("janesmith789@gmail.com"));
 
     }
 
@@ -124,7 +124,7 @@ class UserDatabaseTest {
         List<User> users = FileManager.loadUsers();
         assertTrue(users.contains(newUser));
         assertEquals(newUser.credentials(), credentials);
-        assertEquals("johndoe456", newUser.id());
+        assertEquals("johndoe456@gmail.com", newUser.email());
         assertEquals("John Doe", newUser.name());
     }
 
@@ -142,13 +142,12 @@ class UserDatabaseTest {
 
         // Creating the user...
         var user = new User(
-            "johndoe456",
             "John Doe",
             List.of(
                 "789 Oak St, Anytown, USA 12345",
                 "321 Pine St, Anycity, USA 54321"),
             "+1 (555) 555-5678",
-            "johndoe456@gmail.com",
+            "johndoe456@gmail.com@gmail.com",
             credentials,
             List.of(),
             List.of());

@@ -43,9 +43,9 @@ public class Database {
         return Optional.ofNullable(authenticatedUser);
     }
 
-    public boolean signIn(String id, String password) {
+    public boolean signIn(String email, String password) {
         for (User user : users) {
-            if (user.id().equals(id) && user.credentials().password().equals(password)) {
+            if (user.email().equals(email) && user.credentials().password().equals(password)) {
                 authenticatedUser = user;
                 return true;
             }
@@ -63,9 +63,9 @@ public class Database {
         authenticatedUser = null;
     }
 
-    public boolean userExists(String id) {
+    public boolean userExists(String email) {
         for (User user : users) {
-            if (user.id().equals(id)) {
+            if (user.email().equals(email)) {
                 return true;
             }
         }

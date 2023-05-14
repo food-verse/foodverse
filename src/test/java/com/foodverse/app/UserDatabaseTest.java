@@ -84,10 +84,10 @@ class UserDatabaseTest {
         db.signUp(user);
 
         // Testing if the user exists in the database using its email...
-        assertTrue(db.userExists("johndoe456@gmail.com").isPresent());
+        assertTrue(db.findUserByEmail("johndoe456@gmail.com").isPresent());
 
         // Testing with a non-existing email...
-        assertTrue(db.userExists("janesmith789@gmail.com").isEmpty());
+        assertTrue(db.findUserByEmail("janesmith789@gmail.com").isEmpty());
 
     }
 
@@ -138,7 +138,7 @@ class UserDatabaseTest {
         db.signUp(user);
 
         // Getting the user from the database...
-        Optional<User> signedUser = db.userExists("johndoe456@gmail.com");
+        Optional<User> signedUser = db.findUserByEmail("johndoe456@gmail.com");
 
         // Testing if the user exists in the database using its email...
         assertTrue(signedUser.isPresent());

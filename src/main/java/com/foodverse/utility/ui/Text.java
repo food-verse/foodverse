@@ -1,13 +1,19 @@
 package com.foodverse.utility.ui;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.function.Consumer;
 import javax.swing.JLabel;
+
 import com.foodverse.utility.core.Widget;
 
 public abstract class Text extends Widget {
 
     private final JLabel component = new JLabel();
+    private Consumer<MouseEvent> onPressed;
 
     protected Text(String data, FontStyle fontStyle, TextStyle textStyle) {
         component.setText(data);
@@ -20,9 +26,26 @@ public abstract class Text extends Widget {
         component.setText(data);
     }
 
+    public void onPressed(Consumer<MouseEvent> onPressed) {
+        this.onPressed = onPressed;
+        if (onPressed != null) {
+            component.addMouseListener(new TextListener());
+            component.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        }
+    }
+
     @Override
     public Component getRef() {
         return component;
+    }
+
+    private class TextListener extends MouseAdapter {
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            onPressed.accept(e);
+        }
+
     }
 
 }

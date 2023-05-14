@@ -1,11 +1,14 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 
 import com.foodverse.models.Credentials;
+import com.foodverse.models.User;
+import com.foodverse.pages.HomePage;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.navigation.Overlay;
@@ -60,10 +63,13 @@ public final class RecoveryOptionsOverlay extends Overlay {
                     var answers = List.of(textFirstRecovAnswInput.getText(),
                         textSecondRecovAnswInput.getText());
                     var userCredentials = new Credentials(password, answers);
-                    // var createdUser = new User(username, new ArrayList<>(List.of(address)),
-                    // phone, email,
-                    // userCredentials, new ArrayList<>(), new ArrayList<>());
-                    // db.signUp(createdUser);
+                    var createdUser = new User(username, new ArrayList<>(List.of(address)),
+                    phone, email,
+                    userCredentials, new ArrayList<>(), new ArrayList<>());
+                    db.signUp(createdUser);
+                    System.out.println("OK User created"); //for checking purposes
+                    Router.closeOverlay();
+                    
                 } else
                     Router.openOverlay(
                         new Alert(UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_TITLE,

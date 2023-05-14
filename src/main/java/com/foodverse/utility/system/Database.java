@@ -1,6 +1,7 @@
 package com.foodverse.utility.system;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -63,25 +64,33 @@ public class Database {
         authenticatedUser = null;
     }
 
-    public boolean userExists(String email) {
-        for (User user : users) {
-            if (user.email().equals(email)) {
-                return true;
+    public Optional<User> verifyUser(String email, Map<Integer, String> recoveryAnswers) {
+        Optional<User> foundUser = findUserByEmail(email);
+        if (foundUser.isEmpty()) {
+            return Optional.empty();
+        }
+        for (Map.Entry<Integer, String> entry : configuration.recoveryQuestions().entrySet()) {
+            if (!recoveryAnswers.get(entry.getKey())
+                .equals(foundUser.get().credentials().recoveryAnswers().get(entry.getKey()))) {
+                return Optional.empty();
             }
         }
-        return false;
+        return foundUser;
+    }
+
+    public Optional<User> findUserByEmail(String email) {
+        for (User user : users) {
+            if (user.email().equals(email)) {
+                return Optional.of(user);
+            }
+        }
+        return Optional.empty();
     }
 
     public void updateUser(User newUser) {
-        boolean found = false;
-        for (User user : users) {
-            if (user.equals(newUser)) {
-                found = true;
-                users.remove(user);
-                break;
-            }
-        }
-        if (found) {
+        Optional<User> foundUser = findUserByEmail(newUser.email());
+        if (foundUser.isPresent()) {
+            users.remove(foundUser.get());
             users.add(newUser);
             CompletableFuture.runAsync(() -> FileManager.saveUsers(users));
         }
@@ -93,15 +102,9 @@ public class Database {
     }
 
     public void updateShop(Shop newShop) {
-        boolean found = false;
-        for (Shop shop : shops) {
-            if (shop.equals(newShop)) {
-                found = true;
-                shops.remove(shop);
-                break;
-            }
-        }
-        if (found) {
+        Optional<Shop> foundShop = findShopByName(newShop.name());
+        if (foundShop.isPresent()) {
+            shops.remove(foundShop.get());
             shops.add(newShop);
             CompletableFuture.runAsync(() -> FileManager.saveShops(shops));
         }

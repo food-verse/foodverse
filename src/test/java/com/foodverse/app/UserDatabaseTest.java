@@ -83,10 +83,10 @@ class UserDatabaseTest {
         // Signing up the user to the database...
         db.signUp(user);
 
-        // Testing if the user exists in the database using its username...
+        // Testing if the user exists in the database using its email...
         assertTrue(db.userExists("johndoe456@gmail.com").isPresent());
 
-        // Testing with a non-existing username...
+        // Testing with a non-existing email...
         assertTrue(db.userExists("janesmith789@gmail.com").isEmpty());
 
     }
@@ -126,6 +126,42 @@ class UserDatabaseTest {
         assertEquals(newUser.credentials(), credentials);
         assertEquals("johndoe456@gmail.com", newUser.email());
         assertEquals("John Doe", newUser.name());
+    }
+
+    @Test
+    public void testChangePassword() throws InterruptedException {
+
+        // Creating a fake user...
+        User user = getFakeUser();
+
+        // Signing up the user to the database...
+        db.signUp(user);
+
+        // Getting the user from the database...
+        Optional<User> signedUser = db.userExists("johndoe456@gmail.com");
+
+        // Testing if the user exists in the database using its email...
+        assertTrue(signedUser.isPresent());
+
+        // Creating new user's credentials...
+        var credentials = new Credentials(
+            "NewPassword123!",
+            signedUser.get().credentials().recoveryAnswers());
+
+        // Creating a new user with the updated credentials...
+        User newUser = user.withCredentials(credentials);
+
+        // Updating the user in the database...
+        db.updateUser(newUser);
+
+        // Ensure that the saved user has been written to the file system...
+        Thread.sleep(1000);
+
+        // Loading the list of users from the file system and verifying that the saved user is
+        // included...
+        List<User> users = FileManager.loadUsers();
+        assertTrue(users.contains(newUser));
+        assertEquals(newUser.credentials(), credentials);
     }
 
     private User getFakeUser() {

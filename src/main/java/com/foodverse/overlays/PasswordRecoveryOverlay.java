@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.xml.validation.Validator;
 
 import com.foodverse.models.User;
+import com.foodverse.utility.common.ResourceProvider;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.navigation.Overlay;
@@ -31,7 +32,7 @@ public final class PasswordRecoveryOverlay extends Overlay {
     private final Component component;
 
     //This object will help us to produce a random number in order to show a random recovery question
-    private Random random = new Random();
+    //private Random random = ResourceProvider.getRandom();
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
@@ -49,26 +50,30 @@ public final class PasswordRecoveryOverlay extends Overlay {
         super(500, 400);
 
         var configuration = db.getConfiguration();
-        var randomQuestion = "";
+        var question1 = "";
+        var question2 = "";
         
         if(!configuration.isEmpty())
         {
-            var randomIndex = random.nextInt(2); //0 inclusive, 2 exclusive
-            randomQuestion = configuration.get().recoveryQuestions().get(randomIndex);
+            //var randomIndex = random.nextInt(2); //0 inclusive, 2 exclusive
+            question1 = configuration.get().recoveryQuestions().get(0);
+            question2 = configuration.get().recoveryQuestions().get(1);
         }
 
         // Heading
         var panel = new JPanel();
         var passwordRecoveryHeading = new Heading("Password Recovery", HeadingSize.XXL);
         var explanationParagraph = new Paragraph("It seems that you forgot your password. Answer the following question to change it.", ParagraphSize.M);
-        var textAnswerInput = new TextField();
-        var answer = new InputForm(randomQuestion, "", textAnswerInput);
+        var textFirstAnswerInput = new TextField();
+        var answer1 = new InputForm(question1, "", textFirstAnswerInput);
+        var textSecondAnswerInput = new TextField();
+        var answer2 = new InputForm(question2, "", textSecondAnswerInput);
         var continueButton = new RectButton(
             "Continue",
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                    boolean isValidAnswer = checkValidityOfRecoveryAnswer(textAnswerInput.getText());
+                    boolean isValidAnswer = checkValidityOfRecoveryAnswers(textFirstAnswerInput.getText(), textSecondAnswerInput.getText());
 
                     if(isValidAnswer)
                     {
@@ -87,15 +92,16 @@ public final class PasswordRecoveryOverlay extends Overlay {
        
         panel.add(passwordRecoveryHeading.getRef());
         panel.add(explanationParagraph.getRef());
-        panel.add(answer.getRef());
+        panel.add(answer1.getRef());
+        panel.add(answer2.getRef());
         panel.add(continueButton.getRef());
         panel.setOpaque(false);
         component = panel;
     }
 
-    private boolean checkValidityOfRecoveryAnswer(String anAnswer)
+    private boolean checkValidityOfRecoveryAnswers(String firstAnswer, String secondAnswer)
     {
-        return validator.isAnswersValid(anAnswer);
+        return validator.isAnswersValid(firstAnswer, secondAnswer);
     }
 
     @Override

@@ -63,13 +63,13 @@ public class Database {
         authenticatedUser = null;
     }
 
-    public boolean userExists(String email) {
+    public Optional<User> userExists(String email) {
         for (User user : users) {
             if (user.email().equals(email)) {
-                return true;
+                return Optional.of(user);
             }
         }
-        return false;
+        return Optional.empty();
     }
 
     public void updateUser(User newUser) {

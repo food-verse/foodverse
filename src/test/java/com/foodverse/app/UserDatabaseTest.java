@@ -84,10 +84,10 @@ class UserDatabaseTest {
         db.signUp(user);
 
         // Testing if the user exists in the database using its username...
-        assertTrue(db.userExists("johndoe456@gmail.com"));
+        assertTrue(db.userExists("johndoe456@gmail.com").isPresent());
 
         // Testing with a non-existing username...
-        assertFalse(db.userExists("janesmith789@gmail.com"));
+        assertTrue(db.userExists("janesmith789@gmail.com").isEmpty());
 
     }
 
@@ -147,7 +147,7 @@ class UserDatabaseTest {
                 "789 Oak St, Anytown, USA 12345",
                 "321 Pine St, Anycity, USA 54321"),
             "+1 (555) 555-5678",
-            "johndoe456@gmail.com@gmail.com",
+            "johndoe456@gmail.com",
             credentials,
             List.of(),
             List.of());

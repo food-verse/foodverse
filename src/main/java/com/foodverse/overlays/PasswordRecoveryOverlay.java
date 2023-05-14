@@ -38,7 +38,7 @@ public final class PasswordRecoveryOverlay extends Overlay {
      * passwordInputRow = new Row();
      */
 
-    public PasswordRecoveryOverlay(Optional<User> user) {
+    public PasswordRecoveryOverlay(User user) {
         super(500, 400);
 
         var configuration = db.getConfiguration();
@@ -76,13 +76,13 @@ public final class PasswordRecoveryOverlay extends Overlay {
                         {
                             //open the window for password change
                             Router.closeOverlay();
-                            Router.openOverlay(new PasswordRecoveryOverlay(user));
+                            Router.openOverlay(new ChangePasswordOverlay(user));
                         }
                         else
                         {
                             //show a message for wrong answer and go back to onboarding
-                            Router.openOverlay(new Alert(UIConstants.WRONG_RECOVERY_ANSWERS_TITLE, UIConstants.WRONG_RECOVERY_ANSWERS_DESCRIPTION));
                             Router.closeOverlay();
+                            Router.openOverlay(new Alert(UIConstants.WRONG_RECOVERY_ANSWERS_TITLE, UIConstants.WRONG_RECOVERY_ANSWERS_DESCRIPTION));
                             Router.pushPage(Pages.ONBOARDING);
                         }
 
@@ -113,9 +113,9 @@ public final class PasswordRecoveryOverlay extends Overlay {
     }
 
 
-    public boolean checkIfAnswersAreCorrect(Optional<User> user, String answer1, String answer2)
+    public boolean checkIfAnswersAreCorrect(User user, String answer1, String answer2)
     {
-        var correctAnswers = user.get().credentials().recoveryAnswers();   
+        var correctAnswers = user.credentials().recoveryAnswers();   
         return correctAnswers.get(0).equals(answer1) && correctAnswers.get(1).equals(answer2);
     }
 

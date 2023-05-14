@@ -52,7 +52,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                boolean isValid = checkQuestions(textFirstRecovAnswInput, textSecondRecovAnswInput);
+                boolean isValid = checkValidityOfQuestions(textFirstRecovAnswInput, textSecondRecovAnswInput);
 
                 if (isValid) {
                     var answers = List.of(textFirstRecovAnswInput.getText(),
@@ -84,7 +84,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
 
     }
 
-    private boolean checkQuestions(TextField answer1, TextField answer2) {
+    private boolean checkValidityOfQuestions(TextField answer1, TextField answer2) {
         boolean isValid;
 
         isValid = validator.isAnswersValid(answer1.getText(), answer2.getText());

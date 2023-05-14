@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import com.foodverse.overlays.InfoOverlay;
 import com.foodverse.overlays.SignInOverlay;
 import com.foodverse.overlays.SignUpOverlay;
+import com.foodverse.utility.common.ResourceProvider;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.common.URLHandler;
 import com.foodverse.utility.layout.Align;
@@ -36,25 +37,25 @@ public final class OnboardingPage extends Page {
 
     private final JPanel panel;
 
-    private static Random random = new Random();
+    private static final Random random = ResourceProvider.getRandom();
 
     public OnboardingPage() {
 
         List<String> onboardingImages = List.of(
-                "corn_meat_quesadillas_sauce_on_board.jpg",
-                "mexican_fajita_nachos_sombrero_pan.jpg",
-                "tasty_fajita_with_veggies_beef.jpg");
+            "corn_meat_quesadillas_sauce_on_board.jpg",
+            "mexican_fajita_nachos_sombrero_pan.jpg",
+            "tasty_fajita_with_veggies_beef.jpg");
 
         // Creating text widgets...
         var promoTitleText = new Display(UIConstants.ONBOARDING_PROMO_TITLE, DisplaySize.XS);
         var promoMessageText = new Heading(
-                UIConstants.ONBOARDING_PROMO_MESSAGE,
-                HeadingSize.S,
-                Colors.gray600);
+            UIConstants.ONBOARDING_PROMO_MESSAGE,
+            HeadingSize.S,
+            Colors.gray600);
         var promoNoteText = new Heading(
-                UIConstants.ONBOARDING_PROMO_NOTE,
-                HeadingSize.XS,
-                Colors.gray600);
+            UIConstants.ONBOARDING_PROMO_NOTE,
+            HeadingSize.XS,
+            Colors.gray600);
 
         // Creating image widgets...
         var repositoryUrl = "https://github.com/food-verse/foodverse";
@@ -62,32 +63,32 @@ public final class OnboardingPage extends Page {
             URLHandler.open(repositoryUrl);
         }, repositoryUrl);
         var hushFaceImage = new Image("hush-emoji.png", new ImageStyle.Builder()
-                .width(32)
-                .height(32)
-                .build());
+            .width(32)
+            .height(32)
+            .build());
         var onboardingImage = new Image(
-                onboardingImages.get(random.nextInt(onboardingImages.size())),
-                new ImageStyle.Builder()
-                        .width(600)
-                        .height(828)
-                        .build());
+            onboardingImages.get(random.nextInt(onboardingImages.size())),
+            new ImageStyle.Builder()
+                .width(600)
+                .height(828)
+                .build());
 
         // Creating button widgets...
         var infoButton = new PillButton(
-                "How it works",
-                ButtonSize.M,
-                ButtonType.TERTIARY,
-                e -> Router.openOverlay(new InfoOverlay()));
+            "How it works",
+            ButtonSize.M,
+            ButtonType.TERTIARY,
+            e -> Router.openOverlay(new InfoOverlay()));
         var signInButton = new PillButton(
-                "Sign In",
-                ButtonSize.M,
-                ButtonType.SECONDARY,
-                e -> Router.openOverlay(new SignInOverlay()));
+            "Sign In",
+            ButtonSize.M,
+            ButtonType.SECONDARY,
+            e -> Router.openOverlay(new SignInOverlay()));
         var signUpButton = new PillButton(
-                "Sign Up",
-                ButtonSize.M,
-                ButtonType.PRIMARY,
-                e -> Router.openOverlay(new SignUpOverlay()));
+            "Sign Up",
+            ButtonSize.M,
+            ButtonType.PRIMARY,
+            e -> Router.openOverlay(new SignUpOverlay()));
 
         // Creating main panel...
         panel = new JPanel();
@@ -105,11 +106,11 @@ public final class OnboardingPage extends Page {
                 .left(600)
                 .right(16)
                 .build(),
-                Align.LAST_LINE_END);
+            Align.LAST_LINE_END);
         buttonRow.addWidget(signInButton, new EdgeInsets.Builder()
                 .right(16)
                 .build(),
-                Align.LAST_LINE_END);
+            Align.LAST_LINE_END);
         buttonRow.addWidget(signUpButton, Align.LAST_LINE_END);
 
         // Add images to the parent panel
@@ -123,14 +124,14 @@ public final class OnboardingPage extends Page {
                 .symmetric(40, 48)
                 .bottom(36)
                 .build(),
-                Align.CENTER);
+            Align.CENTER);
         panel.add(paddedHeading.getRef());
 
         var tempCol = new Column();
         tempCol.addWidget(promoTitleText, new EdgeInsets.Builder()
                 .bottom(16)
                 .build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
         tempCol.addWidget(promoMessageText, Align.LAST_LINE_END);
 
         var tempRow2 = new Row();
@@ -142,10 +143,10 @@ public final class OnboardingPage extends Page {
                 .top(164)
                 .bottom(380)
                 .build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
         tempCol2.addWidget(tempRow2, new EdgeInsets.Builder()
                 .build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
 
         var tempRow = new Row();
         tempRow.addWidget(tempCol2, Align.CENTER);
@@ -156,7 +157,7 @@ public final class OnboardingPage extends Page {
                 .all(48)
                 .top(0)
                 .build(),
-                Align.CENTER);
+            Align.CENTER);
 
         panel.add(tempRow.getRef());
 

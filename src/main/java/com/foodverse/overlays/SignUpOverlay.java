@@ -58,15 +58,17 @@ public final class SignUpOverlay extends Overlay {
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                boolean isValid = checkValidityOfCredentials(textNameInput, textAddressInput,
-                    textPhoneInput, textEmailInput, textPasswordInput);
+                var name = textNameInput.getText();
+                var address = textAddressInput.getText();
+                var phone = textPhoneInput.getText();
+                var email = textEmailInput.getText();
+                var password = new String(textPasswordInput.getPassword());
+
+                boolean isValid = checkValidityOfCredentials(name, address, phone, email, password);
 
                 if (isValid) {
                     Router.closeOverlay();
-                    Router.openOverlay(new RecoveryOptionsOverlay(
-                        textNameInput.getText(), textAddressInput.getText(),
-                        textPhoneInput.getText(), textEmailInput.getText(),
-                        new String(textPasswordInput.getPassword()))); 
+                    Router.openOverlay(new RecoveryOptionsOverlay(name, address, phone, email, password)); 
                 } else
                     Router.openOverlay(new Alert(
                         UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE,
@@ -89,15 +91,10 @@ public final class SignUpOverlay extends Overlay {
 
     }
 
-    private boolean checkValidityOfCredentials(TextField name, TextField address, TextField phone,
-                                     TextField email, SecureTextField password) {
+    private boolean checkValidityOfCredentials(String name, String address, String phone, String email, String password) {
         boolean isValid;
 
-        isValid = validator.isNameValid(name.getText())
-            && validator.isAddressValid(address.getText()) &&
-            validator.isPhoneValid(phone.getText()) && validator.isEmailValid(email.getText())
-            &&
-            validator.isPasswordValid(new String(password.getPassword()));
+        isValid = validator.isNameValid(name) && validator.isAddressValid(address) && validator.isPhoneValid(phone) && validator.isEmailValid(email) && validator.isPasswordValid(password);
 
         return isValid;
     }

@@ -36,7 +36,7 @@ public final class SecureTextField extends JPasswordField {
         setOpaque(false);
         setEnabled(isEnabled);
         setSelectionColor(Colors.buttonSecondaryActive);
-        setColumns(16);
+        setColumns(24);
         applyStyle();
     }
 

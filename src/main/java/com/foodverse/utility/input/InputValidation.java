@@ -1,6 +1,14 @@
 package com.foodverse.utility.input;
 
+import javax.lang.model.util.ElementScanner14;
+
+import com.foodverse.models.User;
+import com.foodverse.utility.system.Database;
+
 public final class InputValidation {
+
+    //To search if user exists
+    private final Database db = Database.getInstance();
 
     private static final InputValidation inputValidation = new InputValidation();
     private static final int phoneLength = 10;
@@ -36,8 +44,27 @@ public final class InputValidation {
         return password.length() >= passwordLength;
     }
 
-    public boolean isAnswerValid(String answer1, String answer2) {
+    public boolean isAnswersValid(String answer1, String answer2)
+    {
         return !answer1.isEmpty() && !answer2.isEmpty();
     }
+
+    /*/
+    public boolean isAnswerValid(int index, String answer, String email)
+    {
+        User user = db.userExists(email);
+
+        if(user == null)
+        {
+            var answerToCheck = user.credentials().recoveryAnswers().get(index);
+            if(answer.equals(answerToCheck))
+                return true;
+        }
+        else
+            return false;
+
+    }
+    */
+
 
 }

@@ -8,7 +8,6 @@ import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
-import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.utility.ui.SecureTextField;
@@ -26,7 +25,7 @@ public final class SignUpOverlay extends Overlay {
     private final Component component;
 
     // Getting a reference to the database...
-    private final Database db = Database.getInstance();
+    //private final Database db = Database.getInstance();
 
     // Getting a reference to the input validator...
     private final InputValidation validator = InputValidation.getInstance();
@@ -63,13 +62,11 @@ public final class SignUpOverlay extends Overlay {
                     textPhoneInput, textEmailInput, textPasswordInput);
 
                 if (isValid) {
-                    System.out.println("OK");// something
                     Router.closeOverlay();
                     Router.openOverlay(new RecoveryOptionsOverlay(
                         textNameInput.getText(), textAddressInput.getText(),
                         textPhoneInput.getText(), textEmailInput.getText(),
-                        new String(textPasswordInput.getPassword()))); // just to check if its display is
-                    // alright
+                        new String(textPasswordInput.getPassword()))); 
                 } else
                     Router.openOverlay(new Alert(
                         UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE,

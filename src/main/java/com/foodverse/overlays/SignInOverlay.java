@@ -3,7 +3,6 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.util.Optional;
 
-import javax.lang.model.util.ElementScanner14;
 import javax.swing.JPanel;
 
 import com.foodverse.models.User;

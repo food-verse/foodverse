@@ -1,16 +1,9 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
-
 import javax.swing.JPanel;
-import javax.xml.validation.Validator;
-
 import com.foodverse.models.User;
-import com.foodverse.utility.common.ResourceProvider;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.navigation.Overlay;
@@ -31,8 +24,6 @@ public final class PasswordRecoveryOverlay extends Overlay {
 
     private final Component component;
 
-    //This object will help us to produce a random number in order to show a random recovery question
-    //private Random random = ResourceProvider.getRandom();
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();

@@ -1,14 +1,8 @@
 package com.foodverse.utility.input;
 
-import javax.lang.model.util.ElementScanner14;
-
-import com.foodverse.models.User;
-import com.foodverse.utility.system.Database;
 
 public final class InputValidation {
 
-    //To search if user exists
-    //private final Database db = Database.getInstance();
 
     private static final InputValidation inputValidation = new InputValidation();
     private static final int phoneLength = 10;

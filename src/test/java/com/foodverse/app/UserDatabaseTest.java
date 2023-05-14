@@ -144,9 +144,7 @@ class UserDatabaseTest {
         assertTrue(signedUser.isPresent());
 
         // Creating new user's credentials...
-        var credentials = new Credentials(
-            "NewPassword123!",
-            signedUser.get().credentials().recoveryAnswers());
+        var credentials = signedUser.get().credentials().withPassword("NewPassword123!");
 
         // Creating a new user with the updated credentials...
         User newUser = user.withCredentials(credentials);

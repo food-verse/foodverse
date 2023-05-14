@@ -1,7 +1,6 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
-import java.util.Optional;
 import javax.swing.JPanel;
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;

@@ -1,7 +1,6 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
-import java.util.Optional;
 
 import javax.swing.JPanel;
 
@@ -13,7 +12,6 @@ import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.SecureTextField;
-import com.foodverse.utility.ui.Text;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;

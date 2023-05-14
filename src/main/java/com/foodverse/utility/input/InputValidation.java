@@ -8,7 +8,7 @@ import com.foodverse.utility.system.Database;
 public final class InputValidation {
 
     //To search if user exists
-    private final Database db = Database.getInstance();
+    //private final Database db = Database.getInstance();
 
     private static final InputValidation inputValidation = new InputValidation();
     private static final int phoneLength = 10;
@@ -49,22 +49,6 @@ public final class InputValidation {
         return !answer1.isEmpty() && !answer2.isEmpty();
     }
 
-    /*/
-    public boolean isAnswerValid(int index, String answer, String email)
-    {
-        User user = db.userExists(email);
-
-        if(user == null)
-        {
-            var answerToCheck = user.credentials().recoveryAnswers().get(index);
-            if(answer.equals(answerToCheck))
-                return true;
-        }
-        else
-            return false;
-
-    }
-    */
 
 
 }

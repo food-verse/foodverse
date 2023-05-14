@@ -58,7 +58,7 @@ public final class SignUpOverlay extends Overlay {
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                boolean isValid = checkCredentials(textNameInput, textAddressInput,
+                boolean isValid = checkValidityOfCredentials(textNameInput, textAddressInput,
                     textPhoneInput, textEmailInput, textPasswordInput);
 
                 if (isValid) {
@@ -89,7 +89,7 @@ public final class SignUpOverlay extends Overlay {
 
     }
 
-    private boolean checkCredentials(TextField name, TextField address, TextField phone,
+    private boolean checkValidityOfCredentials(TextField name, TextField address, TextField phone,
                                      TextField email, SecureTextField password) {
         boolean isValid;
 

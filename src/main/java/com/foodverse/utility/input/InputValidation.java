@@ -49,6 +49,11 @@ public final class InputValidation {
         return !answer1.isEmpty() && !answer2.isEmpty();
     }
 
+    //Overload the isAnswersValid method
+    public boolean isAnswersValid(String answer)
+    {
+        return !answer.isEmpty();
+    }
 
 
 }

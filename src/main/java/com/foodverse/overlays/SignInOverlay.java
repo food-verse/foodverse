@@ -24,6 +24,10 @@ import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 public final class SignInOverlay extends Overlay {
 
     private final Component component;
+    private final int wrongAttemptsForRecovery = 5;
+
+    //Counter for password recovery process
+    private int recoveryCounter = wrongAttemptsForRecovery;
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
@@ -56,6 +60,13 @@ public final class SignInOverlay extends Overlay {
                     Router.openOverlay(new Alert(
                         UIConstants.INVALID_CREDENTIALS_TITLE,
                         UIConstants.INVALID_CREDENTIALS_DESCRIPTION));
+
+                    recoveryCounter--;
+
+                    if(recoveryCounter == 0)
+                    {
+                        
+                    }
                 }
             });
 

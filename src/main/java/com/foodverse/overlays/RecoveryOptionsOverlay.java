@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 import com.foodverse.models.Credentials;
 import com.foodverse.models.User;
-import com.foodverse.pages.HomePage;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.navigation.Overlay;
@@ -42,23 +41,18 @@ public final class RecoveryOptionsOverlay extends Overlay {
 
         var panel = new JPanel();
         var recoveryHeading = new Heading("Add Recovery Options", HeadingSize.XXL);
-        var explanationParagraph =
-            new Paragraph("Sign up now and start enjoying delicious meals.", ParagraphSize.S);
+        var explanationParagraph = new Paragraph("Sign up now and start enjoying delicious meals.", ParagraphSize.S);
         var textFirstRecovAnswInput = new TextField();
-        var firstRecovAnswInput =
-            new InputForm("What is the name of your first pet?", "", textFirstRecovAnswInput);
+        var firstRecovAnswInput = new InputForm("What is the name of your first pet?", "", textFirstRecovAnswInput);
         var textSecondRecovAnswInput = new TextField();
-        var secondRecovAnswInput = new InputForm("What is your favorite book/movie/TV Show?", "",
-            textSecondRecovAnswInput);
-        var privacyPolicyParagraph = new Paragraph(
-            "By signing up you agree to our Terms of Use and Privacy Policy.", ParagraphSize.S);
-        var continueButton = new RectButton(
+        var secondRecovAnswInput = new InputForm("What is your favorite book/movie/TV Show?", "", textSecondRecovAnswInput);
+        var privacyPolicyParagraph = new Paragraph("By signing up you agree to our Terms of Use and Privacy Policy.", ParagraphSize.S);
+        var signUpButton = new RectButton(
             "Sign Up",
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                boolean isValid =
-                    checkQuestions(textFirstRecovAnswInput, textSecondRecovAnswInput);
+                boolean isValid = checkQuestions(textFirstRecovAnswInput, textSecondRecovAnswInput);
 
                 if (isValid) {
                     var answers = List.of(textFirstRecovAnswInput.getText(),
@@ -68,7 +62,6 @@ public final class RecoveryOptionsOverlay extends Overlay {
                     phone, email,
                     userCredentials, new ArrayList<>(), new ArrayList<>());
                     db.signUp(createdUser);
-                    System.out.println("OK User created"); //for checking purposes
                     Router.closeOverlay();
                     Router.pushPage(Pages.HOME);
                     
@@ -85,7 +78,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
         panel.add(firstRecovAnswInput.getRef());
         panel.add(secondRecovAnswInput.getRef());
         panel.add(privacyPolicyParagraph.getRef());
-        panel.add(continueButton.getRef());
+        panel.add(signUpButton.getRef());
         panel.setOpaque(false);
         component = panel;
 
@@ -94,7 +87,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
     private boolean checkQuestions(TextField answer1, TextField answer2) {
         boolean isValid;
 
-        isValid = validator.isAnswerValid(answer1.getText(), answer2.getText());
+        isValid = validator.isAnswersValid(answer1.getText(), answer2.getText());
 
         return isValid;
     }

@@ -12,6 +12,7 @@ import com.foodverse.pages.HomePage;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.navigation.Overlay;
+import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
@@ -52,7 +53,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
         var privacyPolicyParagraph = new Paragraph(
             "By signing up you agree to our Terms of Use and Privacy Policy.", ParagraphSize.S);
         var continueButton = new RectButton(
-            "Continue",
+            "Sign Up",
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
@@ -69,6 +70,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
                     db.signUp(createdUser);
                     System.out.println("OK User created"); //for checking purposes
                     Router.closeOverlay();
+                    Router.pushPage(Pages.HOME);
                     
                 } else
                     Router.openOverlay(

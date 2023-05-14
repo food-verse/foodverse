@@ -35,7 +35,7 @@ public final class TextField extends JTextField {
         setOpaque(false);
         setEnabled(isEnabled);
         setSelectionColor(Colors.buttonSecondaryActive);
-        setColumns(16);
+        setColumns(24);
         applyStyle();
     }
 

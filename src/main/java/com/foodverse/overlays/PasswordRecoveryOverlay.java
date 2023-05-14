@@ -7,6 +7,7 @@ import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.navigation.Overlay;
+import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.TextField;
@@ -46,7 +47,6 @@ public final class PasswordRecoveryOverlay extends Overlay {
         
         if(!configuration.isEmpty())
         {
-            //var randomIndex = random.nextInt(2); //0 inclusive, 2 exclusive
             question1 = configuration.get().recoveryQuestions().get(0);
             question2 = configuration.get().recoveryQuestions().get(1);
         }
@@ -64,12 +64,28 @@ public final class PasswordRecoveryOverlay extends Overlay {
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                    boolean isValidAnswer = checkValidityOfRecoveryAnswers(textFirstAnswerInput.getText(), textSecondAnswerInput.getText());
+                    var givenAnswer1 = textFirstAnswerInput.getText();
+                    var givenAnswer2 = textSecondAnswerInput.getText();
+                    boolean isValidAnswer = checkValidityOfRecoveryAnswers(givenAnswer1, givenAnswer2);
 
                     if(isValidAnswer)
                     {
                         //compare with the value that user gave on sign up process
-                        //var correctAnswer = user           
+                        var areCorrect = checkIfAnswersAreCorrect(user, givenAnswer1, givenAnswer2);
+                        if(areCorrect)
+                        {
+                            //open the window for password change
+                            Router.closeOverlay();
+                            Router.openOverlay(new PasswordRecoveryOverlay(user));
+                        }
+                        else
+                        {
+                            //show a message for wrong answer and go back to onboarding
+                            Router.openOverlay(new Alert(UIConstants.WRONG_RECOVERY_ANSWERS_TITLE, UIConstants.WRONG_RECOVERY_ANSWERS_DESCRIPTION));
+                            Router.closeOverlay();
+                            Router.pushPage(Pages.ONBOARDING);
+                        }
+
                     }
                     else
                     {
@@ -90,10 +106,19 @@ public final class PasswordRecoveryOverlay extends Overlay {
         component = panel;
     }
 
+
     private boolean checkValidityOfRecoveryAnswers(String firstAnswer, String secondAnswer)
     {
         return validator.isAnswersValid(firstAnswer, secondAnswer);
     }
+
+
+    public boolean checkIfAnswersAreCorrect(Optional<User> user, String answer1, String answer2)
+    {
+        var correctAnswers = user.get().credentials().recoveryAnswers();   
+        return correctAnswers.get(0).equals(answer1) && correctAnswers.get(1).equals(answer2);
+    }
+
 
     @Override
     public Component getRef() {

@@ -56,7 +56,9 @@ public final class SignInOverlay extends Overlay {
             ButtonType.PRIMARY,
             e -> {
 
-                var correctSign = db.signIn(textEmailField.getText(), new String(textPasswordField.getPassword()));
+                var email = textEmailField.getText();
+                var password = new String(textPasswordField.getPassword());
+                var correctSign = db.signIn(email, password);
 
                 if (correctSign) {
                     Router.pushPage(Pages.HOME);
@@ -66,7 +68,7 @@ public final class SignInOverlay extends Overlay {
                     if(recoveryCounter == 0)
                     {
                         recoveryCounter = wrongAttemptsForRecovery; //Counter reset
-                        var userExists = checkIfUserExists(textEmailField.getText());
+                        var userExists = checkIfUserExists(email);
                        
                         //check if user exists and if yes then open password recovery overlay
                         if(userExists.equals(Optional.empty()))

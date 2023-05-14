@@ -39,24 +39,36 @@ public final class RecoveryOptionsOverlay extends Overlay {
                                   String password) {
         super(600, 840);
 
+        var configuration = db.getConfiguration();
+        var question1 = "";
+        var question2 = "";
+        
+        if(!configuration.isEmpty())
+        {
+            question1 = configuration.get().recoveryQuestions().get(0);
+            question2 = configuration.get().recoveryQuestions().get(1);
+        }
+
         var panel = new JPanel();
         var recoveryHeading = new Heading("Add Recovery Options", HeadingSize.XXL);
         var explanationParagraph = new Paragraph("Sign up now and start enjoying delicious meals.", ParagraphSize.S);
         var textFirstRecovAnswInput = new TextField();
-        var firstRecovAnswInput = new InputForm("What is the name of your first pet?", "", textFirstRecovAnswInput);
+        var firstRecovAnswInput = new InputForm(question1, "", textFirstRecovAnswInput);
         var textSecondRecovAnswInput = new TextField();
-        var secondRecovAnswInput = new InputForm("What is your favorite book/movie/TV Show?", "", textSecondRecovAnswInput);
+        var secondRecovAnswInput = new InputForm(question2, "", textSecondRecovAnswInput);
         var privacyPolicyParagraph = new Paragraph("By signing up you agree to our Terms of Use and Privacy Policy.", ParagraphSize.S);
         var signUpButton = new RectButton(
             "Sign Up",
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                boolean isValid = checkValidityOfQuestions(textFirstRecovAnswInput, textSecondRecovAnswInput);
+                var firstAnswer = textFirstRecovAnswInput.getText();
+                var secondAnswer = textSecondRecovAnswInput.getText();
+                boolean isValid = checkValidityOfQuestions(firstAnswer, secondAnswer);
 
-                if (isValid) {
-                    var answers = List.of(textFirstRecovAnswInput.getText(),
-                        textSecondRecovAnswInput.getText());
+                if (isValid) 
+                {
+                    var answers = List.of(firstAnswer, secondAnswer);
                     var userCredentials = new Credentials(password, answers);
                     var createdUser = new User(username, new ArrayList<>(List.of(address)),
                     phone, email,
@@ -65,7 +77,8 @@ public final class RecoveryOptionsOverlay extends Overlay {
                     Router.closeOverlay();
                     Router.pushPage(Pages.HOME);
                     
-                } else
+                } 
+                else
                     Router.openOverlay(
                         new Alert(UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_TITLE,
                             UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_DESCRIPTION));
@@ -84,10 +97,10 @@ public final class RecoveryOptionsOverlay extends Overlay {
 
     }
 
-    private boolean checkValidityOfQuestions(TextField answer1, TextField answer2) {
+    private boolean checkValidityOfQuestions(String answer1, String answer2) {
         boolean isValid;
 
-        isValid = validator.isAnswersValid(answer1.getText(), answer2.getText());
+        isValid = validator.isAnswersValid(answer1, answer2);
 
         return isValid;
     }

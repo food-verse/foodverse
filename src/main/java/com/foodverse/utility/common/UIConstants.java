@@ -52,6 +52,26 @@ public final class UIConstants {
         + "If the problem continues please<br>"
         + "contact our support for further assistance</html>";
     
+    
+    //Message for wrong recovery answers
+    public static final String WRONG_RECOVERY_ANSWERS_TITLE = "Wrong Answers";
+    public static final String WRONG_RECOVERY_ANSWERS_DESCRIPTION = 
+        "<html>You answered wrong. For security purposes<br>"
+        + "you will be redirected back to onboarding page.</html>";
+
+    //Message for wrong new password format
+    public static final String WRONG_NEW_PASSWORD_FORMAT_TITLE = "Wrong New Password Format";
+    public static final String WRONG_NEW_PASSWORD_FORMAT_DESCRIPTION = 
+        "<html>Please make sure the 2 fields have the same value<br>"
+        + "Also password must be at least 8 characters long</html>";
+
+    
+    //Message for correct password change
+    public static final String SUCCESSFUL_PASSWORD_CHANGE_TITLE = "Password changed successfully!";
+    public static final String SUCCESSFUL_PASSWORD_CHANGE_DESCRIPTION = 
+        "<html>You successfully changed your password!<br>"
+        + "You can continue to enjoy our services now!!!<br>"
+        + "You will be redirected to your home page</html>";
 
     // Sign out alert
     public static final String SIGN_OUT_CONFIRM_MESSAGE = "Are you sure you want to sign out?";

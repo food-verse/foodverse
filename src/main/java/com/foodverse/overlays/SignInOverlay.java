@@ -68,10 +68,10 @@ public final class SignInOverlay extends Overlay {
                     if(recoveryCounter == 0)
                     {
                         recoveryCounter = wrongAttemptsForRecovery; //Counter reset
-                        var userExists = checkIfUserExists(email);
-                       
+                        var userExists = db.findUserByEmail(email);
+                        
                         //check if user exists and if yes then open password recovery overlay
-                        if(userExists.equals(Optional.empty()))
+                        if(userExists.isEmpty())
                         {
                             Router.openOverlay(new Alert(
                                 UIConstants.USER_NOT_EXIST_TITLE, 
@@ -82,7 +82,7 @@ public final class SignInOverlay extends Overlay {
                         {
                             //open password recovery overlay
                             Router.closeOverlay();
-                            Router.openOverlay(new PasswordRecoveryOverlay(userExists));
+                            Router.openOverlay(new PasswordRecoveryOverlay(userExists.get()));
                         }
                     }
                     else
@@ -103,16 +103,6 @@ public final class SignInOverlay extends Overlay {
         component = panel;
     }
 
-
-    private Optional<User> checkIfUserExists(String email)
-    {
-        var user = db.findUserByEmail(email);
-
-        if(user.equals(Optional.empty()))
-            return Optional.empty();
-        else
-            return user;
-    }
 
     @Override
     public Component getRef() {

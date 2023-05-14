@@ -49,11 +49,7 @@ public final class SignInOverlay extends Overlay {
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-
-                // JOptionPane.showMessageDialog(null, "Email:" + textEmailField.getText() + "
-                // Password: " + textPasswordField.getText());
                 if (db.signIn(textEmailField.getText(), new String(textPasswordField.getPassword()))) {
-
                     Router.pushPage(Pages.HOME);
                     Router.closeOverlay();
                 } else {
@@ -63,9 +59,6 @@ public final class SignInOverlay extends Overlay {
                 }
             });
 
-        // signInHeadingRow.addComponent(signInHeading, Align.LINE_START);
-
-        // panel.add(signInHeadingRow.getRef());
         panel.add(signInHeading.getRef());
         panel.add(explanationParagraph.getRef());
         panel.add(emailInput.getRef());

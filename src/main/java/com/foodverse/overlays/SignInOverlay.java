@@ -1,9 +1,12 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
+import java.util.Optional;
 
+import javax.lang.model.util.ElementScanner14;
 import javax.swing.JPanel;
 
+import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
@@ -53,19 +56,39 @@ public final class SignInOverlay extends Overlay {
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                if (db.signIn(textEmailField.getText(), new String(textPasswordField.getPassword()))) {
+
+                var correctSign = db.signIn(textEmailField.getText(), new String(textPasswordField.getPassword()));
+
+                if (correctSign) {
                     Router.pushPage(Pages.HOME);
                     Router.closeOverlay();
                 } else {
-                    Router.openOverlay(new Alert(
-                        UIConstants.INVALID_CREDENTIALS_TITLE,
-                        UIConstants.INVALID_CREDENTIALS_DESCRIPTION));
-
                     recoveryCounter--;
-
                     if(recoveryCounter == 0)
                     {
-                        
+                        recoveryCounter = wrongAttemptsForRecovery; //Counter reset
+                        var userExists = checkIfUserExists(textEmailField.getText());
+                       
+                        //check if user exists and if yes then open password recovery overlay
+                        if(userExists.equals(Optional.empty()))
+                        {
+                            Router.openOverlay(new Alert(
+                                UIConstants.USER_NOT_EXIST_TITLE, 
+                                UIConstants.USER_NOT_EXIST_DESCRIPTION
+                            ));
+                        }
+                        else 
+                        {
+                            //open password recovery overlay
+                            Router.closeOverlay();
+                            Router.openOverlay(new PasswordRecoveryOverlay(userExists));
+                        }
+                    }
+                    else
+                    {
+                        Router.openOverlay(new Alert(
+                            UIConstants.INVALID_CREDENTIALS_TITLE,
+                            UIConstants.INVALID_CREDENTIALS_DESCRIPTION));
                     }
                 }
             });
@@ -77,6 +100,17 @@ public final class SignInOverlay extends Overlay {
         panel.add(signInButton.getRef());
         panel.setOpaque(false);
         component = panel;
+    }
+
+
+    private Optional<User> checkIfUserExists(String email)
+    {
+        var user = db.findUserByEmail(email);
+
+        if(user.equals(Optional.empty()))
+            return Optional.empty();
+        else
+            return user;
     }
 
     @Override

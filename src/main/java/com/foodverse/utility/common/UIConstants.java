@@ -42,6 +42,17 @@ public final class UIConstants {
         "<html>There is an error with your input<br>"
             + "Please make sure that you have filled all the fields</html>";
 
+    
+    //Message when user does not exist
+    public static final String USER_NOT_EXIST_TITLE = "User does not exist";
+    public static final String USER_NOT_EXIST_DESCRIPTION = 
+        "<html>This user does not exist<br>"
+        + "Maybe you are not signed up<br>"
+        + "Please sign up and then try again<br>"
+        + "If the problem continues please<br>"
+        + "contact our support for further assistance</html>";
+    
+
     // Sign out alert
     public static final String SIGN_OUT_CONFIRM_MESSAGE = "Are you sure you want to sign out?";
     public static final String EMPTY_STATE_MESSAGE = "Unfortunately, there is nothing to display.";

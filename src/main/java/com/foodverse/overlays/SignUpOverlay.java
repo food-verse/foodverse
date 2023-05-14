@@ -11,6 +11,7 @@ import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.utility.ui.SecureTextField;
 import com.foodverse.utility.ui.TextField;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
@@ -48,13 +49,13 @@ public final class SignUpOverlay extends Overlay {
         var phoneInput = new InputForm("Phone", "", textPhoneInput);
         var textEmailInput = new TextField();
         var emailInput = new InputForm("Email", "", textEmailInput);
-        var textPasswordInput = new TextField();
+        var textPasswordInput = new SecureTextField();
         var passwordInput = new InputForm("Password", "Your password must be at least 8 characters",
             textPasswordInput);
         var privacyPolicyParagraph = new Paragraph(
             "By signing up you agree to our Terms of Use and Privacy Policy.", ParagraphSize.S);
         var continueButton = new RectButton(
-            "Sign Up",
+            "Continue",
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
@@ -67,7 +68,7 @@ public final class SignUpOverlay extends Overlay {
                     Router.openOverlay(new RecoveryOptionsOverlay(
                         textNameInput.getText(), textAddressInput.getText(),
                         textPhoneInput.getText(), textEmailInput.getText(),
-                        textPasswordInput.getText())); // just to check if its display is
+                        new String(textPasswordInput.getPassword()))); // just to check if its display is
                     // alright
                 } else
                     Router.openOverlay(new Alert(
@@ -92,14 +93,14 @@ public final class SignUpOverlay extends Overlay {
     }
 
     private boolean checkCredentials(TextField name, TextField address, TextField phone,
-                                     TextField email, TextField password) {
+                                     TextField email, SecureTextField password) {
         boolean isValid;
 
         isValid = validator.isNameValid(name.getText())
             && validator.isAddressValid(address.getText()) &&
             validator.isPhoneValid(phone.getText()) && validator.isEmailValid(email.getText())
             &&
-            validator.isPasswordValid(password.getText());
+            validator.isPasswordValid(new String(password.getPassword()));
 
         return isValid;
     }

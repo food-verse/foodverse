@@ -66,9 +66,9 @@ public class ChangePasswordOverlay extends Overlay
                         var newCredentials = user.credentials().withPassword(newPasswordAsAString);
                         User updatedUser = user.withCredentials(newCredentials);
                         db.updateUser(updatedUser);
+                        Router.closeOverlay();
                         Router.openOverlay(new Alert(UIConstants.SUCCESSFUL_PASSWORD_CHANGE_TITLE, UIConstants.SUCCESSFUL_PASSWORD_CHANGE_DESCRIPTION));
                         Router.pushPage(Pages.HOME);
-                        Router.closeOverlay();
                     }  
                     else
                     {

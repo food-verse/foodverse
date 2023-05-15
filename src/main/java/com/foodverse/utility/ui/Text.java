@@ -26,9 +26,10 @@ public abstract class Text extends Widget {
         component.setText(data);
     }
 
-    public void onPressed(Consumer<MouseEvent> onPressed) {
+    public void onPressed(Consumer<MouseEvent> onPressed, String ariaLabel) {
         this.onPressed = onPressed;
         if (onPressed != null) {
+            component.setToolTipText(ariaLabel);
             component.addMouseListener(new TextListener());
             component.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         }

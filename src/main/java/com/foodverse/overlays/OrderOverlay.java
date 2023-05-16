@@ -2,6 +2,7 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.util.Map;
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public final class OrderOverlay extends Overlay {
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
     float total = 0;
+    PillButton tip1, tip2, tip3, tip4;
 
     public OrderOverlay(String merchant, Map<String, Integer> items) {
         super(800, 680);
@@ -64,14 +66,6 @@ public final class OrderOverlay extends Overlay {
         var panel = new JPanel();
         var orderLabel = new Heading("Your Order", HeadingSize.XL);
 
-        // var button = new PillButton(
-        // "Close ProfileOverlay ->",
-        // ButtonSize.XS,
-        // ButtonType.SECONDARY,
-        // e -> {
-        // Router.closeOverlay();
-        // });
-        // panel.add(button.getRef());
         panel.add(orderLabel.getRef());
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -109,8 +103,6 @@ public final class OrderOverlay extends Overlay {
         panel.add(newLine5);
 
         // Tips
-        // TipsView tips = new TipsView();
-        // panel.add(tips.getRef());
 
         var tips = new JPanel();
         tips.setPreferredSize(new Dimension(200, 80));
@@ -118,37 +110,41 @@ public final class OrderOverlay extends Overlay {
         var tipLabel = new Label("Tips:", LabelSize.L);
         tips.add(tipLabel.getRef());
 
-        var tip1 = new PillButton("0.5$",
+        tip1 = new PillButton("0.5$",
                 ButtonSize.XS,
                 ButtonType.SECONDARY,
                 e -> {
-
+                    addTip(e, total);
                 });
-        var tip2 = new PillButton("1$",
+        tip2 = new PillButton("1$",
                 ButtonSize.XS,
                 ButtonType.SECONDARY,
                 e -> {
+                    addTip(e, total);
                 });
-        var tip3 = new PillButton("2$",
+        tip3 = new PillButton("2$",
                 ButtonSize.XS,
                 ButtonType.SECONDARY,
                 e -> {
+                    addTip(e, total);
                 });
-        var tip4 = new PillButton("5$",
+        tip4 = new PillButton("5$",
                 ButtonSize.XS,
                 ButtonType.SECONDARY,
                 e -> {
+                    addTip(e, total);
                 });
 
         tips.add(tip1.getRef());
         tips.add(tip2.getRef());
         tips.add(tip3.getRef());
         tips.add(tip4.getRef());
+
         panel.add(tips);
 
-        // Check out button
+        // Checkout button
         var checkoutButton = new RectButton("Checkout ->",
-                ButtonSize.S,
+                ButtonSize.XL,
                 ButtonType.PRIMARY,
                 e -> {
                     if (total > shop.get().minOrder()) {
@@ -174,8 +170,17 @@ public final class OrderOverlay extends Overlay {
         JOptionPane.showMessageDialog(getFrame(), "Your order has been successfully registered!");
     }
 
-    // private void addTip(){
+    private void addTip(ActionEvent e, float total) {
+        if (e.getSource() == tip1.getRef()) {
+            total += 0.5;
+        } else if (e.getSource() == tip2.getRef()) {
+            total += 1;
+        } else if (e.getSource() == tip3.getRef()) {
+            total += 2;
+        } else {
+            total += 5;
+        }
 
-    // }
+    }
 
 }

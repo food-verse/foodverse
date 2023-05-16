@@ -16,6 +16,7 @@ import com.foodverse.models.OrderType;
 import com.foodverse.models.PaymentMethod;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
+import com.foodverse.state.Store;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
@@ -173,7 +174,9 @@ public final class OrderOverlay extends Overlay {
         // take the date
         Date currentDate = new Date();
         // Save the user's order
-        signedUser.get().orders().add(new Order(merchant, currentDate, items, (float) deltip, total, method, type));
+        method = Store.orderPaymentMethod.getValue();
+        signedUser.get().orders().add(new Order(merchant, currentDate, items, (float) deltip, total, method, null));
+        
         component = panel;
     }
 

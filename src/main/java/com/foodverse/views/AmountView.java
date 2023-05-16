@@ -2,13 +2,15 @@ package com.foodverse.views;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.text.DecimalFormat;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.foodverse.utility.core.Widget;
+import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.ui.Colors;
-import com.foodverse.widgets.text.Label;
-import com.foodverse.widgets.text.Label.LabelSize;
+import com.foodverse.widgets.layout.Column;
 
 public final class AmountView extends Widget {
 
@@ -17,7 +19,7 @@ public final class AmountView extends Widget {
     public AmountView(float total) {
         var panel = new JPanel();
 
-        panel.setPreferredSize(new Dimension(1250, 100));
+        panel.setPreferredSize(new Dimension(1250, 50));
         panel.setBackground(Colors.white);
 
         // // Border
@@ -28,12 +30,15 @@ public final class AmountView extends Widget {
         DecimalFormat df = new DecimalFormat("#0.00");
         String towDigitTotal = df.format(total);
 
-        // amount.setBorder(boarder);
-        amount.setPreferredSize(new Dimension(600, 100));
-        var amountLabel = new Label("Total: " + towDigitTotal, LabelSize.L);
-        amount.add(amountLabel.getRef());
+        amount.setPreferredSize(new Dimension(200, 100));
+        var amountLabel = new JLabel("Total: " + towDigitTotal + " | ");
+        changeFont(amountLabel, "Arial", Font.PLAIN, 12);
+        amount.add(amountLabel);
         amount.setBackground(Colors.white);
         panel.add(amount);
+
+        var paddedPanel = new Column();
+        paddedPanel.addComponent(panel, Align.FIRST_LINE_START);
 
         component = panel;
 
@@ -42,6 +47,11 @@ public final class AmountView extends Widget {
     @Override
     public Component getRef() {
         return component;
+    }
+
+    public static void changeFont(JLabel label, String fontName, int fontStyle, int fontSize) {
+        Font font = new Font(fontName, fontStyle, fontSize);
+        label.setFont(font);
     }
 
 }

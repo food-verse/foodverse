@@ -18,11 +18,11 @@ public final class TipsView extends Widget {
         public Component getRef() {
                 var panel = new JPanel();
                 panel.setBorder(BorderFactory.createLineBorder(Colors.black));
-                panel.setPreferredSize(new Dimension(1250, 100));
+                panel.setPreferredSize(new Dimension(200, 100));
                 panel.setBackground(Colors.white);
 
                 var tips = new JPanel();
-                tips.setPreferredSize(new Dimension(1200, 80));
+                tips.setPreferredSize(new Dimension(200, 80));
                 tips.setBackground(Colors.white);
                 var tipLabel = new Label("Tips:", LabelSize.L);
                 tips.add(tipLabel.getRef());

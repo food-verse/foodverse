@@ -1,88 +1,49 @@
 package com.foodverse.views;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+
+import com.foodverse.overlays.CardOverlay;
 import com.foodverse.utility.core.Widget;
+import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.ui.Colors;
-import javax.swing.JRadioButton;
-// import javax.swing.JTextArea;
-import javax.swing.ButtonGroup;
+import com.foodverse.utility.ui.Button.ButtonSize;
+import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.widgets.button.RectButton;
 
 public final class PaymentView extends Widget {
 
     @Override
     public Component getRef() {
         var panel = new JPanel();
-        panel.setPreferredSize(new Dimension(1250, 100));
+        panel.setPreferredSize(new Dimension(100, 100));
         panel.setBackground(Colors.white);
 
         var payment = new JPanel();
-        payment.setPreferredSize(new Dimension(600, 100));
+        payment.setPreferredSize(new Dimension(100, 100));
         payment.setBackground(Colors.white);
 
-        // var CardButton = new RectButton("Card",
-        // ButtonSize.S,
-        // ButtonType.PRIMARY,
-        // e -> {
-        // Carddetails(e);
-        // });
+        var CardButton = new RectButton("Card",
+                ButtonSize.XL,
+                ButtonType.PRIMARY,
+                e -> {
+                    Router.openOverlay(new CardOverlay());
+                });
 
-        // payment.add(CardButton.getRef());
+        payment.add(CardButton.getRef());
 
-        // Card Details
-
-        // var cardNumber = new JTextArea("Card Number ");
-        // cardNumber.setBorder(boarder);
-        // var Name = new JTextArea("Name ");
-        // Name.setBorder(boarder);
-        // var secCode = new JTextArea("Secret Code ");
-        // secCode.setBorder(boarder);
-        // var Date = new JTextArea("Day/Year ");
-        // Date.setBorder(boarder);
-
-        // payment.add(cardNumber);
-        // payment.add(Name);
-        // payment.add(secCode);
-        // payment.add(Date);
-
-        // Buttons for payment
-
-        var CardDetails = new JRadioButton("Card ");
-        var Cash = new JRadioButton("Cash ");
-        var Take = new JRadioButton("Take away ");
-        var group = new ButtonGroup();
-        group.add(CardDetails);
-        group.add(Take);
-        group.add(Cash);
-
-        payment.add(CardDetails);
-        payment.add(Cash);
-        payment.add(Take);
+        var CashButton = new RectButton("Cash",
+                ButtonSize.XL,
+                ButtonType.PRIMARY,
+                e -> {
+                });
+        payment.add(CashButton.getRef());
 
         panel.add(payment);
 
         return panel;
     }
-
-    // private JPanel Carddetails(ActionEvent e) {
-    // var payment = new JPanel();
-    // Border boarder = BorderFactory.createLineBorder(Colors.black);
-
-    // var cardNumber = new JTextArea("Card Number ");
-    // cardNumber.setBorder(boarder);
-    // var Name = new JTextArea("Name ");
-    // Name.setBorder(boarder);
-    // var secCode = new JTextArea("Secret Code ");
-    // secCode.setBorder(boarder);
-    // var Date = new JTextArea("Day/Year ");
-    // Date.setBorder(boarder);
-
-    // payment.add(cardNumber);
-    // payment.add(Name);
-    // payment.add(secCode);
-    // payment.add(Date);
-    // return payment;
-    // }
 
 }

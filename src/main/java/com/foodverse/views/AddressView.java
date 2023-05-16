@@ -19,13 +19,13 @@ public final class AddressView extends Widget {
     public AddressView(Optional<User> user) {
         var panel = new JPanel();
 
-        panel.setPreferredSize(new Dimension(1250, 50));
+        panel.setPreferredSize(new Dimension(200, 50));
         panel.setBackground(Colors.white);
 
         // OrderCard acard = new OrderCard(null);
         // panel.add(acard.getRef());
         var address = new JLabel("Address: " + user.get().addresses().get(0));
-        setFontSize(address, 24);
+        changeFont(address, "Arial", Font.PLAIN, 16);
         panel.add(address);
 
         component = panel;
@@ -36,10 +36,9 @@ public final class AddressView extends Widget {
         return component;
     }
 
-    public static void setFontSize(JLabel label, int size) {
-        Font font = label.getFont();
-        Font modifiedFont = font.deriveFont((float) size); // Create a font with the specified size
-        label.setFont(modifiedFont); // Set the modified font size
+    public static void changeFont(JLabel label, String fontName, int fontStyle, int fontSize) {
+        Font font = new Font(fontName, fontStyle, fontSize);
+        label.setFont(font);
     }
 
 }

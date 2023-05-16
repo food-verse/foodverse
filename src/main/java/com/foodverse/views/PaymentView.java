@@ -4,7 +4,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 
+import com.foodverse.models.PaymentMethod;
 import com.foodverse.overlays.CardOverlay;
+import com.foodverse.state.Store;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.ui.Colors;
@@ -28,6 +30,7 @@ public final class PaymentView extends Widget {
                 ButtonSize.XL,
                 ButtonType.PRIMARY,
                 e -> {
+                    Store.orderPaymentMethod.setValue(PaymentMethod.CARD);
                     Router.openOverlay(new CardOverlay());
                 });
 
@@ -37,6 +40,7 @@ public final class PaymentView extends Widget {
                 ButtonSize.XL,
                 ButtonType.PRIMARY,
                 e -> {
+                    Store.orderPaymentMethod.setValue(PaymentMethod.CASH);
                 });
         payment.add(CashButton.getRef());
 

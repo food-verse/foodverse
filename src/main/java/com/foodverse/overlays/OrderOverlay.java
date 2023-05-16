@@ -161,6 +161,12 @@ public final class OrderOverlay extends Overlay {
                 ButtonType.PRIMARY,
                 e -> {
                     if (total > shop.get().minOrder()) {
+                        // take the date
+                        Date currentDate = new Date();
+                        // Save the user's order
+                        method = Store.orderPaymentMethod.getValue();
+                        signedUser.get().orders()
+                                .add(new Order(merchant, currentDate, items, (float) deltip, total, method, null));
                         showSuccessfulOrderMessage();
                         Router.closeOverlay();
                     } else {
@@ -171,12 +177,7 @@ public final class OrderOverlay extends Overlay {
 
         panel.add(checkoutButton.getRef());
         panel.setOpaque(false);
-        // take the date
-        Date currentDate = new Date();
-        // Save the user's order
-        method = Store.orderPaymentMethod.getValue();
-        signedUser.get().orders().add(new Order(merchant, currentDate, items, (float) deltip, total, method, null));
-        
+
         component = panel;
     }
 

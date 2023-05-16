@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -134,6 +135,10 @@ public final class ShopOverlay extends Overlay {
         AddLine line1 = new AddLine();
         panel.add(line1);
         var shopAddress = new JLabel(props.address());
+        var paddedaddress = new Row();
+        paddedaddress.addComponent(shopAddress, new EdgeInsets.Builder().top(0).build(),
+                Align.CENTER);
+        changeFont(shopAddress, "Arial", Font.PLAIN, 16);
         panel.add(shopAddress);
         AddLine line2 = new AddLine();
         panel.add(line2);
@@ -222,6 +227,11 @@ public final class ShopOverlay extends Overlay {
         column.addComponent(panel, new EdgeInsets.Builder().left(150).build(), Align.LAST_LINE_START);
         // return column.getRef();
         return new ScrollView(column.getRef()).getRef();
+    }
+
+    public static void changeFont(JLabel label, String fontName, int fontStyle, int fontSize) {
+        Font font = new Font(fontName, fontStyle, fontSize);
+        label.setFont(font);
     }
 
 }

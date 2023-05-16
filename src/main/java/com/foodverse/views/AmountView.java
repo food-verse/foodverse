@@ -32,7 +32,7 @@ public final class AmountView extends Widget {
 
         amount.setPreferredSize(new Dimension(200, 100));
         var amountLabel = new JLabel("Total: " + towDigitTotal + " | ");
-        changeFont(amountLabel, "Arial", Font.PLAIN, 12);
+        changeFont(amountLabel, "Arial", Font.PLAIN, 14);
         amount.add(amountLabel);
         amount.setBackground(Colors.white);
         panel.add(amount);

@@ -20,7 +20,7 @@ public final class Offers extends Widget {
 
         var panel = new JPanel();
 
-        panel.setPreferredSize(new Dimension(200, 40));
+        panel.setPreferredSize(new Dimension(100, 200));
         panel.setBackground(Color.white);
 
         for (int i = 0; i < shop.get().offers().size(); i++) {
@@ -70,7 +70,7 @@ public final class Offers extends Widget {
 
             itemPanel.add(productAddButton.getRef());
 
-            itemPanel.setPreferredSize(new Dimension(200, 40));
+            itemPanel.setPreferredSize(new Dimension(400, 50));
 
             itemPanel.setBackground(Color.white);
         }

@@ -19,6 +19,7 @@ import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.ImageStyle;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.views.AddLine;
 import com.foodverse.views.EmptyView;
 import com.foodverse.views.Offers;
 import com.foodverse.views.RateView;
@@ -130,8 +131,12 @@ public final class ShopOverlay extends Overlay {
         panel.add(prepTime.getRef());
 
         // Shop's address
-        // var shopsAddress = new ListTile(props.address());
-        panel.add(new EmptyView(props.address()).getRef());
+        AddLine line1 = new AddLine();
+        panel.add(line1);
+        var shopAddress = new JLabel(props.address());
+        panel.add(shopAddress);
+        AddLine line2 = new AddLine();
+        panel.add(line2);
 
         // offers
         var offersTile = new ListTile("Offers");

@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.util.Map;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.ui.Colors;
@@ -21,10 +22,10 @@ public final class ProductView extends Widget {
         var number = 0;
         for (String item : items.keySet()) {
             number++;
-            var view = new EmptyView(number + "." + item);
-            panel.add(view.getRef());
+            var view = new JLabel(number + "." + item);
+            panel.add(view);
         }
-        products.setPreferredSize(new Dimension(200, 200));
+        products.setPreferredSize(new Dimension(200, 400));
         products.setBackground(Colors.white);
         panel.add(products);
         component = panel;

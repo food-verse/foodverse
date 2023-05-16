@@ -2,13 +2,11 @@ package com.foodverse.views;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.ui.Colors;
 import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.border.Border;
+// import javax.swing.JTextArea;
 import javax.swing.ButtonGroup;
 
 public final class PaymentView extends Widget {
@@ -16,12 +14,8 @@ public final class PaymentView extends Widget {
     @Override
     public Component getRef() {
         var panel = new JPanel();
-        panel.setBorder(BorderFactory.createLineBorder(Colors.black));
         panel.setPreferredSize(new Dimension(1250, 100));
         panel.setBackground(Colors.white);
-
-        // Border
-        Border boarder = BorderFactory.createLineBorder(Colors.black);
 
         var payment = new JPanel();
         payment.setPreferredSize(new Dimension(600, 100));
@@ -38,19 +32,19 @@ public final class PaymentView extends Widget {
 
         // Card Details
 
-        var cardNumber = new JTextArea("Card Number ");
-        cardNumber.setBorder(boarder);
-        var Name = new JTextArea("Name ");
-        Name.setBorder(boarder);
-        var secCode = new JTextArea("Secret Code ");
-        secCode.setBorder(boarder);
-        var Date = new JTextArea("Day/Year ");
-        Date.setBorder(boarder);
+        // var cardNumber = new JTextArea("Card Number ");
+        // cardNumber.setBorder(boarder);
+        // var Name = new JTextArea("Name ");
+        // Name.setBorder(boarder);
+        // var secCode = new JTextArea("Secret Code ");
+        // secCode.setBorder(boarder);
+        // var Date = new JTextArea("Day/Year ");
+        // Date.setBorder(boarder);
 
-        payment.add(cardNumber);
-        payment.add(Name);
-        payment.add(secCode);
-        payment.add(Date);
+        // payment.add(cardNumber);
+        // payment.add(Name);
+        // payment.add(secCode);
+        // payment.add(Date);
 
         // Buttons for payment
 

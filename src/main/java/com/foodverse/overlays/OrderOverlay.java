@@ -17,6 +17,7 @@ import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Colors;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.views.AddLine;
 import com.foodverse.views.AddressView;
 import com.foodverse.views.AmountView;
 import com.foodverse.views.PaymentView;
@@ -59,7 +60,8 @@ public final class OrderOverlay extends Overlay {
 
         // Heading
         var panel = new JPanel();
-        var orderLabel = new Heading("Order", HeadingSize.XL);
+        var orderLabel = new Heading("Your Order", HeadingSize.XL);
+
         var button = new PillButton(
                 "Close ProfileOverlay ->",
                 ButtonSize.XS,
@@ -71,13 +73,21 @@ public final class OrderOverlay extends Overlay {
         panel.add(orderLabel.getRef());
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+        // add Line after the heading
+        AddLine newLine1 = new AddLine();
+        panel.add(newLine1);
+
         // Address
         AddressView view = new AddressView(signedUser);
         panel.add(view.getRef());
+        AddLine newLine2 = new AddLine();
+        panel.add(newLine2);
 
         // Payment
         PaymentView payment = new PaymentView();
         panel.add(payment.getRef());
+        AddLine newLine3 = new AddLine();
+        panel.add(newLine3);
 
         // Amount
         Optional<Shop> shop = db.findShopByName(merchant);
@@ -91,10 +101,14 @@ public final class OrderOverlay extends Overlay {
         }
         AmountView amount = new AmountView(total);
         panel.add(amount.getRef());
+        AddLine newLine4 = new AddLine();
+        panel.add(newLine4);
 
         // Products
         ProductView products = new ProductView(items);
         panel.add(products.getRef());
+        AddLine newLine5 = new AddLine();
+        panel.add(newLine5);
 
         // Tips
         // TipsView tips = new TipsView();

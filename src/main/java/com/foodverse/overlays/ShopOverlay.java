@@ -26,6 +26,7 @@ import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ListTile;
+import com.foodverse.widgets.layout.Row;
 import com.foodverse.widgets.layout.ScrollView;
 import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
@@ -71,7 +72,16 @@ public final class ShopOverlay extends Overlay {
 
         // create heading with the name of the shop and put it in the panel
         var nameHeading = new Heading(name, HeadingSize.L);
-        panel.add(nameHeading.getRef());
+        var namePanel = new JPanel();
+        namePanel.add(nameHeading.getRef());
+        namePanel.setBackground(Color.white);
+        var paddedHeading = new Row();
+        paddedHeading.addComponent(namePanel, new EdgeInsets.Builder()
+                .symmetric(40, 48)
+                .build(),
+                Align.CENTER);
+        panel.add(paddedHeading.getRef());
+        panel.add(namePanel);
 
         //
         var props = ShopProps.from(shop.get());
@@ -167,6 +177,19 @@ public final class ShopOverlay extends Overlay {
             itemPanel.add(productAddButton.getRef());
 
             itemPanel.setBackground(Color.white);
+            var paddedmenu = new Row();
+            paddedmenu.addComponent(itemPanel, new EdgeInsets.Builder()
+                    .symmetric(40, 48)
+                    .build(),
+                    Align.CENTER);
+            panel.add(paddedmenu.getRef());
+
+            var paddedmenu2 = new Column();
+            paddedmenu2.addComponent(itemPanel, new EdgeInsets.Builder()
+                    .symmetric(40, 48)
+                    .build(),
+                    Align.CENTER);
+            panel.add(paddedmenu.getRef());
 
             panel.add(itemPanel);
 

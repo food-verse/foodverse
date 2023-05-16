@@ -3,6 +3,7 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -10,6 +11,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.foodverse.models.Order;
+import com.foodverse.models.OrderType;
+import com.foodverse.models.PaymentMethod;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 import com.foodverse.utility.navigation.Overlay;
@@ -37,7 +41,10 @@ public final class OrderOverlay extends Overlay {
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
     float total = 0;
+    PaymentMethod method = PaymentMethod.CASH;
+    OrderType type = OrderType.DELIVERY;
     PillButton tip1, tip2, tip3, tip4;
+    float deltip = 0;
 
     public OrderOverlay(String merchant, Map<String, Integer> items) {
         super(800, 680);
@@ -93,6 +100,7 @@ public final class OrderOverlay extends Overlay {
         // Payment
         PaymentView payment = new PaymentView();
         panel.add(payment.getRef());
+
         AddLine newLine3 = new AddLine();
         panel.add(newLine3);
 
@@ -115,24 +123,28 @@ public final class OrderOverlay extends Overlay {
                 ButtonType.SECONDARY,
                 e -> {
                     addTip(e, total);
+                    deltip = (float) 0.5;
                 });
         tip2 = new PillButton("1$",
                 ButtonSize.XS,
                 ButtonType.SECONDARY,
                 e -> {
                     addTip(e, total);
+                    deltip = 1;
                 });
         tip3 = new PillButton("2$",
                 ButtonSize.XS,
                 ButtonType.SECONDARY,
                 e -> {
                     addTip(e, total);
+                    deltip = 2;
                 });
         tip4 = new PillButton("5$",
                 ButtonSize.XS,
                 ButtonType.SECONDARY,
                 e -> {
                     addTip(e, total);
+                    deltip = 5;
                 });
 
         tips.add(tip1.getRef());
@@ -158,6 +170,10 @@ public final class OrderOverlay extends Overlay {
 
         panel.add(checkoutButton.getRef());
         panel.setOpaque(false);
+        // take the date
+        Date currentDate = new Date();
+        // Save the user's order
+        signedUser.get().orders().add(new Order(merchant, currentDate, items, (float) deltip, total, method, type));
         component = panel;
     }
 

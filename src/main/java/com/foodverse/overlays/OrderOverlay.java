@@ -35,8 +35,10 @@ public final class OrderOverlay extends Overlay {
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
+    float total = 0;
 
     public OrderOverlay(String merchant, Map<String, Integer> items) {
+        super(800, 680);
 
         // // Getting the authenticated user...
         // db.getAuthenticatedUser().ifPresentOrElse(signedUser -> {
@@ -62,20 +64,31 @@ public final class OrderOverlay extends Overlay {
         var panel = new JPanel();
         var orderLabel = new Heading("Your Order", HeadingSize.XL);
 
-        var button = new PillButton(
-                "Close ProfileOverlay ->",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                    Router.closeOverlay();
-                });
-        panel.add(button.getRef());
+        // var button = new PillButton(
+        // "Close ProfileOverlay ->",
+        // ButtonSize.XS,
+        // ButtonType.SECONDARY,
+        // e -> {
+        // Router.closeOverlay();
+        // });
+        // panel.add(button.getRef());
         panel.add(orderLabel.getRef());
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        // add Line after the heading
-        AddLine newLine1 = new AddLine();
-        panel.add(newLine1);
+        // Amount
+        Optional<Shop> shop = db.findShopByName(merchant);
+
+        for (int j = 0; j < shop.get().menu().size(); j++) {
+            for (String item : items.keySet()) {
+                if (item.equals(shop.get().menu().get(j).name())) {
+                    total = total + shop.get().menu().get(j).price();
+                }
+            }
+        }
+        AmountView amount = new AmountView(total);
+        panel.add(amount.getRef());
+        AddLine newLine4 = new AddLine();
+        panel.add(newLine4);
 
         // Address
         AddressView view = new AddressView(signedUser);
@@ -89,21 +102,6 @@ public final class OrderOverlay extends Overlay {
         AddLine newLine3 = new AddLine();
         panel.add(newLine3);
 
-        // Amount
-        Optional<Shop> shop = db.findShopByName(merchant);
-        float total = 0;
-        for (int j = 0; j < shop.get().menu().size(); j++) {
-            for (String item : items.keySet()) {
-                if (item.equals(shop.get().menu().get(j).name())) {
-                    total = total + shop.get().menu().get(j).price();
-                }
-            }
-        }
-        AmountView amount = new AmountView(total);
-        panel.add(amount.getRef());
-        AddLine newLine4 = new AddLine();
-        panel.add(newLine4);
-
         // Products
         ProductView products = new ProductView(items);
         panel.add(products.getRef());
@@ -115,7 +113,7 @@ public final class OrderOverlay extends Overlay {
         // panel.add(tips.getRef());
 
         var tips = new JPanel();
-        tips.setPreferredSize(new Dimension(1200, 80));
+        tips.setPreferredSize(new Dimension(200, 80));
         tips.setBackground(Colors.white);
         var tipLabel = new Label("Tips:", LabelSize.L);
         tips.add(tipLabel.getRef());
@@ -153,8 +151,13 @@ public final class OrderOverlay extends Overlay {
                 ButtonSize.S,
                 ButtonType.PRIMARY,
                 e -> {
-                    showSuccessfulOrderMessage();
-                    Router.closeOverlay();
+                    if (total > shop.get().minOrder()) {
+                        showSuccessfulOrderMessage();
+                        Router.closeOverlay();
+                    } else {
+                        var x = shop.get().minOrder() - total;
+                        JOptionPane.showMessageDialog(getFrame(), "You need " + x + "$ to reach the minimum order!");
+                    }
                 });
 
         panel.add(checkoutButton.getRef());
@@ -170,5 +173,9 @@ public final class OrderOverlay extends Overlay {
     private void showSuccessfulOrderMessage() {
         JOptionPane.showMessageDialog(getFrame(), "Your order has been successfully registered!");
     }
+
+    // private void addTip(){
+
+    // }
 
 }

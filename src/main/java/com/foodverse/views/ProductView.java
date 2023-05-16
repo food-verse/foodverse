@@ -24,7 +24,7 @@ public final class ProductView extends Widget {
             var view = new EmptyView(number + "." + item);
             panel.add(view.getRef());
         }
-        products.setPreferredSize(new Dimension(1000, 200));
+        products.setPreferredSize(new Dimension(200, 200));
         products.setBackground(Colors.white);
         panel.add(products);
         component = panel;

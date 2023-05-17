@@ -1,31 +1,74 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
-import javax.swing.JPanel;
 
+import com.foodverse.utility.common.UIConstants;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
+import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.text.Heading;
+import com.foodverse.widgets.text.Heading.HeadingSize;
 
 public class InfoOverlay extends Overlay {
 
     private final Component component;
 
     public InfoOverlay() {
-        super(600, 672);
 
-        // Heading
-        var panel = new JPanel();
-        var text = new Heading(
-            "<html>Order delivery online in 3<br>simple steps</html>",
-            Heading.HeadingSize.XXL);
-        panel.add(text.getRef());
-        panel.setOpaque(false);
-        component = panel;
+        // Creating text widgets...
+        var infoTitle = new Heading(UIConstants.INFO_TITLE, HeadingSize.L);
+
+        // Creating info's first step widget...
+        var firstStepWidget = new SectionView(
+            UIConstants.INFO_STEP_1_TITLE,
+            UIConstants.INFO_STEP_1_DESCRIPTION);
+
+        // Creating info's second step widget...
+        var secondStepWidget = new SectionView(
+            UIConstants.INFO_STEP_2_TITLE,
+            UIConstants.INFO_STEP_2_DESCRIPTION);
+
+        // Creating info's third step widget...
+        var thirdStepWidget = new SectionView(
+            UIConstants.INFO_STEP_3_TITLE,
+            UIConstants.INFO_STEP_3_DESCRIPTION);
+
+        // Creating the content column...
+        var content = new Column();
+        content.addWidget(firstStepWidget, Align.FIRST_LINE_START);
+        content.addWidget(secondStepWidget, new EdgeInsets.Builder()
+                .symmetric(24, 0)
+                .build(),
+            Align.FIRST_LINE_START);
+        content.addWidget(thirdStepWidget, Align.FIRST_LINE_START);
+
+        // Creating main panel...
+        var panel = new Column();
+        panel.addWidget(infoTitle, new EdgeInsets.Builder()
+                .bottom(32)
+                .build(),
+            Align.FIRST_LINE_START);
+        panel.addWidget(content, Align.FIRST_LINE_START);
+
+        // Add padding to panel
+        var paddedPanel = new Column();
+        paddedPanel.addWidget(panel, new EdgeInsets.Builder()
+                .all(32)
+                .build(),
+            Align.FIRST_LINE_START);
+
+        component = paddedPanel.getRef();
     }
 
     @Override
     public Component getRef() {
         return component;
+    }
+
+    @Override
+    public String getId() {
+        return "How it works";
     }
 
 }

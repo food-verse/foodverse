@@ -2,7 +2,6 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 
-import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -20,10 +19,12 @@ public final class SectionView extends Widget {
     public SectionView(String title, String description) {
 
         // Creating text widgets...
-        var titleText = new Heading(UIConstants.INFO_STEP_3_TITLE, HeadingSize.S);
-        var descriptionText = new Paragraph(UIConstants.INFO_STEP_3_DESCRIPTION,
+        var titleText = new Heading(title, HeadingSize.S);
+        var descriptionText = new Paragraph(
+            description,
             ParagraphSize.M,
-            Colors.gray600);
+            Colors.gray600
+        );
 
         // Creating the column of the section...
         var column = new Column();

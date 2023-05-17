@@ -45,6 +45,16 @@
       <artifactId>svgSalamander</artifactId>
       <version>1.1.4</version>
     </dependency>
+    <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+      <version>1.7</version>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.libphonenumber</groupId>
+      <artifactId>libphonenumber</artifactId>
+      <version>8.13.11</version>
+    </dependency>
   </dependencies>
   <build>
     <resources>

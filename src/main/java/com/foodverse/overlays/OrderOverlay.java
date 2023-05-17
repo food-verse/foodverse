@@ -21,9 +21,9 @@ import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Colors;
+import com.foodverse.utility.ui.Divider;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
-import com.foodverse.views.AddLine;
 import com.foodverse.views.AddressView;
 import com.foodverse.views.AmountView;
 import com.foodverse.views.PaymentView;
@@ -89,27 +89,22 @@ public final class OrderOverlay extends Overlay {
         }
         AmountView amount = new AmountView(total);
         panel.add(amount.getRef());
-        AddLine newLine4 = new AddLine();
-        panel.add(newLine4);
+        panel.add(new Divider());
 
         // Address
         AddressView view = new AddressView(signedUser);
         panel.add(view.getRef());
-        AddLine newLine2 = new AddLine();
-        panel.add(newLine2);
+        panel.add(new Divider());
 
         // Payment
         PaymentView payment = new PaymentView();
         panel.add(payment.getRef());
-
-        AddLine newLine3 = new AddLine();
-        panel.add(newLine3);
+        panel.add(new Divider());
 
         // Products
         ProductView products = new ProductView(items);
         panel.add(products.getRef());
-        AddLine newLine5 = new AddLine();
-        panel.add(newLine5);
+        panel.add(new Divider());
 
         // Tips
 
@@ -120,33 +115,33 @@ public final class OrderOverlay extends Overlay {
         tips.add(tipLabel.getRef());
 
         tip1 = new PillButton("0.5$",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                    addTip(e, total);
-                    deltip = (float) 0.5;
-                });
+            ButtonSize.XS,
+            ButtonType.SECONDARY,
+            e -> {
+                addTip(e, total);
+                deltip = (float) 0.5;
+            });
         tip2 = new PillButton("1$",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                    addTip(e, total);
-                    deltip = 1;
-                });
+            ButtonSize.XS,
+            ButtonType.SECONDARY,
+            e -> {
+                addTip(e, total);
+                deltip = 1;
+            });
         tip3 = new PillButton("2$",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                    addTip(e, total);
-                    deltip = 2;
-                });
+            ButtonSize.XS,
+            ButtonType.SECONDARY,
+            e -> {
+                addTip(e, total);
+                deltip = 2;
+            });
         tip4 = new PillButton("5$",
-                ButtonSize.XS,
-                ButtonType.SECONDARY,
-                e -> {
-                    addTip(e, total);
-                    deltip = 5;
-                });
+            ButtonSize.XS,
+            ButtonType.SECONDARY,
+            e -> {
+                addTip(e, total);
+                deltip = 5;
+            });
 
         tips.add(tip1.getRef());
         tips.add(tip2.getRef());
@@ -157,23 +152,25 @@ public final class OrderOverlay extends Overlay {
 
         // Checkout button
         var checkoutButton = new RectButton("Checkout ->",
-                ButtonSize.XL,
-                ButtonType.PRIMARY,
-                e -> {
-                    if (total > shop.get().minOrder()) {
-                        // take the date
-                        Date currentDate = new Date();
-                        // Save the user's order
-                        method = Store.orderPaymentMethod.getValue();
-                        signedUser.get().orders()
-                                .add(new Order(merchant, currentDate, items, (float) deltip, total, method, null));
-                        showSuccessfulOrderMessage();
-                        Router.closeOverlay();
-                    } else {
-                        var x = shop.get().minOrder() - total;
-                        JOptionPane.showMessageDialog(getFrame(), "You need " + x + "$ to reach the minimum order!");
-                    }
-                });
+            ButtonSize.XL,
+            ButtonType.PRIMARY,
+            e -> {
+                if (total > shop.get().minOrder()) {
+                    // take the date
+                    Date currentDate = new Date();
+                    // Save the user's order
+                    method = Store.orderPaymentMethod.getValue();
+                    signedUser.get().orders()
+                        .add(new Order(merchant, currentDate, items, deltip, total,
+                            method, null));
+                    showSuccessfulOrderMessage();
+                    Router.closeOverlay();
+                } else {
+                    var x = shop.get().minOrder() - total;
+                    JOptionPane.showMessageDialog(getFrame(),
+                        "You need " + x + "$ to reach the minimum order!");
+                }
+            });
 
         panel.add(checkoutButton.getRef());
         panel.setOpaque(false);

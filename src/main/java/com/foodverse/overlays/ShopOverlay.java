@@ -11,16 +11,17 @@ import java.util.Optional;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import com.foodverse.models.Shop;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
+import com.foodverse.utility.ui.Divider;
 import com.foodverse.utility.ui.ImageStyle;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
-import com.foodverse.views.AddLine;
 import com.foodverse.views.EmptyView;
 import com.foodverse.views.Offers;
 import com.foodverse.views.RateView;
@@ -81,7 +82,7 @@ public final class ShopOverlay extends Overlay {
         paddedHeading.addComponent(namePanel, new EdgeInsets.Builder()
                 .symmetric(40, 48)
                 .build(),
-                Align.CENTER);
+            Align.CENTER);
         panel.add(paddedHeading.getRef());
         panel.add(namePanel);
 
@@ -90,25 +91,25 @@ public final class ShopOverlay extends Overlay {
 
         // Creating image widgets...
         var thumbnailImage = new Image(props.thumbnail(),
-                new ImageStyle.Builder().width(800).height(200).build());
+            new ImageStyle.Builder().width(800).height(200).build());
         var heartImage = new VectorImage(IconAsset.HEART);
         var heartFillImage = new VectorImage(IconAsset.HEART_FILL);
 
         // Create a map for the choosen items
-        Map<String, Integer> addproducts = new HashMap<>();
+        Map<String, Integer> addProducts = new HashMap<>();
 
         // Add padding to heart
         var paddedImage = new Column();
         paddedImage.addWidget(thumbnailImage, new EdgeInsets.Builder().all(0).build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
 
         var paddedHeartImage = new Column();
         paddedHeartImage.addWidget(heartImage, new EdgeInsets.Builder().all(4).build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
 
         var paddedHeartFillImage = new Column();
         paddedHeartFillImage.addWidget(heartFillImage, new EdgeInsets.Builder().all(4).build(),
-                Align.FIRST_LINE_START);
+            Align.FIRST_LINE_START);
 
         heartImage.onPressed(e -> {
             panel.remove(heartImage.getRef());
@@ -128,20 +129,19 @@ public final class ShopOverlay extends Overlay {
 
         // preparation time
         var prepTime = new ListTile(
-                shop.get().type() + " " + props.prepTime() + "'  |  Minimum " + props.minOrder() + "$");
+            shop.get().type() + " " + props.prepTime() + "'  |  Minimum " + props.minOrder()
+                + "$");
         panel.add(prepTime.getRef());
 
         // Shop's address
-        AddLine line1 = new AddLine();
-        panel.add(line1);
+        panel.add(new Divider());
         var shopAddress = new JLabel(props.address());
-        var paddedaddress = new Row();
-        paddedaddress.addComponent(shopAddress, new EdgeInsets.Builder().top(0).build(),
-                Align.CENTER);
+        var paddedAddress = new Row();
+        paddedAddress.addComponent(shopAddress, new EdgeInsets.Builder().top(0).build(),
+            Align.CENTER);
         changeFont(shopAddress, "Arial", Font.PLAIN, 16);
         panel.add(shopAddress);
-        AddLine line2 = new AddLine();
-        panel.add(line2);
+        panel.add(new Divider());
 
         // offers
         var offersTile = new ListTile("Offers");
@@ -179,7 +179,7 @@ public final class ShopOverlay extends Overlay {
             var menuPrice = new JLabel(priceAsAString + " \u20AC");
 
             var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                addproducts.put(x, 1);
+                addProducts.put(x, 1);
             });
 
             itemPanel.add(menuName);
@@ -187,19 +187,19 @@ public final class ShopOverlay extends Overlay {
             itemPanel.add(productAddButton.getRef());
 
             itemPanel.setBackground(Color.white);
-            var paddedmenu = new Row();
-            paddedmenu.addComponent(itemPanel, new EdgeInsets.Builder()
+            var paddedMenu = new Row();
+            paddedMenu.addComponent(itemPanel, new EdgeInsets.Builder()
                     .symmetric(40, 48)
                     .build(),
-                    Align.CENTER);
-            panel.add(paddedmenu.getRef());
+                Align.CENTER);
+            panel.add(paddedMenu.getRef());
 
-            var paddedmenu2 = new Column();
-            paddedmenu2.addComponent(itemPanel, new EdgeInsets.Builder()
+            var paddedMenu2 = new Column();
+            paddedMenu2.addComponent(itemPanel, new EdgeInsets.Builder()
                     .symmetric(40, 48)
                     .build(),
-                    Align.CENTER);
-            panel.add(paddedmenu.getRef());
+                Align.CENTER);
+            panel.add(paddedMenu.getRef());
 
             panel.add(itemPanel);
 
@@ -214,7 +214,7 @@ public final class ShopOverlay extends Overlay {
         // RectButton "Cart" to appear the OrderOverlay
         var OrderButton = new RectButton("Cart", ButtonSize.L, ButtonType.PRIMARY, e -> {
             Router.closeOverlay();
-            Router.openOverlay(new OrderOverlay(merchant, addproducts));
+            Router.openOverlay(new OrderOverlay(merchant, addProducts));
 
         });
 
@@ -223,8 +223,9 @@ public final class ShopOverlay extends Overlay {
         // component = new ScrollView(panel).getRef();
 
         column.addWidget(thumbnailImage, new EdgeInsets.Builder().all(0).build(),
-                Align.FIRST_LINE_START);
-        column.addComponent(panel, new EdgeInsets.Builder().left(150).build(), Align.LAST_LINE_START);
+            Align.FIRST_LINE_START);
+        column.addComponent(panel, new EdgeInsets.Builder().left(150).build(),
+            Align.LAST_LINE_START);
         // return column.getRef();
         return new ScrollView(column.getRef()).getRef();
     }

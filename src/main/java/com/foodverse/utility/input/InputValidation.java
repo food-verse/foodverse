@@ -1,11 +1,15 @@
 package com.foodverse.utility.input;
 
+import org.apache.commons.validator.routines.EmailValidator;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 
 public final class InputValidation {
 
-
     private static final InputValidation inputValidation = new InputValidation();
-    private static final int phoneLength = 10;
+    private static final EmailValidator validator = EmailValidator.getInstance();
+    private static final PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
     private static final int passwordLength = 8;
 
     private InputValidation() {}
@@ -14,12 +18,8 @@ public final class InputValidation {
         return inputValidation;
     }
 
-    public boolean isIdValid(String id) {
-        return false;
-    }
-
     public boolean isNameValid(String name) {
-    	return !name.isEmpty();
+        return !name.isEmpty();
     }
 
     public boolean isAddressValid(String address) {
@@ -27,19 +27,26 @@ public final class InputValidation {
     }
 
     public boolean isPhoneValid(String phone) {
-        return !phone.isEmpty() && phone.length() == phoneLength && phone.matches("\\d+") ; //phone must contain more than one different digits
+        PhoneNumber parsedPhoneNumber;
+        try {
+            parsedPhoneNumber = phoneNumberUtil.parse(phone, "GR");
+        } catch (NumberParseException e) {
+            return false;
+        }
+        return phoneNumberUtil.isValidNumber(parsedPhoneNumber)
+            && phoneNumberUtil.getNumberType(parsedPhoneNumber) == PhoneNumberUtil.PhoneNumberType.MOBILE
+            && phoneNumberUtil.getRegionCodeForNumber(parsedPhoneNumber).equals("GR");
     }
 
     public boolean isEmailValid(String email) {
-        return (email.contains("@") && email.contains("."));
+        return validator.isValid(email);
     }
 
     public boolean isPasswordValid(String password) {
         return password.length() >= passwordLength;
     }
 
-    public boolean isAnswersValid(String answer1, String answer2)
-    {
+    public boolean isAnswersValid(String answer1, String answer2) {
         return !answer1.isEmpty() && !answer2.isEmpty();
     }
 

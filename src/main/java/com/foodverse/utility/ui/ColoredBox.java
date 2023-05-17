@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serial;
 import java.util.function.Consumer;
 import javax.swing.JPanel;
 
@@ -15,6 +16,7 @@ import com.foodverse.utility.core.Widget;
 
 public final class ColoredBox extends JPanel {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     private final ColoredBoxStyle style;
     private final Consumer<MouseEvent> onPressed;

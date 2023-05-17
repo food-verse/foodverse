@@ -6,11 +6,13 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serial;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 final class BaseButton extends JButton {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     private ButtonStyle buttonStyle;
     private boolean isEnabled;

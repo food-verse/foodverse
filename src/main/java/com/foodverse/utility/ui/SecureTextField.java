@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
+import java.io.Serial;
 import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
 
@@ -12,6 +13,7 @@ import com.foodverse.widgets.button.RectButton;
 
 public final class SecureTextField extends JPasswordField {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     private Shape shape;
     private final ButtonTheme theme = new ButtonTheme.Builder()

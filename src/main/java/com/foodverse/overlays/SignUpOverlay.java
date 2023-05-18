@@ -10,8 +10,10 @@ import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.utility.ui.Colors;
 import com.foodverse.utility.ui.SecureTextField;
 import com.foodverse.utility.ui.TextField;
+import com.foodverse.views.ConsentPolicyView;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
 import com.foodverse.widgets.modal.Alert;
@@ -31,28 +33,21 @@ public final class SignUpOverlay extends Overlay {
     private final InputValidation validator = InputValidation.getInstance();
 
     public SignUpOverlay() {
-        super(600, 840);
-
-        //
-        // validator.isIdValid("emilysmith123");
+        super(600, 600);
 
         var panel = new JPanel();
-        var signUpHeading = new Heading("Sign Up", HeadingSize.XXL);
-        var explanationParagraph =
-            new Paragraph("Sign up now and start enjoying delicious meals.", ParagraphSize.S);
+        var signUpHeading = new Heading(UIConstants.REGISTRATION_PROMO_TITLE, HeadingSize.L);
+        var explanationParagraph = new Paragraph(UIConstants.REGISTRATION_PROMO_MESSAGE, ParagraphSize.M, Colors.gray600);
         var textNameInput = new TextField();
-        var nameInput = new InputForm("Name", "", textNameInput);
+        var nameInput = new InputForm("Name", textNameInput);
         var textAddressInput = new TextField();
-        var addressInput = new InputForm("Address", "", textAddressInput);
+        var addressInput = new InputForm("Address", textAddressInput);
         var textPhoneInput = new TextField();
-        var phoneInput = new InputForm("Phone", "", textPhoneInput);
+        var phoneInput = new InputForm("Phone", textPhoneInput);
         var textEmailInput = new TextField();
-        var emailInput = new InputForm("Email", "", textEmailInput);
+        var emailInput = new InputForm("Email", textEmailInput);
         var textPasswordInput = new SecureTextField();
-        var passwordInput = new InputForm("Password", "Your password must be at least 8 characters",
-            textPasswordInput);
-        var privacyPolicyParagraph = new Paragraph(
-            "By signing up you agree to our Terms of Use and Privacy Policy.", ParagraphSize.S);
+        var passwordInput = new InputForm("Password", UIConstants.REGISTRATION_PASSWORD_FIELD_HINT, textPasswordInput);
         var continueButton = new RectButton(
             "Continue",
             ButtonSize.L,
@@ -68,7 +63,7 @@ public final class SignUpOverlay extends Overlay {
 
                 if (isValid) {
                     Router.closeOverlay();
-                    Router.openOverlay(new RecoveryOptionsOverlay(name, address, phone, email, password)); 
+                    Router.openOverlay(new RecoveryOptionsOverlay(name, address, phone, email, password));
                 } else
                     Router.openOverlay(new Alert(
                         UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE,
@@ -84,7 +79,7 @@ public final class SignUpOverlay extends Overlay {
         panel.add(phoneInput.getRef());
         panel.add(emailInput.getRef());
         panel.add(passwordInput.getRef());
-        panel.add(privacyPolicyParagraph.getRef());
+        panel.add(new ConsentPolicyView().getRef());
         panel.add(continueButton.getRef());
         panel.setOpaque(false);
         component = panel;

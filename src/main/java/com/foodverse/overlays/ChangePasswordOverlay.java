@@ -22,8 +22,7 @@ import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
-public class ChangePasswordOverlay extends Overlay
-{
+public class ChangePasswordOverlay extends Overlay {
     private final Component component;
 
 
@@ -45,42 +44,39 @@ public class ChangePasswordOverlay extends Overlay
         // Heading
         var panel = new JPanel();
         var passwordChangeHeading = new Heading("Password Change", HeadingSize.XXL);
-        var explanationParagraph = new Paragraph("Let\'s change password now", ParagraphSize.M);
+        var explanationParagraph = new Paragraph("Let's change password now", ParagraphSize.M);
         var textChangePassword = new SecureTextField();
-        var newPasswordInput = new InputForm("Type your new password", "", textChangePassword);
+        var newPasswordInput = new InputForm("Type your new password", textChangePassword);
         var textConfirmPassword = new SecureTextField();
-        var confirmPasswordInput = new InputForm("Please write your new password again", "Password must be at least 8 characters long.", textConfirmPassword);
+        var confirmPasswordInput = new InputForm("Please write your new password again", UIConstants.REGISTRATION_PASSWORD_FIELD_HINT, textConfirmPassword);
         var changePasswordButton = new RectButton(
             "Change Password",
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                    var newPasswordAsAString = new String(textChangePassword.getPassword());
-                    var confirmPasswordAsAString = new String(textConfirmPassword.getPassword());
+                var newPasswordAsAString = new String(textChangePassword.getPassword());
+                var confirmPasswordAsAString = new String(textConfirmPassword.getPassword());
 
-                    var areValid = checkValidityOfNewPassword(newPasswordAsAString, confirmPasswordAsAString);
+                var areValid = checkValidityOfNewPassword(newPasswordAsAString, confirmPasswordAsAString);
 
-                    if(areValid)
-                    {
-                        //change password and go to home page
-                        var newCredentials = user.credentials().withPassword(newPasswordAsAString);
-                        User updatedUser = user.withCredentials(newCredentials);
-                        db.updateUser(updatedUser);
-                        Router.closeOverlay();
-                        Router.openOverlay(new Alert(UIConstants.SUCCESSFUL_PASSWORD_CHANGE_TITLE, UIConstants.SUCCESSFUL_PASSWORD_CHANGE_DESCRIPTION));
-                        Router.pushPage(Pages.HOME);
-                    }  
-                    else
-                    {
-                        //show message for wrong format
-                        Router.openOverlay(new Alert(UIConstants.WRONG_NEW_PASSWORD_FORMAT_TITLE, UIConstants.WRONG_NEW_PASSWORD_FORMAT_DESCRIPTION));
-                    }
-                   
+                if (areValid) {
+                    //change password and go to home page
+                    var newCredentials = user.credentials().withPassword(newPasswordAsAString);
+                    User updatedUser = user.withCredentials(newCredentials);
+                    db.updateUser(updatedUser);
+                    Router.closeOverlay();
+                    Router.openOverlay(new Alert(UIConstants.SUCCESSFUL_PASSWORD_CHANGE_TITLE, UIConstants.SUCCESSFUL_PASSWORD_CHANGE_DESCRIPTION));
+                    Router.pushPage(Pages.HOME);
+                } else {
+                    //show message for wrong format
+                    Router.openOverlay(new Alert(UIConstants.WRONG_NEW_PASSWORD_FORMAT_TITLE, UIConstants.WRONG_NEW_PASSWORD_FORMAT_DESCRIPTION));
                 }
-            
-            );
 
-       
+            }
+
+        );
+
+
         panel.add(passwordChangeHeading.getRef());
         panel.add(explanationParagraph.getRef());
         panel.add(newPasswordInput.getRef());
@@ -91,8 +87,7 @@ public class ChangePasswordOverlay extends Overlay
     }
 
 
-    private boolean checkValidityOfNewPassword(String newPasswd, String confirmPasswd)
-    {
+    private boolean checkValidityOfNewPassword(String newPasswd, String confirmPasswd) {
         return validator.isPasswordValid(newPasswd) && validator.isPasswordValid(confirmPasswd) && newPasswd.equals(confirmPasswd);
     }
 

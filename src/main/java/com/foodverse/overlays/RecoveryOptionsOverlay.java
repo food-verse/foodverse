@@ -17,6 +17,7 @@ import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.utility.ui.TextField;
+import com.foodverse.views.ConsentPolicyView;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
 import com.foodverse.widgets.modal.Alert;
@@ -42,9 +43,8 @@ public final class RecoveryOptionsOverlay extends Overlay {
         var configuration = db.getConfiguration();
         var question1 = "";
         var question2 = "";
-        
-        if(!configuration.isEmpty())
-        {
+
+        if (!configuration.isEmpty()) {
             question1 = configuration.get().recoveryQuestions().get(0);
             question2 = configuration.get().recoveryQuestions().get(1);
         }
@@ -53,10 +53,9 @@ public final class RecoveryOptionsOverlay extends Overlay {
         var recoveryHeading = new Heading("Add Recovery Options", HeadingSize.XXL);
         var explanationParagraph = new Paragraph("Sign up now and start enjoying delicious meals.", ParagraphSize.S);
         var textFirstRecovAnswInput = new TextField();
-        var firstRecovAnswInput = new InputForm(question1, "", textFirstRecovAnswInput);
+        var firstRecovAnswInput = new InputForm(question1, textFirstRecovAnswInput);
         var textSecondRecovAnswInput = new TextField();
-        var secondRecovAnswInput = new InputForm(question2, "", textSecondRecovAnswInput);
-        var privacyPolicyParagraph = new Paragraph("By signing up you agree to our Terms of Use and Privacy Policy.", ParagraphSize.S);
+        var secondRecovAnswInput = new InputForm(question2, textSecondRecovAnswInput);
         var signUpButton = new RectButton(
             "Sign Up",
             ButtonSize.L,
@@ -66,19 +65,17 @@ public final class RecoveryOptionsOverlay extends Overlay {
                 var secondAnswer = textSecondRecovAnswInput.getText();
                 boolean isValid = checkValidityOfQuestions(firstAnswer, secondAnswer);
 
-                if (isValid) 
-                {
+                if (isValid) {
                     var answers = List.of(firstAnswer, secondAnswer);
                     var userCredentials = new Credentials(password, answers);
                     var createdUser = new User(username, new ArrayList<>(List.of(address)),
-                    phone, email,
-                    userCredentials, new ArrayList<>(), new ArrayList<>());
+                        phone, email,
+                        userCredentials, new ArrayList<>(), new ArrayList<>());
                     db.signUp(createdUser);
                     Router.closeOverlay();
                     Router.pushPage(Pages.HOME);
-                    
-                } 
-                else
+
+                } else
                     Router.openOverlay(
                         new Alert(UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_TITLE,
                             UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_DESCRIPTION));
@@ -90,7 +87,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
         panel.add(explanationParagraph.getRef());
         panel.add(firstRecovAnswInput.getRef());
         panel.add(secondRecovAnswInput.getRef());
-        panel.add(privacyPolicyParagraph.getRef());
+        panel.add(new ConsentPolicyView().getRef());
         panel.add(signUpButton.getRef());
         panel.setOpaque(false);
         component = panel;

@@ -2,6 +2,7 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import javax.swing.JPanel;
+
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
@@ -43,9 +44,8 @@ public final class PasswordRecoveryOverlay extends Overlay {
         var configuration = db.getConfiguration();
         var question1 = "";
         var question2 = "";
-        
-        if(!configuration.isEmpty())
-        {
+
+        if (!configuration.isEmpty()) {
             question1 = configuration.get().recoveryQuestions().get(0);
             question2 = configuration.get().recoveryQuestions().get(1);
         }
@@ -55,47 +55,41 @@ public final class PasswordRecoveryOverlay extends Overlay {
         var passwordRecoveryHeading = new Heading("Password Recovery", HeadingSize.XXL);
         var explanationParagraph = new Paragraph("It seems that you forgot your password. Answer the following question to change it.", ParagraphSize.M);
         var textFirstAnswerInput = new TextField();
-        var answer1 = new InputForm(question1, "", textFirstAnswerInput);
+        var answer1 = new InputForm(question1, textFirstAnswerInput);
         var textSecondAnswerInput = new TextField();
-        var answer2 = new InputForm(question2, "", textSecondAnswerInput);
+        var answer2 = new InputForm(question2, textSecondAnswerInput);
         var continueButton = new RectButton(
             "Continue",
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-                    var givenAnswer1 = textFirstAnswerInput.getText();
-                    var givenAnswer2 = textSecondAnswerInput.getText();
-                    boolean isValidAnswer = checkValidityOfRecoveryAnswers(givenAnswer1, givenAnswer2);
+                var givenAnswer1 = textFirstAnswerInput.getText();
+                var givenAnswer2 = textSecondAnswerInput.getText();
+                boolean isValidAnswer = checkValidityOfRecoveryAnswers(givenAnswer1, givenAnswer2);
 
-                    if(isValidAnswer)
-                    {
-                        //compare with the value that user gave on sign up process
-                        var areCorrect = checkIfAnswersAreCorrect(user, givenAnswer1, givenAnswer2);
-                        if(areCorrect)
-                        {
-                            //open the window for password change
-                            Router.closeOverlay();
-                            Router.openOverlay(new ChangePasswordOverlay(user));
-                        }
-                        else
-                        {
-                            //show a message for wrong answer and go back to onboarding
-                            Router.closeOverlay();
-                            Router.openOverlay(new Alert(UIConstants.WRONG_RECOVERY_ANSWERS_TITLE, UIConstants.WRONG_RECOVERY_ANSWERS_DESCRIPTION));
-                            Router.pushPage(Pages.ONBOARDING);
-                        }
-
+                if (isValidAnswer) {
+                    //compare with the value that user gave on sign up process
+                    var areCorrect = checkIfAnswersAreCorrect(user, givenAnswer1, givenAnswer2);
+                    if (areCorrect) {
+                        //open the window for password change
+                        Router.closeOverlay();
+                        Router.openOverlay(new ChangePasswordOverlay(user));
+                    } else {
+                        //show a message for wrong answer and go back to onboarding
+                        Router.closeOverlay();
+                        Router.openOverlay(new Alert(UIConstants.WRONG_RECOVERY_ANSWERS_TITLE, UIConstants.WRONG_RECOVERY_ANSWERS_DESCRIPTION));
+                        Router.pushPage(Pages.ONBOARDING);
                     }
-                    else
-                    {
-                        Router.openOverlay(new Alert(UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_TITLE,
+
+                } else {
+                    Router.openOverlay(new Alert(UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_TITLE,
                         UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_DESCRIPTION));
-                    }
                 }
-            
-            );
+            }
 
-       
+        );
+
+
         panel.add(passwordRecoveryHeading.getRef());
         panel.add(explanationParagraph.getRef());
         panel.add(answer1.getRef());
@@ -106,15 +100,13 @@ public final class PasswordRecoveryOverlay extends Overlay {
     }
 
 
-    private boolean checkValidityOfRecoveryAnswers(String firstAnswer, String secondAnswer)
-    {
+    private boolean checkValidityOfRecoveryAnswers(String firstAnswer, String secondAnswer) {
         return validator.isAnswersValid(firstAnswer, secondAnswer);
     }
 
 
-    public boolean checkIfAnswersAreCorrect(User user, String answer1, String answer2)
-    {
-        var correctAnswers = user.credentials().recoveryAnswers();   
+    public boolean checkIfAnswersAreCorrect(User user, String answer1, String answer2) {
+        var correctAnswers = user.credentials().recoveryAnswers();
         return correctAnswers.get(0).equals(answer1) && correctAnswers.get(1).equals(answer2);
     }
 

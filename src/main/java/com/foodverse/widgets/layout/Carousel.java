@@ -5,17 +5,17 @@ import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.JPanel;
 
+import com.foodverse.props.OfferCardProps;
+import com.foodverse.props.OrderCardProps;
+import com.foodverse.props.ShopCardProps;
 import com.foodverse.utility.core.Props;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.views.EmptyView;
 import com.foodverse.widgets.card.OfferCard;
-import com.foodverse.widgets.card.OfferCardProps;
 import com.foodverse.widgets.card.OrderCard;
-import com.foodverse.widgets.card.OrderCardProps;
 import com.foodverse.widgets.card.ShopCard;
-import com.foodverse.widgets.card.ShopCardProps;
 
 public final class Carousel extends Widget {
 

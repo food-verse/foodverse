@@ -1,4 +1,4 @@
-package com.foodverse.overlays;
+package com.foodverse.views;
 
 import java.awt.Component;
 

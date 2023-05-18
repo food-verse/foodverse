@@ -17,6 +17,10 @@ public final class InputForm extends Widget {
 
     private final Column formWidget = new Column();
 
+    public InputForm(String label, JTextField textField) {
+        this(label, "", textField);
+    }
+
     public InputForm(String label, String caption, JTextField textField) {
 
         // Creating text widgets...

@@ -1,34 +1,15 @@
 package com.foodverse.widgets.layout;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
-import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 
-public final class Column extends Widget {
+public final class Column extends Flex {
 
-    private final JPanel component = new JPanel();
-    private int order = 0;
-
-    public Column() {
-        component.setLayout(new GridBagLayout());
-        component.setOpaque(false);
-    }
-
-    public void addWidget(Widget widget, Align align) {
-        addWidget(widget, new EdgeInsets.Builder().build(), align);
-    }
-
-    public void addWidget(Widget widget, EdgeInsets edgeInsets, Align align) {
-        addComponent(widget.getRef(), edgeInsets, align);
-    }
-
-    public void addComponent(Component widget, Align align) {
-        addComponent(widget, new EdgeInsets.Builder().build(), align);
-    }
-
+    @Override
     public void addComponent(Component widget, EdgeInsets edgeInsets, Align align) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.VERTICAL;
@@ -38,12 +19,19 @@ public final class Column extends Widget {
         constraints.insets = new Insets(
             edgeInsets.getTop(), edgeInsets.getLeft(),
             edgeInsets.getBottom(), edgeInsets.getRight());
-        component.add(widget, constraints);
+        add(widget, constraints);
     }
 
     @Override
-    public Component getRef() {
-        return component;
+    public void replaceComponent(Component oldComponent, Component newComponent) {
+        var constraints = flexItems.get(oldComponent);
+        if (constraints != null) {
+            container.remove(constraints.gridy);
+            add(newComponent, constraints);
+            container.revalidate();
+            container.repaint();
+        }
     }
+
 
 }

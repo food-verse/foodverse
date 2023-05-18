@@ -6,6 +6,7 @@ import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
+import com.foodverse.views.SectionView;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
@@ -22,17 +23,20 @@ public class InfoOverlay extends Overlay {
         // Creating info's first step widget...
         var firstStepWidget = new SectionView(
             UIConstants.INFO_STEP_1_TITLE,
-            UIConstants.INFO_STEP_1_DESCRIPTION);
+            UIConstants.INFO_STEP_1_DESCRIPTION
+        );
 
         // Creating info's second step widget...
         var secondStepWidget = new SectionView(
             UIConstants.INFO_STEP_2_TITLE,
-            UIConstants.INFO_STEP_2_DESCRIPTION);
+            UIConstants.INFO_STEP_2_DESCRIPTION
+        );
 
         // Creating info's third step widget...
         var thirdStepWidget = new SectionView(
             UIConstants.INFO_STEP_3_TITLE,
-            UIConstants.INFO_STEP_3_DESCRIPTION);
+            UIConstants.INFO_STEP_3_DESCRIPTION
+        );
 
         // Creating the content column...
         var content = new Column();

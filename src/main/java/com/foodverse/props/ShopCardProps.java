@@ -1,4 +1,4 @@
-package com.foodverse.widgets.card;
+package com.foodverse.props;
 
 import com.foodverse.models.Shop;
 import com.foodverse.models.ShopType;

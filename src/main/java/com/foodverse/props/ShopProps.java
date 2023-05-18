@@ -1,4 +1,4 @@
-package com.foodverse.overlays;
+package com.foodverse.props;
 
 import java.util.List;
 

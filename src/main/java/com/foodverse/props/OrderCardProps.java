@@ -1,4 +1,4 @@
-package com.foodverse.widgets.card;
+package com.foodverse.props;
 
 import java.util.Map;
 import java.util.Optional;

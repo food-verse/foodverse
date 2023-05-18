@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.foodverse.models.Offer;
 import com.foodverse.overlays.ShopOverlay;
+import com.foodverse.props.OfferCardProps;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -24,7 +25,6 @@ import com.foodverse.widgets.text.Label.LabelSize;
 public final class OfferCard extends Widget {
 
     private final OfferCardProps props;
-    private final int numberOfLines = 3;
 
     public OfferCard(OfferCardProps props) {
         this.props = props;
@@ -54,6 +54,7 @@ public final class OfferCard extends Widget {
         int widgetCount = 0;
         var builder = new StringBuilder();
         var itemListWidget = new Column();
+        int numberOfLines = 3;
         for (Offer offer : props.offers()) {
             builder.append('•');
             for (Map.Entry<String, Integer> entry : offer.items().entrySet()) {

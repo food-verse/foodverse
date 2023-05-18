@@ -3,6 +3,7 @@ package com.foodverse.widgets.card;
 import java.awt.Component;
 
 import com.foodverse.overlays.ShopOverlay;
+import com.foodverse.props.ShopCardProps;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;

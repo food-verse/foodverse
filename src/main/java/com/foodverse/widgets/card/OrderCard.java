@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.util.Map;
 
 import com.foodverse.overlays.OrderOverlay;
+import com.foodverse.props.OrderCardProps;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;

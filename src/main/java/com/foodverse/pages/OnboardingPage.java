@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import com.foodverse.overlays.InfoOverlay;
 import com.foodverse.overlays.SignInOverlay;
 import com.foodverse.overlays.SignUpOverlay;
+import com.foodverse.utility.common.Endpoints;
 import com.foodverse.utility.common.ResourceProvider;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.common.URLHandler;
@@ -58,7 +59,7 @@ public final class OnboardingPage extends Page {
             Colors.gray600);
 
         // Creating image widgets...
-        var repositoryUrl = "https://github.com/food-verse/foodverse";
+        var repositoryUrl = Endpoints.REPOSITORY.getLink();
         var brandImage = new VectorImage(IconAsset.BRAND, e -> {
             URLHandler.open(repositoryUrl);
         }, repositoryUrl);

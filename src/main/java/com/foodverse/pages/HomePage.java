@@ -16,6 +16,7 @@ import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 import com.foodverse.overlays.ProfileOverlay;
 import com.foodverse.utility.common.DateUtils;
+import com.foodverse.utility.common.Endpoints;
 import com.foodverse.utility.common.URLHandler;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -56,7 +57,7 @@ public final class HomePage extends Page {
         headingRow.setLayout(new BoxLayout(headingRow, BoxLayout.X_AXIS));
 
         // Creating image widgets...
-        var repositoryUrl = "https://github.com/food-verse/foodverse";
+        var repositoryUrl = Endpoints.REPOSITORY.getLink();
         var brandImage = new VectorImage(IconAsset.BRAND, e -> {
             URLHandler.open(repositoryUrl);
         }, repositoryUrl);

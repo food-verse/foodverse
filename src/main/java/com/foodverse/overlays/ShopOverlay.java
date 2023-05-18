@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.foodverse.models.Shop;
+import com.foodverse.models.User;
 import com.foodverse.props.ShopProps;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -55,7 +56,11 @@ public final class ShopOverlay extends Overlay {
 
         // Searching for the shop in the database...
         Optional<Shop> shop = db.findShopByName(merchant);
-        if (!shop.isPresent()) {
+
+        // Getting the authenticated user...
+        Optional<User> signedUser = db.getAuthenticatedUser();
+
+        if (shop.isEmpty() || signedUser.isEmpty()) {
             return new EmptyView().getRef();
         }
 
@@ -104,29 +109,35 @@ public final class ShopOverlay extends Overlay {
         paddedImage.addWidget(thumbnailImage, new EdgeInsets.Builder().all(0).build(),
             Align.FIRST_LINE_START);
 
-        var paddedHeartImage = new Column();
-        paddedHeartImage.addWidget(heartImage, new EdgeInsets.Builder().all(4).build(),
-            Align.FIRST_LINE_START);
+        var row = new Row();
 
-        var paddedHeartFillImage = new Column();
-        paddedHeartFillImage.addWidget(heartFillImage, new EdgeInsets.Builder().all(4).build(),
-            Align.FIRST_LINE_START);
+        if (signedUser.get().favorites().contains(merchant)) {
+            row.addWidget(heartFillImage,
+                new EdgeInsets.Builder()
+                    .all(4)
+                    .build(),
+                Align.FIRST_LINE_START);
+        } else {
+            row.addWidget(heartImage,
+                new EdgeInsets.Builder()
+                    .all(4)
+                    .build(),
+                Align.FIRST_LINE_START);
+        }
 
         heartImage.onPressed(e -> {
-            panel.remove(heartImage.getRef());
-            panel.add(heartFillImage.getRef());
-            panel.revalidate();
-            panel.repaint();
+            row.replaceWidget(heartImage, heartFillImage);
+            signedUser.get().favorites().add(merchant);
+            db.updateUser(signedUser.get());
         }, "Add to favorites");
 
         heartFillImage.onPressed(e -> {
-            panel.remove(heartFillImage.getRef());
-            panel.add(heartImage.getRef());
-            panel.revalidate();
-            panel.repaint();
+            row.replaceWidget(heartFillImage, heartImage);
+            signedUser.get().favorites().remove(merchant);
+            db.updateUser(signedUser.get());
         }, "Remove from favorites");
 
-        panel.add(heartImage.getRef());
+        panel.add(row.getRef());
 
         // preparation time
         var prepTime = new ListTile(

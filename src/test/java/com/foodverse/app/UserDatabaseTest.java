@@ -7,9 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.foodverse.models.Address;
 import com.foodverse.models.Credentials;
 import com.foodverse.models.User;
 import com.foodverse.utility.system.Database;
@@ -179,14 +181,27 @@ class UserDatabaseTest {
         var user = new User(
             "John Doe",
             List.of(
-                "789 Oak St, Anytown, USA 12345",
-                "321 Pine St, Anycity, USA 54321"),
+                new Address(
+                    "123 Main Street",
+                    "1A",
+                    "2nd Floor",
+                    "Doorbell A - Smith",
+                    "Please leave the package at the front porch."
+                ),
+                new Address(
+                    "456 Elm Street",
+                    "10B",
+                    "3rd Floor",
+                    "Apartment 305 - Johnson",
+                    "Ring the bell twice for delivery."
+                )
+            ),
             "+1 (555) 555-5678",
             "johndoe456@gmail.com",
             credentials,
-            List.of(),
+            Set.of(),
             Map.of(),
-            List.of());
+            Set.of());
 
         return user;
     }

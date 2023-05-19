@@ -3,9 +3,12 @@ package com.foodverse.utility.factories;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import com.foodverse.models.Address;
 import com.foodverse.models.Credentials;
 import com.foodverse.models.Order;
 import com.foodverse.models.OrderType;
@@ -15,14 +18,28 @@ import com.foodverse.utility.system.FileManager;
 
 public final class UserFactory {
 
-    private UserFactory() {}
+    private UserFactory() {
+    }
 
     private static List<User> generateUsers() {
 
         // Creating user's addresses...
         var addresses = new ArrayList<>(List.of(
-            "123 Main St, Anytown, USA 12345",
-            "456 Maple St, Anycity, USA 54321"));
+            new Address(
+                "789 Oak Avenue",
+                "4C",
+                "1st Floor",
+                "Doorbell B - Anderson",
+                "Please leave the package with the doorman."
+            ),
+            new Address(
+                "321 Pine Street",
+                "12D",
+                "5th Floor",
+                "Apartment 502 - Thompson",
+                "Call upon arrival for delivery instructions."
+            )
+        ));
 
         // Creating user's recovery answers...
         var recoveryAnswers = List.of(
@@ -35,7 +52,7 @@ public final class UserFactory {
             recoveryAnswers);
 
         // Creating user's favorites...
-        var favorites = new ArrayList<>(List.of(
+        var favorites = new HashSet<>(Set.of(
             "Sweet o’ Clock",
             "Taco Mia"));
 
@@ -57,7 +74,7 @@ public final class UserFactory {
             "Coca Cola", 2);
 
         // Creating user's recent orders...
-        var recentOrders = new ArrayList<>(List.of(
+        var recentOrders = new HashSet<>(List.of(
             new Order(
                 "Burgerlicious",
                 new Date(),
@@ -65,7 +82,8 @@ public final class UserFactory {
                 1.5f,
                 31.47f,
                 PaymentMethod.CARD,
-                OrderType.DELIVERY),
+                OrderType.DELIVERY,
+                "Extra ketchup, no pickles."),
             new Order(
                 "Pizzantastic",
                 new Date(),
@@ -73,7 +91,8 @@ public final class UserFactory {
                 0.5f,
                 33.98f,
                 PaymentMethod.CASH,
-                OrderType.TAKE_AWAY)));
+                OrderType.TAKE_AWAY,
+                "Please cut the pizza into square slices.")));
 
         // Creating the user...
         var user = new User(

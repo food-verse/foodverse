@@ -3,10 +3,12 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.JPanel;
 
+import com.foodverse.models.Address;
 import com.foodverse.models.Credentials;
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
@@ -52,7 +54,8 @@ public final class RecoveryOptionsOverlay extends Overlay {
 
         var panel = new JPanel();
         var recoveryHeading = new Heading("Add Recovery Options", HeadingSize.XXL);
-        var explanationParagraph = new Paragraph("Sign up now and start enjoying delicious meals.", ParagraphSize.S);
+        var explanationParagraph =
+            new Paragraph("Sign up now and start enjoying delicious meals.", ParagraphSize.S);
         var textFirstRecovAnswInput = new TextField();
         var firstRecovAnswInput = new InputForm(question1, textFirstRecovAnswInput);
         var textSecondRecovAnswInput = new TextField();
@@ -71,12 +74,13 @@ public final class RecoveryOptionsOverlay extends Overlay {
                     var userCredentials = new Credentials(password, answers);
                     var createdUser = new User(
                         username,
-                        new ArrayList<>(List.of(address)),
-                        phone, email,
+                        new ArrayList<>(List.of(new Address(null, null, null, null, null))),
+                        phone,
+                        email,
                         userCredentials,
-                        new ArrayList<>(),
+                        new HashSet<>(),
                         new HashMap<>(),
-                        new ArrayList<>());
+                        new HashSet<>());
                     db.signUp(createdUser);
                     Router.closeOverlay();
                     Router.pushPage(Pages.HOME);

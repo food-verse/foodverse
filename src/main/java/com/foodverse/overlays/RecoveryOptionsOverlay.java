@@ -2,6 +2,7 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -68,9 +69,14 @@ public final class RecoveryOptionsOverlay extends Overlay {
                 if (isValid) {
                     var answers = List.of(firstAnswer, secondAnswer);
                     var userCredentials = new Credentials(password, answers);
-                    var createdUser = new User(username, new ArrayList<>(List.of(address)),
+                    var createdUser = new User(
+                        username,
+                        new ArrayList<>(List.of(address)),
                         phone, email,
-                        userCredentials, new ArrayList<>(), new ArrayList<>());
+                        userCredentials,
+                        new ArrayList<>(),
+                        new HashMap<>(),
+                        new ArrayList<>());
                     db.signUp(createdUser);
                     Router.closeOverlay();
                     Router.pushPage(Pages.HOME);

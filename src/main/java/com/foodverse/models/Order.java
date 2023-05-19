@@ -12,5 +12,6 @@ public record Order(
     @SerializedName("delivery_tip") float deliveryTip,
     @SerializedName("total") float total,
     @SerializedName("payment") PaymentMethod method,
-    @SerializedName("type") OrderType type) {
+    @SerializedName("type") OrderType type,
+    @SerializedName("comments") String comments) {
 }

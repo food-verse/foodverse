@@ -50,13 +50,6 @@ public final class OrderOverlay extends Overlay {
     public OrderOverlay(String merchant, Map<String, Integer> items) {
         super(800, 680);
 
-        // // Getting the authenticated user...
-        // db.getAuthenticatedUser().ifPresentOrElse(signedUser -> {
-        // // System.out.println(signedUser);
-        // }, () -> {
-        // // System.out.println("Authenticated user not found");
-        // });
-
         // Alternative
         Optional<User> signedUser = db.getAuthenticatedUser();
         if (signedUser.isPresent()) {
@@ -65,10 +58,6 @@ public final class OrderOverlay extends Overlay {
         } else {
             // System.out.println("Authenticated user not found");
         }
-
-        // for (String item : items.keySet()) {
-        // System.out.println(item);
-        // }
 
         // Heading
         var panel = new JPanel();
@@ -162,7 +151,7 @@ public final class OrderOverlay extends Overlay {
                     method = Store.orderPaymentMethod.getValue();
                     signedUser.get().orders()
                         .add(new Order(merchant, currentDate, items, deltip, total,
-                            method, null));
+                            method, null, "No comments"));
                     showSuccessfulOrderMessage();
                     Router.closeOverlay();
                 } else {

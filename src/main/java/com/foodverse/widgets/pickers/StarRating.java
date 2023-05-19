@@ -1,7 +1,7 @@
 package com.foodverse.widgets.pickers;
 
 import java.awt.Component;
-import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
@@ -18,7 +18,7 @@ public final class StarRating extends Widget {
     private final VectorImage[] currIcons;
     private int index;
 
-    public StarRating(int numItems, Consumer<Integer> onChange, int value) {
+    public StarRating(int numItems, IntConsumer onChange, int value) {
         index = value - 1;
         // Initializing the icon arrays...
         enabledIcons = new VectorImage[numItems];
@@ -48,7 +48,7 @@ public final class StarRating extends Widget {
                     index = -1;
                 }
                 container.refresh();
-                onChange.accept(index);
+                onChange.accept(index + 1);
             });
             var disabledIcon = disabledIcons[i];
             disabledIcon.onPressed(e -> {
@@ -60,7 +60,7 @@ public final class StarRating extends Widget {
                     index = k;
                 }
                 container.refresh();
-                onChange.accept(index);
+                onChange.accept(index + 1);
             });
             currIcons[i] = (value >= k + 1) ? enabledIcon : disabledIcon;
             container.addWidget(currIcons[i], new EdgeInsets.Builder()

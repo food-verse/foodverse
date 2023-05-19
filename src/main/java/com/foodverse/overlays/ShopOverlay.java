@@ -91,10 +91,10 @@ public final class ShopOverlay extends Overlay {
             "Add to favorites",
             isEnabled -> {
                 if (isEnabled) {
-                    signedUser.favorites().remove(merchant);
+                    signedUser.favorites().add(merchant);
                     db.updateUser(signedUser);
                 } else {
-                    signedUser.favorites().add(merchant);
+                    signedUser.favorites().remove(merchant);
                     db.updateUser(signedUser);
                 }
             },
@@ -109,8 +109,13 @@ public final class ShopOverlay extends Overlay {
 
         //
         var starRating = new StarRating(5, rating -> {
-            signedUser.ratings().put(merchant, rating);
-            db.updateUser(signedUser);
+            if (rating == 0) {
+                signedUser.ratings().remove(merchant);
+                db.updateUser(signedUser);
+            } else {
+                signedUser.ratings().put(merchant, rating);
+                db.updateUser(signedUser);
+            }
         }, signedUser.ratings().getOrDefault(merchant, 0));
 
         // Creating card's heading widget...

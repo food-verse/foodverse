@@ -1,6 +1,7 @@
 package com.foodverse.models;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import com.google.gson.annotations.SerializedName;
@@ -12,22 +13,23 @@ public record User(
     @SerializedName("email") String email,
     @SerializedName("credentials") Credentials credentials,
     @SerializedName("favorites") List<String> favorites,
+    @SerializedName("rating") Map<String, Integer> ratings,
     @SerializedName("orders") List<Order> orders) {
 
     public User withName(String name) {
-        return new User(name, addresses, phone, email, credentials, favorites, orders);
+        return new User(name, addresses, phone, email, credentials, favorites, ratings, orders);
     }
 
     public User withPhone(String phone) {
-        return new User(name, addresses, phone, email, credentials, favorites, orders);
+        return new User(name, addresses, phone, email, credentials, favorites, ratings, orders);
     }
 
     public User withEmail(String email) {
-        return new User(name, addresses, phone, email, credentials, favorites, orders);
+        return new User(name, addresses, phone, email, credentials, favorites, ratings, orders);
     }
 
     public User withCredentials(Credentials credentials) {
-        return new User(name, addresses, phone, email, credentials, favorites, orders);
+        return new User(name, addresses, phone, email, credentials, favorites, ratings, orders);
     }
 
     @Override

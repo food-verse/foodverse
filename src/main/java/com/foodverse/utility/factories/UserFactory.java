@@ -2,6 +2,7 @@ package com.foodverse.utility.factories;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,11 @@ public final class UserFactory {
 
     private static List<User> generateUsers() {
 
+        // Creating user's addresses...
+        var addresses = new ArrayList<>(List.of(
+            "123 Main St, Anytown, USA 12345",
+            "456 Maple St, Anycity, USA 54321"));
+
         // Creating user's recovery answers...
         var recoveryAnswers = List.of(
             "Fluffy",
@@ -27,6 +33,16 @@ public final class UserFactory {
         var credentials = new Credentials(
             "XyZ987!",
             recoveryAnswers);
+
+        // Creating user's favorites...
+        var favorites = new ArrayList<>(List.of(
+            "Sweet o’ Clock",
+            "Taco Mia"));
+
+        // Creating user's ratings...
+        var ratings = new HashMap<>(Map.of(
+            "Burgerlicious", 3,
+            "Pizzantastic", 5));
 
         // Creating burger shops items for the burger order
         var burgerShopItems = Map.of(
@@ -62,15 +78,12 @@ public final class UserFactory {
         // Creating the user...
         var user = new User(
             "Emily Smith",
-            new ArrayList<>(List.of(
-                "123 Main St, Anytown, USA 12345",
-                "456 Maple St, Anycity, USA 54321")),
+            addresses,
             "+1 (555) 555-1234",
             "emilysmith123@gmail.com",
             credentials,
-            new ArrayList<>(List.of(
-                "Sweet o’ Clock",
-                "Taco Mia")),
+            favorites,
+            ratings,
             recentOrders);
 
         return new ArrayList<>(List.of(user));

@@ -27,10 +27,15 @@ public final class Row extends Flex {
         var constraints = flexItems.get(oldComponent);
         if (constraints != null) {
             container.remove(constraints.gridx);
+            flexItems.remove(oldComponent);
             add(newComponent, constraints);
-            container.revalidate();
-            container.repaint();
         }
+    }
+
+    @Override
+    protected void add(Component component, GridBagConstraints constraints) {
+        container.add(component, constraints, constraints.gridx);
+        flexItems.put(component, constraints);
     }
 
 }

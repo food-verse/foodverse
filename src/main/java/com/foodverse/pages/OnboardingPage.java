@@ -7,7 +7,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import com.foodverse.overlays.InfoOverlay;
 import com.foodverse.overlays.SignInOverlay;
 import com.foodverse.overlays.SignUpOverlay;
 import com.foodverse.utility.common.Endpoints;
@@ -17,11 +16,13 @@ import com.foodverse.utility.common.URLHandler;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Page;
+import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
-import com.foodverse.utility.ui.Colors;
-import com.foodverse.utility.ui.ImageStyle;
+import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.utility.ui.Colors;
+import com.foodverse.utility.ui.ImageStyle;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.Row;
@@ -30,8 +31,8 @@ import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.media.VectorImage;
 import com.foodverse.widgets.text.Display;
-import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Display.DisplaySize;
+import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 
 public final class OnboardingPage extends Page {
@@ -75,11 +76,21 @@ public final class OnboardingPage extends Page {
                 .build());
 
         // Creating button widgets...
+        // TODO: Add the info button back
+        // var infoButton = new PillButton(
+        // "How it works",
+        // ButtonSize.M,
+        // ButtonType.TERTIARY,
+        // e -> Router.openOverlay(new InfoOverlay()));
         var infoButton = new PillButton(
             "How it works",
             ButtonSize.M,
             ButtonType.TERTIARY,
-            e -> Router.openOverlay(new InfoOverlay()));
+            e -> {
+                var db = Database.getInstance();
+                db.signIn("emilysmith123@gmail.com", "XyZ987!");
+                Router.pushPage(Pages.HOME);
+            });
         var signInButton = new PillButton(
             "Sign In",
             ButtonSize.M,

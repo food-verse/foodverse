@@ -27,11 +27,15 @@ public final class Column extends Flex {
         var constraints = flexItems.get(oldComponent);
         if (constraints != null) {
             container.remove(constraints.gridy);
+            flexItems.remove(oldComponent);
             add(newComponent, constraints);
-            container.revalidate();
-            container.repaint();
         }
     }
 
+    @Override
+    protected void add(Component component, GridBagConstraints constraints) {
+        container.add(component, constraints, constraints.gridy);
+        flexItems.put(component, constraints);
+    }
 
 }

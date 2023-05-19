@@ -42,9 +42,11 @@ abstract class Flex extends Widget {
         replaceComponent(oldWidget.getRef(), newWidget.getRef());
     }
 
-    protected void add(Component component, GridBagConstraints constraints) {
-        container.add(component, constraints);
-        flexItems.put(component, constraints);
+    protected abstract void add(Component component, GridBagConstraints constraints);
+
+    public void refresh() {
+        container.revalidate();
+        container.repaint();
     }
 
     @Override

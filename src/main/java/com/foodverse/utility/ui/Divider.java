@@ -2,6 +2,7 @@ package com.foodverse.utility.ui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
@@ -13,6 +14,14 @@ public class Divider extends JPanel {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public Divider() {
+        setPreferredSize(new Dimension(800, 4));
+    }
+
+    public Divider(int width, int height) {
+        setPreferredSize(new Dimension(width, height));
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

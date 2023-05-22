@@ -3,9 +3,11 @@ package com.foodverse.utility.system;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import com.foodverse.models.Config;
+import com.foodverse.models.Order;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
 
@@ -82,6 +84,16 @@ public class Database {
         for (User user : users) {
             if (user.email().equals(email)) {
                 return Optional.of(user);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Order> findOrderById(UUID id) {
+        if (authenticatedUser == null) return Optional.empty();
+        for (Order order : authenticatedUser.orders()) {
+            if (order.id().equals(id)) {
+                return Optional.of(order);
             }
         }
         return Optional.empty();

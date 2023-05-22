@@ -65,7 +65,7 @@ public final class PillButton extends Button {
             .buttonTheme(buttonTheme)
             .textStyle(fontStyle)
             .padding(padding)
-            .minimumWidth(minimumWidth)
+            .minimumWidth(buttonSize == ButtonSize.L ? 720 : minimumWidth)
             .borderRadius(borderRadius)
             .isEnabled(isEnabled)
             .build();

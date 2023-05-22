@@ -105,10 +105,10 @@ public abstract class Overlay extends Widget implements Identifiable {
 
         @Override
         public void windowClosing(WindowEvent e) {
+            Router.closeOverlay();
             if (onClose != null) {
                 onClose.accept(e);
             }
-            Router.closeOverlay();
         }
 
     }

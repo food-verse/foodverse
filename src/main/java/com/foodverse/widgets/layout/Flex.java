@@ -17,23 +17,39 @@ abstract class Flex extends Widget {
     protected final Map<Component, GridBagConstraints> flexItems = new HashMap<>();
     protected int order = 0;
 
-    public Flex() {
+    protected Flex() {
         container.setLayout(new GridBagLayout());
         container.setOpaque(false);
     }
 
     public abstract void addComponent(Component widget, EdgeInsets edgeInsets, Align align);
 
+    public void addComponent(Component widget, EdgeInsets edgeInsets) {
+        addComponent(widget, edgeInsets, Align.FIRST_LINE_START);
+    }
+
     public void addComponent(Component widget, Align align) {
         addComponent(widget, new EdgeInsets.Builder().build(), align);
+    }
+
+    public void addComponent(Component widget) {
+        addComponent(widget, new EdgeInsets.Builder().build(), Align.FIRST_LINE_START);
     }
 
     public void addWidget(Widget widget, EdgeInsets edgeInsets, Align align) {
         addComponent(widget.getRef(), edgeInsets, align);
     }
 
+    public void addWidget(Widget widget, EdgeInsets edgeInsets) {
+        addComponent(widget.getRef(), edgeInsets, Align.FIRST_LINE_START);
+    }
+
     public void addWidget(Widget widget, Align align) {
         addComponent(widget.getRef(), new EdgeInsets.Builder().build(), align);
+    }
+
+    public void addWidget(Widget widget) {
+        addComponent(widget.getRef(), new EdgeInsets.Builder().build(), Align.FIRST_LINE_START);
     }
 
     public abstract void replaceComponent(Component oldComponent, Component newComponent);

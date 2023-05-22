@@ -40,6 +40,19 @@ public final class UIConstants {
         "<html>Use 8 or more characters with a mix of letters,<br>" +
             "numbers & symbols</html>";
 
+    public static final String ORDER_SUCCESSFUL_TITLE = "Order Submitted";
+    public static final String ORDER_SUCCESSFUL_MESSAGE =
+        "<html>Order placed successfully! Thank you for your<br>" +
+            "order. We are now processing it and will notify<br>" +
+            "you once it's ready for delivery.</html>";
+    public static final String ORDER_DELIVERY_TIP_PROMO =
+        "<html>Did you know that tipping your delivery driver is a great way to show your appreciation<br>"
+            +
+            "for their hard work and dedication? Even a small amount can go a long way in making<br>"
+            +
+            "their day.</html>";
+    public static final String ORDER_COMMENTS_CAPTION = "Please use this field to let us know about any specific dietary requirements.";
+
     // Invalid credentials alert
     public static final String INVALID_CREDENTIALS_TITLE = "Invalid Credentials";
     public static final String INVALID_CREDENTIALS_DESCRIPTION =
@@ -89,7 +102,7 @@ public final class UIConstants {
     // Message for wrong new password format
     public static final String WRONG_NEW_PASSWORD_FORMAT_TITLE = "Wrong New Password Format";
     public static final String WRONG_NEW_PASSWORD_FORMAT_DESCRIPTION =
-        "<html>Please make sure the 2 fields have the same value<br>"
+        "<html>Please make sure the 2 fields have the same cost<br>"
             + "Also password must be at least 8 characters long</html>";
 
 

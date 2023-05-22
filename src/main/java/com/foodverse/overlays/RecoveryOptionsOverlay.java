@@ -13,6 +13,8 @@ import com.foodverse.models.Credentials;
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -23,6 +25,7 @@ import com.foodverse.utility.ui.TextField;
 import com.foodverse.views.ConsentPolicyView;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
+import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
@@ -41,7 +44,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
 
     public RecoveryOptionsOverlay(String username, String address, String phone, String email,
                                   String password) {
-        super(600, 840);
+        super(500, 400);
 
         var configuration = db.getConfiguration();
         var question1 = "";
@@ -52,14 +55,15 @@ public final class RecoveryOptionsOverlay extends Overlay {
             question2 = configuration.get().recoveryQuestions().get(1);
         }
 
-        var panel = new JPanel();
-        var recoveryHeading = new Heading("Add Recovery Options", HeadingSize.XXL);
+        var panel = new Column();
+        var recoveryHeading = new Heading("Add Recovery Options", HeadingSize.L);
         var explanationParagraph =
             new Paragraph("Sign up now and start enjoying delicious meals.", ParagraphSize.S);
         var textFirstRecovAnswInput = new TextField();
         var firstRecovAnswInput = new InputForm(question1, textFirstRecovAnswInput);
         var textSecondRecovAnswInput = new TextField();
         var secondRecovAnswInput = new InputForm(question2, textSecondRecovAnswInput);
+        var consentPolicyParagraph = new ConsentPolicyView();
         var signUpButton = new RectButton(
             "Sign Up",
             ButtonSize.L,
@@ -93,14 +97,17 @@ public final class RecoveryOptionsOverlay extends Overlay {
             });
 
 
-        panel.add(recoveryHeading.getRef());
-        panel.add(explanationParagraph.getRef());
-        panel.add(firstRecovAnswInput.getRef());
-        panel.add(secondRecovAnswInput.getRef());
-        panel.add(new ConsentPolicyView().getRef());
-        panel.add(signUpButton.getRef());
-        panel.setOpaque(false);
-        component = panel;
+        panel.addWidget(recoveryHeading, Align.CENTER);
+        panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
+                        .symmetric(24, 0)
+                        .build(),
+                        Align.CENTER);
+        panel.addWidget(firstRecovAnswInput, Align.CENTER);
+        panel.addWidget(secondRecovAnswInput, Align.CENTER);
+        panel.addWidget(consentPolicyParagraph, Align.CENTER);
+        panel.addWidget(signUpButton, Align.CENTER);
+
+        component = panel.getRef();
 
     }
 

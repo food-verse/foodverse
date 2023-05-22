@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -16,6 +18,7 @@ import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
+import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Paragraph;
@@ -39,11 +42,11 @@ public class ChangePasswordOverlay extends Overlay {
      */
 
     public ChangePasswordOverlay(User user) {
-        super(500, 400);
+        super(500, 450);
 
         // Heading
-        var panel = new JPanel();
-        var passwordChangeHeading = new Heading("Password Change", HeadingSize.XXL);
+        var panel = new Column();
+        var passwordChangeHeading = new Heading("Password Change", HeadingSize.L);
         var explanationParagraph = new Paragraph("Let's change password now", ParagraphSize.M);
         var textChangePassword = new SecureTextField();
         var newPasswordInput = new InputForm("Type your new password", textChangePassword);
@@ -77,13 +80,16 @@ public class ChangePasswordOverlay extends Overlay {
         );
 
 
-        panel.add(passwordChangeHeading.getRef());
-        panel.add(explanationParagraph.getRef());
-        panel.add(newPasswordInput.getRef());
-        panel.add(confirmPasswordInput.getRef());
-        panel.add(changePasswordButton.getRef());
-        panel.setOpaque(false);
-        component = panel;
+        panel.addWidget(passwordChangeHeading, Align.CENTER);
+        panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
+                        .symmetric(24, 0)
+                        .build(),
+                        Align.CENTER);
+        panel.addWidget(newPasswordInput, Align.CENTER);
+        panel.addWidget(confirmPasswordInput, Align.CENTER);
+        panel.addWidget(changePasswordButton, Align.CENTER);
+
+        component = panel.getRef();
     }
 
 

@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.ui.Button.ButtonSize;
@@ -16,6 +18,7 @@ import com.foodverse.utility.ui.TextField;
 import com.foodverse.views.ConsentPolicyView;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
+import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
@@ -33,9 +36,9 @@ public final class SignUpOverlay extends Overlay {
     private final InputValidation validator = InputValidation.getInstance();
 
     public SignUpOverlay() {
-        super(600, 600);
+        super(500, 700);
 
-        var panel = new JPanel();
+        var panel = new Column();
         var signUpHeading = new Heading(UIConstants.REGISTRATION_PROMO_TITLE, HeadingSize.L);
         var explanationParagraph = new Paragraph(UIConstants.REGISTRATION_PROMO_MESSAGE, ParagraphSize.M, Colors.gray600);
         var textNameInput = new TextField();
@@ -48,6 +51,7 @@ public final class SignUpOverlay extends Overlay {
         var emailInput = new InputForm("Email", textEmailInput);
         var textPasswordInput = new SecureTextField();
         var passwordInput = new InputForm("Password", UIConstants.REGISTRATION_PASSWORD_FIELD_HINT, textPasswordInput);
+        var consentPolicyParagraph = new ConsentPolicyView();
         var continueButton = new RectButton(
             "Continue",
             ButtonSize.L,
@@ -72,17 +76,21 @@ public final class SignUpOverlay extends Overlay {
             });
 
 
-        panel.add(signUpHeading.getRef());
-        panel.add(explanationParagraph.getRef());
-        panel.add(nameInput.getRef());
-        panel.add(addressInput.getRef());
-        panel.add(phoneInput.getRef());
-        panel.add(emailInput.getRef());
-        panel.add(passwordInput.getRef());
-        panel.add(new ConsentPolicyView().getRef());
-        panel.add(continueButton.getRef());
-        panel.setOpaque(false);
-        component = panel;
+        panel.addWidget(signUpHeading, Align.CENTER);
+        panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
+                        .symmetric(24, 0)
+                        .build(),
+                        Align.CENTER);
+        panel.addWidget(nameInput, Align.CENTER);
+        panel.addWidget(addressInput, Align.CENTER);
+        panel.addWidget(phoneInput, Align.CENTER);
+        panel.addWidget(emailInput, Align.CENTER);
+        panel.addWidget(passwordInput, Align.CENTER);
+        panel.addWidget(consentPolicyParagraph, Align.CENTER);
+        panel.addWidget(continueButton, Align.CENTER);
+
+        component = panel.getRef();
+
 
     }
 

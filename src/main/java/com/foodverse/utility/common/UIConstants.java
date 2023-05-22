@@ -117,4 +117,18 @@ public final class UIConstants {
     public static final String SIGN_OUT_CONFIRM_MESSAGE = "Are you sure you want to sign out?";
     public static final String EMPTY_STATE_MESSAGE = "Unfortunately, there is nothing to display.";
 
+
+    //Sign in promo message
+    public static final String SIGN_IN_TITLE = "Sign In";
+    public static final String SIGN_IN_PROMO_MESSAGE = 
+        "<html>Please sign in to your account to access your order history,<br>"
+            + "favorite restaurants, and exclusive deals.</html>";
+
+    //Recovery password messages
+    public static final String PASSWORD_RECOVERY_TITLE = "Password Recovery";
+    public static final String PASSWORD_RECOVERY_DESCRIPTION = 
+        "<html>It seems that you forgot your password<br>"
+            + "Please answer correct to the following questions<br>"
+            + "in order to change it.";
+
 }

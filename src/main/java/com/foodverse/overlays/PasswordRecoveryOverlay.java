@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -15,6 +17,7 @@ import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
+import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Paragraph;
@@ -39,7 +42,7 @@ public final class PasswordRecoveryOverlay extends Overlay {
      */
 
     public PasswordRecoveryOverlay(User user) {
-        super(500, 400);
+        super(500, 450);
 
         var configuration = db.getConfiguration();
         var question1 = "";
@@ -51,9 +54,9 @@ public final class PasswordRecoveryOverlay extends Overlay {
         }
 
         // Heading
-        var panel = new JPanel();
-        var passwordRecoveryHeading = new Heading("Password Recovery", HeadingSize.XXL);
-        var explanationParagraph = new Paragraph("It seems that you forgot your password. Answer the following question to change it.", ParagraphSize.M);
+        var panel = new Column();
+        var passwordRecoveryHeading = new Heading(UIConstants.PASSWORD_RECOVERY_TITLE, HeadingSize.L);
+        var explanationParagraph = new Paragraph(UIConstants.PASSWORD_RECOVERY_DESCRIPTION, ParagraphSize.M);
         var textFirstAnswerInput = new TextField();
         var answer1 = new InputForm(question1, textFirstAnswerInput);
         var textSecondAnswerInput = new TextField();
@@ -90,13 +93,16 @@ public final class PasswordRecoveryOverlay extends Overlay {
         );
 
 
-        panel.add(passwordRecoveryHeading.getRef());
-        panel.add(explanationParagraph.getRef());
-        panel.add(answer1.getRef());
-        panel.add(answer2.getRef());
-        panel.add(continueButton.getRef());
-        panel.setOpaque(false);
-        component = panel;
+        panel.addWidget(passwordRecoveryHeading, Align.CENTER);
+        panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
+                        .symmetric(24, 0)
+                        .build(),
+                        Align.CENTER);
+        panel.addWidget(answer1, Align.CENTER);
+        panel.addWidget(answer2, Align.CENTER);
+        panel.addWidget(continueButton, Align.CENTER);
+
+        component = panel.getRef();
     }
 
 

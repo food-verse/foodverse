@@ -5,6 +5,8 @@ import java.awt.Component;
 import javax.swing.JPanel;
 
 import com.foodverse.utility.common.UIConstants;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
@@ -15,6 +17,7 @@ import com.foodverse.utility.ui.SecureTextField;
 import com.foodverse.utility.ui.TextField;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
+import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
@@ -41,9 +44,10 @@ public final class SignInOverlay extends Overlay {
         super(500, 400);
 
         // Heading
-        var panel = new JPanel();
-        var signInHeading = new Heading("Sign In", HeadingSize.XXL);
-        var explanationParagraph = new Paragraph("Please sign to your account", ParagraphSize.M);
+        var panel = new Column();
+
+        var signInHeading = new Heading(UIConstants.SIGN_IN_TITLE, HeadingSize.L);
+        var explanationParagraph = new Paragraph(UIConstants.SIGN_IN_PROMO_MESSAGE, ParagraphSize.M);
         var textEmailField = new TextField();
         var emailInput = new InputForm("Email", "", textEmailField);
         var textPasswordField = new SecureTextField();
@@ -53,7 +57,6 @@ public final class SignInOverlay extends Overlay {
             ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
-
                 var email = textEmailField.getText();
                 var password = new String(textPasswordField.getPassword());
                 var correctSign = db.signIn(email, password);
@@ -92,13 +95,17 @@ public final class SignInOverlay extends Overlay {
                 }
             });
 
-        panel.add(signInHeading.getRef());
-        panel.add(explanationParagraph.getRef());
-        panel.add(emailInput.getRef());
-        panel.add(passwordInput.getRef());
-        panel.add(signInButton.getRef());
-        panel.setOpaque(false);
-        component = panel;
+        panel.addWidget(signInHeading, Align.CENTER);
+        panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
+                .symmetric(24, 0)
+                .build(),
+                Align.CENTER);
+        panel.addWidget(emailInput, Align.CENTER);
+        panel.addWidget(passwordInput, Align.CENTER);
+        panel.addWidget(signInButton, Align.CENTER);
+
+        component = panel.getRef();
+        
     }
 
 

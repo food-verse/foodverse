@@ -1,25 +1,13 @@
 package com.foodverse.utility.factories;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import com.foodverse.models.Address;
-import com.foodverse.models.Credentials;
-import com.foodverse.models.Order;
-import com.foodverse.models.OrderType;
-import com.foodverse.models.PaymentMethod;
-import com.foodverse.models.User;
+import com.foodverse.models.*;
 import com.foodverse.utility.system.FileManager;
 
 public final class UserFactory {
 
-    private UserFactory() {
-    }
+    private UserFactory() {}
 
     private static List<User> generateUsers() {
 
@@ -30,16 +18,13 @@ public final class UserFactory {
                 "4C",
                 "1st Floor",
                 "Doorbell B - Anderson",
-                "Please leave the package with the doorman."
-            ),
+                "Please leave the package with the doorman."),
             new Address(
                 "321 Pine Street",
                 "12D",
                 "5th Floor",
                 "Apartment 502 - Thompson",
-                "Call upon arrival for delivery instructions."
-            )
-        ));
+                "Call upon arrival for delivery instructions.")));
 
         // Creating user's recovery answers...
         var recoveryAnswers = List.of(
@@ -76,22 +61,22 @@ public final class UserFactory {
         // Creating user's recent orders...
         var recentOrders = new HashSet<>(List.of(
             new Order(
+                UUID.randomUUID(),
                 "Burgerlicious",
                 new Date(),
                 burgerShopItems,
-                1.5f,
-                31.47f,
+                2,
+                31.47,
                 PaymentMethod.CARD,
-                OrderType.DELIVERY,
                 "Extra ketchup, no pickles."),
             new Order(
+                UUID.randomUUID(),
                 "Pizzantastic",
                 new Date(),
                 pizzaShopItems,
-                0.5f,
-                33.98f,
+                0.5,
+                33.98,
                 PaymentMethod.CASH,
-                OrderType.TAKE_AWAY,
                 "Please cut the pizza into square slices.")));
 
         // Creating the user...

@@ -8,11 +8,11 @@ import com.foodverse.widgets.media.AssetSize;
 public record ShopCardProps(
     String thumbnail,
     String name,
-    float rating,
+    double rating,
     int reviews,
     ShopType type,
     int prepTime,
-    float minOrder) implements Props {
+    double minOrder) implements Props {
 
     public static ShopCardProps from(Shop shop) {
         return new ShopCardProps(

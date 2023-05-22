@@ -20,6 +20,10 @@ public class Alert extends Overlay {
     private final Component component;
 
     public Alert(String title, String description) {
+        this(title, description, null);
+    }
+
+    public Alert(String title, String description, Runnable onPressed) {
 
         // Creating main container...
         var content = new Column();
@@ -35,6 +39,9 @@ public class Alert extends Overlay {
             Button.ButtonType.SECONDARY,
             e -> {
                 Router.closeOverlay();
+                if (onPressed != null) {
+                    onPressed.run();
+                }
             });
 
         // Creating card's main content widget...

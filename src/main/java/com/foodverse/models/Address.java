@@ -32,4 +32,14 @@ public record Address(
         return new Address(street, number, floor, doorbell, comments);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        if (street != null) builder.append(street).append(", ");
+        if (number != null) builder.append(number).append(", ");
+        if (floor != null) builder.append(floor).append(", ");
+        if (doorbell != null) builder.append(doorbell);
+        return builder.toString();
+    }
+
 }

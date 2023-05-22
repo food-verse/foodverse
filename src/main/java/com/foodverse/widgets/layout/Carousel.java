@@ -34,7 +34,14 @@ public final class Carousel extends Widget {
         var carousel = new Row();
         // If list of props is empty return an empty JPanel
         if (propsList.isEmpty()) {
-            return new EmptyView().getRef();
+            // Add padding to the empty view
+            var paddedView = new Row();
+            paddedView.addWidget(new EmptyView(), new EdgeInsets.Builder()
+                    .symmetric(16, 48)
+                    .bottom(24)
+                    .build(),
+                Align.CENTER);
+            return paddedView.getRef();
         }
         // Adding list of widgets to the carousel...
         for (Props props : propsList) {

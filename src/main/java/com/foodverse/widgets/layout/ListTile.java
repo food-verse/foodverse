@@ -16,6 +16,7 @@ public final class ListTile extends Widget {
         var widgetText = new Heading(data, size.getSize());
         component.addWidget(widgetText, new EdgeInsets.Builder()
                 .left(size == ListTileSize.M ? 48 : 40)
+                .top(size == ListTileSize.M ? 0 : 24)
                 .build(),
             Align.CENTER);
     }

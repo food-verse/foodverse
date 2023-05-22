@@ -17,8 +17,8 @@ import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.media.VectorImage;
 import com.foodverse.widgets.text.Label;
-import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Label.LabelSize;
+import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
 public final class ShopCard extends Widget {
@@ -40,7 +40,7 @@ public final class ShopCard extends Widget {
         // Creating text widgets...
         var shopNameText = new Label(props.name(), LabelSize.L);
         var ratingText = new Label(
-            String.valueOf(props.rating()),
+            String.format("%.1f", props.rating()),
             LabelSize.S,
             Colors.orange);
         var reviewsText = new Paragraph(

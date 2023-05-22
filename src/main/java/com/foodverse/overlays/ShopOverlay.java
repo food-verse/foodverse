@@ -1,39 +1,36 @@
 package com.foodverse.overlays;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
+import com.foodverse.models.Item;
+import com.foodverse.models.Offer;
+import com.foodverse.models.Purchasable;
 import com.foodverse.models.Shop;
 import com.foodverse.models.User;
-import com.foodverse.props.ShopProps;
+import com.foodverse.utility.common.URLHandler;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
+import com.foodverse.utility.ui.Button;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.utility.ui.Colors;
 import com.foodverse.utility.ui.Divider;
 import com.foodverse.utility.ui.ImageStyle;
+import com.foodverse.views.AddressView;
 import com.foodverse.views.EmptyView;
-import com.foodverse.views.Offers;
 import com.foodverse.widgets.button.IconButton;
 import com.foodverse.widgets.button.PillButton;
-import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ListTile;
-import com.foodverse.widgets.layout.ListTile.ListTileSize;
 import com.foodverse.widgets.layout.Row;
 import com.foodverse.widgets.layout.ScrollView;
+import com.foodverse.widgets.media.AssetSize;
 import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.pickers.StarRating;
@@ -41,215 +38,282 @@ import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
-import com.foodverse.widgets.text.Paragraph;
-import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
 public final class ShopOverlay extends Overlay {
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
-    // The name of the shop
+
     private final String merchant;
+
+    private final Map<Purchasable, Integer> items;
 
     public ShopOverlay(String merchant) {
         super(800, 680);
         this.merchant = merchant;
+        this.items = new HashMap<>();
+    }
+
+    public ShopOverlay(String merchant, Map<Purchasable, Integer> items) {
+        super(800, 680);
+        this.merchant = merchant;
+        this.items = items;
     }
 
     @Override
     public Component getRef() {
 
         // Searching for the shop in the database...
-        Optional<Shop> shop = db.findShopByName(merchant);
+        Optional<Shop> openedShop = db.findShopByName(merchant);
 
         // Getting the authenticated user...
-        Optional<User> user = db.getAuthenticatedUser();
+        Optional<User> signedUser = db.getAuthenticatedUser();
 
-        if (shop.isEmpty() || user.isEmpty()) {
+        // If the shop or the user are not present, return an empty view...
+        if (openedShop.isEmpty() || signedUser.isEmpty()) {
             return new EmptyView().getRef();
         }
 
-        //
-        var props = ShopProps.from(shop.get());
-        var signedUser = user.get();
+        // Unwrapping shop and user...
+        var shop = openedShop.get();
+        var user = signedUser.get();
 
+        // Creating main panel...
+        var panel = new Column();
+
+        // Creating the info of the order...
         var orderInfo = String.format(
             "%s | %d’ | Minimum %.2f€",
-            props.type(),
-            props.prepTime(),
-            props.minOrder());
+            shop.type(),
+            shop.prepTime(),
+            shop.minOrder());
+        var formattedAddress = String.format(
+            "https://www.google.com/maps/search/?api=1&query=%s",
+            shop.address().replace(" ", "+"));
 
         // Creating text widgets...
-        var shopNameText = new Heading(props.name(), HeadingSize.L);
-        var orderInfoText = new Label(orderInfo, LabelSize.M, Colors.gray600);
+        var shopNameText = new Heading(shop.name(), HeadingSize.L);
+        var shopInfoText = new Label(orderInfo, LabelSize.M, Colors.gray600);
 
-        //
+        // Creating image widgets...
+        var thumbnailImage = new Image(shop.thumbnails().get(AssetSize.LARGE),
+            new ImageStyle.Builder()
+                .width(800)
+                .height(200)
+                .build());
+
+        // Adding the thumbnail widget to the main panel
+        panel.addWidget(thumbnailImage);
+
+        // Creating rating widget...
+        var oldShop = shop;
+        var starRating = new StarRating(5, rating -> {
+            if (rating == 0) {
+                user.ratings().remove(merchant);
+                db.updateUser(user);
+                db.updateShop(oldShop);
+            } else {
+                user.ratings().put(merchant, rating);
+                db.updateUser(user);
+                var oldSum = oldShop.rating() * oldShop.reviews();
+                var newRating = (oldSum + rating) / (oldShop.reviews() + 1);
+                var newShop = shop.withRating(newRating).withReviews(oldShop.reviews() + 1);
+                db.updateShop(newShop);
+            }
+        }, user.ratings().getOrDefault(merchant, 0));
+
+        // Creating checkout button...
+        var checkoutButton = new PillButton("Checkout",
+            ButtonSize.L,
+            ButtonType.PRIMARY,
+            e -> {
+                Router.closeOverlay();
+                Router.openOverlay(new OrderOverlay(merchant, items));
+            });
+
+        // Creating favorites button...
         var favoritesButton = new IconButton(
             IconAsset.HEART_FILL,
             "Remove from favorites",
             IconAsset.HEART,
             "Add to favorites",
             isEnabled -> {
-                if (isEnabled) {
-                    signedUser.favorites().add(merchant);
-                    db.updateUser(signedUser);
+                if (Boolean.TRUE.equals(isEnabled)) {
+                    user.favorites().add(merchant);
+                    db.updateUser(user);
                 } else {
-                    signedUser.favorites().remove(merchant);
-                    db.updateUser(signedUser);
+                    user.favorites().remove(merchant);
+                    db.updateUser(user);
                 }
             },
-            signedUser.favorites().contains(merchant));
-
-        //
+            user.favorites().contains(merchant));
         var paddedFavoritesButton = new Column();
         paddedFavoritesButton.addWidget(favoritesButton, new EdgeInsets.Builder()
-                .all(4)
-                .build(),
-            Align.FIRST_LINE_START);
+            .all(4)
+            .build());
 
-        //
-        var starRating = new StarRating(5, rating -> {
-            if (rating == 0) {
-                signedUser.ratings().remove(merchant);
-                db.updateUser(signedUser);
-            } else {
-                signedUser.ratings().put(merchant, rating);
-                db.updateUser(signedUser);
-            }
-        }, signedUser.ratings().getOrDefault(merchant, 0));
-
-        // Creating card's heading widget...
-        var headingWidget = new Row();
-        headingWidget.addWidget(shopNameText, new EdgeInsets.Builder()
+        // Creating view's header widget...
+        var headerWidget = new Row();
+        headerWidget.addWidget(shopNameText, new EdgeInsets.Builder()
                 .right(16)
                 .build(),
             Align.CENTER);
-        headingWidget.addWidget(paddedFavoritesButton, Align.CENTER);
+        headerWidget.addWidget(paddedFavoritesButton, Align.CENTER);
 
-        // Creating card's heading widget...
-        var headingWidgets = new Column();
-        headingWidgets.addWidget(headingWidget, new EdgeInsets.Builder()
-                .bottom(8)
+        // Creating view's info widget...
+        var infoWidget = new Column();
+        infoWidget.addWidget(headerWidget);
+        infoWidget.addWidget(shopInfoText, new EdgeInsets.Builder()
+            .top(8)
+            .bottom(12)
+            .build());
+        infoWidget.addWidget(starRating);
+
+        // Add the padded info widget to the main panel
+        var paddedInfo = new Column();
+        paddedInfo.addWidget(infoWidget, new EdgeInsets.Builder()
+            .symmetric(24, 40)
+            .build());
+        panel.addWidget(paddedInfo);
+
+        panel.addComponent(new Divider());
+
+        // Create the button for opening Google Maps
+        var openMapsButton = new PillButton(
+            "Open Google Maps",
+            ButtonSize.S,
+            Button.ButtonType.TERTIARY,
+            e -> URLHandler.open(formattedAddress));
+        panel.addWidget(openMapsButton, new EdgeInsets.Builder()
+                .symmetric(14, 40)
                 .build(),
-            Align.FIRST_LINE_START);
-        headingWidgets.addWidget(orderInfoText, new EdgeInsets.Builder()
-                .bottom(8)
-                .build(),
-            Align.FIRST_LINE_START);
-        headingWidgets.addWidget(starRating, Align.FIRST_LINE_START);
+            Align.LINE_END);
 
-        //
-        var paddedHeading = new Column();
-        paddedHeading.addWidget(headingWidgets, new EdgeInsets.Builder()
-                .symmetric(24, 40)
-                .build(),
-            Align.FIRST_LINE_START);
-
-        // Remove the default padding of the shop with a temporary panel
-        var panelWithoutPad = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        panelWithoutPad.setOpaque(false);
-
-        // Creating main panel...
-        var panel = new JPanel();
-        panel.setOpaque(false);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        // Creating image widgets...
-        var thumbnailImage = new Image(props.thumbnail(), new ImageStyle.Builder()
-            .width(800)
-            .height(200)
+        // Add the address to the main panel
+        var addressView = new AddressView(shop.address());
+        panel.addWidget(addressView, new EdgeInsets.Builder()
+            .top(-62)
+            .left(40)
             .build());
 
-        // Create a map for the chosen items
-        Map<String, Integer> addProducts = new HashMap<>();
+        panel.addComponent(new Divider());
 
-        var paddedImage = new Column();
-        paddedImage.addWidget(thumbnailImage, new EdgeInsets.Builder()
-                .all(0)
-                .build(),
-            Align.FIRST_LINE_START);
+        // If the shop has no offers, add an empty view to the main panel
+        if (!shop.offers().isEmpty()) {
+            // Heading for the list of offers
+            var offersTile = new ListTile("Offers", ListTile.ListTileSize.S);
+            // Add the heading for the offers to the main panel
+            panel.addWidget(offersTile, new EdgeInsets.Builder()
+                .bottom(10)
+                .build());
+            // Add the offers to the main panel
+            for (Offer offer : shop.offers()) {
+                // Create the add to cart button
+                var addToCartButton = new PillButton(
+                    "Add",
+                    ButtonSize.S,
+                    ButtonType.SECONDARY,
+                    e -> {
+                        if (items.containsKey(offer)) {
+                            items.put(offer, items.get(offer) + 1);
+                        } else {
+                            if (items.isEmpty()) {
+                                checkoutButton.toggle();
+                            }
+                            items.put(offer, 1);
+                        }
+                    });
+                panel.addWidget(addToCartButton, new EdgeInsets.Builder()
+                        .top(14)
+                        .right(40)
+                        .build(),
+                    Align.LINE_END);
 
-        // Shop's address
-        panel.add(new Divider());
-        var shopAddress = new Paragraph(props.address(), ParagraphSize.L);
-        var paddedAddress = new Row();
-        paddedAddress.addWidget(shopAddress, new EdgeInsets.Builder()
-                .top(0)
-                .build(),
-            Align.CENTER);
-        panel.add(paddedAddress.getRef());
-        panel.add(new Divider());
-
-        // offers
-        var offersTile = new ListTile("Offers", ListTileSize.S);
-
-        panel.add(offersTile.getRef());
-
-        if (props.offers().isEmpty()) {
-            panel.add(new EmptyView().getRef());
-        } else {
-            panel.add(new Offers(shop).getRef());
+                // Add the item to the main panel
+                var itemWidget = new Column();
+                var itemText = new Label(offer.toString(), LabelSize.S);
+                var priceText = new Label(
+                    String.format("%.2f", offer.total()),
+                    LabelSize.S,
+                    Colors.gray600);
+                itemWidget.addWidget(itemText);
+                itemWidget.addWidget(priceText, new EdgeInsets.Builder()
+                    .top(4)
+                    .build());
+                panel.addWidget(itemWidget, new EdgeInsets.Builder()
+                    .top(-40)
+                    .left(40)
+                    .bottom(10)
+                    .build());
+            }
+            panel.addComponent(new Divider(), new EdgeInsets.Builder()
+                .top(14)
+                .build());
         }
 
-        // Menu
-        var menuTile = new ListTile("Menu", ListTileSize.S);
+        // Heading for the menu items
+        var menuTile = new ListTile("Menu", ListTile.ListTileSize.S);
 
-        panel.add(menuTile.getRef());
+        // Add the heading for the menu to the main panel
+        panel.addWidget(menuTile, new EdgeInsets.Builder()
+            .bottom(10)
+            .build());
 
-        for (int i = 0; i < props.menu().size(); i++) {
-
-            var itemPanel = new JPanel();
-
-            itemPanel.setPreferredSize(new Dimension(200, 40));
-
-            var x = props.menu().get(i).name();
-            var price = props.menu().get(i).price();
-            var priceAsAString = Float.toString(price);
-            var menuName = new JLabel(x);
-            var menuPrice = new JLabel(priceAsAString + " €");
-
-            var productAddButton = new PillButton("Add", ButtonSize.XS, ButtonType.SECONDARY, e -> {
-                addProducts.put(x, 1);
-            });
-
-            itemPanel.add(menuName);
-            itemPanel.add(menuPrice);
-            itemPanel.add(productAddButton.getRef());
-
-            itemPanel.setBackground(Color.white);
-            var paddedMenu = new Row();
-            paddedMenu.addComponent(itemPanel, new EdgeInsets.Builder()
-                    .symmetric(40, 48)
+        // Add the menu items to the main panel
+        for (Item item : shop.menu()) {
+            // Create the add to cart button
+            var addToCartButton = new PillButton(
+                "Add",
+                ButtonSize.S,
+                ButtonType.SECONDARY,
+                e -> {
+                    if (items.containsKey(item)) {
+                        items.put(item, items.get(item) + 1);
+                    } else {
+                        if (items.isEmpty()) {
+                            checkoutButton.toggle();
+                        }
+                        items.put(item, 1);
+                    }
+                });
+            panel.addWidget(addToCartButton, new EdgeInsets.Builder()
+                    .top(14)
+                    .right(40)
                     .build(),
-                Align.CENTER);
-            panel.add(paddedMenu.getRef());
+                Align.LINE_END);
 
-            var paddedMenu2 = new Column();
-            paddedMenu2.addComponent(itemPanel, new EdgeInsets.Builder()
-                    .symmetric(40, 48)
-                    .build(),
-                Align.CENTER);
-            panel.add(paddedMenu.getRef());
-            panel.add(itemPanel);
-
+            // Add the item to the main panel
+            var itemWidget = new Column();
+            var itemText = new Label(item.name(), LabelSize.S);
+            var priceText = new Label(
+                String.format("%.2f", item.price()),
+                LabelSize.S,
+                Colors.gray600);
+            itemWidget.addWidget(itemText);
+            itemWidget.addWidget(priceText, new EdgeInsets.Builder()
+                .top(4)
+                .build());
+            panel.addWidget(itemWidget, new EdgeInsets.Builder()
+                .top(-40)
+                .left(40)
+                .bottom(10)
+                .build());
         }
 
-        // RectButton "Cart" to appear the OrderOverlay
-        var OrderButton = new RectButton("Cart", ButtonSize.L, ButtonType.PRIMARY, e -> {
-            Router.closeOverlay();
-            Router.openOverlay(new OrderOverlay(merchant, addProducts));
+        // If the cart is empty, disable the checkout button
+        if (items.isEmpty()) {
+            checkoutButton.toggle();
+        }
 
-        });
+        // Add the checkout button to the main panel
+        var paddedCheckoutButton = new Row();
+        paddedCheckoutButton.addWidget(checkoutButton, new EdgeInsets.Builder()
+            .symmetric(10, 40)
+            .bottom(24)
+            .build());
+        panel.addWidget(paddedCheckoutButton, Align.CENTER);
 
-        panel.add(OrderButton.getRef());
-        var column = new Column();
-        column.addWidget(thumbnailImage, new EdgeInsets.Builder().all(0).build(),
-            Align.FIRST_LINE_START);
-        column.addWidget(paddedHeading, Align.FIRST_LINE_START);
-        column.addComponent(panel, new EdgeInsets.Builder().left(150).build(),
-            Align.LAST_LINE_START);
-
-        return new ScrollView(column.getRef()).getRef();
+        return new ScrollView(panel.getRef()).getRef();
     }
 
 }

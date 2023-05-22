@@ -1,26 +1,34 @@
 package com.foodverse.views;
 
-import java.awt.Component;
-import java.util.Optional;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import com.foodverse.models.User;
 import com.foodverse.utility.core.Widget;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
+import com.foodverse.widgets.layout.Row;
+import com.foodverse.widgets.media.IconAsset;
+import com.foodverse.widgets.media.VectorImage;
+import com.foodverse.widgets.text.Paragraph;
 
-public final class AddressView extends Widget {
+import java.awt.*;
+
+public class AddressView extends Widget {
+
     private final Component component;
 
-    public AddressView(Optional<User> user) {
-        var panel = new JPanel();
+    public AddressView(String address) {
 
-        // panel.setPreferredSize(new Dimension(200, 50));
+        //
+        var pinIcon = new VectorImage(IconAsset.LOCATION);
+        var addressText = new Paragraph(address, Paragraph.ParagraphSize.S);
 
-        // OrderCard acard = new OrderCard(null);
-        // panel.add(acard.getRef());
-        var address = new JLabel("Address: " + user.get().addresses().get(0).street());
-        panel.add(address);
+        //
+        var addressView = new Row();
+        addressView.addWidget(pinIcon, Align.LINE_START);
+        addressView.addWidget(addressText, new EdgeInsets.Builder()
+                .left(8)
+                .build(),
+            Align.LINE_START);
 
-        component = panel;
+        component = addressView.getRef();
     }
 
     @Override

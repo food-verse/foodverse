@@ -20,7 +20,6 @@ import com.foodverse.widgets.text.Label.LabelSize;
 public final class OrderCard extends Widget {
 
     private final OrderCardProps props;
-    private final int numberOfLines = 3;
 
     public OrderCard(OrderCardProps props) {
         this.props = props;
@@ -45,6 +44,7 @@ public final class OrderCard extends Widget {
 
         // Creating card's list of items widget...
         int widgetCount = 0;
+        int numberOfLines = 3;
         var itemListWidget = new Column();
         for (Map.Entry<String, Integer> entry : props.items().entrySet()) {
             var itemContent = String.format("• %d %s", entry.getValue(), entry.getKey());
@@ -89,7 +89,7 @@ public final class OrderCard extends Widget {
 
         // Add border to card
         return new ColoredBox(imageCol, e -> {
-            Router.openOverlay(new OrderOverlay(props.name(), props.items()));
+            Router.openOverlay(new OrderOverlay(props.id()));
         });
 
     }

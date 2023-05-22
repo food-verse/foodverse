@@ -26,15 +26,7 @@ public final class EmptyView extends Widget {
                 .all(24)
                 .build(),
             Align.CENTER);
-        var decoratedView = new ColoredBox(emptyView);
-        // Add padding to the empty view
-        var paddedView = new Row();
-        paddedView.addComponent(decoratedView, new EdgeInsets.Builder()
-                .symmetric(16, 48)
-                .bottom(24)
-                .build(),
-            Align.CENTER);
-        component = paddedView.getRef();
+        component = new ColoredBox(emptyView);
     }
 
     @Override

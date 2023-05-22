@@ -11,16 +11,16 @@ public record Shop(
     @SerializedName("name") String name,
     @SerializedName("address") String address,
     @SerializedName("phone") String phone,
-    @SerializedName("rating") float rating,
+    @SerializedName("rating") double rating,
     @SerializedName("reviews") int reviews,
     @SerializedName("type") ShopType type,
     @SerializedName("thumbnails") Map<AssetSize, String> thumbnails,
     @SerializedName("preparation_time") int prepTime,
-    @SerializedName("minimum_order") float minOrder,
+    @SerializedName("minimum_order") double minOrder,
     @SerializedName("offers") List<Offer> offers,
     @SerializedName("menu") List<Item> menu) {
 
-    public Shop withRating(float rating) {
+    public Shop withRating(double rating) {
         return new Shop(name, address, phone, rating, reviews, type, thumbnails, prepTime, minOrder,
             offers, menu);
     }

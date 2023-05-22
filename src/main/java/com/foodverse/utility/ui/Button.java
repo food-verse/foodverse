@@ -26,23 +26,23 @@ public abstract class Button extends Widget {
             default:
             case SECONDARY:
                 return new ButtonTheme.Builder()
-                        .defaultBackgroundColor(Colors.buttonSecondaryFill)
-                        .defaultTextColor(Colors.buttonSecondaryText)
-                        .hoverBackgroundColor(Colors.buttonSecondaryHover)
-                        .hoverTextColor(Colors.buttonSecondaryText)
-                        .pressBackgroundColor(Colors.buttonSecondaryActive)
-                        .pressTextColor(Colors.buttonSecondaryText)
-                        .build();
+                    .defaultBackgroundColor(Colors.buttonSecondaryFill)
+                    .defaultTextColor(Colors.buttonSecondaryText)
+                    .hoverBackgroundColor(Colors.buttonSecondaryHover)
+                    .hoverTextColor(Colors.buttonSecondaryText)
+                    .pressBackgroundColor(Colors.buttonSecondaryActive)
+                    .pressTextColor(Colors.buttonSecondaryText)
+                    .build();
             case TERTIARY:
                 return new ButtonTheme.Builder()
-                        .defaultBackgroundColor(Colors.buttonTertiaryFill)
-                        .defaultTextColor(Colors.buttonTertiaryText)
-                        .hoverBackgroundColor(Colors.buttonTertiaryHover)
-                        .hoverTextColor(Colors.buttonTertiaryText)
-                        .pressBackgroundColor(Colors.buttonTertiaryActive)
-                        .pressTextColor(Colors.buttonTertiaryText)
-                        .disabledBackgroundColor(Colors.buttonTertiaryFill)
-                        .build();
+                    .defaultBackgroundColor(Colors.buttonTertiaryFill)
+                    .defaultTextColor(Colors.buttonTertiaryText)
+                    .hoverBackgroundColor(Colors.buttonTertiaryHover)
+                    .hoverTextColor(Colors.buttonTertiaryText)
+                    .pressBackgroundColor(Colors.buttonTertiaryActive)
+                    .pressTextColor(Colors.buttonTertiaryText)
+                    .disabledBackgroundColor(Colors.buttonTertiaryFill)
+                    .build();
         }
     }
 
@@ -62,7 +62,7 @@ public abstract class Button extends Widget {
     }
 
     public enum ButtonSize {
-        XS, S, M, L, XL
+        XS, S, M, L
     }
 
     public enum ButtonType {

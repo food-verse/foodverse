@@ -2,8 +2,6 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 
-import javax.swing.JPanel;
-
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
@@ -13,16 +11,16 @@ import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
-import com.foodverse.utility.ui.SecureTextField;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.utility.ui.SecureTextField;
 import com.foodverse.widgets.button.RectButton;
 import com.foodverse.widgets.input.InputForm;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
-import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Heading.HeadingSize;
+import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
 public class ChangePasswordOverlay extends Overlay {
@@ -32,7 +30,7 @@ public class ChangePasswordOverlay extends Overlay {
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
 
-    //Validation for inputs
+    // Validation for inputs
     private final InputValidation validator = InputValidation.getInstance();
 
 
@@ -51,7 +49,8 @@ public class ChangePasswordOverlay extends Overlay {
         var textChangePassword = new SecureTextField();
         var newPasswordInput = new InputForm("Type your new password", textChangePassword);
         var textConfirmPassword = new SecureTextField();
-        var confirmPasswordInput = new InputForm("Please write your new password again", UIConstants.REGISTRATION_PASSWORD_FIELD_HINT, textConfirmPassword);
+        var confirmPasswordInput = new InputForm("Please write your new password again",
+            UIConstants.REGISTRATION_PASSWORD_FIELD_HINT, textConfirmPassword);
         var changePasswordButton = new RectButton(
             "Change Password",
             ButtonSize.L,
@@ -60,19 +59,22 @@ public class ChangePasswordOverlay extends Overlay {
                 var newPasswordAsAString = new String(textChangePassword.getPassword());
                 var confirmPasswordAsAString = new String(textConfirmPassword.getPassword());
 
-                var areValid = checkValidityOfNewPassword(newPasswordAsAString, confirmPasswordAsAString);
+                var areValid = checkValidityOfNewPassword(newPasswordAsAString,
+                    confirmPasswordAsAString);
 
                 if (areValid) {
-                    //change password and go to home page
+                    // change password and go to home page
                     var newCredentials = user.credentials().withPassword(newPasswordAsAString);
                     User updatedUser = user.withCredentials(newCredentials);
                     db.updateUser(updatedUser);
                     Router.closeOverlay();
-                    Router.openOverlay(new Alert(UIConstants.SUCCESSFUL_PASSWORD_CHANGE_TITLE, UIConstants.SUCCESSFUL_PASSWORD_CHANGE_DESCRIPTION));
+                    Router.openOverlay(new Alert(UIConstants.SUCCESSFUL_PASSWORD_CHANGE_TITLE,
+                        UIConstants.SUCCESSFUL_PASSWORD_CHANGE_DESCRIPTION));
                     Router.pushPage(Pages.HOME);
                 } else {
-                    //show message for wrong format
-                    Router.openOverlay(new Alert(UIConstants.WRONG_NEW_PASSWORD_FORMAT_TITLE, UIConstants.WRONG_NEW_PASSWORD_FORMAT_DESCRIPTION));
+                    // show message for wrong format
+                    Router.openOverlay(new Alert(UIConstants.WRONG_NEW_PASSWORD_FORMAT_TITLE,
+                        UIConstants.WRONG_NEW_PASSWORD_FORMAT_DESCRIPTION));
                 }
 
             }
@@ -82,9 +84,9 @@ public class ChangePasswordOverlay extends Overlay {
 
         panel.addWidget(passwordChangeHeading, Align.CENTER);
         panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
-                        .symmetric(24, 0)
-                        .build(),
-                        Align.CENTER);
+                .symmetric(24, 0)
+                .build(),
+            Align.CENTER);
         panel.addWidget(newPasswordInput, Align.CENTER);
         panel.addWidget(confirmPasswordInput, Align.CENTER);
         panel.addWidget(changePasswordButton, Align.CENTER);
@@ -94,7 +96,8 @@ public class ChangePasswordOverlay extends Overlay {
 
 
     private boolean checkValidityOfNewPassword(String newPasswd, String confirmPasswd) {
-        return validator.isPasswordValid(newPasswd) && validator.isPasswordValid(confirmPasswd) && newPasswd.equals(confirmPasswd);
+        return validator.isPasswordValid(newPasswd) && validator.isPasswordValid(confirmPasswd)
+            && newPasswd.equals(confirmPasswd);
     }
 
     @Override

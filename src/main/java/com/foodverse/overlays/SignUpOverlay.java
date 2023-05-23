@@ -2,8 +2,6 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 
-import javax.swing.JPanel;
-
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.layout.Align;
@@ -30,7 +28,7 @@ public final class SignUpOverlay extends Overlay {
     private final Component component;
 
     // Getting a reference to the database...
-    //private final Database db = Database.getInstance();
+    // private final Database db = Database.getInstance();
 
     // Getting a reference to the input validator...
     private final InputValidation validator = InputValidation.getInstance();
@@ -40,7 +38,8 @@ public final class SignUpOverlay extends Overlay {
 
         var panel = new Column();
         var signUpHeading = new Heading(UIConstants.REGISTRATION_PROMO_TITLE, HeadingSize.L);
-        var explanationParagraph = new Paragraph(UIConstants.REGISTRATION_PROMO_MESSAGE, ParagraphSize.M, Colors.gray600);
+        var explanationParagraph = new Paragraph(UIConstants.REGISTRATION_PROMO_MESSAGE,
+            ParagraphSize.M, Colors.gray600);
         var textNameInput = new TextField();
         var nameInput = new InputForm("Name", textNameInput);
         var textAddressInput = new TextField();
@@ -50,7 +49,8 @@ public final class SignUpOverlay extends Overlay {
         var textEmailInput = new TextField();
         var emailInput = new InputForm("Email", textEmailInput);
         var textPasswordInput = new SecureTextField();
-        var passwordInput = new InputForm("Password", UIConstants.REGISTRATION_PASSWORD_FIELD_HINT, textPasswordInput);
+        var passwordInput = new InputForm("Password", UIConstants.REGISTRATION_PASSWORD_FIELD_HINT,
+            textPasswordInput);
         var consentPolicyParagraph = new ConsentPolicyView();
         var continueButton = new RectButton(
             "Continue",
@@ -63,11 +63,13 @@ public final class SignUpOverlay extends Overlay {
                 var email = textEmailInput.getText();
                 var password = new String(textPasswordInput.getPassword());
 
-                boolean isValid = checkValidityOfCredentials(name, address, phone, email, password);
+                boolean isValid =
+                    checkValidityOfCredentials(name, address, phone, email, password);
 
                 if (isValid) {
                     Router.closeOverlay();
-                    Router.openOverlay(new RecoveryOptionsOverlay(name, address, phone, email, password));
+                    Router.openOverlay(
+                        new RecoveryOptionsOverlay(name, address, phone, email, password));
                 } else
                     Router.openOverlay(new Alert(
                         UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE,
@@ -78,9 +80,9 @@ public final class SignUpOverlay extends Overlay {
 
         panel.addWidget(signUpHeading, Align.CENTER);
         panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
-                        .symmetric(24, 0)
-                        .build(),
-                        Align.CENTER);
+                .symmetric(24, 0)
+                .build(),
+            Align.CENTER);
         panel.addWidget(nameInput, Align.CENTER);
         panel.addWidget(addressInput, Align.CENTER);
         panel.addWidget(phoneInput, Align.CENTER);
@@ -94,10 +96,13 @@ public final class SignUpOverlay extends Overlay {
 
     }
 
-    private boolean checkValidityOfCredentials(String name, String address, String phone, String email, String password) {
+    private boolean checkValidityOfCredentials(String name, String address, String phone,
+                                               String email, String password) {
         boolean isValid;
 
-        isValid = validator.isNameValid(name) && validator.isAddressValid(address) && validator.isPhoneValid(phone) && validator.isEmailValid(email) && validator.isPasswordValid(password);
+        isValid = validator.isNameValid(name) && validator.isAddressValid(address)
+            && validator.isPhoneValid(phone) && validator.isEmailValid(email)
+            && validator.isPasswordValid(password);
 
         return isValid;
     }

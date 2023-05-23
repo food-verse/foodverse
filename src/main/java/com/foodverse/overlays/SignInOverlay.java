@@ -2,8 +2,6 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 
-import javax.swing.JPanel;
-
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -29,7 +27,7 @@ public final class SignInOverlay extends Overlay {
     private final Component component;
     private final int wrongAttemptsForRecovery = 5;
 
-    //Counter for password recovery process
+    // Counter for password recovery process
     private int recoveryCounter = wrongAttemptsForRecovery;
 
     // Getting a reference to the database...
@@ -47,7 +45,8 @@ public final class SignInOverlay extends Overlay {
         var panel = new Column();
 
         var signInHeading = new Heading(UIConstants.SIGN_IN_TITLE, HeadingSize.L);
-        var explanationParagraph = new Paragraph(UIConstants.SIGN_IN_PROMO_MESSAGE, ParagraphSize.M);
+        var explanationParagraph =
+            new Paragraph(UIConstants.SIGN_IN_PROMO_MESSAGE, ParagraphSize.M);
         var textEmailField = new TextField();
         var emailInput = new InputForm("Email", "", textEmailField);
         var textPasswordField = new SecureTextField();
@@ -66,28 +65,21 @@ public final class SignInOverlay extends Overlay {
                     Router.closeOverlay();
                 } else {
                     recoveryCounter--;
-                    if(recoveryCounter == 0)
-                    {
-                        recoveryCounter = wrongAttemptsForRecovery; //Counter reset
+                    if (recoveryCounter == 0) {
+                        recoveryCounter = wrongAttemptsForRecovery; // Counter reset
                         var userExists = db.findUserByEmail(email);
-                        
-                        //check if user exists and if yes then open password recovery overlay
-                        if(userExists.isEmpty())
-                        {
+
+                        // check if user exists and if yes then open password recovery overlay
+                        if (userExists.isEmpty()) {
                             Router.openOverlay(new Alert(
-                                UIConstants.USER_NOT_EXIST_TITLE, 
-                                UIConstants.USER_NOT_EXIST_DESCRIPTION
-                            ));
-                        }
-                        else 
-                        {
-                            //open password recovery overlay
+                                UIConstants.USER_NOT_EXIST_TITLE,
+                                UIConstants.USER_NOT_EXIST_DESCRIPTION));
+                        } else {
+                            // open password recovery overlay
                             Router.closeOverlay();
                             Router.openOverlay(new PasswordRecoveryOverlay(userExists.get()));
                         }
-                    }
-                    else
-                    {
+                    } else {
                         Router.openOverlay(new Alert(
                             UIConstants.INVALID_CREDENTIALS_TITLE,
                             UIConstants.INVALID_CREDENTIALS_DESCRIPTION));
@@ -99,13 +91,13 @@ public final class SignInOverlay extends Overlay {
         panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
                 .symmetric(24, 0)
                 .build(),
-                Align.CENTER);
+            Align.CENTER);
         panel.addWidget(emailInput, Align.CENTER);
         panel.addWidget(passwordInput, Align.CENTER);
         panel.addWidget(signInButton, Align.CENTER);
 
         component = panel.getRef();
-        
+
     }
 
 

@@ -15,19 +15,14 @@ public class AddressView extends Widget {
     private final Component component;
 
     public AddressView(String address) {
-
-        //
         var pinIcon = new VectorImage(IconAsset.LOCATION);
         var addressText = new Paragraph(address, Paragraph.ParagraphSize.S);
-
-        //
         var addressView = new Row();
         addressView.addWidget(pinIcon, Align.LINE_START);
         addressView.addWidget(addressText, new EdgeInsets.Builder()
                 .left(8)
                 .build(),
             Align.LINE_START);
-
         component = addressView.getRef();
     }
 

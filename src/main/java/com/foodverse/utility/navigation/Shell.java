@@ -34,12 +34,14 @@ public final class Shell {
                 ShopFactory.generate();
             }
             var assetIndex = FileManager.loadAssetIndex();
-            AssetManager.loadFont(
-                options.getDefaultFont(),
-                assetIndex.fonts().get(options.getDefaultFont()));
-            AssetManager.loadFont(
-                options.getDefaultFont(),
-                assetIndex.fonts().get(options.getMonospacedFont()));
+            if (assetIndex.isPresent()) {
+                AssetManager.loadFont(
+                    options.getDefaultFont(),
+                    assetIndex.get().fonts().get(options.getDefaultFont()));
+                AssetManager.loadFont(
+                    options.getDefaultFont(),
+                    assetIndex.get().fonts().get(options.getMonospacedFont()));
+            }
         }
         frame.setSize(options.getDimension());
         frame.getContentPane().setBackground(options.getBackgroundColor());

@@ -1,12 +1,17 @@
 package com.foodverse.models;
 
 public enum PaymentMethod {
-    CARD, CASH;
+    CARD("Card"), CASH("Cash");
+
+    private final String method;
+
+    PaymentMethod(String method) {
+        this.method = method;
+    }
 
     @Override
     public String toString() {
-        String name = name().toLowerCase();
-        return name.substring(0, 1).toUpperCase() + name.substring(1);
+        return method;
     }
 
 }

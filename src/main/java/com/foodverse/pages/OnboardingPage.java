@@ -128,39 +128,38 @@ public final class OnboardingPage extends Page {
             Align.CENTER);
         panel.add(paddedHeading.getRef());
 
-        var tempCol = new Column();
-        tempCol.addWidget(promoTitleText, new EdgeInsets.Builder()
+        var promoText = new Column();
+        promoText.addWidget(promoTitleText, new EdgeInsets.Builder()
                 .bottom(16)
                 .build(),
             Align.FIRST_LINE_START);
-        tempCol.addWidget(promoMessageText, Align.LAST_LINE_END);
+        promoText.addWidget(promoMessageText, Align.LAST_LINE_END);
 
-        var tempRow2 = new Row();
-        tempRow2.addWidget(promoNoteText, Align.FIRST_LINE_START);
-        tempRow2.addWidget(hushFaceImage, Align.FIRST_LINE_END);
+        var noteWidget = new Row();
+        noteWidget.addWidget(promoNoteText, Align.FIRST_LINE_START);
+        noteWidget.addWidget(hushFaceImage, Align.FIRST_LINE_END);
 
-        var tempCol2 = new Column();
-        tempCol2.addWidget(tempCol, new EdgeInsets.Builder()
-                .top(164)
-                .bottom(380)
-                .build(),
-            Align.FIRST_LINE_START);
-        tempCol2.addWidget(tempRow2, new EdgeInsets.Builder()
-                .build(),
-            Align.FIRST_LINE_START);
+        var textWidgets = new Column();
+        textWidgets.addWidget(promoText, new EdgeInsets.Builder()
+            .top(164)
+            .bottom(440)
+            .build());
+        textWidgets.addWidget(noteWidget, new EdgeInsets.Builder().build());
 
-        var tempRow = new Row();
-        tempRow.addWidget(tempCol2, Align.CENTER);
-        tempRow.addWidget(onboardingImage, Align.CENTER);
+        // Add the text widgets and the onboarding image to the content row
+        var content = new Row();
+        content.addWidget(textWidgets, new EdgeInsets.Builder()
+            .right(320)
+            .build());
+        content.addWidget(onboardingImage);
 
+        // Add the padded content row to the main panel
         var paddedContent = new Column();
-        paddedContent.addWidget(tempRow, new EdgeInsets.Builder()
-                .all(48)
-                .top(0)
-                .build(),
-            Align.CENTER);
-
-        panel.add(tempRow.getRef());
+        paddedContent.addWidget(content, new EdgeInsets.Builder()
+            .all(48)
+            .top(0)
+            .build());
+        panel.add(paddedContent.getRef());
 
     }
 

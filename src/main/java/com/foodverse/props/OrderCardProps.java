@@ -10,7 +10,6 @@ import com.foodverse.utility.system.Database;
 import com.foodverse.widgets.media.AssetSize;
 
 public record OrderCardProps(
-
     String thumbnail,
     String name,
     UUID id,
@@ -29,8 +28,7 @@ public record OrderCardProps(
             "",
             UUID.randomUUID(),
             order.items(),
-            order.total())
-        );
+            order.total()));
     }
 
 }

@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.swing.JPanel;
-
 import com.foodverse.models.Address;
 import com.foodverse.models.Credentials;
 import com.foodverse.models.User;
@@ -50,7 +48,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
         var question1 = "";
         var question2 = "";
 
-        if (!configuration.isEmpty()) {
+        if (configuration.isPresent()) {
             question1 = configuration.get().recoveryQuestions().get(0);
             question2 = configuration.get().recoveryQuestions().get(1);
         }
@@ -99,9 +97,9 @@ public final class RecoveryOptionsOverlay extends Overlay {
 
         panel.addWidget(recoveryHeading, Align.CENTER);
         panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
-                        .symmetric(24, 0)
-                        .build(),
-                        Align.CENTER);
+                .symmetric(24, 0)
+                .build(),
+            Align.CENTER);
         panel.addWidget(firstRecovAnswInput, Align.CENTER);
         panel.addWidget(secondRecovAnswInput, Align.CENTER);
         panel.addWidget(consentPolicyParagraph, Align.CENTER);

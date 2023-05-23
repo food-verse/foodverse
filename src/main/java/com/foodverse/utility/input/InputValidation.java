@@ -5,12 +5,14 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public final class InputValidation {
 
     private static final InputValidation inputValidation = new InputValidation();
     private static final EmailValidator validator = EmailValidator.getInstance();
     private static final PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
-    private static final int passwordLength = 8;
 
     private InputValidation() {}
 
@@ -43,7 +45,10 @@ public final class InputValidation {
     }
 
     public boolean isPasswordValid(String password) {
-        return password.length() >= passwordLength;
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).{8,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
     }
 
     public boolean isAnswersValid(String answer1, String answer2) {

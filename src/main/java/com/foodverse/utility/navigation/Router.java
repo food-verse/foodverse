@@ -27,8 +27,7 @@ public final class Router {
     // A reference to the main frame of the application
     private static final JFrame frame = Shell.getFrame();
 
-    private Router() {
-    }
+    private Router() {}
 
     /**
      * Adds the specified page to the router.

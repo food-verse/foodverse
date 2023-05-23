@@ -53,7 +53,6 @@ public final class UIConstants {
             "their day.</html>";
     public static final String ORDER_COMMENTS_CAPTION = "Please use this field to let us know about any specific dietary requirements.";
 
-    // Invalid credentials alert
     public static final String INVALID_CREDENTIALS_TITLE = "Invalid Credentials";
     public static final String INVALID_CREDENTIALS_DESCRIPTION =
         "<html>Sorry, we were unable to verify your login<br>"
@@ -63,7 +62,6 @@ public final class UIConstants {
             + "may reset your password or contact our<br>"
             + "support team for further assistance.</html>";
 
-    // Invalid credentials format for sign up
     public static final String INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE = "Invalid Data Format";
     public static final String INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_DESCRIPTION =
         "<html>There is an error with the given credentials.<br>"
@@ -75,15 +73,12 @@ public final class UIConstants {
             + "If you continue having problems you can ask<br>"
             + "our support team for further assistance.</html>";
 
-    // Invalid recovery answers
     public static final String INVALID_RECOVERY_ANSWERS_INPUT_TITLE =
         "Invalid Recovery Answers Input";
     public static final String INVALID_RECOVERY_ANSWERS_INPUT_DESCRIPTION =
         "<html>There is an error with your input<br>"
             + "Please make sure that you have filled all the fields</html>";
 
-
-    // Message when user does not exist
     public static final String USER_NOT_EXIST_TITLE = "User does not exist";
     public static final String USER_NOT_EXIST_DESCRIPTION =
         "<html>This user does not exist<br>"
@@ -92,41 +87,32 @@ public final class UIConstants {
             + "If the problem continues please<br>"
             + "contact our support for further assistance</html>";
 
-
-    // Message for wrong recovery answers
     public static final String WRONG_RECOVERY_ANSWERS_TITLE = "Wrong Answers";
     public static final String WRONG_RECOVERY_ANSWERS_DESCRIPTION =
         "<html>You answered wrong. For security purposes<br>"
             + "you will be redirected back to onboarding page.</html>";
 
-    // Message for wrong new password format
     public static final String WRONG_NEW_PASSWORD_FORMAT_TITLE = "Wrong New Password Format";
     public static final String WRONG_NEW_PASSWORD_FORMAT_DESCRIPTION =
         "<html>Please make sure the 2 fields have the same cost<br>"
             + "Also password must be at least 8 characters long</html>";
 
-
-    // Message for correct password change
     public static final String SUCCESSFUL_PASSWORD_CHANGE_TITLE = "Password changed successfully!";
     public static final String SUCCESSFUL_PASSWORD_CHANGE_DESCRIPTION =
         "<html>You successfully changed your password!<br>"
             + "You can continue to enjoy our services now!!!<br>"
             + "You will be redirected to your home page</html>";
 
-    // Sign out alert
     public static final String SIGN_OUT_CONFIRM_MESSAGE = "Are you sure you want to sign out?";
     public static final String EMPTY_STATE_MESSAGE = "Unfortunately, there is nothing to display.";
 
-
-    //Sign in promo message
     public static final String SIGN_IN_TITLE = "Sign In";
-    public static final String SIGN_IN_PROMO_MESSAGE = 
+    public static final String SIGN_IN_PROMO_MESSAGE =
         "<html>Please sign in to your account to access your order history,<br>"
             + "favorite restaurants, and exclusive deals.</html>";
 
-    //Recovery password messages
     public static final String PASSWORD_RECOVERY_TITLE = "Password Recovery";
-    public static final String PASSWORD_RECOVERY_DESCRIPTION = 
+    public static final String PASSWORD_RECOVERY_DESCRIPTION =
         "<html>It seems that you forgot your password<br>"
             + "Please answer correct to the following questions<br>"
             + "in order to change it.";

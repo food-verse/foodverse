@@ -21,11 +21,13 @@ public record Shop(
     @SerializedName("menu") List<Item> menu) {
 
     public Shop withRating(double rating) {
+        if (Double.compare(this.rating, rating) == 0) return this;
         return new Shop(name, address, phone, rating, reviews, type, thumbnails, prepTime, minOrder,
             offers, menu);
     }
 
     public Shop withReviews(int reviews) {
+        if (this.reviews == reviews) return this;
         return new Shop(name, address, phone, rating, reviews, type, thumbnails, prepTime, minOrder,
             offers, menu);
     }

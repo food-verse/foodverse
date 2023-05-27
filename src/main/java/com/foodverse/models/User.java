@@ -18,18 +18,22 @@ public record User(
     @SerializedName("orders") Set<Order> orders) {
 
     public User withName(String name) {
+        if (this.name.equals(name)) return this;
         return new User(name, addresses, phone, email, credentials, favorites, ratings, orders);
     }
 
     public User withPhone(String phone) {
+        if (this.phone.equals(phone)) return this;
         return new User(name, addresses, phone, email, credentials, favorites, ratings, orders);
     }
 
     public User withEmail(String email) {
+        if (this.email.equals(email)) return this;
         return new User(name, addresses, phone, email, credentials, favorites, ratings, orders);
     }
 
     public User withCredentials(Credentials credentials) {
+        if (this.credentials.equals(credentials)) return this;
         return new User(name, addresses, phone, email, credentials, favorites, ratings, orders);
     }
 

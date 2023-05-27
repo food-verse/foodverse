@@ -18,6 +18,7 @@ public record Credentials(
     }
 
     public Credentials withPassword(String password) {
+        if (this.password.equals(password)) return this;
         return new Credentials(password, recoveryAnswers);
     }
 

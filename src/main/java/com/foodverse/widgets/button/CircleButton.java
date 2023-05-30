@@ -36,7 +36,8 @@ public final class CircleButton extends Button {
         String data,
         boolean isEnabled,
         ButtonSize buttonSize,
-        ButtonType buttonType, Consumer<ActionEvent> onPressed
+        ButtonType buttonType,
+        Consumer<ActionEvent> onPressed
     ) {
         this(data, isEnabled, buttonSize, buttonType, onPressed, false);
     }

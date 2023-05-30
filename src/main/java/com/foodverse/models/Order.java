@@ -14,5 +14,5 @@ public record Order(
     @SerializedName("delivery_tip") double deliveryTip,
     @SerializedName("total") double total,
     @SerializedName("payment") PaymentMethod method,
-    @SerializedName("comments") String comments) {
-}
+    @SerializedName("comments") String comments
+) {}

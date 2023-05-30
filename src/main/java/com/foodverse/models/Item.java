@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public record Item(
     @SerializedName("name") String name,
-    @SerializedName("cost") double price) implements Purchasable {
+    @SerializedName("price") double price
+) implements Purchasable {
 
     @Override
     public double cost() {

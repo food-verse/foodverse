@@ -18,7 +18,8 @@ public record Shop(
     @SerializedName("preparation_time") int prepTime,
     @SerializedName("minimum_order") double minOrder,
     @SerializedName("offers") List<Offer> offers,
-    @SerializedName("menu") List<Item> menu) {
+    @SerializedName("menu") List<Item> menu
+) {
 
     public Shop withRating(double rating) {
         if (Double.compare(this.rating, rating) == 0) return this;

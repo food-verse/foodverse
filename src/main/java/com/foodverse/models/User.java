@@ -15,7 +15,8 @@ public record User(
     @SerializedName("credentials") Credentials credentials,
     @SerializedName("favorites") Set<String> favorites,
     @SerializedName("rating") Map<String, Integer> ratings,
-    @SerializedName("orders") Set<Order> orders) {
+    @SerializedName("orders") Set<Order> orders
+) {
 
     public User withName(String name) {
         if (this.name.equals(name)) return this;

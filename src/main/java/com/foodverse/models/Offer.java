@@ -6,7 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 public record Offer(
     @SerializedName("items") Map<String, Integer> items,
-    @SerializedName("total") double total) implements Purchasable {
+    @SerializedName("total") double total
+) implements Purchasable {
 
     @Override
     public double cost() {

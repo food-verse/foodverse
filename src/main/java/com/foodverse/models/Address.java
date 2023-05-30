@@ -5,7 +5,8 @@ public record Address(
     String number,
     String floor,
     String doorbell,
-    String comments) {
+    String comments
+) {
 
     public Address withStreet(String street) {
         if (this.street.equals(street)) return this;

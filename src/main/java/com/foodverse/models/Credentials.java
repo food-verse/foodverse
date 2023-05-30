@@ -9,7 +9,8 @@ import com.google.gson.annotations.SerializedName;
 
 public record Credentials(
     @SerializedName("password") String password,
-    @SerializedName("recovery_answers") Map<Integer, String> recoveryAnswers) {
+    @SerializedName("recovery_answers") Map<Integer, String> recoveryAnswers
+) {
 
     public Credentials(String password, List<String> recoveryAnswers) {
         this(password, IntStream.range(0, recoveryAnswers.size())

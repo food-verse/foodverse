@@ -8,7 +8,8 @@ import java.util.stream.IntStream;
 import com.google.gson.annotations.SerializedName;
 
 public record Config(
-    @SerializedName("recovery_questions") Map<Integer, String> recoveryQuestions) {
+    @SerializedName("recovery_questions") Map<Integer, String> recoveryQuestions
+) {
 
     public Config(List<String> recoveryQuestions) {
         this(IntStream.range(0, recoveryQuestions.size())

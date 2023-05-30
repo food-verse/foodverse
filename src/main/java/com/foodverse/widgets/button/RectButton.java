@@ -13,32 +13,55 @@ import com.foodverse.widgets.text.Label.LabelSize;
 
 public final class RectButton extends Button {
 
-    public RectButton(String data, ButtonSize buttonSize, ButtonType buttonType,
-            Consumer<ActionEvent> onPressed, boolean isMono) {
+    public RectButton(
+        String data,
+        ButtonSize buttonSize,
+        ButtonType buttonType,
+        Consumer<ActionEvent> onPressed,
+        boolean isMono
+    ) {
         this(data, true, buttonSize, buttonType, onPressed, isMono);
     }
 
-    public RectButton(String data, ButtonSize buttonSize, ButtonType buttonType,
-            Consumer<ActionEvent> onPressed) {
+    public RectButton(
+        String data,
+        ButtonSize buttonSize,
+        ButtonType buttonType,
+        Consumer<ActionEvent> onPressed
+    ) {
         this(data, true, buttonSize, buttonType, onPressed, false);
     }
 
-    public RectButton(String data, boolean isEnabled, ButtonSize buttonSize,
-            ButtonType buttonType, Consumer<ActionEvent> onPressed) {
+    public RectButton(
+        String data,
+        boolean isEnabled,
+        ButtonSize buttonSize,
+        ButtonType buttonType,
+        Consumer<ActionEvent> onPressed
+    ) {
         this(data, isEnabled, buttonSize, buttonType, onPressed, false);
     }
 
-    public RectButton(String data, boolean isEnabled, ButtonSize buttonSize,
-            ButtonType buttonType, Consumer<ActionEvent> onPressed, boolean isMono) {
-        super(data, onPressed,
-                getButtonStyle(isEnabled, buttonSize, getButtonTheme(buttonType), isMono));
+    public RectButton(
+        String data,
+        boolean isEnabled,
+        ButtonSize buttonSize,
+        ButtonType buttonType,
+        Consumer<ActionEvent> onPressed,
+        boolean isMono
+    ) {
+        super(data, onPressed, getButtonStyle(isEnabled, buttonSize, getButtonTheme(buttonType), isMono));
     }
 
-    public static ButtonStyle getButtonStyle(boolean isEnabled, ButtonSize buttonSize,
-            ButtonTheme buttonTheme, boolean isMono) {
-        final FontStyle fontStyle;
-        final EdgeInsets padding = new EdgeInsets.Builder().symmetric(6, 10).build();
-        final int borderRadius = 8;
+    public static ButtonStyle getButtonStyle(
+        boolean isEnabled,
+        ButtonSize buttonSize,
+        ButtonTheme buttonTheme,
+        boolean isMono
+    ) {
+        FontStyle fontStyle;
+        EdgeInsets padding = new EdgeInsets.Builder().symmetric(6, 10).build();
+        int borderRadius = 8;
         switch (buttonSize) {
             case XS:
                 fontStyle = Label.getFontStyle(LabelSize.XS, isMono);

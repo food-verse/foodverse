@@ -14,9 +14,14 @@ public final class IconButton extends Widget {
     private final Row container = new Row();
     private boolean isEnabled;
 
-    public IconButton(IconAsset enabledIconAsset, String enabledAriaLabel,
-                      IconAsset disabledIconAsset, String disabledAriaLabel, Consumer<Boolean> onChange,
-                      boolean isIconEnabled) {
+    public IconButton(
+        IconAsset enabledIconAsset,
+        String enabledAriaLabel,
+        IconAsset disabledIconAsset,
+        String disabledAriaLabel,
+        Consumer<Boolean> onChange,
+        boolean isIconEnabled
+    ) {
         this.isEnabled = isIconEnabled;
         // Creating the icons...
         var enabledIcon = new VectorImage(enabledIconAsset);

@@ -22,8 +22,12 @@ public class Dialog extends Overlay {
 
     private final Component component;
 
-    public Dialog(String title, String description, String confirmLabel,
-                  Consumer<ActionEvent> onPressed) {
+    public Dialog(
+        String title,
+        String description,
+        String confirmLabel,
+        Consumer<ActionEvent> onPressed
+    ) {
 
         // Creating main container...
         var content = new Column();

@@ -25,8 +25,8 @@ public final class TextField extends JTextField {
         .pressTextColor(Colors.buttonSecondaryText)
         .build();
     private boolean isEnabled = true;
-    private ButtonStyle buttonStyle = RectButton.getButtonStyle(
-        isEnabled,
+    private final ButtonStyle buttonStyle = RectButton.getButtonStyle(
+        true,
         ButtonSize.S,
         theme,
         false);
@@ -39,10 +39,6 @@ public final class TextField extends JTextField {
         setSelectionColor(Colors.buttonSecondaryActive);
         setColumns(24);
         applyStyle();
-    }
-
-    public void setTheme(ButtonStyle buttonStyle) {
-        this.buttonStyle = buttonStyle;
     }
 
     public void toggle() {

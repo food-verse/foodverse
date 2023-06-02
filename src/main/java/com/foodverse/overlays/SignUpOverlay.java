@@ -27,9 +27,6 @@ public final class SignUpOverlay extends Overlay {
 
     private final Component component;
 
-    // Getting a reference to the database...
-    // private final Database db = Database.getInstance();
-
     // Getting a reference to the input validator...
     private final InputValidation validator = InputValidation.getInstance();
 
@@ -38,14 +35,21 @@ public final class SignUpOverlay extends Overlay {
 
         var panel = new Column();
         var signUpHeading = new Heading(UIConstants.REGISTRATION_PROMO_TITLE, HeadingSize.L);
-        var explanationParagraph = new Paragraph(UIConstants.REGISTRATION_PROMO_MESSAGE,
-            ParagraphSize.M, Colors.gray600);
+        var explanationParagraph = new Paragraph(
+            UIConstants.REGISTRATION_PROMO_MESSAGE,
+            ParagraphSize.M,
+            Colors.gray600
+        );
         var textNameInput = new TextField();
         var nameInput = new InputForm("Name", textNameInput);
         var textAddressInput = new TextField();
         var addressInput = new InputForm("Address", textAddressInput);
         var textPhoneInput = new TextField();
-        var phoneInput = new InputForm("Phone", textPhoneInput);
+        var phoneInput = new InputForm(
+            "Phone",
+            UIConstants.REGISTRATION_PHONE_FIELD_HINT,
+            textPhoneInput
+        );
         var textEmailInput = new TextField();
         var emailInput = new InputForm("Email", textEmailInput);
         var textPasswordInput = new SecureTextField();

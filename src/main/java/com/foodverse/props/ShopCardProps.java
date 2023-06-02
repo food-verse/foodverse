@@ -12,7 +12,8 @@ public record ShopCardProps(
     int reviews,
     ShopType type,
     int prepTime,
-    double minOrder) implements Props {
+    double minOrder
+) implements Props {
 
     public static ShopCardProps from(Shop shop) {
         return new ShopCardProps(

@@ -2,9 +2,7 @@ package com.foodverse.overlays;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.util.Optional;
 
-import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -17,8 +15,6 @@ import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.utility.ui.Divider;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.layout.Column;
-import com.foodverse.widgets.layout.ScrollView;
-import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.modal.Dialog;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
@@ -28,23 +24,12 @@ public class ProfileOverlay extends Overlay {
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
 
-    private User user;
-
     public ProfileOverlay() {
         super(800, 540);
     }
 
     @Override
     public Component getRef() {
-
-        // Getting the authenticated user...
-        Optional<User> signedUser = db.getAuthenticatedUser();
-        if (signedUser.isPresent()) {
-            user = signedUser.get();
-        } else {
-            Router.openOverlay(new Alert("Error", "Authenticated User is not found"));
-            Router.closeOverlay();
-        }
 
         // Creating the page panel
         var panel = new Column();
@@ -55,7 +40,6 @@ public class ProfileOverlay extends Overlay {
                 .top(16)
                 .build(),
             Align.CENTER);
-
 
         // Buttons that lead to the various settings we can use
         var openProfilePage = new PillButton(
@@ -81,7 +65,6 @@ public class ProfileOverlay extends Overlay {
                 .symmetric(14, 40)
                 .build(),
             Align.CENTER);
-
 
         var openAddressesPage = new PillButton(
             "Addresses",
@@ -114,15 +97,13 @@ public class ProfileOverlay extends Overlay {
             "Sign Out",
             ButtonSize.L,
             ButtonType.PRIMARY,
-            e -> {
-                signOutAction(e);
-            });
+            this::signOutAction);
         panel.addWidget(signOutButton, new EdgeInsets.Builder()
                 .symmetric(14, 40)
                 .build(),
             Align.CENTER);
 
-        return new ScrollView(panel.getRef()).getRef();
+        return panel.getRef();
 
     }
 

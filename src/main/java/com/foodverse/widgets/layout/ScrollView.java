@@ -18,7 +18,7 @@ public final class ScrollView extends Widget {
         component.setBackground(Colors.white);
         component.setBorder(null);
         JScrollBar scrollBar = component.getVerticalScrollBar();
-        scrollBar.setUnitIncrement(30);
+        scrollBar.setUnitIncrement(10);
         scrollBar.setBlockIncrement(120);
     }
 

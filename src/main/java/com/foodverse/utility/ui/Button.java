@@ -20,30 +20,26 @@ public abstract class Button extends Widget {
     }
 
     protected static ButtonTheme getButtonTheme(ButtonType buttonType) {
-        switch (buttonType) {
-            case PRIMARY:
-                return new ButtonTheme.Builder().build();
-            default:
-            case SECONDARY:
-                return new ButtonTheme.Builder()
-                    .defaultBackgroundColor(Colors.buttonSecondaryFill)
-                    .defaultTextColor(Colors.buttonSecondaryText)
-                    .hoverBackgroundColor(Colors.buttonSecondaryHover)
-                    .hoverTextColor(Colors.buttonSecondaryText)
-                    .pressBackgroundColor(Colors.buttonSecondaryActive)
-                    .pressTextColor(Colors.buttonSecondaryText)
-                    .build();
-            case TERTIARY:
-                return new ButtonTheme.Builder()
-                    .defaultBackgroundColor(Colors.buttonTertiaryFill)
-                    .defaultTextColor(Colors.buttonTertiaryText)
-                    .hoverBackgroundColor(Colors.buttonTertiaryHover)
-                    .hoverTextColor(Colors.buttonTertiaryText)
-                    .pressBackgroundColor(Colors.buttonTertiaryActive)
-                    .pressTextColor(Colors.buttonTertiaryText)
-                    .disabledBackgroundColor(Colors.buttonTertiaryFill)
-                    .build();
-        }
+        return switch (buttonType) {
+            case PRIMARY -> new ButtonTheme.Builder().build();
+            case TERTIARY -> new ButtonTheme.Builder()
+                .defaultBackgroundColor(Colors.buttonTertiaryFill)
+                .defaultTextColor(Colors.buttonTertiaryText)
+                .hoverBackgroundColor(Colors.buttonTertiaryHover)
+                .hoverTextColor(Colors.buttonTertiaryText)
+                .pressBackgroundColor(Colors.buttonTertiaryActive)
+                .pressTextColor(Colors.buttonTertiaryText)
+                .disabledBackgroundColor(Colors.buttonTertiaryFill)
+                .build();
+            default -> new ButtonTheme.Builder()
+                .defaultBackgroundColor(Colors.buttonSecondaryFill)
+                .defaultTextColor(Colors.buttonSecondaryText)
+                .hoverBackgroundColor(Colors.buttonSecondaryHover)
+                .hoverTextColor(Colors.buttonSecondaryText)
+                .pressBackgroundColor(Colors.buttonSecondaryActive)
+                .pressTextColor(Colors.buttonSecondaryText)
+                .build();
+        };
     }
 
     public void setText(String data) {

@@ -37,7 +37,7 @@ public final class TextArea extends JTextArea {
         setOpaque(false);
         setEnabled(isEnabled);
         setSelectionColor(Colors.buttonSecondaryActive);
-        setColumns(56);
+        setColumns(48);
         setRows(2);
         applyStyle();
     }

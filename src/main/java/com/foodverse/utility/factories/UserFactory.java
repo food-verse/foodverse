@@ -3,9 +3,12 @@ package com.foodverse.utility.factories;
 import java.util.*;
 
 import com.foodverse.models.*;
+import com.foodverse.utility.common.ResourceProvider;
 import com.foodverse.utility.system.FileManager;
 
 public final class UserFactory {
+
+    private static final Random random = ResourceProvider.getRandom();
 
     private UserFactory() {}
 
@@ -25,6 +28,12 @@ public final class UserFactory {
                 "5th Floor",
                 "Apartment 502 - Thompson",
                 "Call upon arrival for delivery instructions.")));
+
+        // Creating user's phone number...
+        int min = 10000000;
+        int max = 99999999;
+        int randomNumber = random.nextInt(max - min + 1) + min;
+        var phoneNumber = "+30 69" + randomNumber;
 
         // Creating user's recovery answers...
         var recoveryAnswers = List.of(
@@ -83,7 +92,7 @@ public final class UserFactory {
         var user = new User(
             "Emily Smith",
             addresses,
-            "+1 (555) 555-1234",
+            phoneNumber,
             "emilysmith123@gmail.com",
             credentials,
             favorites,

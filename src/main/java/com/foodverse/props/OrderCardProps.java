@@ -14,7 +14,8 @@ public record OrderCardProps(
     String name,
     UUID id,
     Map<String, Integer> items,
-    double price) implements Props {
+    double price
+) implements Props {
 
     public static OrderCardProps from(Order order) {
         Optional<Shop> foundShop = Database.getInstance().findShopByName(order.merchant());

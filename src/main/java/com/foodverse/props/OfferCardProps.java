@@ -10,7 +10,8 @@ import com.foodverse.widgets.media.AssetSize;
 public record OfferCardProps(
     String thumbnail,
     String name,
-    List<Offer> offers) implements Props {
+    List<Offer> offers
+) implements Props {
 
     public static OfferCardProps from(Shop shop) {
         return new OfferCardProps(

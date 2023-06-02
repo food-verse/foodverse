@@ -75,6 +75,7 @@ public final class OnboardingPage extends Page {
                 .build());
 
         // Creating button widgets...
+        // TODO: REVERT
         var infoButton = new PillButton(
             "How it works",
             ButtonSize.M,

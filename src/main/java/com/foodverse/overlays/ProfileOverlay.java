@@ -3,17 +3,22 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.Optional;
-import javax.swing.JPanel;
 
+import com.foodverse.models.Address;
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
+import com.foodverse.utility.ui.Divider;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
-import com.foodverse.widgets.button.RectButton;
+import com.foodverse.widgets.button.PillButton;
+import com.foodverse.widgets.layout.Column;
+import com.foodverse.widgets.layout.ScrollView;
 import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.modal.Dialog;
 import com.foodverse.widgets.text.Heading;
@@ -26,11 +31,15 @@ public class ProfileOverlay extends Overlay {
 
     private User user;
 
-    private final Component component;
+    // user's current address
+    private Address currAdd = new Address("el vel", "10", "3", "tsaridis", "-");
 
     public ProfileOverlay() {
+        super(800, 800);
+    }
 
-        super(400, 400);
+    @Override
+    public Component getRef() {
 
         // Getting the authenticated user...
         Optional<User> signedUser = db.getAuthenticatedUser();
@@ -42,62 +51,83 @@ public class ProfileOverlay extends Overlay {
         }
 
         // Creating the page panel
-        var panel = new JPanel();
-        var text = new Heading("Profile", HeadingSize.L);
+        var panel = new Column();
+
+        // Creating overlays heading widget
+        var text = new Heading("Settings", HeadingSize.L);
+        panel.addWidget(text, new EdgeInsets.Builder()
+                .top(16)
+                .build(),
+            Align.CENTER);
+        
 
         // Buttons that lead to the various settings we can use
-        var openProfilePage = new RectButton(
-            "Profile Info ->",
-            ButtonSize.S,
+        var openProfilePage = new PillButton(
+            "Profile Info",
+            ButtonSize.L,
             ButtonType.SECONDARY,
             e -> {
-                Router.openOverlay(new ProfileInfoOverlay(user, db));
+                Router.openOverlay(new ProfileInfoOverlay(currAdd));
             });
-        var openAddressesPage = new RectButton(
-            "Addresses ->",
-            ButtonSize.S,
-            ButtonType.SECONDARY,
-            e -> {
-                Router.openOverlay(new AddressesOverlay());
-            });
-        var openFavoritesPage = new RectButton(
-            "Favorites ->",
-            ButtonSize.S,
-            ButtonType.SECONDARY,
-            e -> {
-                Router.openOverlay(new FavoritesOverlay());
-            });
-        var openHistoryPage = new RectButton(
-            "History ->",
-            ButtonSize.S,
+        panel.addWidget(openProfilePage, new EdgeInsets.Builder()
+             .symmetric(14, 40)
+             .build(),
+            Align.CENTER);
+
+        var openHistoryPage = new PillButton(
+            "History",
+            ButtonSize.L,
             ButtonType.SECONDARY,
             e -> {
                 Router.openOverlay(new HistoryOverlay());
             });
+        panel.addWidget(openHistoryPage, new EdgeInsets.Builder()
+            .symmetric(14, 40)
+            .build(),
+           Align.CENTER);
+
+
+        var openAddressesPage = new PillButton(
+            "Addresses",
+            ButtonSize.L,
+            ButtonType.SECONDARY,
+            e -> {
+                Router.openOverlay(new AddressesOverlay());
+            });
+        panel.addWidget(openAddressesPage, new EdgeInsets.Builder()
+            .symmetric(14, 40)
+            .build(),
+          Align.CENTER);
+
+        var openFavoritesPage = new PillButton(
+            "Favorites",
+            ButtonSize.L,
+            ButtonType.SECONDARY,
+            e -> {
+                Router.openOverlay(new FavoritesOverlay());
+            });
+        panel.addWidget(openFavoritesPage, new EdgeInsets.Builder()
+            .symmetric(14, 40)
+            .build(),
+           Align.CENTER);
+
+        panel.addComponent(new Divider());
 
         // Signing out...
-        var signOutButton = new RectButton(
-            "Sign Out ->",
-            ButtonSize.S,
+        var signOutButton = new PillButton(
+            "Sign Out",
+            ButtonSize.L,
             ButtonType.PRIMARY,
             e -> {
                 signOutAction(e);
             });
+        panel.addWidget(signOutButton, new EdgeInsets.Builder()
+            .symmetric(14, 40)
+            .build(),
+           Align.CENTER);
+        
+        return new ScrollView(panel.getRef()).getRef();
 
-        // adding all the buttons to the panel
-        panel.add(text.getRef());
-        panel.add(openProfilePage.getRef());
-        panel.add(openAddressesPage.getRef());
-        panel.add(openFavoritesPage.getRef());
-        panel.add(openHistoryPage.getRef());
-        panel.add(signOutButton.getRef());
-        panel.setOpaque(false);
-        component = panel;
-    }
-
-    @Override
-    public Component getRef() {
-        return component;
     }
 
     private void signOutAction(ActionEvent e) {

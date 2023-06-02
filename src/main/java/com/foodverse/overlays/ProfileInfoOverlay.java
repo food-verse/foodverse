@@ -114,12 +114,14 @@ public final class ProfileInfoOverlay extends Overlay {
                         UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_DESCRIPTION));
                 } else {
                     // creating a new user with the updated data
-                    User newUser = user.withName(nameField.getText())
+                    User newUser = user
+                        .withName(nameField.getText())
                         .withEmail(emailField.getText())
                         .withPhone(phoneNumberField.getText());
 
                     // updating the user in the database
                     db.updateUser(newUser);
+                    Router.closeOverlay();
                 }
             });
         panel.addWidget(saveButton, new EdgeInsets.Builder()

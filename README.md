@@ -20,6 +20,14 @@ The overlays of the application live here. Overlays are widgets that get their o
 
 The pages of the application live here. Pages are widgets that get their own id and can be later added to the router **without** an underlying frame.
 
+### [`/props`](https://github.com/food-verse/foodverse/tree/main/src/main/java/com/foodverse/props)
+
+This is where the properties of widgets lie. Properties are read-only objects required to build various widgets.
+
+### [`/state`](https://github.com/food-verse/foodverse/tree/main/src/main/java/com/foodverse/state)
+
+This is where the global state of the application is stored.
+
 ### [`/utility`](https://github.com/food-verse/foodverse/tree/main/src/main/java/com/foodverse/utility)
 
 Utilities folder includes many helper classes for navigation, input validation, asset loading, file manipulation and database handling.

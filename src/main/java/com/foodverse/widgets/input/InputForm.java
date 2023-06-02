@@ -1,7 +1,7 @@
 package com.foodverse.widgets.input;
 
 import java.awt.Component;
-import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
@@ -17,11 +17,11 @@ public final class InputForm extends Widget {
 
     private final Column formWidget = new Column();
 
-    public InputForm(String label, JTextField textField) {
+    public InputForm(String label, JTextComponent textField) {
         this(label, "", textField);
     }
 
-    public InputForm(String label, String caption, JTextField textField) {
+    public InputForm(String label, String caption, JTextComponent textField) {
 
         // Creating text widgets...
         var labelText = new Label(label, LabelSize.S);

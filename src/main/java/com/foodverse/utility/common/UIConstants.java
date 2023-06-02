@@ -4,6 +4,7 @@ public final class UIConstants {
 
     private UIConstants() {}
 
+    // Onboarding
     public static final String ONBOARDING_PROMO_TITLE =
         "<html>Don't feel like cooking?<br>"
             + "No problem*</html>";
@@ -13,6 +14,7 @@ public final class UIConstants {
             + "want.</html>";
     public static final String ONBOARDING_PROMO_NOTE = "*We neither, but don’t tell anyone";
 
+    // Info
     public static final String INFO_TITLE =
         "<html>Order delivery online in 3<br>" +
             "simple steps</html>";
@@ -32,14 +34,17 @@ public final class UIConstants {
             "ordering experience - and there are no extra charges to<br>" +
             "worry about!</html>";
 
+    // Sign Up
     public static final String REGISTRATION_PROMO_TITLE = "Create a new account";
     public static final String REGISTRATION_PROMO_MESSAGE =
         "<html>Sign up now and start enjoying delicious meals from your<br>" +
             "favorite restaurants.</html>";
+    public static final String REGISTRATION_PHONE_FIELD_HINT = "<html>Please enter a Greek phone number";
     public static final String REGISTRATION_PASSWORD_FIELD_HINT =
         "<html>Use 8 or more characters with a mix of letters,<br>" +
             "numbers & symbols</html>";
 
+    // Order
     public static final String ORDER_SUCCESSFUL_TITLE = "Order Submitted";
     public static final String ORDER_SUCCESSFUL_MESSAGE =
         "<html>Order placed successfully! Thank you for your<br>" +
@@ -51,8 +56,10 @@ public final class UIConstants {
             "for their hard work and dedication? Even a small amount can go a long way in making<br>"
             +
             "their day.</html>";
-    public static final String ORDER_COMMENTS_CAPTION = "Please use this field to let us know about any specific dietary requirements.";
+    public static final String ORDER_COMMENTS_CAPTION =
+        "Please use this field to let us know about any specific dietary requirements.";
 
+    // Sign In
     public static final String INVALID_CREDENTIALS_TITLE = "Invalid Credentials";
     public static final String INVALID_CREDENTIALS_DESCRIPTION =
         "<html>Sorry, we were unable to verify your login<br>"

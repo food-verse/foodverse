@@ -1,8 +1,7 @@
 package com.foodverse.widgets.layout;
 
 import java.awt.Component;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.*;
 
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.ui.Colors;
@@ -18,6 +17,9 @@ public final class ScrollView extends Widget {
         component.getViewport().setOpaque(false);
         component.setBackground(Colors.white);
         component.setBorder(null);
+        JScrollBar scrollBar = component.getVerticalScrollBar();
+        scrollBar.setUnitIncrement(30);
+        scrollBar.setBlockIncrement(120);
     }
 
     @Override

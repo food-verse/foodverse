@@ -106,8 +106,8 @@ public final class ProfileInfoOverlay extends Overlay {
             ButtonSize.S,
             ButtonType.PRIMARY,
             e -> {
-                boolean isValid = validator.isNameValid(nameField.getText()) && validator.isAddressValid(addressField.getText())
-                && validator.isPhoneValid(phoneNumberField.getText()) && validator.isEmailValid(emailField.getText());
+                boolean isValid = validator.isNameValid(nameField.getText() && validator.isPhoneValid(phoneNumberField.getText()) 
+                && validator.isEmailValid(emailField.getText());
                 if (!isValid){
                     Router.openOverlay(new Alert(
                         UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE,

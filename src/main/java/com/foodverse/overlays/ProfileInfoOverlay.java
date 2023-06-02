@@ -106,7 +106,7 @@ public final class ProfileInfoOverlay extends Overlay {
             ButtonSize.S,
             ButtonType.PRIMARY,
             e -> {
-                boolean isValid = validator.isNameValid(nameField.getText() && validator.isPhoneValid(phoneNumberField.getText()) 
+                boolean isValid = validator.isNameValid(nameField.getText()) && validator.isPhoneValid(phoneNumberField.getText())
                 && validator.isEmailValid(emailField.getText());
                 if (!isValid){
                     Router.openOverlay(new Alert(

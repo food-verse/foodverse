@@ -99,6 +99,7 @@ public final class OnboardingPage extends Page {
         // Creating main panel...
         panel = new JPanel();
         panel.setOpaque(false);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Row with the brand's logo and the action buttons
         // Creating parent panel for the images...
@@ -108,7 +109,7 @@ public final class OnboardingPage extends Page {
 
         var buttonRow = new Row();
         buttonRow.addWidget(infoButton, new EdgeInsets.Builder()
-                .left(600)
+                .left(584)
                 .right(16)
                 .build(),
             Align.LAST_LINE_END);
@@ -153,7 +154,7 @@ public final class OnboardingPage extends Page {
         // Add the text widgets and the onboarding image to the content row
         var content = new Row();
         content.addWidget(textWidgets, new EdgeInsets.Builder()
-            .right(440)
+            .right(432)
             .build());
         content.addWidget(onboardingImage);
 

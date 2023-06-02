@@ -33,9 +33,6 @@ public final class ProfileInfoOverlay extends Overlay {
     // Getting a reference to the input validator...
     private final InputValidation validator = InputValidation.getInstance();
 
-    //User's current address
-    private Address address;
-
     public ProfileInfoOverlay() {
         super(400, 400);
     }

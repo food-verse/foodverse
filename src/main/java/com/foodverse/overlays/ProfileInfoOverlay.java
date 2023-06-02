@@ -3,7 +3,6 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.util.Optional;
 
-import com.foodverse.models.Address;
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
@@ -12,16 +11,16 @@ import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
+import com.foodverse.utility.ui.Button.ButtonSize;
+import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.utility.ui.Divider;
+import com.foodverse.utility.ui.TextField;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ScrollView;
 import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
-import com.foodverse.utility.ui.Divider;
-import com.foodverse.utility.ui.TextField;
-import com.foodverse.utility.ui.Button.ButtonSize;
-import com.foodverse.utility.ui.Button.ButtonType;
 
 public final class ProfileInfoOverlay extends Overlay {
 
@@ -55,11 +54,11 @@ public final class ProfileInfoOverlay extends Overlay {
         // creating overlay's heading widget
         var text = new Heading("Profile", HeadingSize.L);
         panel.addWidget(text, new EdgeInsets.Builder()
-            .top(16)
-            .left(8)
-            .build(),
-          Align.FIRST_LINE_START);
-        
+                .top(16)
+                .left(8)
+                .build(),
+            Align.FIRST_LINE_START);
+
         // setting up fields to display the user's profile data
 
         // setting up view's name widget
@@ -68,9 +67,9 @@ public final class ProfileInfoOverlay extends Overlay {
         var nameField = new TextField();
         nameField.setText(user.name());
         nameWidget.addWidget(nameText, new EdgeInsets.Builder()
-                 .left(8)
-                 .build(),
-                 Align.LINE_START);
+                .left(8)
+                .build(),
+            Align.LINE_START);
         nameWidget.addComponent(nameField, Align.CENTER);
         panel.addWidget(nameWidget, Align.LINE_START);
 
@@ -80,9 +79,9 @@ public final class ProfileInfoOverlay extends Overlay {
         var phoneNumberField = new TextField();
         phoneNumberField.setText(user.phone());
         phoneNumberWidget.addWidget(phoneNumberText, new EdgeInsets.Builder()
-                 .left(8)
-                 .build(),
-                 Align.LINE_START);
+                .left(8)
+                .build(),
+            Align.LINE_START);
         phoneNumberWidget.addComponent(phoneNumberField, Align.CENTER);
         panel.addWidget(phoneNumberWidget, Align.LINE_START);
 
@@ -92,12 +91,12 @@ public final class ProfileInfoOverlay extends Overlay {
         var emailField = new TextField();
         emailField.setText(user.email());
         emailWidget.addWidget(emailText, new EdgeInsets.Builder()
-                 .left(8)
-                 .build(),
-                 Align.LINE_START);
+                .left(8)
+                .build(),
+            Align.LINE_START);
         emailWidget.addComponent(emailField, Align.CENTER);
         panel.addWidget(emailWidget, Align.LINE_START);
-       
+
         panel.addComponent(new Divider());
 
         // save updated data button
@@ -106,27 +105,28 @@ public final class ProfileInfoOverlay extends Overlay {
             ButtonSize.S,
             ButtonType.PRIMARY,
             e -> {
-                boolean isValid = validator.isNameValid(nameField.getText()) && validator.isPhoneValid(phoneNumberField.getText())
-                && validator.isEmailValid(emailField.getText());
-                if (!isValid){
+                boolean isValid = validator.isNameValid(nameField.getText())
+                    && validator.isPhoneValid(phoneNumberField.getText())
+                    && validator.isEmailValid(emailField.getText());
+                if (!isValid) {
                     Router.openOverlay(new Alert(
                         UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE,
                         UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_DESCRIPTION));
                 } else {
                     // creating a new user with the updated data
                     User newUser = user.withName(nameField.getText())
-                                       .withEmail(emailField.getText())
-                                       .withPhone(phoneNumberField.getText());
+                        .withEmail(emailField.getText())
+                        .withPhone(phoneNumberField.getText());
 
                     // updating the user in the database
                     db.updateUser(newUser);
                 }
             });
-         panel.addWidget(saveButton, new EdgeInsets.Builder()
-            .symmetric(14, 80)
-            .build(),
-           Align.LINE_START);
+        panel.addWidget(saveButton, new EdgeInsets.Builder()
+                .symmetric(14, 80)
+                .build(),
+            Align.LINE_START);
 
         return new ScrollView(panel.getRef()).getRef();
-    }    
-} 
+    }
+}

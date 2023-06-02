@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.Optional;
 
-import com.foodverse.models.Address;
 import com.foodverse.models.User;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.layout.Align;
@@ -13,9 +12,9 @@ import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Pages;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
-import com.foodverse.utility.ui.Divider;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
+import com.foodverse.utility.ui.Divider;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ScrollView;
@@ -32,7 +31,7 @@ public class ProfileOverlay extends Overlay {
     private User user;
 
     public ProfileOverlay() {
-        super(800, 800);
+        super(800, 540);
     }
 
     @Override
@@ -56,7 +55,7 @@ public class ProfileOverlay extends Overlay {
                 .top(16)
                 .build(),
             Align.CENTER);
-        
+
 
         // Buttons that lead to the various settings we can use
         var openProfilePage = new PillButton(
@@ -67,8 +66,8 @@ public class ProfileOverlay extends Overlay {
                 Router.openOverlay(new ProfileInfoOverlay());
             });
         panel.addWidget(openProfilePage, new EdgeInsets.Builder()
-             .symmetric(14, 40)
-             .build(),
+                .symmetric(14, 40)
+                .build(),
             Align.CENTER);
 
         var openHistoryPage = new PillButton(
@@ -79,9 +78,9 @@ public class ProfileOverlay extends Overlay {
                 Router.openOverlay(new HistoryOverlay());
             });
         panel.addWidget(openHistoryPage, new EdgeInsets.Builder()
-            .symmetric(14, 40)
-            .build(),
-           Align.CENTER);
+                .symmetric(14, 40)
+                .build(),
+            Align.CENTER);
 
 
         var openAddressesPage = new PillButton(
@@ -92,9 +91,9 @@ public class ProfileOverlay extends Overlay {
                 Router.openOverlay(new AddressesOverlay());
             });
         panel.addWidget(openAddressesPage, new EdgeInsets.Builder()
-            .symmetric(14, 40)
-            .build(),
-          Align.CENTER);
+                .symmetric(14, 40)
+                .build(),
+            Align.CENTER);
 
         var openFavoritesPage = new PillButton(
             "Favorites",
@@ -104,9 +103,9 @@ public class ProfileOverlay extends Overlay {
                 Router.openOverlay(new FavoritesOverlay());
             });
         panel.addWidget(openFavoritesPage, new EdgeInsets.Builder()
-            .symmetric(14, 40)
-            .build(),
-           Align.CENTER);
+                .symmetric(14, 40)
+                .build(),
+            Align.CENTER);
 
         panel.addComponent(new Divider());
 
@@ -119,10 +118,10 @@ public class ProfileOverlay extends Overlay {
                 signOutAction(e);
             });
         panel.addWidget(signOutButton, new EdgeInsets.Builder()
-            .symmetric(14, 40)
-            .build(),
-           Align.CENTER);
-        
+                .symmetric(14, 40)
+                .build(),
+            Align.CENTER);
+
         return new ScrollView(panel.getRef()).getRef();
 
     }

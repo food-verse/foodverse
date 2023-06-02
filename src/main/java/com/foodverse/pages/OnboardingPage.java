@@ -25,7 +25,6 @@ import com.foodverse.utility.ui.ImageStyle;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.Row;
-import com.foodverse.widgets.layout.ScrollView;
 import com.foodverse.widgets.media.IconAsset;
 import com.foodverse.widgets.media.Image;
 import com.foodverse.widgets.media.VectorImage;
@@ -70,8 +69,8 @@ public final class OnboardingPage extends Page {
         var onboardingImage = new Image(
             onboardingImages.get(random.nextInt(onboardingImages.size())),
             new ImageStyle.Builder()
-                .width(600)
-                .height(828)
+                .width(400)
+                .height(560)
                 .build());
 
         // Creating button widgets...
@@ -94,7 +93,6 @@ public final class OnboardingPage extends Page {
         // Creating main panel...
         panel = new JPanel();
         panel.setOpaque(false);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Row with the brand's logo and the action buttons
         // Creating parent panel for the images...
@@ -142,14 +140,14 @@ public final class OnboardingPage extends Page {
         var textWidgets = new Column();
         textWidgets.addWidget(promoText, new EdgeInsets.Builder()
             .top(164)
-            .bottom(440)
+            .bottom(172)
             .build());
         textWidgets.addWidget(noteWidget, new EdgeInsets.Builder().build());
 
         // Add the text widgets and the onboarding image to the content row
         var content = new Row();
         content.addWidget(textWidgets, new EdgeInsets.Builder()
-            .right(320)
+            .right(440)
             .build());
         content.addWidget(onboardingImage);
 
@@ -165,8 +163,7 @@ public final class OnboardingPage extends Page {
 
     @Override
     public Component getRef() {
-        // Wrap the main panel in a scroll view
-        return new ScrollView(panel).getRef();
+        return panel;
     }
 
 }

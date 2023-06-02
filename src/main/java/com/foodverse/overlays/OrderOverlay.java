@@ -1,11 +1,20 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.Date;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.foodverse.models.*;
+import com.foodverse.models.Offer;
+import com.foodverse.models.Order;
+import com.foodverse.models.PaymentMethod;
+import com.foodverse.models.Purchasable;
+import com.foodverse.models.Shop;
+import com.foodverse.models.User;
 import com.foodverse.state.Store;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.core.State;
@@ -21,7 +30,7 @@ import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.utility.ui.ColoredBox;
 import com.foodverse.utility.ui.Colors;
 import com.foodverse.utility.ui.Divider;
-import com.foodverse.utility.ui.TextField;
+import com.foodverse.utility.ui.TextArea;
 import com.foodverse.views.AddressView;
 import com.foodverse.views.EmptyView;
 import com.foodverse.widgets.button.PillButton;
@@ -259,8 +268,7 @@ public final class OrderOverlay extends Overlay {
 
         // Creating the comments view...
         var commentsView = new Column();
-        var commentsField = new TextField();
-        commentsField.setColumns(56);
+        var commentsField = new TextArea();
         if (comments != null) {
             commentsField.setText(comments);
         }

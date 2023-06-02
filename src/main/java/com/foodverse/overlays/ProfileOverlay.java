@@ -31,9 +31,6 @@ public class ProfileOverlay extends Overlay {
 
     private User user;
 
-    // user's current address
-    private Address currAdd = new Address("el vel", "10", "3", "tsaridis", "-");
-
     public ProfileOverlay() {
         super(800, 800);
     }
@@ -67,7 +64,7 @@ public class ProfileOverlay extends Overlay {
             ButtonSize.L,
             ButtonType.SECONDARY,
             e -> {
-                Router.openOverlay(new ProfileInfoOverlay(currAdd));
+                Router.openOverlay(new ProfileInfoOverlay());
             });
         panel.addWidget(openProfilePage, new EdgeInsets.Builder()
              .symmetric(14, 40)

@@ -1,116 +1,135 @@
 package com.foodverse.overlays;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.util.Optional;
 
+import com.foodverse.models.Address;
 import com.foodverse.models.User;
+import com.foodverse.utility.common.UIConstants;
+import com.foodverse.utility.input.InputValidation;
+import com.foodverse.utility.layout.Align;
+import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
-import com.foodverse.widgets.button.RectButton;
+import com.foodverse.widgets.button.PillButton;
+import com.foodverse.widgets.layout.Column;
+import com.foodverse.widgets.layout.ScrollView;
+import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
+import com.foodverse.utility.ui.Divider;
 import com.foodverse.utility.ui.TextField;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 
 public final class ProfileInfoOverlay extends Overlay {
 
-    private final Component component;
+    // Getting a reference to the database...
+    private final Database db = Database.getInstance();
 
-    public ProfileInfoOverlay(User user, Database db) {
+    private User user;
 
+    // Getting a reference to the input validator...
+    private final InputValidation validator = InputValidation.getInstance();
+
+    //User's current address
+    private Address address;
+
+    public ProfileInfoOverlay() {
         super(400, 400);
+    }
+
+    @Override
+    public Component getRef() {
+
+        // Getting the authenticated user...
+        Optional<User> signedUser = db.getAuthenticatedUser();
+        if (signedUser.isPresent()) {
+            user = signedUser.get();
+        } else {
+            Router.openOverlay(new Alert("Error", "Authenticated User is not found"));
+            Router.closeOverlay();
+        }
 
         // creating the page panel
-        var panel = new JPanel();
+        var panel = new Column();
+
+        // creating overlay's heading widget
         var text = new Heading("Profile", HeadingSize.L);
-
+        panel.addWidget(text, new EdgeInsets.Builder()
+            .top(16)
+            .left(8)
+            .build(),
+          Align.FIRST_LINE_START);
+        
         // setting up fields to display the user's profile data
-        var emailText = new Heading("Email", HeadingSize.M);
-        var emailField = new TextField();
-        emailField.setText(user.email());
 
-        var nameText = new Heading("Last-Name", HeadingSize.M);
+        // setting up view's name widget
+        var nameWidget = new Column();
+        var nameText = new Heading("Last-Name", HeadingSize.XS);
         var nameField = new TextField();
         nameField.setText(user.name());
+        nameWidget.addWidget(nameText, new EdgeInsets.Builder()
+                 .left(8)
+                 .build(),
+                 Align.LINE_START);
+        nameWidget.addComponent(nameField, Align.CENTER);
+        panel.addWidget(nameWidget, Align.LINE_START);
 
-        var phoneNumberText = new Heading("Phone Number", HeadingSize.M);
+        // setting up view's phone widget
+        var phoneNumberWidget = new Column();
+        var phoneNumberText = new Heading("Phone Number", HeadingSize.XS);
         var phoneNumberField = new TextField();
         phoneNumberField.setText(user.phone());
+        phoneNumberWidget.addWidget(phoneNumberText, new EdgeInsets.Builder()
+                 .left(8)
+                 .build(),
+                 Align.LINE_START);
+        phoneNumberWidget.addComponent(phoneNumberField, Align.CENTER);
+        panel.addWidget(phoneNumberWidget, Align.LINE_START);
 
-        // confirm changes to the profile data button
-        var confirmChangesButton = new RectButton(
-            "Confirm Changes",
+        // setting up view's email widget
+        var emailWidget = new Column();
+        var emailText = new Heading("Email", HeadingSize.XS);
+        var emailField = new TextField();
+        emailField.setText(user.email());
+        emailWidget.addWidget(emailText, new EdgeInsets.Builder()
+                 .left(8)
+                 .build(),
+                 Align.LINE_START);
+        emailWidget.addComponent(emailField, Align.CENTER);
+        panel.addWidget(emailWidget, Align.LINE_START);
+       
+        panel.addComponent(new Divider());
+
+        // save updated data button
+        var saveButton = new PillButton(
+            "Save",
             ButtonSize.S,
             ButtonType.PRIMARY,
             e -> {
-                // check if the data given by the user are valid. If yes it updates the user, if
-                // not it shows an error message
-                if ((!emailField.getText().contains("@"))
-                    || (!emailField.getText().endsWith(".com"))) {
-                    JOptionPane.showMessageDialog(null, "Email address is not valid", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                } else if (!isValidNumber(phoneNumberField.getText())) {
-                    JOptionPane.showMessageDialog(null, "Phone number is not valid", "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                boolean isValid = validator.isNameValid(nameField.getText()) && validator.isAddressValid(addressField.getText())
+                && validator.isPhoneValid(phoneNumberField.getText()) && validator.isEmailValid(emailField.getText());
+                if (!isValid){
+                    Router.openOverlay(new Alert(
+                        UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE,
+                        UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_DESCRIPTION));
                 } else {
                     // creating a new user with the updated data
-                    User updatedUser = user.withEmail(emailField.getText())
-                        .withName(nameField.getText())
-                        .withPhone(phoneNumberField.getText());
+                    User newUser = user.withName(nameField.getText())
+                                       .withEmail(emailField.getText())
+                                       .withPhone(phoneNumberField.getText());
 
                     // updating the user in the database
-                    db.updateUser(updatedUser);
+                    db.updateUser(newUser);
                 }
             });
+         panel.addWidget(saveButton, new EdgeInsets.Builder()
+            .symmetric(14, 80)
+            .build(),
+           Align.LINE_START);
 
-        // return to settings button
-        var openSettingsPage = new RectButton(
-            "<- Back",
-            ButtonSize.S,
-            ButtonType.PRIMARY,
-            e -> {
-                Router.closeOverlay();
-            });
-
-
-        // adding the components to the panel
-        panel.add(text.getRef());
-        panel.add(emailText.getRef());
-        panel.add(emailField);
-        panel.add(nameText.getRef());
-        panel.add(nameField);
-        panel.add(phoneNumberText.getRef());
-        panel.add(phoneNumberField);
-        panel.add(confirmChangesButton.getRef());
-        panel.add(openSettingsPage.getRef());
-        panel.setPreferredSize(new Dimension(1200, 400));
-        panel.setOpaque(false);
-        component = panel;
-    }
-
-    public Component getRef() {
-        return component;
-    }
-
-    // method to check if a number submitted by a user is valid
-    public boolean isValidNumber(String phoneNumber) {
-        // Regular expression pattern for a valid US phone number
-        String pattern = "^(\\+1)?[\\-\\s]?(\\(?\\d{3}\\)?[\\-\\s]?){2}\\d{4}$";
-
-        // Compile the pattern into a regex object
-        Pattern regex = Pattern.compile(pattern);
-
-        // Match the regex against the phone number
-        Matcher matcher = regex.matcher(phoneNumber);
-
-        // Return whether the phone number matches the pattern
-        return matcher.matches();
-    }
-
-}
+        return new ScrollView(panel.getRef()).getRef();
+    }    
+} 

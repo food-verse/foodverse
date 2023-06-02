@@ -4,7 +4,8 @@ An online delivery application built with Java Swing.
 
 ## 📸 Screenshots
 
-![Homepage of Foodiverse](assets/docs/home.webp)
+![Onboarding page of Foodiverse](assets/docs/onboarding.webp)
+![Home page of Foodiverse](assets/docs/home.webp)
 
 ## 🏛️ Architecture
 

@@ -37,15 +37,19 @@ import com.foodverse.widgets.text.Heading.HeadingSize;
 public final class OnboardingPage extends Page {
 
     private final JPanel panel;
-
+    private final List<String> onboardingImages;
+    private final Column textWidgets;
+    private boolean didRender = false;
     private static final Random random = ResourceProvider.getRandom();
+
 
     public OnboardingPage() {
 
-        List<String> onboardingImages = List.of(
+        onboardingImages = List.of(
             "corn_meat_quesadillas_sauce_on_board.jpg",
             "mexican_fajita_nachos_sombrero_pan.jpg",
-            "tasty_fajita_with_veggies_beef.jpg");
+            "tasty_fajita_with_veggies_beef.jpg"
+        );
 
         // Creating text widgets...
         var promoTitleText = new Display(UIConstants.ONBOARDING_PROMO_TITLE, DisplaySize.XS);
@@ -67,12 +71,6 @@ public final class OnboardingPage extends Page {
             .width(32)
             .height(32)
             .build());
-        var onboardingImage = new Image(
-            onboardingImages.get(random.nextInt(onboardingImages.size())),
-            new ImageStyle.Builder()
-                .width(400)
-                .height(560)
-                .build());
 
         // Creating button widgets...
         // TODO: REVERT
@@ -144,12 +142,33 @@ public final class OnboardingPage extends Page {
         noteWidget.addWidget(promoNoteText, Align.FIRST_LINE_START);
         noteWidget.addWidget(hushFaceImage, Align.FIRST_LINE_END);
 
-        var textWidgets = new Column();
+        textWidgets = new Column();
         textWidgets.addWidget(promoText, new EdgeInsets.Builder()
             .top(164)
             .bottom(172)
             .build());
         textWidgets.addWidget(noteWidget, new EdgeInsets.Builder().build());
+
+    }
+
+    @Override
+    public Component getRef() {
+
+        // Creating the onboarding image widget
+        var onboardingImage = new Image(
+            onboardingImages.get(random.nextInt(onboardingImages.size())),
+            new ImageStyle.Builder()
+                .width(400)
+                .height(560)
+                .build());
+
+        // Remove the last component (content) if the page has already rendered once
+        if (!didRender) {
+            didRender = true;
+        } else {
+            int lastComponentIndex = panel.getComponentCount() - 1;
+            panel.remove(lastComponentIndex);
+        }
 
         // Add the text widgets and the onboarding image to the content row
         var content = new Row();
@@ -166,11 +185,8 @@ public final class OnboardingPage extends Page {
             .build());
         panel.add(paddedContent.getRef());
 
-    }
-
-    @Override
-    public Component getRef() {
         return panel;
+
     }
 
 }

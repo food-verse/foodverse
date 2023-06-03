@@ -13,10 +13,10 @@ import com.foodverse.models.User;
 
 public class Database {
 
-    private final Config configuration;
     private User authenticatedUser;
-    protected List<User> users;
-    protected List<Shop> shops;
+    private final Config configuration;
+    protected final List<User> users;
+    protected final List<Shop> shops;
 
     protected Database() {
         configuration = FileManager.loadConfig();

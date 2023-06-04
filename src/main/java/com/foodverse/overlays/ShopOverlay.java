@@ -187,7 +187,7 @@ public final class ShopOverlay extends Overlay {
         panel.addWidget(openMapsButton, new EdgeInsets.Builder()
                 .symmetric(14, 40)
                 .build(),
-            Align.LINE_END);
+            Align.CENTER_RIGHT);
 
         // Add the address to the main panel
         var addressView = new AddressView(shop.address());
@@ -227,7 +227,7 @@ public final class ShopOverlay extends Overlay {
                         .top(14)
                         .right(40)
                         .build(),
-                    Align.LINE_END);
+                    Align.CENTER_RIGHT);
 
                 // Add the item to the main panel
                 var itemWidget = new Column();
@@ -280,7 +280,7 @@ public final class ShopOverlay extends Overlay {
                     .top(14)
                     .right(40)
                     .build(),
-                Align.LINE_END);
+                Align.CENTER_RIGHT);
 
             // Add the item to the main panel
             var itemWidget = new Column();

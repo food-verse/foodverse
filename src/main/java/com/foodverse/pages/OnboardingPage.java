@@ -110,12 +110,12 @@ public final class OnboardingPage extends Page {
                 .left(584)
                 .right(16)
                 .build(),
-            Align.LAST_LINE_END);
+            Align.BOTTOM_RIGHT);
         buttonRow.addWidget(signInButton, new EdgeInsets.Builder()
                 .right(16)
                 .build(),
-            Align.LAST_LINE_END);
-        buttonRow.addWidget(signUpButton, Align.LAST_LINE_END);
+            Align.BOTTOM_RIGHT);
+        buttonRow.addWidget(signUpButton, Align.BOTTOM_RIGHT);
 
         // Add images to the parent panel
         headingRow.add(brandImage.getRef());
@@ -135,12 +135,12 @@ public final class OnboardingPage extends Page {
         promoText.addWidget(promoTitleText, new EdgeInsets.Builder()
                 .bottom(16)
                 .build(),
-            Align.FIRST_LINE_START);
-        promoText.addWidget(promoMessageText, Align.LAST_LINE_END);
+            Align.TOP_LEFT);
+        promoText.addWidget(promoMessageText, Align.BOTTOM_RIGHT);
 
         var noteWidget = new Row();
-        noteWidget.addWidget(promoNoteText, Align.FIRST_LINE_START);
-        noteWidget.addWidget(hushFaceImage, Align.FIRST_LINE_END);
+        noteWidget.addWidget(promoNoteText, Align.TOP_LEFT);
+        noteWidget.addWidget(hushFaceImage, Align.TOP_RIGHT);
 
         textWidgets = new Column();
         textWidgets.addWidget(promoText, new EdgeInsets.Builder()

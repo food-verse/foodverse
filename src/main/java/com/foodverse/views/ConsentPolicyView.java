@@ -39,15 +39,15 @@ public final class ConsentPolicyView extends Widget {
 
         // Creating the row of text...
         var textRow = new Row();
-        textRow.addWidget(firstText, Align.FIRST_LINE_START);
-        textRow.addWidget(termsLink, Align.FIRST_LINE_START);
-        textRow.addWidget(secondText, Align.FIRST_LINE_START);
-        textRow.addWidget(policiesFirstLink, Align.FIRST_LINE_START);
+        textRow.addWidget(firstText, Align.TOP_LEFT);
+        textRow.addWidget(termsLink, Align.TOP_LEFT);
+        textRow.addWidget(secondText, Align.TOP_LEFT);
+        textRow.addWidget(policiesFirstLink, Align.TOP_LEFT);
 
         // Creating the column of text...
         var textColumn = new Column();
-        textColumn.addWidget(textRow, Align.FIRST_LINE_START);
-        textColumn.addWidget(policiesSecondLink, Align.FIRST_LINE_START);
+        textColumn.addWidget(textRow, Align.TOP_LEFT);
+        textColumn.addWidget(policiesSecondLink, Align.TOP_LEFT);
 
         component = textColumn.getRef();
     }

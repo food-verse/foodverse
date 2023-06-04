@@ -57,24 +57,24 @@ public class Dialog extends Overlay {
         content.addWidget(titleText, new EdgeInsets.Builder()
                 .bottom(16)
                 .build(),
-            Align.PAGE_START);
-        content.addWidget(descriptionText, Align.PAGE_END);
+            Align.TOP_CENTER);
+        content.addWidget(descriptionText, Align.BOTTOM_CENTER);
 
         // Creating the row of buttons...
         var actions = new Row();
         actions.addWidget(confirmButton, new EdgeInsets.Builder()
                 .right(8)
                 .build(),
-            Align.LAST_LINE_END);
-        actions.addWidget(cancelButton, Align.LAST_LINE_END);
+            Align.BOTTOM_RIGHT);
+        actions.addWidget(cancelButton, Align.BOTTOM_RIGHT);
 
         // Add the buttons row to the bottom of the alert...
         var paddedContent = new Column();
         paddedContent.addWidget(content, new EdgeInsets.Builder()
                 .bottom(24)
                 .build(),
-            Align.PAGE_START);
-        paddedContent.addWidget(actions, Align.PAGE_END);
+            Align.TOP_CENTER);
+        paddedContent.addWidget(actions, Align.BOTTOM_CENTER);
 
         // Add padding to the alert...
         var paddedWidget = new Column();

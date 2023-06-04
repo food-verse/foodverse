@@ -49,7 +49,7 @@ public final class OrderCard extends Widget {
         for (Map.Entry<String, Integer> entry : props.items().entrySet()) {
             var itemContent = String.format("• %d %s", entry.getValue(), entry.getKey());
             var itemText = new Label(itemContent, LabelSize.XS, Colors.gray600);
-            itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
+            itemListWidget.addWidget(itemText, Align.TOP_LEFT);
             widgetCount++;
             if (widgetCount == numberOfLines) {
                 break;
@@ -60,7 +60,7 @@ public final class OrderCard extends Widget {
         if (widgetCount < numberOfLines) {
             for (int i = widgetCount; i < numberOfLines; i++) {
                 var itemText = new Label(" ", LabelSize.XS, Colors.gray600);
-                itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
+                itemListWidget.addWidget(itemText, Align.TOP_LEFT);
             }
         }
 
@@ -69,23 +69,23 @@ public final class OrderCard extends Widget {
         mainContentWidget.addWidget(shopNameText, new EdgeInsets.Builder()
                 .bottom(8)
                 .build(),
-            Align.FIRST_LINE_START);
-        mainContentWidget.addWidget(itemListWidget, Align.LINE_START);
+            Align.TOP_LEFT);
+        mainContentWidget.addWidget(itemListWidget, Align.CENTER_LEFT);
         mainContentWidget.addWidget(priceText, new EdgeInsets.Builder()
                 .top(16)
                 .build(),
-            Align.LAST_LINE_START);
+            Align.BOTTOM_LEFT);
 
         // Adding the card's thumbnail widget to the main content...
         var imageCol = new Column();
-        imageCol.addWidget(thumbnailImage, Align.FIRST_LINE_START);
+        imageCol.addWidget(thumbnailImage, Align.TOP_LEFT);
         imageCol.addWidget(mainContentWidget, new EdgeInsets.Builder()
                 .left(16)
                 .top(8)
                 .right(12)
                 .bottom(16)
                 .build(),
-            Align.LAST_LINE_START);
+            Align.BOTTOM_LEFT);
 
         // Add border to card
         return new ColoredBox(imageCol, e -> {

@@ -62,50 +62,50 @@ public final class ShopCard extends Widget {
         ratingWidget.addWidget(starImage, new EdgeInsets.Builder()
                 .right(2)
                 .build(),
-            Align.LINE_START);
+            Align.CENTER_LEFT);
         ratingWidget.addWidget(ratingText, new EdgeInsets.Builder()
                 .right(4)
                 .build(),
             Align.CENTER);
         ratingWidget.addWidget(reviewsText, new EdgeInsets.Builder()
                 .build(),
-            Align.LINE_END);
+            Align.CENTER_RIGHT);
 
         // Creating card's heading widget...
         var headingWidget = new Row();
-        headingWidget.addWidget(shopNameText, Align.FIRST_LINE_START);
-        headingWidget.addWidget(ratingWidget, Align.LAST_LINE_END);
+        headingWidget.addWidget(shopNameText, Align.TOP_LEFT);
+        headingWidget.addWidget(ratingWidget, Align.BOTTOM_RIGHT);
 
         // Creating card's information widget...
         var infoWidget = new Column();
         infoWidget.addWidget(shopTypeText, new EdgeInsets.Builder()
                 .bottom(4)
                 .build(),
-            Align.FIRST_LINE_START);
-        infoWidget.addWidget(minOrderText, Align.LAST_LINE_START);
+            Align.TOP_LEFT);
+        infoWidget.addWidget(minOrderText, Align.BOTTOM_LEFT);
 
         // Creating card's main content widget...
         var mainContentWidget = new Column();
         mainContentWidget.addWidget(shopNameText, new EdgeInsets.Builder()
                 .bottom(8)
                 .build(),
-            Align.FIRST_LINE_START);
+            Align.TOP_LEFT);
         mainContentWidget.addWidget(ratingWidget, new EdgeInsets.Builder()
                 .bottom(8)
                 .build(),
-            Align.FIRST_LINE_START);
-        mainContentWidget.addWidget(infoWidget, Align.LAST_LINE_START);
+            Align.TOP_LEFT);
+        mainContentWidget.addWidget(infoWidget, Align.BOTTOM_LEFT);
 
         // Adding the card's thumbnail widget to the main content...
         var imageCol = new Column();
-        imageCol.addWidget(thumbnailImage, Align.FIRST_LINE_START);
+        imageCol.addWidget(thumbnailImage, Align.TOP_LEFT);
         imageCol.addWidget(mainContentWidget, new EdgeInsets.Builder()
                 .left(16)
                 .top(8)
                 .right(12)
                 .bottom(16)
                 .build(),
-            Align.LAST_LINE_START);
+            Align.BOTTOM_LEFT);
 
         // Add border to card
         return new ColoredBox(imageCol, e -> {

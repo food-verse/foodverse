@@ -57,7 +57,7 @@ public final class ProfileInfoOverlay extends Overlay {
                 .top(16)
                 .left(8)
                 .build(),
-            Align.FIRST_LINE_START);
+            Align.TOP_LEFT);
 
         // setting up fields to display the user's profile data
 
@@ -69,9 +69,9 @@ public final class ProfileInfoOverlay extends Overlay {
         nameWidget.addWidget(nameText, new EdgeInsets.Builder()
                 .left(8)
                 .build(),
-            Align.LINE_START);
+            Align.CENTER_LEFT);
         nameWidget.addComponent(nameField, Align.CENTER);
-        panel.addWidget(nameWidget, Align.LINE_START);
+        panel.addWidget(nameWidget, Align.CENTER_LEFT);
 
         // setting up view's phone widget
         var phoneNumberWidget = new Column();
@@ -81,9 +81,9 @@ public final class ProfileInfoOverlay extends Overlay {
         phoneNumberWidget.addWidget(phoneNumberText, new EdgeInsets.Builder()
                 .left(8)
                 .build(),
-            Align.LINE_START);
+            Align.CENTER_LEFT);
         phoneNumberWidget.addComponent(phoneNumberField, Align.CENTER);
-        panel.addWidget(phoneNumberWidget, Align.LINE_START);
+        panel.addWidget(phoneNumberWidget, Align.CENTER_LEFT);
 
         // setting up view's email widget
         var emailWidget = new Column();
@@ -93,9 +93,9 @@ public final class ProfileInfoOverlay extends Overlay {
         emailWidget.addWidget(emailText, new EdgeInsets.Builder()
                 .left(8)
                 .build(),
-            Align.LINE_START);
+            Align.CENTER_LEFT);
         emailWidget.addComponent(emailField, Align.CENTER);
-        panel.addWidget(emailWidget, Align.LINE_START);
+        panel.addWidget(emailWidget, Align.CENTER_LEFT);
 
         panel.addComponent(new Divider());
 
@@ -127,7 +127,7 @@ public final class ProfileInfoOverlay extends Overlay {
         panel.addWidget(saveButton, new EdgeInsets.Builder()
                 .symmetric(14, 80)
                 .build(),
-            Align.LINE_START);
+            Align.CENTER_LEFT);
 
         return new ScrollView(panel.getRef()).getRef();
     }

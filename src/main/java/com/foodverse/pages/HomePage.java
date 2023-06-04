@@ -70,7 +70,7 @@ public final class HomePage extends Page {
         paddedAvatar.addWidget(avatarImage, new EdgeInsets.Builder()
                 .top(8)
                 .build(),
-            Align.FIRST_LINE_END);
+            Align.TOP_RIGHT);
 
         // Add images to the parent panel
         headingRow.add(brandImage.getRef());

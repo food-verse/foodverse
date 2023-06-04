@@ -177,8 +177,8 @@ class UserDatabaseTest {
             "Abc123!",
             recoveryAnswers);
 
-        // Creating the user...
-        var user = new User(
+        // Returning the user...
+        return new User(
             "John Doe",
             List.of(
                 new Address(
@@ -186,27 +186,23 @@ class UserDatabaseTest {
                     "1A",
                     "2nd Floor",
                     "Doorbell A - Smith",
-                    "Please leave the package at the front porch."
-                ),
+                    "Please leave the package at the front porch."),
                 new Address(
                     "456 Elm Street",
                     "10B",
                     "3rd Floor",
                     "Apartment 305 - Johnson",
-                    "Ring the bell twice for delivery."
-                )
-            ),
+                    "Ring the bell twice for delivery.")),
             "+1 (555) 555-5678",
             "johndoe456@gmail.com",
             credentials,
             Set.of(),
             Map.of(),
-            Set.of());
-
-        return user;
+            Set.of()
+        );
     }
 
-    private class FlushableDatabase extends Database {
+    private static class FlushableDatabase extends Database {
 
         public void flushUsers() {
             users.clear();

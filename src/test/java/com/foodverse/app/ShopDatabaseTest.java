@@ -93,8 +93,8 @@ class ShopDatabaseTest {
             new Item("Fanta", 2.50f),
             new Item("Soda", 2.00f));
 
-        // Creating the burger shop...
-        var burgerShop = new Shop(
+        // Returning the burger shop...
+        return new Shop(
             "Burgerlicious",
             "7890 Cherry Lane, Westwood, CA 90290",
             "345-678-9012",
@@ -107,12 +107,11 @@ class ShopDatabaseTest {
             30,
             7.00f,
             List.of(),
-            burgerMenu);
-
-        return burgerShop;
+            burgerMenu
+        );
     }
 
-    private class FlushableDatabase extends Database {
+    private static class FlushableDatabase extends Database {
 
         public void flushShops() {
             shops.clear();

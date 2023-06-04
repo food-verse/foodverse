@@ -6,12 +6,12 @@ public final class UIConstants {
 
     // Onboarding
     public static final String ONBOARDING_PROMO_TITLE =
-        "<html>Don't feel like cooking?<br>"
-            + "No problem*</html>";
+        "<html>Don't feel like cooking?<br>" +
+            "No problem*</html>";
     public static final String ONBOARDING_PROMO_MESSAGE =
-        "<html>Browse through our vast selection of<br>"
-            + "restaurants and pay the way you<br>"
-            + "want.</html>";
+        "<html>Browse through our vast selection of<br>" +
+            "restaurants and pay the way you<br>" +
+            "want.</html>";
     public static final String ONBOARDING_PROMO_NOTE = "*We neither, but don’t tell anyone";
 
     // Info
@@ -39,10 +39,18 @@ public final class UIConstants {
     public static final String REGISTRATION_PROMO_MESSAGE =
         "<html>Sign up now and start enjoying delicious meals from your<br>" +
             "favorite restaurants.</html>";
-    public static final String REGISTRATION_PHONE_FIELD_HINT = "<html>Please enter a Greek phone number";
+    public static final String REGISTRATION_PHONE_FIELD_HINT =
+        "<html>Please enter a Greek phone number";
     public static final String REGISTRATION_PASSWORD_FIELD_HINT =
         "<html>Use 8 or more characters with a mix of letters,<br>" +
             "numbers & symbols</html>";
+    public static final String REGISTRATION_ADDRESS_TITLE = "Add a new address";
+    public static final String REGISTRATION_ADDRESS_MESSAGE =
+        "<html>Never worry about delivery to a new location again. Whether<br>" +
+            " it's your workplace, a friend's house, or a vacation rental,<br>" +
+            "we've got you covered.</html>";
+    public static final String REGISTRATION_COMMENTS_CAPTION =
+        "Please use this field to let us know about any specific delivery instructions.";
 
     // Order
     public static final String ORDER_SUCCESSFUL_TITLE = "Order Submitted";
@@ -51,10 +59,8 @@ public final class UIConstants {
             "order. We are now processing it and will notify<br>" +
             "you once it's ready for delivery.</html>";
     public static final String ORDER_DELIVERY_TIP_PROMO =
-        "<html>Did you know that tipping your delivery driver is a great way to show your appreciation<br>"
-            +
-            "for their hard work and dedication? Even a small amount can go a long way in making<br>"
-            +
+        "<html>Did you know that tipping your delivery driver is a great way to show your appreciation<br>" +
+            "for their hard work and dedication? Even a small amount can go a long way in making<br>" +
             "their day.</html>";
     public static final String ORDER_COMMENTS_CAPTION =
         "Please use this field to let us know about any specific dietary requirements.";
@@ -62,12 +68,12 @@ public final class UIConstants {
     // Sign In
     public static final String INVALID_CREDENTIALS_TITLE = "Invalid Credentials";
     public static final String INVALID_CREDENTIALS_DESCRIPTION =
-        "<html>Sorry, we were unable to verify your login<br>"
-            + "credentials. Please ensure that you have<br>"
-            + "entered your email address and password<br>"
-            + "correctly. If you are still having trouble, you<br>"
-            + "may reset your password or contact our<br>"
-            + "support team for further assistance.</html>";
+        "<html>Sorry, we were unable to verify your login<br>" +
+            "credentials. Please ensure that you have<br>" +
+            "entered your email address and password<br>" +
+            "correctly. If you are still having trouble, you<br>" +
+            "may reset your password or contact our<br>" +
+            "support team for further assistance.</html>";
 
     public static final String INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE = "Invalid Data Format";
     public static final String INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_DESCRIPTION =

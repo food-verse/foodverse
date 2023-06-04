@@ -31,8 +31,8 @@ public final class SectionView extends Widget {
         column.addWidget(titleText, new EdgeInsets.Builder()
                 .bottom(16)
                 .build(),
-            Align.FIRST_LINE_START);
-        column.addWidget(descriptionText, Align.FIRST_LINE_START);
+            Align.TOP_LEFT);
+        column.addWidget(descriptionText, Align.TOP_LEFT);
 
         component = column.getRef();
     }

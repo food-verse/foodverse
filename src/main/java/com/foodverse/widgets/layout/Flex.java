@@ -25,7 +25,7 @@ abstract class Flex extends Widget {
     public abstract void addComponent(Component widget, EdgeInsets edgeInsets, Align align);
 
     public void addComponent(Component widget, EdgeInsets edgeInsets) {
-        addComponent(widget, edgeInsets, Align.FIRST_LINE_START);
+        addComponent(widget, edgeInsets, Align.TOP_LEFT);
     }
 
     public void addComponent(Component widget, Align align) {
@@ -33,7 +33,7 @@ abstract class Flex extends Widget {
     }
 
     public void addComponent(Component widget) {
-        addComponent(widget, new EdgeInsets.Builder().build(), Align.FIRST_LINE_START);
+        addComponent(widget, new EdgeInsets.Builder().build(), Align.TOP_LEFT);
     }
 
     public void addWidget(Widget widget, EdgeInsets edgeInsets, Align align) {
@@ -41,7 +41,7 @@ abstract class Flex extends Widget {
     }
 
     public void addWidget(Widget widget, EdgeInsets edgeInsets) {
-        addComponent(widget.getRef(), edgeInsets, Align.FIRST_LINE_START);
+        addComponent(widget.getRef(), edgeInsets, Align.TOP_LEFT);
     }
 
     public void addWidget(Widget widget, Align align) {
@@ -49,7 +49,7 @@ abstract class Flex extends Widget {
     }
 
     public void addWidget(Widget widget) {
-        addComponent(widget.getRef(), new EdgeInsets.Builder().build(), Align.FIRST_LINE_START);
+        addComponent(widget.getRef(), new EdgeInsets.Builder().build(), Align.TOP_LEFT);
     }
 
     public abstract void replaceComponent(Component oldComponent, Component newComponent);

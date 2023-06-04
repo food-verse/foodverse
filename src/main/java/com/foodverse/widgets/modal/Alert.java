@@ -48,16 +48,16 @@ public class Alert extends Overlay {
         content.addWidget(titleText, new EdgeInsets.Builder()
                 .bottom(16)
                 .build(),
-            Align.PAGE_START);
-        content.addWidget(descriptionText, Align.PAGE_END);
+            Align.TOP_CENTER);
+        content.addWidget(descriptionText, Align.BOTTOM_CENTER);
 
         // Add the action button to the bottom of the alert...
         var paddedContent = new Column();
         paddedContent.addWidget(content, new EdgeInsets.Builder()
                 .bottom(24)
                 .build(),
-            Align.PAGE_START);
-        paddedContent.addWidget(actionButton, Align.PAGE_END);
+            Align.TOP_CENTER);
+        paddedContent.addWidget(actionButton, Align.BOTTOM_CENTER);
 
         // Add padding to the alert...
         var paddedWidget = new Column();

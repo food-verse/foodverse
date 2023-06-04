@@ -50,19 +50,19 @@ public final class Carousel extends Widget {
                     new EdgeInsets.Builder()
                         .right(8)
                         .build(),
-                    Align.FIRST_LINE_END);
+                    Align.TOP_RIGHT);
             } else if (props instanceof OrderCardProps p) {
                 carousel.addWidget(new OrderCard(p),
                     new EdgeInsets.Builder()
                         .right(8)
                         .build(),
-                    Align.FIRST_LINE_END);
+                    Align.TOP_RIGHT);
             } else if (props instanceof ShopCardProps p) {
                 carousel.addWidget(new ShopCard(p),
                     new EdgeInsets.Builder()
                         .right(8)
                         .build(),
-                    Align.FIRST_LINE_END);
+                    Align.TOP_RIGHT);
             }
         }
         panelWithoutPad.add(carousel.getRef());
@@ -72,7 +72,7 @@ public final class Carousel extends Widget {
                 .symmetric(16, 48)
                 .bottom(24)
                 .build(),
-            Align.FIRST_LINE_START);
+            Align.TOP_LEFT);
         return paddedCarousel.getRef();
     }
 

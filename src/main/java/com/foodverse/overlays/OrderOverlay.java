@@ -171,7 +171,7 @@ public final class OrderOverlay extends Overlay {
         panel.addWidget(changeAddressButton, new EdgeInsets.Builder()
                 .symmetric(14, 40)
                 .build(),
-            Align.LINE_END);
+            Align.CENTER_RIGHT);
 
         // TODO: Refactor the way we get the address
         // Adding the address view to the main panel
@@ -236,8 +236,8 @@ public final class OrderOverlay extends Overlay {
             methodView.addWidget(methodIcon, new EdgeInsets.Builder()
                     .right(12)
                     .build(),
-                Align.LINE_START);
-            methodView.addWidget(methodText, Align.LINE_START);
+                Align.CENTER_LEFT);
+            methodView.addWidget(methodText, Align.CENTER_LEFT);
             var paddedMethodView = new Row();
             paddedMethodView.addWidget(methodView, new EdgeInsets.Builder()
                     .all(16)

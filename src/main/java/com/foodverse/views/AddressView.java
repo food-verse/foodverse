@@ -18,11 +18,11 @@ public class AddressView extends Widget {
         var pinIcon = new VectorImage(IconAsset.LOCATION);
         var addressText = new Paragraph(address, Paragraph.ParagraphSize.S);
         var addressView = new Row();
-        addressView.addWidget(pinIcon, Align.LINE_START);
+        addressView.addWidget(pinIcon, Align.CENTER_LEFT);
         addressView.addWidget(addressText, new EdgeInsets.Builder()
                 .left(8)
                 .build(),
-            Align.LINE_START);
+            Align.CENTER_LEFT);
         component = addressView.getRef();
     }
 

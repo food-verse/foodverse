@@ -31,14 +31,14 @@ public final class InputForm extends Widget {
         formWidget.addWidget(labelText, new EdgeInsets.Builder()
                 .bottom(8)
                 .build(),
-            Align.FIRST_LINE_START);
+            Align.TOP_LEFT);
         formWidget.addComponent(textField, new EdgeInsets.Builder()
                 .build(),
-            Align.LINE_START);
+            Align.CENTER_LEFT);
         formWidget.addWidget(hintText, new EdgeInsets.Builder()
                 .top(8)
                 .build(),
-            Align.LAST_LINE_START);
+            Align.BOTTOM_LEFT);
     }
 
     @Override

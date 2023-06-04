@@ -40,27 +40,27 @@ public class InfoOverlay extends Overlay {
 
         // Creating the content column...
         var content = new Column();
-        content.addWidget(firstStepWidget, Align.FIRST_LINE_START);
+        content.addWidget(firstStepWidget, Align.TOP_LEFT);
         content.addWidget(secondStepWidget, new EdgeInsets.Builder()
                 .symmetric(24, 0)
                 .build(),
-            Align.FIRST_LINE_START);
-        content.addWidget(thirdStepWidget, Align.FIRST_LINE_START);
+            Align.TOP_LEFT);
+        content.addWidget(thirdStepWidget, Align.TOP_LEFT);
 
         // Creating main panel...
         var panel = new Column();
         panel.addWidget(infoTitle, new EdgeInsets.Builder()
                 .bottom(32)
                 .build(),
-            Align.FIRST_LINE_START);
-        panel.addWidget(content, Align.FIRST_LINE_START);
+            Align.TOP_LEFT);
+        panel.addWidget(content, Align.TOP_LEFT);
 
         // Add padding to panel
         var paddedPanel = new Column();
         paddedPanel.addWidget(panel, new EdgeInsets.Builder()
                 .all(32)
                 .build(),
-            Align.FIRST_LINE_START);
+            Align.TOP_LEFT);
 
         component = paddedPanel.getRef();
     }

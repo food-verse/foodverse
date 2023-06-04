@@ -64,7 +64,7 @@ public final class OfferCard extends Widget {
             builder.setLength(Math.max(builder.length() - 1, 0));
             builder.append(String.format("-> %.2f€", offer.total()));
             var itemText = new Label(builder.toString(), LabelSize.XS, Colors.gray600);
-            itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
+            itemListWidget.addWidget(itemText, Align.TOP_LEFT);
             builder.setLength(0);
             widgetCount++;
             if (widgetCount == numberOfLines) {
@@ -76,7 +76,7 @@ public final class OfferCard extends Widget {
         if (widgetCount < numberOfLines) {
             for (int i = widgetCount; i < numberOfLines; i++) {
                 var itemText = new Label(" ", LabelSize.XS, Colors.gray600);
-                itemListWidget.addWidget(itemText, Align.FIRST_LINE_START);
+                itemListWidget.addWidget(itemText, Align.TOP_LEFT);
             }
         }
 
@@ -85,12 +85,12 @@ public final class OfferCard extends Widget {
         mainContentWidget.addWidget(shopNameText, new EdgeInsets.Builder()
                 .bottom(16)
                 .build(),
-            Align.FIRST_LINE_START);
-        mainContentWidget.addWidget(itemListWidget, Align.LINE_START);
+            Align.TOP_LEFT);
+        mainContentWidget.addWidget(itemListWidget, Align.CENTER_LEFT);
         mainContentWidget.addWidget(openOrderButton, new EdgeInsets.Builder()
                 .top(24)
                 .build(),
-            Align.LAST_LINE_START);
+            Align.BOTTOM_LEFT);
 
         // Adding the card's thumbnail widget to the main content...
         var imageCol = new Row();
@@ -98,8 +98,8 @@ public final class OfferCard extends Widget {
                 .all(16)
                 .left(20)
                 .build(),
-            Align.LINE_START);
-        imageCol.addWidget(thumbnailImage, Align.LINE_END);
+            Align.CENTER_LEFT);
+        imageCol.addWidget(thumbnailImage, Align.CENTER_RIGHT);
 
         // Add border to card
         return new ColoredBox(imageCol);

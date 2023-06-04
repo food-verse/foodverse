@@ -66,7 +66,7 @@ public final class StarRating extends Widget {
             container.addWidget(currIcons[i], new EdgeInsets.Builder()
                     .right(4)
                     .build(),
-                Align.FIRST_LINE_START);
+                Align.TOP_LEFT);
         }
     }
 

@@ -28,9 +28,9 @@ public final class IconButton extends Widget {
         var disabledIcon = new VectorImage(disabledIconAsset);
         // Adding the icon to the container...
         if (isEnabled) {
-            container.addWidget(enabledIcon, Align.FIRST_LINE_START);
+            container.addWidget(enabledIcon, Align.TOP_LEFT);
         } else {
-            container.addWidget(disabledIcon, Align.FIRST_LINE_START);
+            container.addWidget(disabledIcon, Align.TOP_LEFT);
         }
         // Adding the event listeners to the icons...
         enabledIcon.onPressed(e -> {

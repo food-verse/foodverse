@@ -43,4 +43,4 @@ This is where the views of the application lie. Views are reusable blocks of wid
 
 ### [`/widgets`](src/main/java/com/foodverse/widgets)
 
-The widgets of the application live here. Widgets are reusable blocks of code that implement a single method called [`getRef()`](https://github.com/food-verse/foodverse/blob/a39006f15a34a7f5f0dc05d1d0fe42e768ecebaf/src/main/java/com/foodverse/utility/core/Widget.java#L13) which returns a reference to its underlying component. Widgets can also be nested into other widgets, pages or overlays accordingly.
+The widgets of the application live here. Widgets are reusable blocks of code that implement a single method called [`getRef()`](src/main/java/com/foodverse/utility/core/Widget.java#L13) which returns a reference to its underlying component. Widgets can also be nested into other widgets, pages or overlays accordingly.

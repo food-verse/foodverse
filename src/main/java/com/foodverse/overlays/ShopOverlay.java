@@ -110,16 +110,15 @@ public final class ShopOverlay extends Overlay {
         var starRating = new StarRating(5, rating -> {
             if (rating == 0) {
                 user.ratings().remove(merchant);
-                db.updateUser(user);
                 db.updateShop(oldShop);
             } else {
                 user.ratings().put(merchant, rating);
-                db.updateUser(user);
                 var oldSum = oldShop.rating() * oldShop.reviews();
                 var newRating = (oldSum + rating) / (oldShop.reviews() + 1);
                 var newShop = shop.withRating(newRating).withReviews(oldShop.reviews() + 1);
                 db.updateShop(newShop);
             }
+            db.updateUser(user);
         }, user.ratings().getOrDefault(merchant, 0));
 
         // Creating checkout button...
@@ -140,11 +139,10 @@ public final class ShopOverlay extends Overlay {
             isEnabled -> {
                 if (Boolean.TRUE.equals(isEnabled)) {
                     user.favorites().add(merchant);
-                    db.updateUser(user);
                 } else {
                     user.favorites().remove(merchant);
-                    db.updateUser(user);
                 }
+                db.updateUser(user);
             },
             user.favorites().contains(merchant));
         var paddedFavoritesButton = new Column();

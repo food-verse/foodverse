@@ -63,13 +63,6 @@ public abstract class Overlay extends Widget implements Identifiable {
     }
 
     /**
-     * Returns the underlying JFrame of the overlay.
-     */
-    protected JFrame getFrame() {
-        return frame;
-    }
-
-    /**
      * Adds the specified widget to the page's frame.
      *
      * @param widget The widget to be added

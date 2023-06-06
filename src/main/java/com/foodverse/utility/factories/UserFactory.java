@@ -42,7 +42,7 @@ public final class UserFactory {
 
         // Creating user's credentials...
         var credentials = new Credentials(
-            "XyZ987!",
+            "P@ssw0rd!",
             recoveryAnswers);
 
         // Creating user's favorites...

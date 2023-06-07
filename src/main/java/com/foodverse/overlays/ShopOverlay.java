@@ -1,22 +1,12 @@
 package com.foodverse.overlays;
 
-import java.awt.Component;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
-import com.foodverse.models.Item;
-import com.foodverse.models.Offer;
-import com.foodverse.models.Purchasable;
-import com.foodverse.models.Shop;
-import com.foodverse.models.User;
+import com.foodverse.models.*;
 import com.foodverse.utility.common.URLHandler;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
-import com.foodverse.utility.ui.Button;
 import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.utility.ui.Colors;
@@ -28,6 +18,7 @@ import com.foodverse.widgets.button.IconButton;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ListTile;
+import com.foodverse.widgets.layout.ListTile.ListTileSize;
 import com.foodverse.widgets.layout.Row;
 import com.foodverse.widgets.layout.ScrollView;
 import com.foodverse.widgets.media.AssetSize;
@@ -38,6 +29,11 @@ import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public final class ShopOverlay extends Overlay {
 
@@ -180,7 +176,7 @@ public final class ShopOverlay extends Overlay {
         var openMapsButton = new PillButton(
             "Open Google Maps",
             ButtonSize.S,
-            Button.ButtonType.TERTIARY,
+            ButtonType.TERTIARY,
             e -> URLHandler.open(formattedAddress));
         panel.addWidget(openMapsButton, new EdgeInsets.Builder()
                 .symmetric(14, 40)
@@ -199,7 +195,7 @@ public final class ShopOverlay extends Overlay {
         // If the shop has no offers, add an empty view to the main panel
         if (!shop.offers().isEmpty()) {
             // Heading for the list of offers
-            var offersTile = new ListTile("Offers", ListTile.ListTileSize.S);
+            var offersTile = new ListTile("Offers", ListTileSize.S);
             // Add the heading for the offers to the main panel
             panel.addWidget(offersTile, new EdgeInsets.Builder()
                 .bottom(10)

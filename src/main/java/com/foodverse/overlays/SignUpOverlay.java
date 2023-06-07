@@ -1,7 +1,7 @@
 package com.foodverse.overlays;
 
-import java.awt.Component;
-
+import com.foodverse.models.Address;
+import com.foodverse.props.RecoveryOptionsProps;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.layout.Align;
@@ -23,6 +23,8 @@ import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
+import java.awt.*;
+
 public final class SignUpOverlay extends Overlay {
 
     private final Component component;
@@ -32,7 +34,6 @@ public final class SignUpOverlay extends Overlay {
 
     public SignUpOverlay() {
         super(500, 700);
-
         var panel = new Column();
         var signUpHeading = new Heading(UIConstants.REGISTRATION_PROMO_TITLE, HeadingSize.L);
         var explanationParagraph = new Paragraph(
@@ -53,8 +54,11 @@ public final class SignUpOverlay extends Overlay {
         var textEmailInput = new TextField();
         var emailInput = new InputForm("Email", textEmailInput);
         var textPasswordInput = new SecureTextField();
-        var passwordInput = new InputForm("Password", UIConstants.REGISTRATION_PASSWORD_FIELD_HINT,
-            textPasswordInput);
+        var passwordInput = new InputForm(
+            "Password",
+            UIConstants.REGISTRATION_PASSWORD_FIELD_HINT,
+            textPasswordInput
+        );
         var consentPolicyParagraph = new ConsentPolicyView();
         var continueButton = new RectButton(
             "Continue",
@@ -66,21 +70,22 @@ public final class SignUpOverlay extends Overlay {
                 var phone = textPhoneInput.getText();
                 var email = textEmailInput.getText();
                 var password = new String(textPasswordInput.getPassword());
-
-                boolean isValid =
-                    checkValidityOfCredentials(name, address, phone, email, password);
-
-                if (isValid) {
+                if (checkValidityOfCredentials(name, address, phone, email, password)) {
                     Router.closeOverlay();
                     Router.openOverlay(
-                        new RecoveryOptionsOverlay(name, address, phone, email, password));
+                        new RecoveryOptionsOverlay(new RecoveryOptionsProps(
+                            name,
+                            new Address(address, "", "", "", ""),
+                            phone,
+                            email,
+                            password)
+                        ));
                 } else
                     Router.openOverlay(new Alert(
                         UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_TITLE,
-                        UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_DESCRIPTION));
-
+                        UIConstants.INVALID_CREDENTIALS_FORMAT_FOR_SIGNUP_DESCRIPTION
+                    ));
             });
-
 
         panel.addWidget(signUpHeading, Align.CENTER);
         panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
@@ -97,18 +102,18 @@ public final class SignUpOverlay extends Overlay {
 
         component = panel.getRef();
 
-
     }
 
-    private boolean checkValidityOfCredentials(String name, String address, String phone,
-                                               String email, String password) {
-        boolean isValid;
-
-        isValid = validator.isNameValid(name) && validator.isAddressValid(address)
+    private boolean checkValidityOfCredentials(
+        String name,
+        String address,
+        String phone,
+        String email,
+        String password
+    ) {
+        return validator.isNameValid(name) && validator.isAddressValid(address)
             && validator.isPhoneValid(phone) && validator.isEmailValid(email)
             && validator.isPasswordValid(password);
-
-        return isValid;
     }
 
     @Override

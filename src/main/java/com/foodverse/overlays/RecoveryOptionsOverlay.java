@@ -1,14 +1,8 @@
 package com.foodverse.overlays;
 
-import java.awt.Component;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
-import com.foodverse.models.Address;
 import com.foodverse.models.Credentials;
 import com.foodverse.models.User;
+import com.foodverse.props.RecoveryOptionsProps;
 import com.foodverse.utility.common.UIConstants;
 import com.foodverse.utility.input.InputValidation;
 import com.foodverse.utility.layout.Align;
@@ -30,6 +24,12 @@ import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
 public final class RecoveryOptionsOverlay extends Overlay {
 
     private final Component component;
@@ -40,8 +40,7 @@ public final class RecoveryOptionsOverlay extends Overlay {
     // Getting a reference to the input validator...
     private final InputValidation validator = InputValidation.getInstance();
 
-    public RecoveryOptionsOverlay(String username, String address, String phone, String email,
-                                  String password) {
+    public RecoveryOptionsOverlay(RecoveryOptionsProps props) {
         super(500, 400);
 
         var configuration = db.getConfiguration();
@@ -55,8 +54,10 @@ public final class RecoveryOptionsOverlay extends Overlay {
 
         var panel = new Column();
         var recoveryHeading = new Heading("Add Recovery Options", HeadingSize.L);
-        var explanationParagraph =
-            new Paragraph("Sign up now and start enjoying delicious meals.", ParagraphSize.S);
+        var explanationParagraph = new Paragraph(
+            "Sign up now and start enjoying delicious meals.",
+            ParagraphSize.S
+        );
         var textFirstRecovAnswInput = new TextField();
         var firstRecovAnswInput = new InputForm(question1, textFirstRecovAnswInput);
         var textSecondRecovAnswInput = new TextField();
@@ -69,16 +70,15 @@ public final class RecoveryOptionsOverlay extends Overlay {
             e -> {
                 var firstAnswer = textFirstRecovAnswInput.getText();
                 var secondAnswer = textSecondRecovAnswInput.getText();
-                boolean isValid = checkValidityOfQuestions(firstAnswer, secondAnswer);
-
+                boolean isValid = validator.isAnswersValid(firstAnswer, secondAnswer);
                 if (isValid) {
                     var answers = List.of(firstAnswer, secondAnswer);
-                    var userCredentials = new Credentials(password, answers);
+                    var userCredentials = new Credentials(props.password(), answers);
                     var createdUser = new User(
-                        username,
-                        new ArrayList<>(List.of(new Address(null, null, null, null, null))),
-                        phone,
-                        email,
+                        props.name(),
+                        new ArrayList<>(List.of(props.address())),
+                        props.phone(),
+                        props.email(),
                         userCredentials,
                         new HashSet<>(),
                         new HashMap<>(),
@@ -86,14 +86,12 @@ public final class RecoveryOptionsOverlay extends Overlay {
                     db.signUp(createdUser);
                     Router.closeOverlay();
                     Router.pushPage(Pages.HOME);
-
                 } else
-                    Router.openOverlay(
-                        new Alert(UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_TITLE,
-                            UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_DESCRIPTION));
-
+                    Router.openOverlay(new Alert(
+                        UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_TITLE,
+                        UIConstants.INVALID_RECOVERY_ANSWERS_INPUT_DESCRIPTION
+                    ));
             });
-
 
         panel.addWidget(recoveryHeading, Align.CENTER);
         panel.addWidget(explanationParagraph, new EdgeInsets.Builder()
@@ -109,18 +107,9 @@ public final class RecoveryOptionsOverlay extends Overlay {
 
     }
 
-    private boolean checkValidityOfQuestions(String answer1, String answer2) {
-        boolean isValid;
-
-        isValid = validator.isAnswersValid(answer1, answer2);
-
-        return isValid;
-    }
-
     @Override
     public Component getRef() {
         return component;
     }
-
 
 }

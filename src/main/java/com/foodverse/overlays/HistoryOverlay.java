@@ -3,13 +3,13 @@ package com.foodverse.overlays;
 import java.awt.Component;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import com.foodverse.models.Order;
 import com.foodverse.models.User;
 import com.foodverse.props.OrderCardProps;
@@ -20,12 +20,12 @@ import com.foodverse.utility.navigation.Overlay;
 import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Divider;
-import com.foodverse.widgets.text.Heading;
-import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.widgets.layout.Carousel;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ScrollView;
 import com.foodverse.widgets.modal.Alert;
+import com.foodverse.widgets.text.Heading;
+import com.foodverse.widgets.text.Heading.HeadingSize;
 
 public final class HistoryOverlay extends Overlay {
 
@@ -34,12 +34,7 @@ public final class HistoryOverlay extends Overlay {
 
     private User user;
 
-    private Order currOrder;
     private LocalDate currBaseDate;
-
-    public HistoryOverlay() {
-        super(600,600);
-    }
 
     @Override
     public Component getRef() {
@@ -55,17 +50,16 @@ public final class HistoryOverlay extends Overlay {
 
         // creating the main panel of the page
         var panel = new Column();
-       
+
         // creating overlay's heading widget
         var text = new Heading("Orders", HeadingSize.L);
         panel.addWidget(text, new EdgeInsets.Builder()
-                .top(16)
-                .left(8)
-                .build(),
-            Align.FIRST_LINE_START);
+            .top(16)
+            .left(8)
+            .build());
 
-        // getting the current date when this program is running to compare it 
-        // with the date of a order  and create the order's carousel heading
+        // getting the current date when this program is running to compare it
+        // with the date of an order and create the order's carousel heading
         var oneWeekDate = LocalDate.now(ZoneId.systemDefault()).minusWeeks(1);
         var oneMonthDate = LocalDate.now(ZoneId.systemDefault()).minusWeeks(4);
         var endDate = LocalDate.now(ZoneId.systemDefault());
@@ -77,37 +71,39 @@ public final class HistoryOverlay extends Overlay {
         // temporary set to use if one order doesn't get displayed
         Set<Order> tempSet = user.orders();
 
-        //counter of orders displayed in one row
+        // counter of orders displayed in one row
         int count = 0;
-        
+
         Set<Order> ordersInARow = new HashSet<>();
         LocalDate baseDate;
         // displaying the orders in the overlay. The maximum orders than be displayed in
         // one row of the overlay is 2
-        for (Order order: user.orders()) {
-            if (((order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isAfter(oneWeekDate))) 
-            || (order.date().equals(oneWeekDate))){
+        for (Order order : user.orders()) {
+            if (((order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                .isAfter(oneWeekDate)))
+                || (order.date().equals(oneWeekDate))) {
                 if (!lastWeekTextPrinted) {
                     panel.addComponent(new Divider());
                     var lastWeekText = new Heading("Last Week", HeadingSize.XS);
                     panel.addWidget(lastWeekText, new EdgeInsets.Builder()
-                          .top(13)
-                          .left(8)
-                          .build(),
-                        Align.LINE_START);
+                            .top(13)
+                            .left(8)
+                            .build(),
+                        Align.CENTER_LEFT);
                     lastWeekTextPrinted = true;
                 }
                 baseDate = oneWeekDate;
-            } else if (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isAfter(oneWeekDate) 
-            || (order.date().equals(oneMonthDate))) {
+            } else if (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                .isAfter(oneWeekDate)
+                || (order.date().equals(oneMonthDate))) {
                 if (!lastMonthTextPrinted) {
                     panel.addComponent(new Divider());
                     var lastMonthText = new Heading("Last Month", HeadingSize.XS);
                     panel.addWidget(lastMonthText, new EdgeInsets.Builder()
-                     .top(13)
-                     .left(8)
-                     .build(),
-                     Align.LINE_START);
+                            .top(13)
+                            .left(8)
+                            .build(),
+                        Align.CENTER_LEFT);
                     lastMonthTextPrinted = true;
                 }
                 baseDate = oneMonthDate;
@@ -116,23 +112,23 @@ public final class HistoryOverlay extends Overlay {
                     panel.addComponent(new Divider());
                     var lastYearText = new Heading("Last Year", HeadingSize.XS);
                     panel.addWidget(lastYearText, new EdgeInsets.Builder()
-                     .top(13)
-                     .left(8)
-                     .build(),
-                     Align.LINE_START);
+                            .top(13)
+                            .left(8)
+                            .build(),
+                        Align.CENTER_LEFT);
                     lastYearTextPrinted = true;
                 }
                 baseDate = LocalDate.now(ZoneId.systemDefault()).minusWeeks(52);
             }
 
-            currOrder = order;
             currBaseDate = baseDate;
             if (count == 2) {
                 List<OrderCardProps> orderProps = ordersInARow.stream()
-                .filter(currOrder -> DateUtils.isInRange(order.date(), currBaseDate, endDate))
-                .sorted(Comparator.comparing(Order::date).reversed())
-                .map(OrderCardProps::from)
-                .collect(Collectors.toList());
+                    .filter(currOrder -> DateUtils.isInRange(order.date(), currBaseDate,
+                        endDate))
+                    .sorted(Comparator.comparing(Order::date).reversed())
+                    .map(OrderCardProps::from)
+                    .collect(Collectors.toList());
 
                 // Create a carousel for the available offers
                 var offerCarousel = new Carousel(orderProps);
@@ -140,33 +136,30 @@ public final class HistoryOverlay extends Overlay {
                 // Add the carousel for the available offers to the main panel
                 panel.addComponent(offerCarousel.getRef());
 
-                //clear the orders from the TempSet that got displayed in the overlay
-                for (Order orderDisplayed: ordersInARow){
+                // clear the orders from the TempSet that got displayed in the overlay
+                for (Order orderDisplayed : ordersInARow) {
                     tempSet.remove(orderDisplayed);
                 }
 
                 // clear the orders that were showed in the previous row and reset the counter
                 ordersInARow.clear();
                 count = 1;
-            }
-            else {
+            } else {
                 count++;
             }
             ordersInARow.add(order);
-        } 
+        }
 
         if (!tempSet.isEmpty()) {
-            for(Order order: tempSet) {
-                currOrder = order;
-            }
             List<OrderCardProps> orderProps = tempSet.stream()
-                .filter(currOrder -> DateUtils.isInRange(currOrder.date(), currBaseDate, endDate))
+                .filter(currOrder -> DateUtils.isInRange(currOrder.date(), currBaseDate,
+                    endDate))
                 .sorted(Comparator.comparing(Order::date).reversed())
                 .map(OrderCardProps::from)
                 .collect(Collectors.toList());
             var offerCarousel = new Carousel(orderProps);
             panel.addComponent(offerCarousel.getRef());
-        } 
+        }
 
 
         return new ScrollView(panel.getRef()).getRef();

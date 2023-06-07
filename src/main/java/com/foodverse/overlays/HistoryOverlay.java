@@ -81,7 +81,7 @@ public final class HistoryOverlay extends Overlay {
         for (Order order : user.orders()) {
             if (((order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
                 .isAfter(oneWeekDate)))
-                || (order.date().equals(oneWeekDate))) {
+                || (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().equals(oneWeekDate))) {
                 if (!lastWeekTextPrinted) {
                     panel.addComponent(new Divider());
                     var lastWeekText = new Heading("Last Week", HeadingSize.XS);
@@ -94,8 +94,8 @@ public final class HistoryOverlay extends Overlay {
                 }
                 baseDate = oneWeekDate;
             } else if (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-                .isAfter(oneWeekDate)
-                || (order.date().equals(oneMonthDate))) {
+                .isAfter(oneMonthDate)
+                || (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().equals(oneMonthDate))) {
                 if (!lastMonthTextPrinted) {
                     panel.addComponent(new Divider());
                     var lastMonthText = new Heading("Last Month", HeadingSize.XS);

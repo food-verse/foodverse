@@ -57,9 +57,6 @@ class ShopDatabaseTest {
         // Creating a new shop with the updated rating and reviews...
         Shop newShop = shop.withRating(4.5f).withReviews(shop.reviews() + 1);
 
-        // Ensure that the shop has been written to the file system...
-        Thread.sleep(1000);
-
         // Updating the shop in the database...
         db.updateShop(newShop);
 
@@ -107,11 +104,15 @@ class ShopDatabaseTest {
             30,
             7.00f,
             List.of(),
-            burgerMenu
-        );
+            burgerMenu);
     }
 
     private static class FlushableDatabase extends Database {
+
+        public void addShop(Shop shop) {
+            shops.add(shop);
+            FileManager.saveShops(shops);
+        }
 
         public void flushShops() {
             shops.clear();

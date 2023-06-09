@@ -19,7 +19,6 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-
 import javax.imageio.ImageIO;
 
 import com.foodverse.utility.system.EnvironmentOptions.Mode;
@@ -54,9 +53,7 @@ public final class AssetManager {
     }
 
     public static void loadFont(String fontFamily) {
-        if (isFontInstalled(fontFamily)) {
-            return;
-        }
+        if (isFontInstalled(fontFamily)) return;
         var dir = String.format("assets/fonts/%s/", fontFamily);
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         File[] fontFiles = new File(dir).listFiles();
@@ -64,38 +61,31 @@ public final class AssetManager {
             logger.log(Level.INFO, "There is no such directory: {0}", dir);
             return;
         }
-        Stream.of(fontFiles).map(File::getName).forEach(fontName -> {
+        Stream.of(fontFiles).map(File::getName).forEach(fileName -> {
             try {
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT,
-                    new File(String.format("%s%s", dir, fontName))));
+                ge.registerFont(Font.createFont(
+                    Font.TRUETYPE_FONT,
+                    new File(String.format("%s%s", dir, fileName))
+                ));
             } catch (IOException | FontFormatException e) {
-                logger.log(Level.INFO, "Could not load \"{0}\" font family.", fontFamily);
+                logger.log(Level.INFO, "Could not load \"{0}\" font variant.", fileName);
             }
         });
     }
 
     public static void loadFont(String fontFamily, List<String> fontFiles) {
-        if (isFontInstalled(fontFamily)) {
-            return;
-        }
+        if (isFontInstalled(fontFamily)) return;
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         for (String fontFile : fontFiles) {
             var fileName = String.format("fonts/%s/%s", fontFamily, fontFile);
-            InputStream stream = ResourceHandler.loadResourceAsStream(fileName);
-            if (stream == null) {
-                logger.log(Level.INFO, "There is no such file: {0}", fontFile);
-                return;
-            }
-            try {
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, stream));
-            } catch (IOException | FontFormatException e) {
-                logger.log(Level.INFO, "Could not load \"{0}\" font family.", fontFamily);
-            } finally {
+            try (InputStream stream = ResourceHandler.loadResourceAsStream(fileName)) {
                 try {
-                    stream.close();
-                } catch (IOException e) {
-                    logger.log(Level.INFO, "Failed to close stream for font file {0}", fontFile);
+                    ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, stream));
+                } catch (IOException | FontFormatException e) {
+                    logger.log(Level.INFO, "Could not load \"{0}\" font variant.", fontFile);
                 }
+            } catch (IOException e) {
+                logger.log(Level.INFO, "Failed to close stream for font file: {0}", fontFile);
             }
         }
     }

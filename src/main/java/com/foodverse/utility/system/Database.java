@@ -1,11 +1,9 @@
 package com.foodverse.utility.system;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-
 import com.foodverse.models.Config;
 import com.foodverse.models.Order;
 import com.foodverse.models.Shop;
@@ -66,20 +64,6 @@ public class Database {
         authenticatedUser = null;
     }
 
-    public Optional<User> verifyUser(String email, Map<Integer, String> recoveryAnswers) {
-        Optional<User> foundUser = findUserByEmail(email);
-        if (foundUser.isEmpty()) {
-            return Optional.empty();
-        }
-        for (Map.Entry<Integer, String> entry : configuration.recoveryQuestions().entrySet()) {
-            if (!recoveryAnswers.get(entry.getKey())
-                .equals(foundUser.get().credentials().recoveryAnswers().get(entry.getKey()))) {
-                return Optional.empty();
-            }
-        }
-        return foundUser;
-    }
-
     public Optional<User> findUserByEmail(String email) {
         for (User user : users) {
             if (user.email().equals(email)) {
@@ -90,7 +74,8 @@ public class Database {
     }
 
     public Optional<Order> findOrderById(UUID id) {
-        if (authenticatedUser == null) return Optional.empty();
+        if (authenticatedUser == null)
+            return Optional.empty();
         for (Order order : authenticatedUser.orders()) {
             if (order.id().equals(id)) {
                 return Optional.of(order);
@@ -106,11 +91,6 @@ public class Database {
             users.add(newUser);
             CompletableFuture.runAsync(() -> FileManager.saveUsers(users));
         }
-    }
-
-    public void addShop(Shop shop) {
-        shops.add(shop);
-        CompletableFuture.runAsync(() -> FileManager.saveShops(shops));
     }
 
     public void updateShop(Shop newShop) {

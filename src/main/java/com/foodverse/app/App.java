@@ -27,7 +27,7 @@ public final class App {
             EnvironmentOptions.setMode(Mode.DEBUG);
 
             // Initialize the application
-            ShellOptions options = new ShellOptions.Builder()
+            var options = new ShellOptions.Builder()
                 .width(1440)
                 .height(1024)
                 .title("Foodiverse")

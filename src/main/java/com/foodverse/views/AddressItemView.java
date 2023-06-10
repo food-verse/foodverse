@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.foodverse.models.Address;
 import com.foodverse.models.User;
 import com.foodverse.overlays.AddressesOverlay;
-import com.foodverse.overlays.EditAddressOverlay;
+import com.foodverse.overlays.ManageAddressOverlay;
 import com.foodverse.utility.core.Widget;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -94,7 +94,7 @@ public class AddressItemView extends Widget {
             ButtonSize.XS,
             ButtonType.PRIMARY,
             e -> {
-                Router.openOverlay(new EditAddressOverlay(address));
+                Router.openOverlay(new ManageAddressOverlay(address));
             });
         buttonView.addWidget(editAddressButton, new EdgeInsets.Builder()
                 .right(8)

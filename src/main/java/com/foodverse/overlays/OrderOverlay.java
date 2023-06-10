@@ -173,7 +173,6 @@ public final class OrderOverlay extends Overlay {
                 .build(),
             Align.CENTER_RIGHT);
 
-        // TODO: Refactor the way we get the address
         // Adding the address view to the main panel
         var addressView = new AddressView(user.addresses().get(0).toString());
         panel.addWidget(addressView, new EdgeInsets.Builder()

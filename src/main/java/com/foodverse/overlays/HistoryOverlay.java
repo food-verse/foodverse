@@ -17,13 +17,12 @@ import com.foodverse.utility.common.DateUtils;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
-import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
 import com.foodverse.utility.ui.Divider;
+import com.foodverse.views.EmptyView;
 import com.foodverse.widgets.layout.Carousel;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ScrollView;
-import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 
@@ -32,8 +31,6 @@ public final class HistoryOverlay extends Overlay {
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
 
-    private User user;
-
     private LocalDate currBaseDate;
 
     @Override
@@ -41,12 +38,14 @@ public final class HistoryOverlay extends Overlay {
 
         // Getting the authenticated user...
         Optional<User> signedUser = db.getAuthenticatedUser();
-        if (signedUser.isPresent()) {
-            user = signedUser.get();
-        } else {
-            Router.openOverlay(new Alert("Error", "Authenticated User is not found"));
-            Router.closeOverlay();
+
+        // If the shop or the user are not present, return an empty view...
+        if (signedUser.isEmpty()) {
+            return new EmptyView().getRef();
         }
+
+        // Unwrapping shop and user...
+        var user = signedUser.get();
 
         // creating the main panel of the page
         var panel = new Column();
@@ -81,7 +80,8 @@ public final class HistoryOverlay extends Overlay {
         for (Order order : user.orders()) {
             if (((order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
                 .isAfter(oneWeekDate)))
-                || (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().equals(oneWeekDate))) {
+                || (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                .equals(oneWeekDate))) {
                 if (!lastWeekTextPrinted) {
                     panel.addComponent(new Divider());
                     var lastWeekText = new Heading("Last Week", HeadingSize.XS);
@@ -95,7 +95,8 @@ public final class HistoryOverlay extends Overlay {
                 baseDate = oneWeekDate;
             } else if (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
                 .isAfter(oneMonthDate)
-                || (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().equals(oneMonthDate))) {
+                || (order.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                .equals(oneMonthDate))) {
                 if (!lastMonthTextPrinted) {
                     panel.addComponent(new Divider());
                     var lastMonthText = new Heading("Last Month", HeadingSize.XS);

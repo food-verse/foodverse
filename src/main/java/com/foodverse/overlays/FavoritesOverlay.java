@@ -13,12 +13,11 @@ import com.foodverse.models.User;
 import com.foodverse.props.ShopCardProps;
 import com.foodverse.utility.layout.EdgeInsets;
 import com.foodverse.utility.navigation.Overlay;
-import com.foodverse.utility.navigation.Router;
 import com.foodverse.utility.system.Database;
+import com.foodverse.views.EmptyView;
 import com.foodverse.widgets.layout.Carousel;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ScrollView;
-import com.foodverse.widgets.modal.Alert;
 import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 
@@ -27,19 +26,19 @@ public final class FavoritesOverlay extends Overlay {
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
 
-    private User user;
-
     @Override
     public Component getRef() {
 
         // Getting the authenticated user...
         Optional<User> signedUser = db.getAuthenticatedUser();
-        if (signedUser.isPresent()) {
-            user = signedUser.get();
-        } else {
-            Router.openOverlay(new Alert("Error", "Authenticated User is not found"));
-            Router.closeOverlay();
+
+        // If the shop or the user are not present, return an empty view...
+        if (signedUser.isEmpty()) {
+            return new EmptyView().getRef();
         }
+
+        // Unwrapping shop and user...
+        var user = signedUser.get();
 
         // Creating the page panel
         var panel = new Column();

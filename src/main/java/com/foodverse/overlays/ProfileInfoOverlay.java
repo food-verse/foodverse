@@ -15,6 +15,7 @@ import com.foodverse.utility.ui.Button.ButtonSize;
 import com.foodverse.utility.ui.Button.ButtonType;
 import com.foodverse.utility.ui.Divider;
 import com.foodverse.utility.ui.TextField;
+import com.foodverse.views.EmptyView;
 import com.foodverse.widgets.button.PillButton;
 import com.foodverse.widgets.layout.Column;
 import com.foodverse.widgets.layout.ScrollView;
@@ -26,8 +27,6 @@ public final class ProfileInfoOverlay extends Overlay {
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
-
-    private User user;
 
     // Getting a reference to the input validator...
     private final InputValidation validator = InputValidation.getInstance();
@@ -41,12 +40,14 @@ public final class ProfileInfoOverlay extends Overlay {
 
         // Getting the authenticated user...
         Optional<User> signedUser = db.getAuthenticatedUser();
-        if (signedUser.isPresent()) {
-            user = signedUser.get();
-        } else {
-            Router.openOverlay(new Alert("Error", "Authenticated User is not found"));
-            Router.closeOverlay();
+
+        // If the shop or the user are not present, return an empty view...
+        if (signedUser.isEmpty()) {
+            return new EmptyView().getRef();
         }
+
+        // Unwrapping shop and user...
+        var user = signedUser.get();
 
         // creating the page panel
         var panel = new Column();

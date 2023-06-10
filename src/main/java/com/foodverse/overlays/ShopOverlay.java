@@ -1,6 +1,15 @@
 package com.foodverse.overlays;
 
-import com.foodverse.models.*;
+import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import com.foodverse.models.Item;
+import com.foodverse.models.Offer;
+import com.foodverse.models.Purchasable;
+import com.foodverse.models.Shop;
+import com.foodverse.models.User;
 import com.foodverse.utility.common.URLHandler;
 import com.foodverse.utility.layout.Align;
 import com.foodverse.utility.layout.EdgeInsets;
@@ -29,11 +38,6 @@ import com.foodverse.widgets.text.Heading;
 import com.foodverse.widgets.text.Heading.HeadingSize;
 import com.foodverse.widgets.text.Label;
 import com.foodverse.widgets.text.Label.LabelSize;
-
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 public final class ShopOverlay extends Overlay {
 

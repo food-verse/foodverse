@@ -37,10 +37,12 @@ public final class Shell {
             if (assetIndex.isPresent()) {
                 AssetManager.loadFont(
                     options.getDefaultFont(),
-                    assetIndex.get().fonts().get(options.getDefaultFont()));
+                    assetIndex.get().fonts().get(options.getDefaultFont())
+                );
                 AssetManager.loadFont(
-                    options.getDefaultFont(),
-                    assetIndex.get().fonts().get(options.getMonospacedFont()));
+                    options.getMonospacedFont(),
+                    assetIndex.get().fonts().get(options.getMonospacedFont())
+                );
             }
         }
         frame.setSize(options.getDimension());

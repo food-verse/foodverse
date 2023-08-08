@@ -1,6 +1,6 @@
 # Foodiverse
 
-An online delivery application built with Java Swing.
+A cross-platform online delivery desktop application, built using Java Swing.
 
 ## 📸 Screenshots
 

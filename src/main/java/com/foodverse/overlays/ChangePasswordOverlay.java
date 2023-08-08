@@ -24,20 +24,14 @@ import com.foodverse.widgets.text.Paragraph;
 import com.foodverse.widgets.text.Paragraph.ParagraphSize;
 
 public class ChangePasswordOverlay extends Overlay {
-    private final Component component;
 
+    private final Component component;
 
     // Getting a reference to the database...
     private final Database db = Database.getInstance();
 
     // Validation for inputs
     private final InputValidation validator = InputValidation.getInstance();
-
-
-    /*
-     * private Row signInHeadingRow = new Row(); private Row emailInputRow = new Row(); private Row
-     * passwordInputRow = new Row();
-     */
 
     public ChangePasswordOverlay(User user) {
         super(500, 450);
